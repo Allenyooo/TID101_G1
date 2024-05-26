@@ -1,6 +1,47 @@
-section{
-    h1{
+.wrapper{
+    width: 100vw;
+    height: 100vh;
+}
+nav{
+    position: fixed;
+    top: 0;
+}
+
+.homeBanner{
+    width: 100vw;
+    height: 829px;
+    background-color: $Blue;
+    .homeBanner-tb{
+        width: 512px;
+        height: 292px;
+        h1{
         font-size: $bigTitle;
+        background: $GoldGrad;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        // -webkit-text-stroke: 3.5px $GreenGrad;
+
+        }
+        h1::before {
+            content: '梨花韓食';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: -10px;
+            bottom: -10px;
+            background: $GreenGrad;
+            z-index: 1;
+            border-radius: 8px;
+            filter: blur(10px);
+        }
+        h2{
+            margin-top: 128px;
+            background: $GoldGrad;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     }
+    
 }
 
