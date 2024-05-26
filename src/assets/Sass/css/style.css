@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200..900&family=Noto+Serif+TC:wght@200..900&display=swap");
+h1 {
+  font-size: 60px;
+  font-family: "Noto Serif TC", "Noto Serif KR";
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 36px;
+  font-family: "Noto Serif TC", "Noto Serif KR";
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 28px;
+  font-family: "Noto Serif TC", "Noto Serif KR";
+}
+
+h4 {
+  font-size: 20px;
+  font-family: "Noto Serif TC", "Noto Serif KR";
+  line-height: 150%;
+}
+
+h5 {
+  font-size: 16px;
+  font-family: "Noto Serif TC", "Noto Serif KR";
+  line-height: 150%;
+}
+
+h6 {
+  font-size: 14px;
+  font-family: "Noto Serif TC", "Noto Serif KR";
+  line-height: 150%;
+}
+
+p {
+  font-size: 12px;
+  font-family: "Noto Serif TC", "Noto Serif KR";
+  line-height: 150%;
+}/*# sourceMappingURL=style.css.map */
