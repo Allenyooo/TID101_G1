@@ -1,3 +1,4 @@
+@import './reset.css';
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200..900&family=Noto+Serif+TC:wght@200..900&display=swap");
 h1 {
   font-size: 60px;
@@ -38,4 +39,8 @@ p {
   font-size: 12px;
   font-family: "Noto Serif TC", "Noto Serif KR";
   line-height: 150%;
+}
+
+section h1 {
+  font-size: 128px;
 }/*# sourceMappingURL=style.css.map */
