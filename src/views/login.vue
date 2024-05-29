@@ -1,5 +1,7 @@
 <script></script>
 
-<template></template>
+<template>
+    Login
+</template>
 
 <style lang="scss" scope></style>

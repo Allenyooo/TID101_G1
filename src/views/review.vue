@@ -1,5 +1,7 @@
 <script></script>
 
-<template></template>
+<template>
+    Review
+</template>
 
 <style lang="scss" scope></style>

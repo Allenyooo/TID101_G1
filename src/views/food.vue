@@ -1,5 +1,7 @@
 <script></script>
 
-<template></template>
+<template>
+    Food
+</template>
 
 <style lang="scss" scope></style>
