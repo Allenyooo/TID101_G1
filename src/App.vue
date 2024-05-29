@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import '@/scss/app.scss'
+// import '@/scss/app.scss'
 
 export default {
   computed: {

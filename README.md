@@ -1,56 +1,7 @@
-# vue3-vite-starter-template
+# Vue 3 + Vite
 
-A single page app [Vite](https://vitejs.dev) starter template, created to easily bootstrap Vue.js 3 apps.
+This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-**Features**
+## Recommended IDE Setup
 
-- Jest for unit testing
-- Pinia for state management
-- Vue Router 4 for client-side routing
-- Bootstrap 5.2 for layout and styling
-- SCSS variables inside Vue components
-- Purgecss for eliminating unused CSS
-- Basic multiple layouts feature
-- ESLint config based on `eslint:recommended` with sensible defaults :relaxed:
-- [Prettier](https://prettier.io/) for code formatting
-- Automated release workflow with [semantic-release](https://github.com/semantic-release/semantic-release)
-
-## Project setup
-
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-
-```
-npm run dev
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-## Run your unit tests
-
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Lints and fixes files
-
-```
-npm run lint-fix
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/guide/).
+- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur

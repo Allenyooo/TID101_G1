@@ -1,35 +1,40 @@
+<!-- <script setup>
+import { ref } from 'vue'
+
+defineProps({
+  msg: String,
+})
+
+const count = ref(0)
+</script>
+
 <template>
-  <div class="row">
-    <div class="col text-center">
-      <h1 class="msg">{{ msg }}</h1>
-      <p>
-        A project setup using vue-cli, created to easily scaffold new Vue.js projects.
-        <br />
-        Find out more at
-        <a class="custom" href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>
-        .
-      </p>
-    </div>
+  <h1>{{ msg }}</h1>
+
+  <div class="card">
+    <button type="button" @click="count++">count is {{ count }}</button>
+    <p>
+      Edit
+      <code>components/HelloWorld.vue</code> to test HMR
+    </p>
   </div>
+
+  <p>
+    Check out
+    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
+      >create-vue</a
+    >, the official Vue + Vite starter
+  </p>
+  <p>
+    Install
+    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
+    in your IDE for a better DX
+  </p>
+  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
 </template>
 
-<script>
-export default {
-  name: 'HelloWorld'
+<style scoped>
+.read-the-docs {
+  color: #888;
 }
-</script>
-
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    default: ''
-  }
-})
-</script>
-
-<style lang="scss" scoped>
-h1.msg {
-  color: $gray-900;
-}
-</style>
+</style> -->

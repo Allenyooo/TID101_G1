@@ -1,0 +1,55 @@
+
+// 中文＋韓文字體
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200..900&family=Noto+Serif+TC:wght@200..900&display=swap');
+
+$bigTitle: 128px;
+$midTitle: 96px;
+$smallTitle: 48px;
+$fontSize: 4px;
+$lineHeight: 150%;
+$fontFamily : 'Noto Serif TC', 'Noto Serif KR'; // 字串
+
+
+
+h1{
+    font-size: $fontSize * 15; //60px
+    font-family: $fontFamily;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+h2{
+    font-size: $fontSize * 9; // 36px
+    font-family: $fontFamily;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+h3{
+    font-size: $fontSize * 7; // 28px
+    font-family: $fontFamily;
+}
+
+h4{
+    font-size: $fontSize * 5; // 20px
+    font-family: $fontFamily;
+    line-height: $lineHeight;
+}
+
+h5{
+    font-size: $fontSize * 4; // 16px
+    font-family: $fontFamily;
+    line-height: $lineHeight;
+}
+
+h6{
+    font-size: $fontSize * 3.5; // 14px
+    font-family: $fontFamily;
+    line-height: $lineHeight;
+}
+
+p{
+    font-size: $fontSize * 3; // 12px
+    font-family: $fontFamily;
+    line-height: $lineHeight;
+}

@@ -1,32 +1,16 @@
-import vue from '@vitejs/plugin-vue'
-import { createHtmlPlugin } from 'vite-plugin-html'
 import { defineConfig } from 'vite'
-import { resolve } from 'path'
+import vue from '@vitejs/plugin-vue'
+import path from 'path'   // 載入 path
 
+// console.log(__dirname) // 印出來的結果：/Users/carlos_new/Documents/vite/my_vite
+
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    createHtmlPlugin({
-      minify: true,
-      inject: {
-        data: {
-          title: 'ProjectName',
-          description: 'A single page application created using Vue.js 3'
-        }
-      }
-    })
-  ],
+  base: "./", // 設定相對路徑
+  plugins: [vue()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, '/src'),
-      '~bootstrap': 'bootstrap'
-    }
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@import "./src/scss/variables";`
-      }
+      "@": path.resolve(__dirname, "./src") // @ 符號：直接指向到 src 資料夾
     }
   }
 })

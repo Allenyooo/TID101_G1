@@ -1,9 +1,11 @@
-import Home from '../views/Home.vue'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import Home from '../views/Home.vue';
+import { createRouter, createWebHistory } from "vue-router";
 
-const history = createWebHashHistory()
+// path → component
 const routes = [
-  {
+//   { path: '/', component: () => import('@/pages/HomeView.vue') },
+//   { path: '/about', component: () => import('@/pages/AboutView.vue') }
+{
     path: '/',
     name: 'Home',
     component: Home,
@@ -13,130 +15,116 @@ const routes = [
   },
   {
     path: '/checkOut',
-    name: 'checkOut',
-    component: checkOut,
+    name: 'CheckOut',
+    component: () => import('../views/CheckOut.vue'),
     meta: {
       layout: 'default'
     }
   },
-  {
-    path: '/enter',
-    name: 'enter',
-    component: enter,
-    meta: {
-      layout: 'default'
-    }
-  },
-  {
-    path: '/food',
-    name: 'food',
-    component: food,
-    meta: {
-      layout: 'default'
-    }
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: login,
-    meta: {
-      layout: 'default'
-    }
-  },
-  {
-    path: '/map',
-    name: 'map',
-    component: map,
-    meta: {
-      layout: 'default'
-    }
-  },
-  {
-    path: '/member',
-    name: 'member',
-    component: member,
-    meta: {
-      layout: 'default'
-    }
-  },
-  {
-    path: '/product',
-    name: 'product',
-    component: product,
-    meta: {
-      layout: 'default'
-    }
-  },
-  {
-    path: '/receipt',
-    name: 'receipt',
-    component: receipt,
-    meta: {
-      layout: 'default'
-    }
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: register,
-    meta: {
-      layout: 'default'
-    }
-  },
-  {
-    path: '/restaurant',
-    name: 'restaurant',
-    component: restaurant,
-    meta: {
-      layout: 'default'
-    }
-  },
-  {
-    path: '/review',
-    name: 'review',
-    component: review,
-    meta: {
-      layout: 'default'
-    }
-  },
-  {
-    path: '/index',
-    name: 'index',
-    component: index,
-    meta: {
-      layout: 'default'
-    }
-  },
-  // -----------以下後台--------------
-  {
-    path: '/BkHome',
-    name: 'BkHome',
-    component: BkHome,
-    meta: {
-      layout: 'defaultBack'
-    }
-  },
+//   {
+//     path: '/enter',
+//     name: 'Enter',
+//     component: Enter,
+//     meta: {
+//       layout: 'default'
+//     }
+//   },
+//   {
+//     path: '/food',
+//     name: 'Food',
+//     component: Food,
+//     meta: {
+//       layout: 'default'
+//     }
+//   },
+//   {
+//     path: '/login',
+//     name: 'Login',
+//     component: Login,
+//     meta: {
+//       layout: 'default'
+//     }
+//   },
+//   {
+//     path: '/map',
+//     name: 'Map',
+//     component: Map,
+//     meta: {
+//       layout: 'default'
+//     }
+//   },
+//   {
+//     path: '/member',
+//     name: 'Member',
+//     component: Member,
+//     meta: {
+//       layout: 'default'
+//     }
+//   },
+//   {
+//     path: '/product',
+//     name: 'Product',
+//     component: Product,
+//     meta: {
+//       layout: 'default'
+//     }
+//   },
+//   {
+//     path: '/receipt',
+//     name: 'Receipt',
+//     component: Receipt,
+//     meta: {
+//       layout: 'default'
+//     }
+//   },
+//   {
+//     path: '/register',
+//     name: 'Register',
+//     component: Register,
+//     meta: {
+//       layout: 'default'
+//     }
+//   },
+//   {
+//     path: '/restaurant',
+//     name: 'Restaurant',
+//     component: Restaurant,
+//     meta: {
+//       layout: 'default'
+//     }
+//   },
+//   {
+//     path: '/review',
+//     name: 'Review',
+//     component: Review,
+//     meta: {
+//       layout: 'default'
+//     }
+//   },
+//   {
+//     path: '/index',
+//     name: 'Index',
+//     component: Index,
+//     meta: {
+//       layout: 'default'
+//     }
+//   },
+//   // -----------以下後台--------------
+//   {
+//     path: '/BkHome',
+//     name: 'BkHome',
+//     component: BkHome,
+//     meta: {
+//       layout: 'defaultBack'
+//     }
+//   },
+];
 
-
-
-
-  // 方法2
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  //   meta: {
-  //     layout: 'default'
-  //   }
-  // }
-]
+// 建立 router
 const router = createRouter({
-  linkActiveClass: 'active',
-  history,
-  routes
-})
+  history: createWebHistory(import.meta.env.BASE_URL), // vite 設定檔中的 base: /tid101/g1/
+  routes: routes
+});
 
-export { router }
+// 匯出 router
+export default router;
