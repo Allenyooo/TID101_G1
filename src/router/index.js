@@ -16,7 +16,7 @@ const routes = [
   {
     path: '/checkOut',
     name: 'CheckOut',
-    component: () => import('../views/CheckOut.vue'),
+    component: () => import('../views/checkOut.vue'),
     meta: {
       layout: 'default'
     }
@@ -24,7 +24,7 @@ const routes = [
   {
     path: '/enter',
     name: 'Enter',
-    component: () => import('../views/Enter.vue'),
+    component: () => import('../views/enter.vue'),
     meta: {
       layout: 'default'
     }
@@ -32,7 +32,7 @@ const routes = [
   {
     path: '/food',
     name: 'Food',
-    component: () => import('../views/Food.vue'),
+    component: () => import('../views/food.vue'),
     meta: {
       layout: 'default'
     }
@@ -40,7 +40,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue'),
+    component: () => import('../views/login.vue'),
     meta: {
       layout: 'default'
     }
@@ -48,7 +48,7 @@ const routes = [
   {
     path: '/map',
     name: 'Map',
-    component: () => import('../views/Map.vue'),
+    component: () => import('../views/map.vue'),
     meta: {
       layout: 'default'
     }
@@ -56,7 +56,7 @@ const routes = [
   {
     path: '/member',
     name: 'Member',
-    component: () => import('../views/Member.vue'),
+    component: () => import('../views/member.vue'),
     meta: {
       layout: 'default'
     }
@@ -64,7 +64,7 @@ const routes = [
   {
     path: '/product',
     name: 'Product',
-    component: () => import('../views/Product.vue'),
+    component: () => import('../views/product.vue'),
     meta: {
       layout: 'default'
     }
@@ -72,7 +72,7 @@ const routes = [
   {
     path: '/receipt',
     name: 'Receipt',
-    component: () => import('../views/Receipt.vue'),
+    component: () => import('../views/receipt.vue'),
     meta: {
       layout: 'default'
     }
@@ -80,7 +80,7 @@ const routes = [
   {
     path: '/register',
     name: 'Register',
-    component: () => import('../views/Register.vue'),
+    component: () => import('../views/register.vue'),
     meta: {
       layout: 'default'
     }
@@ -88,7 +88,7 @@ const routes = [
   {
     path: '/restaurant',
     name: 'Restaurant',
-    component: () => import('../views/Restaurant.vue'),
+    component: () => import('../views/restaurant.vue'),
     meta: {
       layout: 'default'
     }
@@ -96,7 +96,7 @@ const routes = [
   {
     path: '/review',
     name: 'Review',
-    component: () => import('../views/Review.vue'),
+    component: () => import('../views/review.vue'),
     meta: {
       layout: 'default'
     }
@@ -104,7 +104,7 @@ const routes = [
   {
     path: '/index',
     name: 'Index',
-    component: () => import('../views/Index.vue'),
+    component: () => import('../views/index.vue'),
     meta: {
       layout: 'default'
     }
