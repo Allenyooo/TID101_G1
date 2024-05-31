@@ -1,14 +1,16 @@
 <template>
   <div class="default-page-wrapper">
-    <default-nav />
+    <!-- <default-nav /> -->
+    <hamburger />
     <slot />
     <default-footer />
   </div>
 </template>
 
 <script setup>
+import hamburger from './hamburger.vue';
 import DefaultFooter from './DefaultFooter.vue'
-import DefaultNav from './DefaultNav.vue'
+// import DefaultNav from './DefaultNav.vue'
 </script>
 
 <style lang="scss">
