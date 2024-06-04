@@ -3,13 +3,13 @@
     <!-- <default-nav /> -->
     <hamburger />
     <slot />
-    <default-footer />
+    <footer />
   </div>
 </template>
 
 <script setup>
 import hamburger from './hamburger.vue';
-import DefaultFooter from './DefaultFooter.vue'
+import footer from './footer.vue';
 // import DefaultNav from './DefaultNav.vue'
 </script>
 

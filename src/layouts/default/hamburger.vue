@@ -126,9 +126,10 @@ export default {
     }
     .deco2{
         position: absolute;
-        top: 267px;
-        right: 330px;
-        z-index: 10;
+        top: 260px;
+        right: 322px;
+        z-index: 105;
+        width: 100px;
     }
     #o-menulist{
         position: relative;
@@ -278,7 +279,9 @@ export default {
         font-size: 24px;
         line-height: 100%;
         margin: 0;
+        text-align: center;
         color:#7a625b;
+        font-weight: bold;
     }
     p{
         width: 96px;
@@ -286,7 +289,7 @@ export default {
         line-height: 100%;
         margin: 0;
         color: #7a625b;
-        text-align: right;
+        text-align: center;
         margin-top: 2px;
     }
     .menulist{
@@ -295,28 +298,28 @@ export default {
     }
     .menu_list .menu_list_food{
         position: absolute;
-        top: 12px;
+        top: 0px;
         right: 348px;
     }
     .menu_list .menu_list_recommend {
         position: absolute;
-        top: 102px;
-        right: 268px;
+        top: 90px;
+        right: 308px;
     }
     .menu_list .menu_list_ticket{
         position: absolute;
-        top: 192px;
-        right: 188px;
+        top: 180px;
+        right: 245px;
     }
     .menu_list .menu_list_user{
         position: absolute;
-        top: 282px;
-        right: 108px;
+        top: 265px;
+        right: 158px;
     }
     .menu_list .menu_list_shoppingcart{
         position: absolute;
-        top: 372px;
-        right: 35px;
+        top: 330px;
+        right: 52px;
     }
     .o-menu_bg .circle{
         position: absolute;
@@ -324,8 +327,8 @@ export default {
         right: -330px;
         transform-origin: right;
         z-index: 0;
-        width: 800px;
-        height: 800px;
+        width: 780px;
+        height: 770px;
         border-radius: 50%;
         background-color: #fff4eb;
         transition: .6s .2s cubic-bezier(.16,1,.3,1) transform;
@@ -345,7 +348,7 @@ export default {
     /* 未點擊前菜單預設隐藏 */
     #menulist {
         transform: scale(0);
-        width: 409px;
+        width: 400px;
         position: fixed;
         top: 0;
         right: 0;
