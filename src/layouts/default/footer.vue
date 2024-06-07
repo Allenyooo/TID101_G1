@@ -13,17 +13,21 @@
     </footer>
 </template>
 
-<script></script>
+<script>
+    export default {
+        name: 'FooterComponent'
+    }
+</script>
 
 <style lang="css" scoped>
     footer{
         height: 80px;
-        width: 100vw;
+        width: 100%;
         background-color: #333;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position: absolute;
+        position: fixed;
         bottom: 0;
     }
     img{

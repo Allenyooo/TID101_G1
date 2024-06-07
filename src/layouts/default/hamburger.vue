@@ -104,7 +104,7 @@ export default {
         position: fixed;
         top: 26px;
         right: 28px;
-        z-index: 100;
+        z-index: 200;
         width: 60px;
         height: 60px;
         display: flex;

@@ -1,18 +1,13 @@
 <template>
-  <h1>TID101</h1>
+    <h1>TID101</h1>
 </template>
 
-<script>
-
-</script>
+<script></script>
 
 <style lang="scss" scoped>
+@import "/src/sass/style.scss";
 
-  @import "/src/sass/style.scss";
-
-  body {
-      background-color: $OffWhite;
-  }
-
-
+body {
+    background-color: $OffWhite;
+}
 </style>
