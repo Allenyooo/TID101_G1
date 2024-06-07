@@ -3,8 +3,8 @@
         <!-- <default-nav /> -->
         <hamburger />
         <slot />
-        <floatingButton />
         <FooterComponent />
+        <footer />
     </div>
 </template>
 
