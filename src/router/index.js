@@ -124,7 +124,7 @@ const routes = [
         children: [
             {
                 path: "/register/regisinfo",
-                component: () => import("../components/RegisterInfo.vue"),
+                component: () => import("../components/RegisInfo.vue"),
             },
             {
                 path: "/register/regisuccess",
