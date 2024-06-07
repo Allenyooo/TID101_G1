@@ -6,8 +6,10 @@
             <img src="../assets/Image/login/cup.svg" alt="cup1" class="login_cup1">
             <img src="../assets/Image/login/cup.svg" alt="cup2" class="login_cup2">
         </div>
-        <div class="login_right">
-
+        <div id="login_right">
+            <h2>會員登入</h2>
+            <button></button>
+            
         </div>
 
     </section>
@@ -59,7 +61,7 @@
                 filter: drop-shadow(2px 7px 3px #bbb);
             }
         }
-        .login_right{
+        #login_right{
             width: 30vw;
             background-color: $WarmNude;
             border: 1px solid transparent;

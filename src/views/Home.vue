@@ -1214,12 +1214,12 @@ export default {
     .home_introWord1 {
         display: flex;
         position: absolute;
-        top: 30vh;
+        top: 50%;
         left: 50%;
+        transform: translate(-50%, -50%);
         margin: auto;
-        transform: translate(-50%);
         h2 {
-            font-size: 32px;
+            font-size: 1.9vw;
             writing-mode: vertical-lr;
             line-height: 150%;
             color: $Black;
@@ -1230,6 +1230,7 @@ export default {
     }
     .home_introWord2 {
         position: absolute;
+        bottom: 50%;
         left: 50%;
         margin: auto;
         transform: translate(-50%, 50%);
@@ -1238,11 +1239,12 @@ export default {
         h4 {
             color: $Black;
             text-align: center;
+            font-size: 1.2vw;
         }
         h3 {
-            font-size: 28px;
+            font-size: 1.66vw;
             text-align: center;
-            margin-top: 36px;
+            margin-top: 2.1vw;
             font-weight: bold;
             background: $RevGoldGrad;
             background-clip: text;
