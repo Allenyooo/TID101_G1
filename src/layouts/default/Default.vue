@@ -3,17 +3,25 @@
     <!-- <default-nav /> -->
     <hamburger />
     <slot />
+    <FooterComponent />
     <footer />
   </div>
 </template>
 
 <script setup>
 import hamburger from './hamburger.vue';
-import footer from './footer.vue';
+import FooterComponent from './footer.vue';
+import floatingButton from './floatingButton.vue';
 // import DefaultNav from './DefaultNav.vue'
 </script>
 
 <style lang="scss">
+
+  .floatingButton{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
 /* Sticky footer */
 // html {
 //   position: relative;
