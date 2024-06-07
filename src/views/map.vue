@@ -14,7 +14,9 @@ export default {
     },
 
     methods: {
-
+        aaa() {
+            alert("aaa");
+        }
     },
     computed: {
         
@@ -46,8 +48,8 @@ export default {
                 class="island northIsland"
                 usemap="#nIsland"
             />
-            <router-link to="/map/north">
-                <map name="nIsland">
+            <router-link to="/map/north" @click.native="aaa">
+                <map name="nIsland" >
                     <area
                         shape="poly"
                         coords="0,0,256,0,256,60,128,199,0,199"

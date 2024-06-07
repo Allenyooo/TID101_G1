@@ -143,7 +143,7 @@ section {
     right: 10vw;
     z-index: 16;
     width: 721px;
-
+    outline: 2px solid red;
     .map_shoptitle {
       width: 312px;
       height: 88px;

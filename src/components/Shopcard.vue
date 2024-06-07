@@ -23,6 +23,7 @@ export default {
 <template>
     <!-- <li :class="{ map_open : hovered }" @mouseover="cardOpen" @mouseleave="cardOpen"> -->
     <li @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
+        <div class="test"></div>
         <div class="normal">
             <img src="/src/assets/Image/map/koreawaybgi.png" alt="" />
             <div class="shopinfo">
@@ -99,10 +100,11 @@ export default {
 
 li {
     // background-color: $OffWhite;
-    transition:  0.1s;
+    transition: 0.1s;
     transform-origin: center;
+    outline: 2px solid blue;
     &:hover .opened {
-        transition:  0.1s;
+        transition: 0.1s;
         width: 720px;
         height: 364px;
         z-index: 16;
@@ -110,7 +112,7 @@ li {
         opacity: 1;
     }
     &:hover .normal {
-        transition:  0.1s;
+        transition: 0.1s;
         width: 0px;
         height: 0px;
         z-index: 0;
@@ -141,7 +143,6 @@ li {
     transition: 0.2s;
     margin: 24px auto;
     transform-origin: top center;
-
 
     img {
         width: 100%;
