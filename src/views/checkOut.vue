@@ -167,7 +167,6 @@
                     
                     &::-webkit-scrollbar {
                         width: 10px;
-
                     }
 
                     &::-webkit-scrollbar-track-piece {
