@@ -11,7 +11,7 @@
         }"
       >
         <a
-          href=""
+          :href="i.src"
           :class="{
             BmaOn: i.index == page,
           }"
@@ -33,6 +33,10 @@ export default {
 @import "/src/sass/style.scss";
 
 .BkManage {
+  margin-right: 36px;
+  margin-top: 16px;
+  margin-left: 20px;
+
   a {
     text-decoration: none;
     display: block;
