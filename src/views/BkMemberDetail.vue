@@ -99,7 +99,7 @@ export default {
         {
           index: 2,
           manageName: "會員資料管理",
-          src: "/BkMamber",
+          src: "/BkMember",
           border: 2,
         },
         {

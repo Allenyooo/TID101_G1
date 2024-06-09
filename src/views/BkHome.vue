@@ -70,7 +70,7 @@ export default {
         {
           index: 2,
           manageName: "會員資料管理",
-          src: "/BkMamber",
+          src: "/BkMember",
           border: 2,
         },
         {
@@ -320,13 +320,14 @@ export default {
         margin-bottom: 24px;
 
         div {
-          width: 328px;
-          height: 96px;
+          width: 300px;
+          height: 76px;
           background-color: $Nude;
           text-align: center;
-          line-height: 96px;
+          line-height: 72px;
           font-size: 24px;
           color: $Black;
+          font-size: 20px;
         }
 
         .BS2 {

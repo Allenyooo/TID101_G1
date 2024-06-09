@@ -9,7 +9,31 @@
         <BS :dropdown="dropdown" :search="search" :newButton="newButton"></BS>
 
         <BSort :dropdown="dropdown"></BSort>
-        <BD :bd="bd" :title="title" :dataTd="dataTd" :stateTd="stateTd"></BD>
+
+        <button
+          class="discountButton1"
+          v-for="i in dButton"
+          :class="{ dBOn: buttonState == i.id }"
+          @click="(buttonState = i.id), (bdState = i.id)"
+        >
+          {{ i.text }}
+        </button>
+
+        <BD
+          :bd="bd"
+          :title="title"
+          :dataTd="dataTd"
+          :stateTd="stateTd"
+          v-if="bdState == 1"
+        ></BD>
+
+        <BD
+          :bd="bd2"
+          :title="title"
+          :dataTd="dataTd"
+          :stateTd="stateTd"
+          v-if="bdState == 2"
+        ></BD>
       </div>
     </div>
 
@@ -41,7 +65,7 @@ export default {
         {
           index: 2,
           manageName: "會員資料管理",
-          src: "/BkMamber",
+          src: "/BkMember",
           border: 2,
         },
         {
@@ -86,7 +110,7 @@ export default {
       bd: [
         {
           id: 1,
-          name: "$100折價券",
+          name: "100折價券",
           discountPrice: 100,
           number: " 123abc",
           start: "2024-06-01",
@@ -95,7 +119,7 @@ export default {
         },
         {
           id: 2,
-          name: "$300折價券",
+          name: "300折價券",
           discountPrice: 300,
           number: " 123abc",
           start: "2024-06-01",
@@ -104,8 +128,38 @@ export default {
         },
         {
           id: 3,
-          name: "$500折價券",
+          name: "500折價券",
           discountPrice: 500,
+          number: " 123abc",
+          start: "2024-06-01",
+          end: "2025-06-01",
+          use: 100,
+        },
+      ],
+
+      bd2: [
+        {
+          id: 4,
+          name: "30折價券",
+          discountPrice: 30,
+          number: " 123abc",
+          start: "2024-06-01",
+          end: "2025-06-01",
+          use: 100,
+        },
+        {
+          id: 5,
+          name: "150折價券",
+          discountPrice: 150,
+          number: " 123abc",
+          start: "2024-06-01",
+          end: "2025-06-01",
+          use: 100,
+        },
+        {
+          id: 6,
+          name: "600折價券",
+          discountPrice: 600,
           number: " 123abc",
           start: "2024-06-01",
           end: "2025-06-01",
@@ -127,6 +181,19 @@ export default {
       search: "新增折價券",
       stateTd: 1,
       dataTd: 1,
+      buttonState: 1,
+      dButton: [
+        {
+          id: 1,
+          text: "啟用",
+        },
+        {
+          id: 2,
+          text: "下架",
+        },
+      ],
+
+      bdState: 1,
     };
   },
 };
@@ -155,6 +222,34 @@ export default {
 
         background-color: $Black;
         margin-bottom: 24px;
+      }
+
+      .discountButton1 {
+        font-size: 16px;
+        width: 60px;
+        height: 32px;
+        border: none;
+        border-top: 1px solid #c4c4c4;
+        border-left: 1px solid #c4c4c4;
+        border-right: 1px solid #c4c4c4;
+
+        color: $DarkBrown;
+        margin-right: 12px;
+      }
+
+      .discountButton2 {
+        font-size: 16px;
+        width: 60px;
+        height: 32px;
+        border: none;
+        border-top: 1px solid #c4c4c4;
+        border-left: 1px solid #c4c4c4;
+        border-right: 1px solid #c4c4c4;
+      }
+
+      .dBOn {
+        background-color: $DarkBrown;
+        color: $White;
       }
     }
   }
