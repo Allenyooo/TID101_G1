@@ -2,7 +2,7 @@
   <div class="productBody">
     <!-- nav -->
     <div class="productHeader"></div>
-    <button @click="scToggle()">購物車</button>
+    <!-- <button @click="scToggle()">購物車</button> -->
 
     <!-- <div class="left"></div> -->
 
@@ -508,6 +508,7 @@ export default {
       .productPrice {
         width: 580px;
         height: 528px;
+        // margin-right: ;
 
         ul {
           flex-direction: column;
@@ -789,7 +790,7 @@ export default {
   }
 
   footer {
-    height: 200px;
+    height: 100px;
   }
 }
 </style>

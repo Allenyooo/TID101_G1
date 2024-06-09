@@ -6,7 +6,8 @@
       </a>
     </div>
     <div class="headRight">
-      <p>User xxx</p>
+      <p>User:</p>
+      <p class="userName">xxx</p>
       <button>登出</button>
     </div>
   </div>
@@ -38,15 +39,19 @@ export default {
 
   .headRight {
     display: flex;
-    margin-left: 78vw;
+    margin-left: auto;
 
     p {
       font-size: 24px;
       font-weight: bold;
     }
+    .userName {
+      margin-left: 8px;
+    }
 
     button {
       margin-left: 20px;
+      margin-right: 20px;
     }
   }
 }

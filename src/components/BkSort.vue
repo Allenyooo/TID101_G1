@@ -1,7 +1,7 @@
 <template>
   <div class="BkSort">
     <div>
-      <button class="Bkd" @click="dD">管理員編號</button>
+      <button class="Bkd" @click="dD">編號:由小到大</button>
       <ul :class="{ sDrop: this.sDown == true }">
         <li v-for="i in dropdown">
           <a href="">{{ i }}</a>
@@ -42,7 +42,7 @@ export default {
 
   div {
     position: relative;
-    width: 130px;
+    width: 160px;
 
     .sDrop {
       display: block;
@@ -50,7 +50,7 @@ export default {
 
     .Bkd {
       height: 32px;
-      width: 126px;
+      width: 160px;
       background-color: $LightBrown;
       color: $White;
       text-align: left;

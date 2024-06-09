@@ -19,7 +19,7 @@
   </div> -->
   <div class="BkSearch">
     <div>
-      <button class="Bkdrop" @click="dd">管理員編號</button>
+      <button class="Bkdrop" @click="dd">編號</button>
       <ul :class="{ drop: down == true }">
         <li v-for="i in dropdown">
           <a href="">{{ i }}</a>
@@ -27,13 +27,13 @@
       </ul>
     </div>
     <div class="inputSearch">
-      <input type="text" placeholder="請輸入會員編號" />
+      <input type="text" placeholder="請輸入編號" />
     </div>
     <div class="rightButton">
       <button class="rB">搜尋</button>
     </div>
 
-    <div class="BkNew">
+    <div class="BkNew" v-if="newButton == 1">
       <button class="bN">{{ search }}</button>
     </div>
   </div>
@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  props: ["dropdown", "search"],
+  props: ["dropdown", "search", "newButton"],
 
   data() {
     return {

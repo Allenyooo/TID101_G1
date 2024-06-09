@@ -28,17 +28,12 @@
             <h5>{{ i }}</h5>
           </td>
 
-          <td v-if="stateTd == 1">
+          <td>
             <BState></BState>
           </td>
-          <td v-if="dataTd == 1">
+          <td>
             <!-- <button></button> -->
             <BR></BR>
-          </td>
-
-          <td v-if="dataTd == 2">
-            <!-- <button></button> -->
-            <BC></BC>
           </td>
         </tr>
 
@@ -81,9 +76,9 @@ import BState from "/src/components/BkState.vue";
 import BC from "/src/components/BkCheck.vue";
 
 export default {
-  components: { BR, BState, BC },
+  components: { BR, BState },
 
-  props: ["bd", "title", "dataTd", "stateTd"],
+  props: ["bd", "title"],
 
   data() {
     return {

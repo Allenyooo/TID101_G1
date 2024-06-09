@@ -4,12 +4,38 @@
     <div class="BkM">
       <BM :manage="manage" :page="page"></BM>
       <div class="BkContent">
-        <p>{{ manage[page - 1].manageName }}</p>
+        <p>後台首頁</p>
         <div class="Bkline"></div>
-        <BS :dropdown="dropdown" :search="search"></BS>
-        <BDate></BDate>
-        <BSort :dropdown="dropdown"></BSort>
-        <BD :bd="bd"></BD>
+
+        <div class="BkStatistics">
+          <div class="BS1">累積會員人數: 12,345筆</div>
+          <div class="BS2">目前使用人數: 12,345筆</div>
+          <div class="BS3">今日營收: 12,345元</div>
+        </div>
+
+        <div class="chartTtle">
+          會員人數
+          <button>月</button>
+        </div>
+        <section class="chartBg">
+          <canvas id="Chart"></canvas>
+        </section>
+
+        <div class="chartTtle">
+          使用人數
+          <button>月</button>
+        </div>
+        <section class="chartBg">
+          <canvas id="Chart2"></canvas>
+        </section>
+
+        <div class="chartTtle">
+          營收
+          <button>月</button>
+        </div>
+        <section class="chartBg">
+          <canvas id="Chart3"></canvas>
+        </section>
       </div>
     </div>
 
@@ -20,14 +46,16 @@
 <script>
 import BH from "/src/components/BkHead.vue";
 import BM from "/src/components/BkManage.vue";
-import BS from "/src/components/BkSearch.vue";
-import BD from "/src/components/BkData.vue";
-import BDate from "/src/components/BkDate.vue";
-import BSort from "/src/components/BkSort.vue";
-// import BR from "/src/components/BkRevise.vue";
+import Chart from "chart.js/auto";
 
 export default {
-  components: { BH, BM, BS, BD, BDate, BSort },
+  components: { BH, BM },
+
+  mounted() {
+    this.renderChart1();
+    this.renderChart2();
+    this.renderChart3();
+  },
 
   data() {
     return {
@@ -36,80 +64,227 @@ export default {
         {
           index: 1,
           manageName: "權限管理",
-          src: "/product",
+          src: "/BkAccess",
           border: 1,
         },
         {
           index: 2,
           manageName: "會員資料管理",
-          src: "/product",
+          src: "/BkMamber",
           border: 2,
         },
         {
           index: 3,
           manageName: "店家資訊管理",
-          src: "/product",
+          src: "/BkShop",
           border: 2,
         },
         {
           index: 4,
           manageName: "訂單管理",
-          src: "/product",
+          src: "/BkOrder",
           border: 2,
         },
         {
           index: 5,
           manageName: "商品管理",
-          src: "/product",
+          src: "/BkProduct",
           border: 2,
         },
         {
           index: 6,
           manageName: "折價券管理",
-          src: "/product",
+          src: "/BkDiscount",
           border: 2,
         },
         {
           index: 7,
           manageName: "FAQ管理",
-          src: "/product",
+          src: "/BkFaq",
           border: 2,
         },
       ],
-      dropdown: [
-        {
-          id: "管理員編號",
-        },
-        {
-          name: "姓名",
-        },
-      ],
-      bd: [
-        {
-          id: 1,
-          姓名: "xxx",
-          信箱: "123@gmail.com",
-          管理權限: 4,
-          狀態: 5,
-        },
-        {
-          id: 5,
-          姓名: "xxx",
-          信箱: "123@gmail.com",
-          管理權限: 8,
-          狀態: 5,
-        },
-        {
-          id: 9,
-          姓名: "xxx",
-          信箱: "123@gmail.com",
-          管理權限: 12,
-          狀態: 5,
-        },
-      ],
 
-      search: "新增操作人員帳號",
+      stateTd: 1,
+      dataTd: 1,
     };
+  },
+
+  methods: {
+    renderChart1() {
+      const ctx = document.getElementById("Chart").getContext("2d");
+      const labels = ["6/5", "6/10", "6/15", "6/20", "6/25", "6/30"];
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: "會員人數",
+            data: [1000, 1300, 600, 300, 1200, 2510],
+            fill: true,
+            borderColor: "#2852AB",
+            backgroundColor: "rgba(0, 0, 0, 0)",
+            pointStyle: "circle",
+            pointBackgroundColor: "#2852AB",
+            pointRadius: 4,
+            pointHoverRadius: 10,
+            pointHoverBackgroundColor: "#CB4847",
+            tension: 0,
+          },
+        ],
+      };
+      const config = {
+        type: "line",
+        data: data,
+        options: {
+          responsive: true,
+          interaction: {
+            intersect: false,
+          },
+          scales: {
+            x: {
+              display: true,
+              title: {
+                display: true,
+                text: "日期",
+              },
+            },
+            y: {
+              display: true,
+              title: {
+                display: true,
+                text: "人數",
+              },
+            },
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: "當月會員人數",
+              font: {
+                size: 20,
+              },
+            },
+          },
+        },
+      };
+      new Chart(ctx, config);
+    },
+    renderChart2() {
+      const ctx = document.getElementById("Chart2").getContext("2d");
+      const labels = ["6/5", "6/10", "6/15", "6/20", "6/25", "6/30"];
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: "使用人數",
+            data: [1000, 1300, 600, 300, 1200, 2510],
+            fill: true,
+            borderColor: "#2852AB",
+            backgroundColor: "rgba(0, 0, 0, 0)",
+            pointStyle: "circle",
+            pointBackgroundColor: "#2852AB",
+            pointRadius: 4,
+            pointHoverRadius: 10,
+            pointHoverBackgroundColor: "#CB4847",
+            tension: 0,
+          },
+        ],
+      };
+      const config = {
+        type: "line",
+        data: data,
+        options: {
+          responsive: true,
+          interaction: {
+            intersect: false,
+          },
+          scales: {
+            x: {
+              display: true,
+              title: {
+                display: true,
+                text: "日期",
+              },
+            },
+            y: {
+              display: true,
+              title: {
+                display: true,
+                text: "人數",
+              },
+            },
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: "當月使用人數",
+              font: {
+                size: 20,
+              },
+            },
+          },
+        },
+      };
+      new Chart(ctx, config);
+    },
+    renderChart3() {
+      const ctx = document.getElementById("Chart3").getContext("2d");
+      const labels = ["6/5", "6/10", "6/15", "6/20", "6/25", "6/30"];
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: "營收",
+            data: [32000, 11200, 42000, 22200, 16000, 27100],
+            fill: true,
+            borderColor: "#2852AB",
+            backgroundColor: "rgba(0, 0, 0, 0)",
+            pointStyle: "circle",
+            pointBackgroundColor: "#2852AB",
+            pointRadius: 4,
+            pointHoverRadius: 10,
+            pointHoverBackgroundColor: "#CB4847",
+            tension: 0,
+          },
+        ],
+      };
+      const config = {
+        type: "line",
+        data: data,
+        options: {
+          responsive: true,
+          interaction: {
+            intersect: false,
+          },
+          scales: {
+            x: {
+              display: true,
+              title: {
+                display: true,
+                text: "日期",
+              },
+            },
+            y: {
+              display: true,
+              title: {
+                display: true,
+                text: "元",
+              },
+            },
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: "當月營收",
+              font: {
+                size: 20,
+              },
+            },
+          },
+        },
+      };
+      new Chart(ctx, config);
+    },
   },
 };
 </script>
@@ -118,13 +293,14 @@ export default {
 @import "/src/sass/style.scss";
 .BkBody {
   background-color: $OffWhite;
+  font-family: $fontFamily;
 
   .BkM {
     display: flex;
-    height: 100vh;
+    height: 2100px;
 
     .BkContent {
-      width: 1172px;
+      width: 80vw;
 
       p {
         font-size: 28px;
@@ -137,6 +313,44 @@ export default {
 
         background-color: $Black;
         margin-bottom: 24px;
+      }
+
+      .BkStatistics {
+        display: flex;
+        margin-bottom: 24px;
+
+        div {
+          width: 328px;
+          height: 96px;
+          background-color: $Nude;
+          text-align: center;
+          line-height: 96px;
+          font-size: 24px;
+          color: $Black;
+        }
+
+        .BS2 {
+          margin: 0 auto;
+        }
+      }
+
+      .chartBg {
+        background-color: white;
+        margin-bottom: 24px;
+      }
+
+      .chartTtle {
+        font-size: 24px;
+        margin-bottom: 12px;
+
+        button {
+          font-size: 20px;
+          width: 60px;
+          height: 24px;
+          background-color: $White;
+          text-align: left;
+          margin-left: 12px;
+        }
       }
     }
   }

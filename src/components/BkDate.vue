@@ -1,8 +1,8 @@
 <template>
   <div class="BkDate">
-    <input type="text" name="" id="" placeholder="請輸入日期" />
+    <input type="date" name="" id="" placeholder="請輸入日期" />
     ~
-    <input type="text" name="" id="" placeholder="請輸入日期" />
+    <input type="date" name="" id="" placeholder="請輸入日期" />
     <button>搜尋</button>
   </div>
 </template>
