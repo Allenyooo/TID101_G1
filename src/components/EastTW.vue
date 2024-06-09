@@ -140,8 +140,9 @@ section {
   .shops {
     position: fixed;
     top: 10vh;
-    right: 5vw;
+    right: 15vw;
     z-index: 16;
+    width: 460px;
 
     .map_shoptitle {
       width: 312px;
@@ -154,7 +155,7 @@ section {
       margin-bottom: 5vh;
 
       h1 {
-        font-size: $fontSize * 9;
+        font-size: $fontSize * 2;
       }
     }
   }

@@ -23,7 +23,6 @@ export default {
 <template>
     <!-- <li :class="{ map_open : hovered }" @mouseover="cardOpen" @mouseleave="cardOpen"> -->
     <li @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
-        <div class="test"></div>
         <div class="normal">
             <img src="/src/assets/Image/map/koreawaybgi.png" alt="" />
             <div class="shopinfo">
@@ -99,39 +98,28 @@ export default {
 @import "/src/sass/style.scss";
 
 li {
-    // background-color: $OffWhite;
     transition: 0.1s;
-    transform-origin: center;
-    outline: 2px solid blue;
+    // outline: 2px solid blue;
+    width: 460px;
+    // margin-bottom: 24px;
+    // margin: 0 auto;
+
     &:hover .opened {
         transition: 0.1s;
         width: 720px;
         height: 364px;
         z-index: 16;
-        transform-origin: top center;
         opacity: 1;
+        margin-left: -28%;
+
     }
     &:hover .normal {
         transition: 0.1s;
-        width: 0px;
-        height: 0px;
+        width: 1px;
+        height: 1px;
         z-index: 0;
-        transform-origin: top center;
         opacity: 0;
     }
-    // &:hover {
-    //     transition: 0.2s;
-    //     width: 720px;
-    //     height: 364px;
-    // }
-    // &:hover .normal {
-    //     transition: 0.2s;
-    //     display: none;
-    // }
-    // &:hover .opened {
-    //     transition: 0.2s;
-    //     display: block;
-    // }
 }
 
 .normal {
@@ -141,8 +129,8 @@ li {
     border-radius: 15px;
     overflow: hidden;
     transition: 0.2s;
-    margin: 24px auto;
-    transform-origin: top center;
+    transform-origin: 50% center;
+    margin-bottom: 12px;
 
     img {
         width: 100%;
@@ -182,19 +170,14 @@ li {
 }
 
 .opened {
-    // outline: 1px red solid;
-    // width: 720px;
-    // height: 364px;
     border-radius: 15px;
     background-color: $OffWhite;
     overflow: hidden;
-    // display: none;
-
-    width: 0;
-    height: 0;
+    width: 1px;
+    height: 1px;
     z-index: 0;
-    transform-origin: top center;
     opacity: 0;
+    margin-bottom: 12px;
 
     .card_header {
         width: 100%;

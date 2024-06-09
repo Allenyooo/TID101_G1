@@ -13,8 +13,15 @@ export default {
   },
 
   methods: {
-    backToIsland() {
+    backToIsland(event) {
+        const img = document.querySelector('.middleIsland');
+        img.style.transform = 'translate(0px, 0px)';
+        img.style.transition = 'all 0.5s ease';
+        img.style.width = '252px';
+        img.style.height = '204px';
         this.$router.push('/map');
+        console.log('backToIsland is called');
+        event.stopPropagation(); //停止冒泡事件
     },
     markLight1() {
         this.marker1Src="/src/assets/Image/map/marker.png";
@@ -41,6 +48,7 @@ export default {
 
 <template>
     <section >
+
         <div class="filter" @click="backToIsland"></div>
         <div class="sidemap">
             <div class="nmap">
@@ -138,10 +146,22 @@ section {
   }
 
   .shops {
+    // outline: 2px solid red;
     position: fixed;
     top: 10vh;
-    right: 5vw;
+    right: 10vw;
     z-index: 16;
+    width: 740px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
 
     .map_shoptitle {
       width: 312px;
@@ -154,7 +174,7 @@ section {
       margin-bottom: 5vh;
 
       h1 {
-        font-size: $fontSize * 9;
+        font-size: $fontSize * 2;
       }
     }
   }

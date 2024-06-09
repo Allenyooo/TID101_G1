@@ -14,24 +14,77 @@ export default {
     },
 
     methods: {
-        aaa() {
-            alert("aaa");
-        }
+        nWave(event) {
+            const img = this.$refs.northIslandImg;
+            console.log(img);
+            if (img) {
+                img.removeEventListener('transitionend', (event)=>{
+                    this.$router.push('/map/north');
+                });
+
+                img.style.width = '510px';
+                img.style.height = '400px';
+                img.style.transform = 'translate(-720px, 110px)';
+                img.style.transition = 'all 0.5s ease';
+                console.log('nMove');
+
+                img.addEventListener('transitionend', (event)=>{
+                    this.$router.push('/map/north');
+                    console.log('nWave is called');
+                });
+
+            }
+        },
+
+        mWave(event) {
+            const img = this.$refs.middleIslandImg;
+            if (img) {
+                img.removeEventListener('transitionend', ()=>{
+                    this.$router.push('/map/middle');
+                });
+
+                img.style.width = '510px';
+                img.style.height = '400px';
+                img.style.transform = 'translate(-645px, 15px)';
+                img.style.transition = 'all 0.5s ease';
+
+                img.addEventListener('transitionend', ()=>{
+                    this.$router.push('/map/middle');
+                    console.log('mWave is called');
+                });
+            }
+        },
+
+        sWave(event) {
+            const img = this.$refs.southIslandImg;
+            if (img) {
+                img.removeEventListener('transitionend', ()=>{
+                    this.$router.push('/map/south');
+                });
+
+                img.style.width = '400px';
+                img.style.height = '650px';
+                img.style.transform = 'translate(-645px, -270px)';
+                img.style.transition = 'all 0.5s ease';
+
+                img.addEventListener('transitionend', ()=>{
+                    this.$router.push('/map/south');
+                    console.log('sWave is called');
+                });
+            }
+        },
+        eWave() {
+            alert("east");
+        },
     },
-    computed: {
-        
-    }
+    computed: {},
 };
 </script>
 
 <template>
     <div class="map_body">
         <div class="islandOpen">
-
             <router-view></router-view>
-            <!-- <northtw v-show="northOpen"></northtw> -->
-            
-
         </div>
 
         <div class="taiwanIsland">
@@ -43,50 +96,39 @@ export default {
                 </h3>
             </div>
 
-            <img
-                src="/src/assets/Image/map/northIsland.png"
-                class="island northIsland"
-                usemap="#nIsland"
-            />
-            <router-link to="/map/north" @click.native="aaa">
-                <map name="nIsland" >
-                    <area
-                        shape="poly"
-                        coords="0,0,256,0,256,60,128,199,0,199"
-                        class="area"
-                        href=""
-                    />
-                </map>
-            </router-link>
+            <!-- 北部 -->
+                <img
+                    src="/src/assets/Image/map/northIsland.png"
+                    class="island northIsland"
+                    ref="northIslandImg"
+                    @click.native="nWave"
+                />
 
-            <router-link to="/map/middle">
+
+            <!-- 中部 -->
                 <img
                     src="/src/assets/Image/map/middleIsland.png"
                     class="island middleIsland"
+                    ref="middleIslandImg"
+                    @click.native="mWave"
                 />
-            </router-link>
 
-            <router-link to="/map/south">
+            <!-- 南部 -->
+            <router-link to="/map/south" @click.native="sWave">
                 <img
                     src="/src/assets/Image/map/southIsland.png"
                     class="island southIsland"
+                    ref="southIslandImg"
                 />
             </router-link>
 
-
-            <router-link to="/map/east">
+            <!-- 東部 -->
+            <router-link to="/map/east" @click.native="eWave">
                 <img
                     src="/src/assets/Image/map/eastIsland.png"
                     class="island eastIsalnd"
-                    usemap="#eIsland"
+                    ref="eastIslandImg"
                 />
-                <map name="eIsland">
-                    <area
-                        shape="poly"
-                        coords="155,0,232,0,232,524,0,524,0,393"
-                        href=""
-                    />
-                </map>
             </router-link>
         </div>
     </div>
@@ -95,11 +137,10 @@ export default {
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
 
-
 .map_body {
     background-color: #f7f2db;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 90.96vh;
     background-image: url(/src/assets/Image/map/pointpoint.png);
     transition: 0.3s;
     // .islandOpen{
@@ -145,7 +186,7 @@ export default {
         }
         &:hover .eastIsalnd {
             transition: 0.3s;
-            transform: translateX(60px);
+            transform: translateX(80px);
         }
 
         .northIsland {
@@ -155,6 +196,7 @@ export default {
             top: 44px;
             left: 94px;
             z-index: 10;
+            transition: 0.3s;
         }
         .middleIsland {
             // outline: 1px red solid;
@@ -162,6 +204,7 @@ export default {
             position: absolute;
             top: 200px;
             z-index: 11;
+            transition: 0.3s;
         }
         .southIsland {
             // outline: 1px red solid;
@@ -169,6 +212,7 @@ export default {
             position: absolute;
             top: 356px;
             left: -10px;
+            transition: 0.3s;
         }
         .eastIsalnd {
             // outline: 1px red solid;
@@ -176,13 +220,17 @@ export default {
             position: absolute;
             top: 108px;
             left: 104px;
-        }
-        .island:hover {
             transition: 0.3s;
-            // filter: drop-shadow(0 0 30px red);
-            // transform: translateY(-12px);
-            // text-shadow: 0 0 0.5em #fff, 0 0 0.5em #fff, 0 0 0.5em #fff;
         }
     }
 }
+
+.island{
+    cursor: pointer;
+}
+
+.island:hover{
+    filter: drop-shadow(0 0 30px $Gold);
+}
+
 </style>

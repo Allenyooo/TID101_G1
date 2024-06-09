@@ -72,6 +72,7 @@ export default {
               <shopcard can_hover="true" @mouseenter.native="markLight3" @mouseleave.native="unmarker3"></shopcard>
           </router-link>
 
+
         </ul>
     </section>
 </template>
@@ -138,12 +139,36 @@ section {
   }
 
   .shops {
+    // outline: 2px solid red;
     position: fixed;
     top: 10vh;
     right: 10vw;
     z-index: 16;
-    width: 721px;
-    outline: 2px solid red;
+    width: 740px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+        width: 12px; /* 滾動條寬度 */
+    }
+
+    // .shops::-webkit-scrollbar-track {
+    //     background: #f1f1f1; /* 滾動條軌道的顏色 */
+    // }
+
+    // .shops::-webkit-scrollbar-thumb {
+    //     background: #888; /* 滾動條滑塊的顏色 */
+    //     border-radius: 10px; /* 滑塊的圓角 */
+    // }
+
+    // .shops::-webkit-scrollbar-thumb:hover {
+    //     background: #555; /* 滑塊在懸停時的顏色 */
+    // }
+
     .map_shoptitle {
       width: 312px;
       height: 88px;
@@ -155,7 +180,7 @@ section {
       margin-bottom: 5vh;
 
       h1 {
-        font-size: $fontSize * 9;
+        font-size: $fontSize * 2;
       }
     }
   }
