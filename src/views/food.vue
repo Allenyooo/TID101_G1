@@ -8,7 +8,72 @@
             </div>
         </div>
     </div>
-
+    <!-- 視差滾動第一個 -->
+    <div class="food_selector_wrapper">
+        <div class="food_selector_text">
+            <div class="food_1st_scroll">
+                <p class="left_text">從食材到餐盤</p>
+                <div class="food_and_time">
+                    <h1 class="inRed">食</h1>
+                    <img
+                        src="/src/assets/Image/food/food_spotlight.png"
+                        alt=""
+                    />
+                    <h1 class="inBlue">時</h1>
+                </div>
+                <p class="right_text">的美味歷程</p>
+            </div>
+            <div class="scroll_down">
+                <h2>往下滑動</h2>
+                <img
+                    src="/src/assets/Image/food/keyboard_double_arrow_down.png"
+                    alt=""
+                />
+            </div>
+        </div>
+    </div>
+    <!-- 視差滾動主欄位 -->
+    <section class="horizontal">
+        <div class="pin-wrap">
+            <div class="animation-wrap to-right">
+                <div class="item">
+                    <a href="#article1"
+                        ><img
+                            src="/src/assets/Image/food/horizontal_main.png"
+                            alt=""
+                    /></a>
+                </div>
+                <div class="item">
+                    <a href="#article2"
+                        ><img
+                            src="/src/assets/Image/food/horizontal_meat.png"
+                            alt=""
+                    /></a>
+                </div>
+                <div class="item">
+                    <a href="#article3"
+                        ><img
+                            src="/src/assets/Image/food/horizontal_seafood.png"
+                            alt=""
+                    /></a>
+                </div>
+                <div class="item">
+                    <a href="#article4"
+                        ><img
+                            src="/src/assets/Image/food/horizontal_sidedish.png"
+                            alt=""
+                    /></a>
+                </div>
+                <div class="item">
+                    <a href="#article5"
+                        ><img
+                            src="/src/assets/Image/food/horizontal_soup.png"
+                            alt=""
+                    /></a>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- food-main-description -->
     <div class="food-description-blue" id="article1">
         <h1>主食 밥면</h1>
@@ -17,7 +82,7 @@
         </h4>
     </div>
 
-    <!-- food-category-main -->
+    <!-- food-category-main-主食 -->
     <div class="food-category">
         <div class="food-category-left">
             <img
@@ -150,7 +215,14 @@ import bibimbap from "../assets/Image/food/food_bibimbap.jpeg";
 import ShinRamyun from "../assets/Image/food/food_ShinRamyun.jpeg";
 import leftArrow from "../assets/Image/food/food_left_arrow.png";
 import rightArrow from "../assets/Image/food/food_right_arrow.png";
+//--------
+import { onMounted } from "vue";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
+
+//--------
 export default {
     data() {
         return {
@@ -227,6 +299,44 @@ export default {
             this.currentItem =
                 this.items[(this.currentSlide + index) % this.items.length];
         },
+    }, //---------視差滾動----------
+    mounted() {
+        const horizontalSections = gsap.utils.toArray("section.horizontal");
+
+        horizontalSections.forEach((sec, i) => {
+            const pinWrap = sec.querySelector(".pin-wrap");
+            const animationWrap = pinWrap.querySelector(".animation-wrap");
+
+            const getToValue = () =>
+                -(animationWrap.scrollWidth - window.innerWidth);
+
+            gsap.fromTo(
+                animationWrap,
+                {
+                    x: () =>
+                        animationWrap.classList.contains("to-right")
+                            ? 0
+                            : getToValue(),
+                },
+                {
+                    x: () =>
+                        animationWrap.classList.contains("to-right")
+                            ? getToValue()
+                            : 0,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: sec,
+                        start: "top top",
+                        end: () =>
+                            "+=" +
+                            (animationWrap.scrollWidth - window.innerWidth),
+                        pin: pinWrap,
+                        invalidateOnRefresh: true,
+                        scrub: true,
+                    },
+                }
+            );
+        });
     },
 };
 </script>
@@ -262,11 +372,11 @@ export default {
             height: 413px;
             h2 {
                 text-align: center;
-                color: #fff4eb;
+                color: $WarmNude;
             }
             h1 {
                 text-align: center;
-                color: #fff4eb;
+                color: $WarmNude;
                 font-size: $bigTitle;
             }
         }
@@ -274,35 +384,36 @@ export default {
 }
 /* food-main-description */
 .food-description-blue {
+    max-height: 100vh;
     max-width: 100vw;
-    background-color: #073763;
+    background-color: $Blue;
     justify-content: center;
     padding: 56px 268px 40px;
     h1 {
         text-align: center;
-        color: #fff4eb;
+        color: $WarmNude;
         margin-bottom: 44px;
     }
     h4 {
         text-align: center;
-        color: #fff4eb;
+        color: $WarmNude;
         line-height: 1.5;
     }
 }
 
 .food-description-red {
     max-width: 100vw;
-    background-color: #cb4847;
+    background-color: $Red;
     justify-content: center;
     padding: 56px 268px 40px;
     h1 {
         text-align: center;
-        color: #fff4eb;
+        color: $WarmNude;
         margin-bottom: 44px;
     }
     h4 {
         text-align: center;
-        color: #fff4eb;
+        color: $WarmNude;
         line-height: 1.5;
     }
 }
@@ -310,7 +421,7 @@ export default {
 .food-category {
     width: 100vw;
     height: 809px;
-    background-color: #f6f1ed;
+    background-color: $OffWhite;
     display: flex;
     .food-category-left {
         flex: 2;
@@ -324,7 +435,7 @@ export default {
             left: 119px;
             width: 300px;
             height: 300px;
-            background-color: #cb4847;
+            background-color: $Red;
             overflow: hidden;
             border-radius: 50%;
             display: flex;
@@ -345,7 +456,7 @@ export default {
     .food-category-middle-text {
         max-width: 100%;
         h1 {
-            color: #cb4847;
+            color: $Red;
             margin-bottom: 72px;
         }
         h4 {
@@ -375,7 +486,7 @@ export default {
                 margin: 0 15px;
                 width: 136px;
                 height: 214px;
-                background-color: #dbcec6;
+                background-color: $Nude;
                 border-radius: 30px;
                 text-align: center;
                 a {
@@ -402,8 +513,8 @@ export default {
                     }
                 }
                 p {
-                    font-size: 20px;
-                    color: #7a625b;
+                    font-size: $smallTitle/2;
+                    color: $DarkBrown;
                     line-height: 1.5;
                 }
             }
@@ -415,8 +526,8 @@ export default {
     display: flex;
     flex-direction: column;
     max-width: 100%;
-    font-size: 20px;
-    color: #999;
+    font-size: $smallTitle/2;
+    color: $Gray;
     text-align: center;
     line-height: 150%;
     padding-top: 281px;
@@ -432,14 +543,14 @@ export default {
         margin-right: 8px;
     }
     .primary-color {
-        background-color: var(--Primary-Trello-Red, #cb4847);
+        background-color: var(--Primary-Trello-Red, $Red);
     }
     .gold-color {
-        background-color: var(--Primary-Gold, #c3a988);
+        background-color: var(--Primary-Gold, $Gold);
     }
     .category-text {
         margin: auto 0;
-        font-size: 20px;
+        font-size: $smallTitle/2;
         color: $Gold;
     }
     a {
@@ -475,14 +586,168 @@ export default {
             place-items: center; /* 水平垂直置中 */
             margin: 0 auto;
             .food-bottom-text {
-                font-size: 24px;
-                color: #f6f1ed;
+                font-size: $smallTitle/2;
+                color: $OffWhite;
             }
             & a {
-                font-size: 24px;
-                color: #f6f1ed;
+                font-size: $smallTitle/2;
+                color: $OffWhite;
             }
             /* .food-bottom-box a:hover{} */
+        }
+    }
+}
+//-----------------視差滾動-----------------
+.food_selector_wrapper {
+    background-color: $OffWhite;
+    padding-top: 100px;
+    .food_selector_text {
+        width: 444px;
+        height: 704px;
+        display: flex;
+        background-image: url(/src/assets/Image/food/time_and_food.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        .food_1st_scroll {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            p {
+                writing-mode: vertical-rl; /* 文字垂直從右到左 */
+                text-orientation: upright;
+                font-size: $smallTitle;
+                color: $LightBrown;
+            }
+            .left_text {
+                margin-bottom: 160px;
+            }
+            .right_text {
+                margin-top: 200px;
+            }
+            .food_and_time {
+                h1 {
+                    font-size: $bigTitle;
+                    background: $RevGoldGrad;
+                    background-clip: text;
+                    -webkit-text-stroke: 8px transparent;
+                }
+                .inRed {
+                    color: $Red;
+                }
+                .inBlue {
+                    color: $Blue;
+                }
+                img {
+                }
+            }
+            p {
+            }
+        }
+        .scroll_down {
+            margin-top: 50px;
+            animation: jump 0.8s infinite;
+            @keyframes jump {
+                0%,
+                20%,
+                50%,
+                80%,
+                100% {
+                    transform: translateY(0);
+                }
+                40% {
+                    transform: translateY(7px);
+                }
+                60% {
+                    transform: translateY(1px);
+                }
+            }
+            h2 {
+                color: $Gold;
+            }
+
+            img {
+                margin-top: 5px;
+                width: 64px;
+                height: 56px;
+            }
+        }
+    }
+}
+//------------------------------------
+
+section {
+    padding-top: 100px;
+    background-color: $OffWhite;
+    &.horizontal {
+        overflow-x: hidden;
+
+        .pin-wrap,
+        .animation-wrap {
+            display: flex;
+            position: relative;
+            z-index: 1;
+            // height: 100vh;
+        }
+        .item {
+            position: relative;
+            padding: 110px 36px; //不可以刪掉
+            // flex: 0 0 500px;
+            height: calc(100vh - 300px); //暫時不可以刪掉
+            display: flex;
+            align-items: center;
+            // line-height: 1.7;
+            // user-select: none;
+            // border-right: 1px solid rgba(0, 0, 0, 0.06);
+            background-color: transparent;
+            //以下開始新增樣式
+            width: 444px;
+            height: 704px;
+            &:before {
+                position: absolute;
+                // font-size: 100px;
+                // opacity: 0.13;
+                font-weight: bold;
+                z-index: -1;
+                transform: translate(-30px, -50px);
+                // line-height: 1;
+            }
+            img {
+            }
+        }
+        .animation-wrap {
+            &.to-right {
+                // counter-reset: item;
+                // float: left;
+
+                .item:before {
+                    // counter-increment: item;
+                    // content: counter(item);
+                }
+            }
+
+            &.to-left {
+                counter-reset: item 11;
+                float: right;
+
+                .item:before {
+                    counter-increment: item -1;
+                    content: counter(item);
+                }
+            }
+
+            .item:nth-child(2n + 2) {
+                align-items: flex-start;
+            }
+
+            .item:nth-child(4n + 4) {
+                align-items: flex-end;
+            }
         }
     }
 }
