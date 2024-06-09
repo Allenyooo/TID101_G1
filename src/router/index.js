@@ -190,9 +190,9 @@ const routes = [
     },
   },
   {
-    path: "/BkMamber",
-    name: "BkMamber",
-    component: () => import("../views/BkMamber.vue"),
+    path: "/BkMember",
+    name: "BkMember",
+    component: () => import("../views/BkMember.vue"),
     meta: {
       layout: "default-back",
     },
@@ -233,6 +233,14 @@ const routes = [
     path: "/BkShop",
     name: "BkShop",
     component: () => import("../views/BkShop.vue"),
+    meta: {
+      layout: "default-back",
+    },
+  },
+  {
+    path: "/BkProduct",
+    name: "BkProduct",
+    component: () => import("../views/BkProduct.vue"),
     meta: {
       layout: "default-back",
     },
