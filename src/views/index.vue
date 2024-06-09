@@ -3,25 +3,22 @@
     <div class="wrapper">
         <img src="../assets/Image/index/gate.png" alt="" class="gate">
         
-        <div class="door">
+        <div class="door" :class="{rotate: rotating}">
             <img class="left" src="/src/assets/Image/index/door_left.png" alt="">
             <img class="right" src="/src/assets/Image/index/door_right.png" alt="">
         </div>
-        
-        <h5 class="frontdesk">前台</h5>
-        <h5 class="Backstage">後台</h5>
 
-        <div class="yiayng" @click="cyclerotate">
+        <div class="yiayng" @click="cyclerotate" :class="{rotate: rotating}">
 
-            <div class="FrontDesk"> 
+            <div class="FrontDesk" :class="{ 'move-right': moved, 'highlight': rotating }">
+                <h5 class="frontdesk">前台</h5>
                 <img class="yia" src="../assets/Image/index/yin.png" alt="">
             </div>
 
-            <div class="BackStage">
+            <div class="BackStage" :class="{ 'move-left': moved, 'highlight': rotating }">
+                <h5 class="Backstage">後台</h5>
                 <img class="yng" src="../assets/Image/index/yng.png" alt="">
             </div>
-            
-            
 
         </div>
 
@@ -33,24 +30,16 @@ export default {
     data() {
         return {
             rotating: false,
-            showText: true
+            moved: false
         }
     },
     methods: {
         cyclerotate() {
-            this.rotating = false;
-            this.showText = true;
+            this.rotating = true;
 
-            let yiayngElement = document.querySelector('.yiayng');
-            let frontDeskElement = document.querySelector('.FrontDesk');
-            let backstageElement = document.querySelector('.BackStage');
-            
-            yiayngElement.classList.add('rotate');
-
-            yiayngElement.addEventListener('animationend', () => {
-                frontDeskElement.classList.add('move-right');
-                backstageElement.classList.add('move-left');
-            }, { once: true });
+            setTimeout(() => {
+                this.moved = true;
+            }, 2500); 
         }
     }
 }
@@ -58,6 +47,36 @@ export default {
 
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
+
+//RWD
+// @mixin windows{
+//   @media(max-width:1280px){
+//     @content;
+//   }
+// }
+
+// @mixin xxx{
+//   @media(max-width:1024px){
+//     @content;
+//   }
+// }
+
+// @mixin tablet{
+//   @media(max-width:820px){
+//     @content;
+//   }
+// }
+
+// @mixin mobile{
+//   @media(max-width:430px){
+//     @content;
+//   }
+// }
+// @mixin mobile{
+//   @media(max-width:375px){
+//     @content;
+//   }
+// }
 
 .wrapper{
     background-color: #333;
@@ -75,26 +94,27 @@ export default {
         left: 50%;
         transform: translateX(-50%);
         display: flex;
-        .left{
+        .left, .right {
             width: 23vw;
             height: 84vh;
+        }
+        .left {
             transform-origin: left;
-            transition: transform 2.5s;
-            // transform: translate3d(10px 20px 20px 45deg);
-        }
-        .right{
-            width: 23vw;
-            height: 84vh;
-            transform-origin: right;
-            transition: transform 2.5s;
-            // transform: translate3d(28px 12px 40px);
-        }
-        &:hover .left {
-            transform: rotateY(-70deg);
         }
 
-        &:hover .right {
-            transform: rotateY(70deg);
+        .right {
+            transform-origin: right;
+        }
+        &.rotate .left {
+            animation: door-left-rotate 2.5s linear forwards;
+
+            animation-delay: 2.9s; //門打開時間
+        }
+
+        &.rotate .right {
+            animation: door-right-rotate 2.5s linear forwards;
+
+            animation-delay: 2.9s; // 門打開時間
         }
     }
     .yiayng{
@@ -103,25 +123,39 @@ export default {
         left: 42.6%;
         width: 14.4vw;
         height: 15.8vw;
-        // animation: cycle 2s linear 1 forwards;
-        
         &.rotate {
             animation: cycle 2s linear forwards;
-        } 
-
+        }
         .FrontDesk{
             position: absolute;
             top: 30px;
             left: 90px;
             z-index: 1;
-            transition: transform 1s;
-            
+            transition: transform 5s;
+            .frontdesk{
+                color: #ccc;
+                font-size: 24px;
+                font-weight: 800;
+                position: absolute;
+                padding-left: 10px;
+                z-index: 1;
+                width: 48px;
+                top: 11px;
+                left: -11px;
+            }
             .yia{
                 width: 15vw;
                 cursor: pointer;
                 position: absolute;
-                top: -2.5vw;
-                left: -6.8vw;
+                top: -1.76vw;
+                left: -5.9vw;
+                transition: all .5s ease;
+                &:hover{
+                    transform: translateY(-10px);
+                &:hover{
+                    filter: drop-shadow(5px 8px 2px rgba(0, 0, 0, 0.7));
+                }
+                }
             }
         }
         .BackStage{
@@ -130,18 +164,33 @@ export default {
             left: 80px;
             z-index: 1;
             transition: transform 1s;
-            
+            .Backstage{  //字
+                color: #ccc;
+                font-size: 24px;
+                font-weight: 800;
+                position: absolute;
+                width: 48px;
+                z-index: 1;
+                top: 1vw;
+                left: 1vw;
+            }
             .yng{
                 width: 15vw;
                 cursor: pointer;
                 position: absolute;
-                bottom: -3.6vw;
-                left: -6.6vw;
+                z-index: 0;
+                bottom: -5.3vw;
+                left: -5.68vw;
+                transition: all .5s ease;
+                &:hover{
+                    transform: translateY(-10px);
+                }
+                &:hover{
+                    filter: drop-shadow(5px 8px 2px rgba(0, 0, 0, 0.7));
+                }
             }
         }
-        // &.rotate {
-        //     animation: cycle 3s linear forwards;
-        // }
+        
         .move-right {
             transform: translateY(-50px);
         }
@@ -149,26 +198,12 @@ export default {
         .move-left {
             transform: translateY(50px);
         }
-    }
-    .frontdesk{
-                color: #ccc;
-                font-size: 24px;
-                font-weight: 800;
-                position: absolute;
-                padding-left: 10px;
-                z-index: 1;
-                top: 23vw;
-                left: 48vw;
-            }
-    .Backstage{  //字
-        color: #ccc;
-        font-size: 24px;
-        font-weight: 800;
-        position: absolute;
-        width: 48px;
-        z-index: 1;
-        top: 31vw;
-        left: 49vw;
+
+        .highlight .frontdesk, .highlight .Backstage {
+            width: 65px;
+            font-size: 31px;
+            text-shadow: 4px 1px 4px rgb(8, 8, 9);
+        }
     }
 }
 
@@ -177,7 +212,26 @@ export default {
         transform: rotate(0deg);
     }
     100% {
-        transform: rotate(70deg);
+        transform: rotate(360deg);
     }
 }
+@keyframes door-left-rotate {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(-70deg);
+    }
+}
+
+@keyframes door-right-rotate {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(70deg);
+    }
+}
+
+
 </style>
