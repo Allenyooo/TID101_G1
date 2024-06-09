@@ -94,4 +94,9 @@ p {
   font-size: 12px;
   font-family: "Noto Serif TC", "Noto Serif KR";
   line-height: 150%;
+}
+
+input {
+  font-family: "Noto Serif TC", "Noto Serif KR";
+  line-height: 150%;
 }/*# sourceMappingURL=style.css.map */
