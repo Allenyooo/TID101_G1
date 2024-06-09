@@ -135,7 +135,7 @@ export default {
         // height: 100vh;
         padding-top: 5%;
         padding-left: 3vw;
-        padding-bottom: 132px;
+        padding-bottom: 92px;
         .receipt_coupon{
             background-image: url(../assets/Image/receipt/receipt_bg.png);
             // width: 78%;
@@ -196,7 +196,7 @@ export default {
                     button{
                         background-color: $OffWhite;
                         border: none;
-                        font-size: $fontSize * 5;
+                        font-size: $fontSize * 1.25;
                         color: $DarkBrown;
                         font-weight: bold;
                         font-family: $fontFamily;
@@ -274,12 +274,11 @@ export default {
         width: 1026px;
         margin: 72px auto 0;
         h3{
-            font-size: $fontSize * 6;
+            font-size: $fontSize * 1.5;
             font-weight: bold;
             margin-bottom: 16px;
         }
         p{
-            font-size: $fontSize * 5;
             padding: 20px;
             background-color: $White;
             border-radius: 20px;
@@ -290,9 +289,9 @@ export default {
         background-color: $Gold;
         border-radius: 42px;
         color: $White;
-        padding: 16px 52px;
+        padding: 12px 40px;
         border: transparent;
-        font-size: $fontSize * 6;
+        font-size: $fontSize * 1.5;
         font-weight: bold;
         font-family: $fontFamily;
         // margin-top: 44px;

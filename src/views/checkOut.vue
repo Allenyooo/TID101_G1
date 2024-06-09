@@ -81,7 +81,7 @@
         background-color: $OffWhite;
         max-width: 100vw;
         height: 98vh;
-        padding-top: 5%;
+        padding-top: 1%;
     }
 
     .checkOut_wrapper{
@@ -133,7 +133,7 @@
                 width: 100%;
                 h3{
                     display: inline-block;
-                    font-size: $fontSize * 6;
+                    font-size: $fontSize * 1.5;
                     font-weight: bold;
                     padding-bottom: 14px;
                     padding-right: 12px;
@@ -203,7 +203,7 @@
                     border-bottom: 1px solid $Gold;
                     h3{
                         padding-left: 8px;
-                        font-size: $fontSize * 6;
+                        font-size: $fontSize * 1.5;
                         font-weight: bold;
                         line-height: 150%;
                     }
@@ -231,7 +231,7 @@
                             border: 1px solid $Gold;
                             border-radius: 20px;
                             padding: 5px 10px;
-                            font-size: 14px;
+                            font-size: $fontSize * 0.875;
                             font-family: $fontFamily;
                             margin-right: 20px;
                             width: 60%;
@@ -239,7 +239,7 @@
                         }
                         #checkOut_submitCode{
                             font-family: $fontFamily;
-                            font-size: 14px;
+                            font-size: $fontSize * 0.875;
                             font-weight: bold;
                             background-color: $OffWhite;
                             border-radius: 20px;
@@ -320,7 +320,7 @@
         #checkOut_next{
             position: absolute;
             z-index: 2;
-            font-size: $fontSize * 5;
+            font-size: $fontSize * 1.25;
             padding: 8px 44px;
             background-color: $Gold;
             color: #fff;
