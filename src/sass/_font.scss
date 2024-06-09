@@ -51,6 +51,11 @@ p {
     line-height: $lineHeight;
 }
 
+input{
+    font-family: $fontFamily;
+    line-height: $lineHeight;
+}
+
 @mixin breakpoint($point) {
     @media screen and (max-width: $point) {
         @content;

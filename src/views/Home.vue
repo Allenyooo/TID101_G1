@@ -632,6 +632,26 @@ gsap.registerPlugin(ScrollTrigger);
 export default {
     setup() {
         onMounted(() => {
+            let tl = gsap.timeline({repeat: -1});
+
+            tl.to(".banner-img", {
+                x: -1300,
+                y: -1725,
+                duration: 60,
+            }).to(".banner-img", {
+                x: 0,
+                y: -1725,
+                duration: 60,
+            }).to(".banner-img", {
+                x: -1300,
+                y: 0,
+                duration: 60,
+            }).to(".banner-img", {
+                x: 0,
+                y: 0,
+                duration: 60,
+            });
+
             let tls = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".home_intro",
@@ -655,7 +675,7 @@ export default {
                         autoAlpha: 0,
                         scale: 0,
                         stagger: 0.03,
-                        scrub: 0.5,
+                        scrub: 1,
                     },
                     "<+=0.1"
                 )
@@ -737,8 +757,6 @@ export default {
         grid-template-rows: repeat(9, 1fr);
         gap: 100px 50px;
         box-sizing: border-box;
-        margin-top: 100px;
-        margin-left: 50px;
         img {
             width: 100%;
             height: 100%;
@@ -1263,9 +1281,11 @@ export default {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 90vw;
-        height: 85vh;
-        background-size: 90vw 85vh;
+        width: 77vw;
+        height: 48vw;
+        // object-fit: contain;
+        background-size: 100% 100%;
+        background-position: center;
         background-repeat: no-repeat;
         display: flex;
         align-items: center;
@@ -1488,6 +1508,7 @@ export default {
                 border: 3px solid $DarkBrown;
                 border-radius: 30px;
                 margin: 0 auto;
+                opacity: 0;
                 .home_card_title {
                     width: 30%;
                     background-color: $Gold;
@@ -1497,15 +1518,17 @@ export default {
                     h3 {
                         color: $OffWhite;
                         line-height: 143%;
+                        font-size: 1.7vw;
                     }
                 }
                 img {
-                    width: 80%;
+                    width: 22vw;
                     border-radius: 20px;
                 }
                 h5 {
                     color: $Black;
                     font-weight: lighter;
+                    font-size: 1vw;
                     width: 80%;
                     margin: 16px auto 32px;
                     text-align: left;

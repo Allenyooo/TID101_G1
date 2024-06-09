@@ -1,15 +1,76 @@
 <template>
-    <div>
+    <img
+        src="../assets/Image/login/decoTop.svg"
+        alt="deco"
+        class="decoTop"
+        draggable="false"
+    />
 
+    <h2>註冊成功</h2>
+
+    <h4>歡迎成為梨花殿會員<br />您可以開始享受您的美食之旅</h4>
+
+    <div class="regiSuccess_in">
+        <button>
+            <h3>確定</h3>
+        </button>
     </div>
+
+    <img
+        src="../assets/Image/login/decoBottom.svg"
+        alt="deco"
+        class="decoBottom"
+        draggable="false"
+    />
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {};
 </script>
 
 <style lang="scss" scoped>
+.decoTop {
+    width: 9vw;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+h2 {
+    margin: 2vw;
+    color: $Black;
+    z-index: 1;
+}
+h4 {
+    text-align: center;
+    margin: 6vw auto;
+    font-weight: bold;
+}
 
+.regiSuccess_in {
+    background-image: $GoldGrad;
+    border: 1px solid $Gold;
+    border-radius: 15px;
+    margin: 2vw auto 2vw;
+    &:active {
+        background-image: $RevGoldGrad;
+    }
+    button {
+        width: 165px;
+        height: 52px;
+        background-color: transparent;
+        border: none;
+        h3 {
+            color: $DarkBrown;
+            font-size: 24px;
+            font-weight: 600;
+        }
+    }
+}
+
+.decoBottom {
+    height: 14vw;
+    position: absolute;
+    bottom: 3%;
+    left: 0;
+}
 </style>
