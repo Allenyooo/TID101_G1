@@ -80,6 +80,8 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+@import "/src/sass/style.scss";
+
 .decoTop {
     width: 9vw;
     position: absolute;

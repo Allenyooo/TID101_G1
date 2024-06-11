@@ -430,40 +430,139 @@
                             />
                         </h2>
                     </div>
-
                     <div class="home_table_card">
-                        <div class="home_card_title">
-                            <h3>小菜</h3>
+                        <div class="table_card">
+                            <div class="home_card_title">
+                                <h3>小菜</h3>
+                            </div>
+                            <img
+                                src="../assets/Image/home/TableIntro/card/side.jpg"
+                                alt="side_dish"
+                                draggable="false"
+                            />
+                            <h5>
+                                韓國的小菜飲食文化獨具特色，被視為餐桌上不可或缺的一部分。小菜種類繁多，包括泡菜、醃製蔬菜、炒菜、煎餅等，提供多樣的風味和營養。<br /><br />這些小菜構成了韓國餐桌上的多彩風景，與主食搭配使用。韓國人重視小菜的製作工藝和味道，認為小菜反映了餐廳或家庭的品質和風格，是韓國飲食文化中不可或缺的一部分。
+                            </h5>
                         </div>
-                        <img
-                            src="../assets/Image/home/TableIntro/kimchi_full.jpg"
-                            alt="side_dish"
-                            draggable="false"
-                        />
-                        <h5>
-                            韓國的小菜飲食文化獨具特色，被視為餐桌上不可或缺的一部分。小菜種類繁多，包括泡菜、醃製蔬菜、炒菜、煎餅等，提供多樣的風味和營養。<br /><br />這些小菜構成了韓國餐桌上的多彩風景，與主食搭配使用。韓國人重視小菜的製作工藝和味道，認為小菜反映了餐廳或家庭的品質和風格，是韓國飲食文化中不可或缺的一部分。
-                        </h5>
-                    </div>
 
-                    <!-- <div class="home_table_card">
-                        <div class="home_card_title">
-                            <h3>韓式鐵碗</h3>
+                        <div class="table_card">
+                            <div class="home_card_title">
+                                <h3>韓式鐵碗</h3>
+                            </div>
+                            <img
+                                src="../assets/Image/home/TableIntro/card/steelbowl.jpg"
+                                alt="steel bowl"
+                                draggable="false"
+                            />
+                            <h5>
+                                韓國不鏽鋼碗起源於20世紀，當時的糧食供給仍處於不穩定的情況，政府尋求降低白米需求量的配套措施，此時官員們注意到餐館的不鏽鋼飯碗，便利用這種小碗作為米食限量的工具。隨著物資豐足，大眾仍保留使用不鏽鋼碗的習慣。<br /><br />它們特別適合盛放熱湯和飯類，保持溫度的同時防止食物變質。不鏽鋼碗在韓國飲食文化中象徵著現代化與衛生，成為韓國家庭和餐館常見的餐具之一，並體現了韓國人對實用性、衛生、歷史的重視。
+                            </h5>
                         </div>
-                        <img
-                            src="../assets/Image/home/TableIntro/kimchi_full.jpg"
-                            alt="side_dish"
-                            draggable="false"
-                        />
-                        <h5>
-                            韓國不鏽鋼碗起源於20世紀，當時的糧食供給仍處於不穩定的情況，政府尋求降低白米需求量的配套措施，此時官員們注意到餐館的不鏽鋼飯碗，便利用這種小碗作為米食限量的工具。隨著物資豐足，大眾仍保留使用不鏽鋼碗的習慣。<br /><br />它們特別適合盛放熱湯和飯類，保持溫度的同時防止食物變質。不鏽鋼碗在韓國飲食文化中象徵著現代化與衛生，成為韓國家庭和餐館常見的餐具之一，並體現了韓國人對實用性、衛生、歷史的重視。
-                        </h5>
-                    </div> -->
+
+                        <div class="table_card">
+                            <div class="home_card_title">
+                                <h3>韓式石鍋</h3>
+                            </div>
+                            <img
+                                src="../assets/Image/home/TableIntro/card/stonepot.jpeg"
+                                alt="stone pot"
+                                draggable="false"
+                            />
+                            <h5>
+                                韓國石鍋的歷史可追溯至古代農業社會，最初由農民使用天然石材製作，用於煮飯和湯。石鍋具有優良的保溫性能，能保持食物溫熱，尤其適合韓國冬天寒冷氣候。<br /><br />隨著時間推移，石鍋逐漸被廣泛應用於各種韓國料理中，例如：知名的石鍋拌飯（돌솥비빔밥）和各類燉煮菜餚，成為韓國飲食文化的重要部分，象徵著傳統與實用的結合。
+                            </h5>
+                        </div>
+
+                        <div class="table_card">
+                            <div class="home_card_title">
+                                <h3>韓式湯匙</h3>
+                            </div>
+                            <img
+                                src="../assets/Image/home/TableIntro/card/spoon.jpg"
+                                alt="spoon"
+                                draggable="false"
+                            />
+                            <h5>
+                                韓式湯匙也因為功能性，所以與東亞國家習慣使用的湯匙、勺子有所差異。韓國飲食文化習慣在食用主食時搭配湯一起享用，細長的湯匙方便勺取剛好入口的份量，不僅如此，細長的湯柄可以深入到湯碗內盛料，讓湯成為餐桌上的配菜之一。
+                            </h5>
+                        </div>
+
+                        <div class="table_card">
+                            <div class="home_card_title">
+                                <h3>韓式筷子</h3>
+                            </div>
+                            <img
+                                src="../assets/Image/home/TableIntro/card/side.jpg"
+                                alt="chopsticks"
+                                draggable="false"
+                            />
+                            <h5>
+                                韓式筷子與其他東亞國家不同，大多呈現狹長且扁平的設計。扁平的設計增加了筷子的摩擦力，使筷子更容易夾住食物，尤其是在進食韓國常見的滑溜食物：如泡菜和各種涼拌菜時。<br /><br />除此之外，扁平的筷子不容易在餐桌上滑動，傳統韓食習慣把飯菜放在小桌子上，再移動小桌子到用餐的地方，扁平的筷子可以避免在移動過程滑落。
+                            </h5>
+                        </div>
+
+                        <div class="table_card">
+                            <div class="home_card_title">
+                                <h3>湯品</h3>
+                            </div>
+                            <img
+                                src="../assets/Image/home/TableIntro/card/soup.jpg"
+                                alt="soup"
+                                draggable="false"
+                            />
+                            <h5>
+                                韓國的湯品飲食文化源遠流長，湯在韓國飲食中佔有重要地位，被視為滋補身體、補充營養的重要途徑。韓國湯類繁多，包括清湯、辣湯、醬汁湯等，以及加入各種肉類、海鮮和蔬菜的燉煮湯品。韓國人相信湯能促進健康、保持體力，因此在日常生活中經常享用各種湯品。
+                            </h5>
+                        </div>
+
+                        <div class="table_card">
+                            <div class="home_card_title">
+                                <h3>海鮮</h3>
+                            </div>
+                            <img
+                                src="../assets/Image/home/TableIntro/card/seafood.jpg"
+                                alt="seafood"
+                                draggable="false"
+                            />
+                            <h5>
+                                韓國的海鮮飲食文化源遠流長，擁有豐富多樣的海產品。海鮮在韓國飲食中佔有重要地位，如生魚片、海鮮湯、海鮮煎餅等。韓國人喜歡將新鮮的海鮮生吃或烹煮，搭配醬料和小菜，味道鮮美。此外，韓國還有豐富的海鮮醃製和發酵食品，如韓國泡菜中的醃製海鮮，展現了海洋資源的多樣性和韓國人對食材的巧妙應用。
+                            </h5>
+                        </div>
+
+                        <div class="table_card">
+                            <div class="home_card_title">
+                                <h3>肉類</h3>
+                            </div>
+                            <img
+                                src="../assets/Image/home/TableIntro/card/bbq.jpg"
+                                alt="meat"
+                                draggable="false"
+                            />
+                            <h5>
+                                韓國的肉類飲食文化豐富多樣，以烤肉（고기구이）為代表。烤肉是一種社交活動，家人或朋友聚在一起在炭火上烤製各種肉類，如牛肉、豬肉和雞肉。除了烤肉，還有燉牛肉（갈비찜）和韓式炸雞（치킨）。韓國肉類飲食重視品質和調味，常搭配各種小菜和醬料一起享用，展現了韓國人對美食和社交的熱愛。
+                            </h5>
+                        </div>
+
+                        <div class="table_card">
+                            <div class="home_card_title">
+                                <h3>主食</h3>
+                            </div>
+                            <img
+                                src="../assets/Image/home/TableIntro/card/carb.jpg"
+                                alt="carbs"
+                                draggable="false"
+                            />
+                            <h5>
+                                韓國的主食文化以米飯為主，米飯是餐桌上的核心，但也會加入糯米、紅豆等增加營養和風味。除了米飯，韓國人還喜愛各類麵食，如冷麵（냉면）和拌麵（비빔국수）。冷麵清爽的口感適合夏季食用，而拌麵則辛辣和多樣的配料深受大眾喜愛。白米飯和麵食共同構成了韓國主食文化的重要部分，反映了韓國人對簡單、健康飲食的追求。
+                            </h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="home_links">
-            <a href="" class="home_food_link">
+            <router-link to="/food" class="home_food_link">
                 <div class="home_food">
                     <div class="home_food_banner">
                         <img
@@ -500,9 +599,9 @@
                         </span>
                     </div>
                 </div>
-            </a>
+            </router-link>
 
-            <a href="" class="home_map_link">
+            <router-link to="/map" class="home_map_link">
                 <div class="home_map">
                     <div class="home_map_words">
                         <h2>全台合作餐廳</h2>
@@ -539,9 +638,9 @@
                         </div>
                     </div>
                 </div>
-            </a>
+            </router-link>
 
-            <a href="" class="home_product_link">
+            <router-link to="/product" class="home_product_link">
                 <div class="home_product">
                     <div class="home_product_banner">
                         <img
@@ -578,7 +677,7 @@
                         </span>
                     </div>
                 </div>
-            </a>
+            </router-link>
         </section>
 
         <section class="home_about">
@@ -632,31 +731,46 @@ gsap.registerPlugin(ScrollTrigger);
 export default {
     setup() {
         onMounted(() => {
-            let tl = gsap.timeline({repeat: -1});
+            let tl = gsap.timeline({ repeat: -1 });
 
             tl.to(".banner-img", {
                 x: -1300,
                 y: -1725,
-                duration: 60,
-            }).to(".banner-img", {
-                x: 0,
-                y: -1725,
-                duration: 60,
-            }).to(".banner-img", {
-                x: -1300,
-                y: 0,
-                duration: 60,
-            }).to(".banner-img", {
-                x: 0,
-                y: 0,
-                duration: 60,
-            });
+                duration: 30,
+            })
+                .to(
+                    ".banner-img",
+                    {
+                        x: 0,
+                        y: -1725,
+                        duration: 30,
+                    },
+                    ">"
+                )
+                .to(
+                    ".banner-img",
+                    {
+                        x: -1300,
+                        y: 0,
+                        duration: 30,
+                    },
+                    ">"
+                )
+                .to(
+                    ".banner-img",
+                    {
+                        x: 0,
+                        y: 0,
+                        duration: 30,
+                    },
+                    ">"
+                );
 
             let tls = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".home_intro",
                     start: "50% center",
-                    end: "700%",
+                    end: "250%",
                     scrub: 1,
                     id: "pin",
                     pin: true,
@@ -692,7 +806,7 @@ export default {
                     ".home_flower, .home_lion, .home_path, .home_pot, .home_lamp, .home_drum, .home_statue",
                     {
                         filter: "grayscale(0)",
-                        duration: 0.7,
+                        // duration: 0.7,
                     }
                 )
                 .to(
@@ -722,12 +836,62 @@ export default {
                     },
                     "<"
                 )
+                .to(
+                    ".home_flower",
+                    {
+                        x: -100,
+                    },
+                    "<"
+                )
+                .to(
+                    ".home_lion",
+                    {
+                        x: 130,
+                    },
+                    "<"
+                )
+                .to(
+                    ".home_path",
+                    {
+                        x: -40,
+                    },
+                    "<"
+                )
+                .to(
+                    ".home_pot",
+                    {
+                        x: 80,
+                    },
+                    "<"
+                )
+                .to(
+                    ".home_lamp",
+                    {
+                        x: 50,
+                    },
+                    "<"
+                )
+                .to(
+                    ".home_drum",
+                    {
+                        x: -120,
+                    },
+                    "<"
+                )
+                .to(
+                    ".home_statue",
+                    {
+                        x: 150,
+                    },
+                    "<"
+                )
                 .from(
                     ".home_introWord2 h4, .home_introWord2 h3",
                     {
                         autoAlpha: 0,
                         stagger: 0.03,
                         duration: 0.7,
+                        delay: 0.2,
                     },
                     "<"
                 );
@@ -738,6 +902,12 @@ export default {
 
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
+
+@mixin breakpoint($point) {
+    @media screen and (max-width: $point) {
+        @content;
+    }
+}
 
 .wrapper {
     max-width: 100vw;
@@ -1487,12 +1657,14 @@ export default {
                 top: 42%;
                 h1 {
                     color: $Black;
+                    font-size: 3.6vw;
                 }
                 h2 {
                     color: $Black;
                     position: relative;
+                    font-size: 2.14vw;
                     img {
-                        width: 8%;
+                        width: 2.38vw;
                         position: absolute;
                         z-index: 0;
                         top: 100%;
@@ -1504,39 +1676,54 @@ export default {
                 position: relative;
                 z-index: 1;
                 width: 91%;
-                background-color: $OffWhite;
-                border: 3px solid $DarkBrown;
-                border-radius: 30px;
+                height: 43vw;
                 margin: 0 auto;
-                opacity: 0;
-                .home_card_title {
-                    width: 30%;
-                    background-color: $Gold;
-                    margin: 24px auto 16px;
-                    border-radius: 10px;
-                    text-align: center;
-                    h3 {
-                        color: $OffWhite;
-                        line-height: 143%;
-                        font-size: 1.7vw;
+
+                display: none;
+
+                .table_card {
+                    background-color: $OffWhite;
+                    border: 3px solid $DarkBrown;
+                    border-radius: 30px;
+                    width: 100%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    .home_card_title {
+                        width: 30%;
+                        background-color: $Gold;
+                        margin: 24px auto 16px;
+                        border-radius: 10px;
+                        text-align: center;
+                        h3 {
+                            color: $OffWhite;
+                            line-height: 143%;
+                            font-size: 1.7vw;
+                        }
+                    }
+                    img {
+                        width: 22vw;
+                        border-radius: 20px;
+                    }
+                    h5 {
+                        color: $Black;
+                        font-weight: lighter;
+                        font-size: 1vw;
+                        width: 80%;
+                        margin: 16px auto 32px;
+                        text-align: left;
                     }
                 }
-                img {
-                    width: 22vw;
-                    border-radius: 20px;
-                }
-                h5 {
-                    color: $Black;
-                    font-weight: lighter;
-                    font-size: 1vw;
-                    width: 80%;
-                    margin: 16px auto 32px;
-                    text-align: left;
-                }
+                // add remaining cards here
+
+                // opacity: 0;
+                // transition: opacity 0.3s;
             }
         }
     }
 }
+
 .home_links {
     width: 100vw;
     height: 100vw;
@@ -1545,6 +1732,7 @@ export default {
         width: 60vw;
         display: block;
         margin: 0 auto;
+        cursor: pointer;
         .home_food {
             width: 60vw;
             margin: 7.1vw auto;

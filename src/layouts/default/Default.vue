@@ -21,6 +21,9 @@ import floatingButton from "./floatingButton.vue";
     bottom: 20px;
     right: 20px;
 }
+.default-page-wrapper {
+    background-color: #F6F1ED;
+}
 /* Sticky footer */
 // html {
 //   position: relative;
