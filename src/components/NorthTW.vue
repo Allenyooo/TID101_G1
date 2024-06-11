@@ -4,6 +4,11 @@ import shopcard from "../components/Shopcard.vue";
 export default {
   components: { shopcard },
 
+  beforeMount(){
+    // const filter = document.querySelector('.filter');
+    // filter.style.top = '0';
+  },
+
   data() {
     return {
         marker1Src : "/src/assets/Image/map/unmarker.png",
@@ -13,8 +18,17 @@ export default {
   },
 
   methods: {
-    backToIsland() {
-        this.$router.push('/map');
+    backToIsland(event) {
+      event.stopPropagation(); //停止冒泡事件
+      const img = document.querySelector('.northIsland');
+      img.style.opacity = '1';
+      img.style.transform = 'translate(0px, 0px)';
+      img.style.transition = 'all 0.5s ease';
+      img.style.width = '256px';
+      img.style.height = '199px';
+      this.$router.push('/map');
+      console.log('backToIsland is called');
+      img.style.transform = '';
     },
     markLight1() {
         this.marker1Src="/src/assets/Image/map/marker.png";
@@ -55,21 +69,23 @@ export default {
                 </span>
             </div>
         </div>
-        <ul class="shops">
-          <div class="map_shoptitle">
+
+        <div class="map_shoptitle">
               <h1>精 選 店 家</h1>
           </div>
 
+        <ul class="shops">
+
           <router-link to="/restaurant" class="marker">
-              <shopcard can_hover="true" @mouseenter.native="markLight1" @mouseleave.native="unmarker1"></shopcard>
+              <shopcard @mouseenter.native="markLight1" @mouseleave.native="unmarker1"></shopcard>
           </router-link>
 
           <router-link to="/restaurant" class="marker">
-              <shopcard can_hover="true" @mouseenter.native="markLight2" @mouseleave.native="unmarker2"></shopcard>
+              <shopcard @mouseenter.native="markLight2" @mouseleave.native="unmarker2"></shopcard>
           </router-link>
 
           <router-link to="/restaurant" class="marker">
-              <shopcard can_hover="true" @mouseenter.native="markLight3" @mouseleave.native="unmarker3"></shopcard>
+              <shopcard @mouseenter.native="markLight3" @mouseleave.native="unmarker3"></shopcard>
           </router-link>
 
 
@@ -83,6 +99,7 @@ export default {
 .marker{
     text-decoration: none;
     color: #333;
+    margin-bottom: 24px;
 }
 
 section {
@@ -97,6 +114,7 @@ section {
     top: 0;
     left: 0;
     z-index: 15; 
+    transition: 0.3s;
   }
   .cards {
     margin-bottom: 24px;
@@ -141,11 +159,11 @@ section {
   .shops {
     // outline: 2px solid red;
     position: fixed;
-    top: 10vh;
+    top: 20vh;
     right: 10vw;
     z-index: 16;
     width: 740px;
-    height: 90vh;
+    height: 79vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -156,33 +174,23 @@ section {
         width: 12px; /* 滾動條寬度 */
     }
 
-    // .shops::-webkit-scrollbar-track {
-    //     background: #f1f1f1; /* 滾動條軌道的顏色 */
-    // }
-
-    // .shops::-webkit-scrollbar-thumb {
-    //     background: #888; /* 滾動條滑塊的顏色 */
-    //     border-radius: 10px; /* 滑塊的圓角 */
-    // }
-
-    // .shops::-webkit-scrollbar-thumb:hover {
-    //     background: #555; /* 滑塊在懸停時的顏色 */
-    // }
-
-    .map_shoptitle {
+  }
+  .map_shoptitle {
       width: 312px;
       height: 88px;
       background-image: url(/src/assets/Image/map/bannerBGI.png);
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0 auto;
       margin-bottom: 5vh;
+      position: fixed;
+      top: 8vh;
+      right: 21.5vw;
+      z-index: 16;
 
       h1 {
         font-size: $fontSize * 2;
       }
     }
-  }
 }
 </style>

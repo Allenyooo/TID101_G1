@@ -5,7 +5,6 @@ import easttw from "../components/EastTW.vue";
 import middletw from "../components/MiddleTW.vue";
 
 export default {
-    components: { northtw, southtw, easttw, middletw },
 
     data() {
         return {
@@ -14,24 +13,27 @@ export default {
     },
 
     methods: {
+        
         nWave(event) {
             const img = this.$refs.northIslandImg;
             console.log(img);
             if (img) {
-                img.removeEventListener('transitionend', (event)=>{
+
+                const moveToN = () => {
+                    console.log("moveToN is called");
                     this.$router.push('/map/north');
-                });
+                };
+
+                img.removeEventListener('transitionend', moveToN, { once: true });
 
                 img.style.width = '510px';
                 img.style.height = '400px';
                 img.style.transform = 'translate(-720px, 110px)';
                 img.style.transition = 'all 0.5s ease';
+                img.style.opacity = '0';
                 console.log('nMove');
 
-                img.addEventListener('transitionend', (event)=>{
-                    this.$router.push('/map/north');
-                    console.log('nWave is called');
-                });
+                img.addEventListener('transitionend', moveToN, { once: true });
 
             }
         },
@@ -39,42 +41,63 @@ export default {
         mWave(event) {
             const img = this.$refs.middleIslandImg;
             if (img) {
-                img.removeEventListener('transitionend', ()=>{
+
+                const moveToM = () => {
+                    console.log("moveToM is called");
                     this.$router.push('/map/middle');
-                });
+                };
+
+                img.removeEventListener('transitionend', moveToM);
 
                 img.style.width = '510px';
                 img.style.height = '400px';
                 img.style.transform = 'translate(-645px, 15px)';
                 img.style.transition = 'all 0.5s ease';
+                img.style.opacity = '0';
 
-                img.addEventListener('transitionend', ()=>{
-                    this.$router.push('/map/middle');
-                    console.log('mWave is called');
-                });
+                img.addEventListener('transitionend', moveToM, { once: true });
             }
         },
 
         sWave(event) {
             const img = this.$refs.southIslandImg;
             if (img) {
-                img.removeEventListener('transitionend', ()=>{
-                    this.$router.push('/map/south');
-                });
 
-                img.style.width = '400px';
-                img.style.height = '650px';
-                img.style.transform = 'translate(-645px, -270px)';
+                const moveToS = () => {
+                    console.log("moveToS is called");
+                    this.$router.push('/map/south');
+                };
+
+                img.removeEventListener('transitionend', moveToS);
+
+                img.style.width = '370px';
+                img.style.height = '660px';
+                img.style.transform = 'translate(-565px, -265px)';
                 img.style.transition = 'all 0.5s ease';
+                img.style.opacity = '0';
 
-                img.addEventListener('transitionend', ()=>{
-                    this.$router.push('/map/south');
-                    console.log('sWave is called');
-                });
+                img.addEventListener('transitionend', moveToS, { once: true });
             }
         },
-        eWave() {
-            alert("east");
+        eWave(event) {
+            const img = this.$refs.eastIslandImg;
+            if (img) {
+
+                const moveToE = () => {
+                    console.log("moveToE is called");
+                    this.$router.push('/map/east');
+                };
+
+                img.removeEventListener('transitionend', moveToE);
+
+                img.style.width = '300px';
+                img.style.height = '695px';
+                img.style.transform = 'translate(-700px, -20px)';
+                img.style.transition = 'all 0.5s ease';
+                img.style.opacity = '0';
+
+                img.addEventListener('transitionend', moveToE, { once: true });
+            }
         },
     },
     computed: {},
@@ -114,22 +137,21 @@ export default {
                 />
 
             <!-- 南部 -->
-            <router-link to="/map/south" @click.native="sWave">
                 <img
                     src="/src/assets/Image/map/southIsland.png"
                     class="island southIsland"
                     ref="southIslandImg"
+                    @click.native="sWave"
                 />
-            </router-link>
+
 
             <!-- 東部 -->
-            <router-link to="/map/east" @click.native="eWave">
                 <img
                     src="/src/assets/Image/map/eastIsland.png"
-                    class="island eastIsalnd"
+                    class="island eastIsland"
                     ref="eastIslandImg"
+                    @click.native="eWave"
                 />
-            </router-link>
         </div>
     </div>
 </template>
@@ -184,7 +206,7 @@ export default {
             transition: 0.3s;
             transform: translateY(44px);
         }
-        &:hover .eastIsalnd {
+        &:hover .eastIsland {
             transition: 0.3s;
             transform: translateX(80px);
         }
@@ -214,7 +236,7 @@ export default {
             left: -10px;
             transition: 0.3s;
         }
-        .eastIsalnd {
+        .eastIsland {
             // outline: 1px red solid;
             // cursor: pointer;
             position: absolute;

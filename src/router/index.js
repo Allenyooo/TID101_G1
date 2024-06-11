@@ -70,6 +70,7 @@ const routes = [
     component: () => import("../views/map.vue"),
     meta: {
       layout: "default",
+      isHoverEnabled: true,
     },
     children: [
       {
@@ -96,6 +97,7 @@ const routes = [
     component: () => import("../views/member.vue"),
     meta: {
       layout: "default",
+      isHoverEnabled: false,
     },
   },
   {
