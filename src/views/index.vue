@@ -11,12 +11,20 @@
         <div class="yiayng" @click="cyclerotate" :class="{rotate: rotating}">
 
             <div class="FrontDesk" :class="{ 'move-right': moved, 'highlight': rotating }">
-                <h5 class="frontdesk">前台</h5>
+                
+                <router-link to="/enter">
+                    <h5 class="frontdesk">前台</h5>
+                </router-link>
+                
                 <img class="yia" src="../assets/Image/index/yin.png" alt="">
             </div>
 
             <div class="BackStage" :class="{ 'move-left': moved, 'highlight': rotating }">
-                <h5 class="Backstage">後台</h5>
+
+                <router-link to="/BkHome">
+                    <h5 class="Backstage">後台</h5>
+                </router-link>
+                
                 <img class="yng" src="../assets/Image/index/yng.png" alt="">
             </div>
 
@@ -108,19 +116,19 @@ export default {
         &.rotate .left {
             animation: door-left-rotate 2.5s linear forwards;
 
-            animation-delay: 2.9s; //門打開時間
+            animation-delay: 2.5s; //門打開時間
         }
 
         &.rotate .right {
             animation: door-right-rotate 2.5s linear forwards;
 
-            animation-delay: 2.9s; // 門打開時間
+            animation-delay: 2.5s; // 門打開時間
         }
     }
     .yiayng{
         position: absolute;
         top: 41%;
-        left: 42.6%;
+        left: 43.5%;
         width: 14.4vw;
         height: 15.8vw;
         &.rotate {
@@ -139,16 +147,16 @@ export default {
                 position: absolute;
                 padding-left: 10px;
                 z-index: 1;
-                width: 48px;
-                top: 11px;
-                left: -11px;
+                width: 58px;
+                top: 1px;
+                left: -28px;
             }
             .yia{
-                width: 15vw;
+                width: 15.0vw;
                 cursor: pointer;
                 position: absolute;
                 top: -1.76vw;
-                left: -5.9vw;
+                left: -6.9vw;
                 transition: all .5s ease;
                 &:hover{
                     transform: translateY(-10px);
@@ -171,16 +179,16 @@ export default {
                 position: absolute;
                 width: 48px;
                 z-index: 1;
-                top: 1vw;
-                left: 1vw;
+                top: -1vw;
+                left: 0vw;
             }
             .yng{
                 width: 15vw;
                 cursor: pointer;
                 position: absolute;
                 z-index: 0;
-                bottom: -5.3vw;
-                left: -5.68vw;
+                bottom: -5.0vw;
+                left: -6.68vw;
                 transition: all .5s ease;
                 &:hover{
                     transform: translateY(-10px);
@@ -200,8 +208,8 @@ export default {
         }
 
         .highlight .frontdesk, .highlight .Backstage {
-            width: 65px;
-            font-size: 31px;
+            width: 68px;
+            font-size: 28px;
             text-shadow: 4px 1px 4px rgb(8, 8, 9);
         }
     }
