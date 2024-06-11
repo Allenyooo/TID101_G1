@@ -6,10 +6,14 @@
     >
         <div v-if="showButtons" class="additional-buttons">
             <button class="additional-button">
-                <img src="/src/assets/Image/food/Facebook.png" alt="" />
+                <a href="https://www.facebook.com/">
+                    <img src="/src/assets/Image/food/Facebook.png" alt="" />
+                </a>
             </button>
             <button class="additional-button">
-                <img src="/src/assets/Image/food/Instagram.png" alt="" />
+                <a href="https://www.instagram.com/">
+                    <img src="/src/assets/Image/food/Instagram.png" alt=""
+                /></a>
             </button>
             <button class="additional-button">
                 <img
@@ -57,6 +61,7 @@ export default {
     align-items: center;
     z-index: 100;
     .main-button {
+        margin-top: 5px;
         width: 60px;
         height: 60px;
         background-image: url(/src/assets/Image/food/FloatingButton.png);
@@ -70,7 +75,7 @@ export default {
         border-radius: 50%;
         cursor: pointer;
         // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        // transition: background-color 0.3s;
+        transition: background-color 0.3s;
 
         &:hover {
             // background-color: #0056b3;
@@ -97,14 +102,14 @@ export default {
             height: 60px;
             display: flex;
             // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            // transition: background-color 0.3s, transform 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
             img {
                 max-width: 100%;
                 max-height: 100%;
             }
             &:hover {
                 background-color: $WarmNude;
-                // transform: translateY(-2px);
+                transform: translateY(-2px);
             }
         }
     }
