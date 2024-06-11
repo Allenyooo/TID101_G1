@@ -946,7 +946,7 @@ export default {
 @import "/src/sass/style.scss";
 /* top-banner */
 .food-top-banner {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-image: url(/src/assets/Image/food/food_banner.jpeg);
     background-size: cover;
@@ -985,7 +985,7 @@ export default {
 }
 /* food-main-description */
 .food-description-blue {
-    // width: 100vw;
+    width: 100%;
     // height: 100vh;
     background-color: $Blue;
     justify-content: center;
@@ -1003,7 +1003,7 @@ export default {
 }
 
 .food-description-red {
-    // width: 100vw;
+    width: 100%;
     background-color: $Red;
     justify-content: center;
     padding: 56px 268px 40px;
@@ -1020,7 +1020,7 @@ export default {
 }
 /* food-category */
 .food-category {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-color: $OffWhite;
     display: flex;
@@ -1047,6 +1047,7 @@ export default {
                 max-height: 100%;
                 width: auto;
                 height: auto;
+                object-fit: cover;
             }
         }
     }
@@ -1134,6 +1135,7 @@ export default {
     line-height: 150%;
     padding-top: 281px;
     padding-left: 36px;
+    overflow: hidden;
     .category-item {
         display: flex;
         margin-bottom: 16px;
@@ -1165,7 +1167,7 @@ export default {
 
 /* bottom */
 .food-bottom {
-    width: 100vw;
+    width: 100%;
     height: 226px;
     background-position: center;
     display: flex;
