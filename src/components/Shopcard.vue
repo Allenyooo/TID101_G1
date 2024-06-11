@@ -105,8 +105,8 @@ li {
     display: block;
     transition: 0.1s;
     // outline: 2px solid blue;
-    // width: 460px;
-    width: 24vw;
+    width: 456px;
+    // width: 24vw;
     height: 202px;
     // height: 36.59vh;
     background-color: $OffWhite;
@@ -146,9 +146,9 @@ li {
 
 .normal {
     // outline: 1px red solid;
-    // width: 460px;
+    width: 456px;
     height: 202px;
-    width: 24vw;
+    // width: 24vw;
     // height: 36.59vh;
     border-radius: 15px;
     overflow: hidden;
