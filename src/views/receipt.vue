@@ -5,9 +5,9 @@ export default {
     
     components: {couponSwiper},
 
-    data(){
-        return{
-
+    methods: {
+        member(){
+            this.$router.push('/member');
         }
     }
 
@@ -119,7 +119,7 @@ export default {
             <p>感謝您選擇我們的梨饗券！梨饗券可以讓您在我們合作的餐廳上享受美味的用餐體驗。完成付款後，您將收到一組QR Code，請將QR Code儲存到您的信箱和手機中，以便在餐廳使用。到達餐廳後，您只需向服務人員出示QR Code，即可抵扣等值金額。此外，我們的餐券有效期為一年，請在有效期內使用。<br><br>請注意，本餐券僅限在我們指定的合作餐廳使用，並且不能兌換現金。最後，我們對於使用本餐券所造成的任何意外概不負責，並保留對本說明的最終修改權。希望您享受美食之旅！</p>
         </div>
 
-        <button class="receipt_ticketBox">檢視票匣</button>
+        <button class="receipt_ticketBox" @click="member">檢視票匣</button>
 
     </div>
 
@@ -283,6 +283,8 @@ export default {
             background-color: $White;
             border-radius: 20px;
             border: 1px solid $Gold;
+            font-size: $fontSize;
+            color: $Black;
         }
     }
     .receipt_ticketBox{
