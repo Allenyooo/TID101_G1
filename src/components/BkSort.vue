@@ -4,7 +4,7 @@
       <button class="Bkd" @click="dD">編號:由小到大</button>
       <ul :class="{ sDrop: this.sDown == true }">
         <li v-for="i in dropdown">
-          <a href="">{{ i }}</a>
+          <a>{{ dropValue(i) }}</a>
         </li>
       </ul>
     </div>
@@ -26,6 +26,11 @@ export default {
         return (this.sDown = true);
       } else if (this.sDown == true) {
         return (this.sDown = false);
+      }
+    },
+    dropValue(t) {
+      for (let v in t) {
+        return v;
       }
     },
   },
@@ -73,9 +78,11 @@ export default {
 
       li {
         background-color: antiquewhite;
-        width: 126px;
-        height: 40px;
+        width: 160px;
+        height: 32px;
         border: 1px solid black;
+        line-height: 32px;
+        padding: 0 6px;
       }
     }
   }

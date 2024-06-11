@@ -9,7 +9,13 @@
         <BS :dropdown="dropdown" :search="search" :newButton="newButton"></BS>
         <BDate></BDate>
         <BSort :dropdown="dropdown"></BSort>
-        <BD :bd="bd" :title="title" :dataTd="dataTd" :stateTd="stateTd"></BD>
+        <BD
+          :bd="bd"
+          :title="title"
+          :dataTd="dataTd"
+          :stateTd="stateTd"
+          :BCHref="BCHref"
+        ></BD>
       </div>
     </div>
 
@@ -78,10 +84,10 @@ export default {
       ],
       dropdown: [
         {
-          id: "管理員編號",
+          編號: "管理員編號",
         },
         {
-          name: "姓名",
+          狀態: "狀態",
         },
       ],
       bd: [
@@ -133,6 +139,7 @@ export default {
       search: "匯出資料",
       stateTd: 1,
       dataTd: 2,
+      BCHref: 2,
     };
   },
 };

@@ -30,7 +30,24 @@
           </div>
           <div class="modal-body">
             <ul>
-              <li>1</li>
+              <li>
+                <h4 class="reviseTitle">編號:</h4>
+                <h4>1</h4>
+              </li>
+              <li>
+                <h4 class="reviseTitle">編號:</h4>
+                <h4>1</h4>
+              </li>
+
+              <li>
+                <h4 class="reviseTitle">編號:</h4>
+                <h4>1</h4>
+              </li>
+
+              <li>
+                <h4 class="reviseTitle">編號:</h4>
+                <h4>1</h4>
+              </li>
             </ul>
           </div>
           <div class="modal-footer">
@@ -72,9 +89,37 @@ export default {
 .modal-dialog {
   .modal-content {
     width: auto;
+    background-color: $OffWhite;
+    padding: 32px;
+
     .modal-header {
       p {
-        width: 100px;
+        // width: 260px;
+      }
+
+      button {
+        margin-left: 210px;
+        margin-bottom: 12px;
+      }
+    }
+
+    .modal-body {
+      ul {
+        li {
+          display: flex;
+          margin-bottom: 8px;
+          border: 1px solid $DarkBrown;
+
+          h4 {
+            width: 120px;
+            background-color: $White;
+          }
+
+          .reviseTitle {
+            background-color: $DarkBrown;
+            color: $White;
+          }
+        }
       }
     }
   }

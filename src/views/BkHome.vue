@@ -297,7 +297,7 @@ export default {
 
   .BkM {
     display: flex;
-    height: 2100px;
+    height: 150vw;
 
     .BkContent {
       width: 80vw;

@@ -2,6 +2,12 @@
   <div class="productBody">
     <!-- nav -->
     <div class="productHeader"></div>
+    <div class="productBreadCrumbs">
+      <router-link to="/Home"><h5>首頁</h5></router-link>
+      <img src="/src/assets/Image/product/VectorRight.svg" alt="" />
+      <router-link to="/Product"><h5>梨饗券</h5></router-link>
+    </div>
+
     <!-- <button @click="scToggle()">購物車</button> -->
 
     <!-- <div class="left"></div> -->
@@ -50,6 +56,7 @@
     <!-------------- top -------------->
     <div class="productTop" id="app">
       <ul>
+        <li class="productNameLine"></li>
         <li class="productImage">
           <div class="piCorner">
             <div class="piPicture">
@@ -59,7 +66,9 @@
         </li>
         <li class="productPrice">
           <ul>
-            <li class="productName"><h2>梨饗券</h2></li>
+            <li class="productName">
+              <h2>梨饗券</h2>
+            </li>
             <li class="productCount">
               <ul>
                 <li class="productCountNav">
@@ -96,9 +105,11 @@
             <li class="priceTotal">
               <p>票券金額小計：NT${{ price * discount * count }}</p>
             </li>
-            <li class="right-4">
+            <li class="buttonList">
               <button class="shopping" @click="taskAdd()">加入購物車</button>
-              <button href="">立即結帳</button>
+              <button href="">
+                <router-link to="/CheckOut"><h4>立即結帳</h4></router-link>
+              </button>
             </li>
           </ul>
         </li>
@@ -127,8 +138,9 @@
 
     <!-------------- bottom -------------->
     <div class="productbottom">
+      <p class="pbMobileText">四大亮點 一次收藏</p>
       <ul>
-        <li>
+        <li class="pbList1">
           <div class="pbimage i1"></div>
           <div class="pbText">
             <p>便利快捷</p>
@@ -139,7 +151,7 @@
           </div>
         </li>
 
-        <li>
+        <li class="pbList2">
           <div class="pbimage i2"></div>
           <div class="pbText">
             <p>多樣選擇</p>
@@ -148,7 +160,7 @@
             </h4>
           </div>
         </li>
-        <li>
+        <li class="pbList3">
           <div class="pbimage i3"></div>
           <div class="pbText">
             <p>優先訂位</p>
@@ -157,7 +169,7 @@
             </h4>
           </div>
         </li>
-        <li>
+        <li class="pbList4">
           <div class="pbimage i4"></div>
           <div class="pbText">
             <p>有效期一年</p>
@@ -186,13 +198,19 @@
       </div>
 
       <!-- ----- -->
+      <!-- <pCard></pCard> -->
       <footer></footer>
     </div>
   </div>
 </template>
 
 <script>
+import shopping from "/src/components/shoppingCart.vue";
+import pCard from "/src/components/productCards.vue";
+
 export default {
+  components: { pCard, shopping },
+
   data() {
     return {
       price: 100,
@@ -311,6 +329,16 @@ export default {
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
 
+@mixin breakpoint($point) {
+  // 检查传入的断点类型是否为移动设备
+  @if $point == mobile {
+    // 当浏览器宽度小于等于 390px 时，应用下面的样式
+    @media (max-width: 391px) {
+      @content; // 插入传入 mixin 的样式
+    }
+  }
+}
+
 .productBody {
   background-color: $OffWhite;
   font-family: $fontFamily;
@@ -320,7 +348,33 @@ export default {
   }
 
   .productHeader {
-    height: 168px;
+    height: 132px;
+
+    @include breakpoint(mobile) {
+      height: 110px;
+    }
+  }
+
+  .productBreadCrumbs {
+    display: flex;
+    margin-left: 8.3vw;
+    margin-bottom: 12px;
+
+    @include breakpoint(mobile) {
+      margin-bottom: 62px;
+    }
+
+    h5 {
+      color: $Black;
+
+      @include breakpoint(mobile) {
+        font-size: 12px;
+      }
+    }
+
+    img {
+      margin: 0 12px;
+    }
   }
 
   // .left {
@@ -470,45 +524,98 @@ export default {
 
   .productTop {
     width: 100%;
-
     margin-bottom: 70px;
+
+    @include breakpoint(mobile) {
+      margin-bottom: 56px;
+    }
 
     ul {
       display: flex;
-      //   align-items: center;
       width: 100%;
 
+      @include breakpoint(mobile) {
+        flex-direction: column;
+      }
+
+      .productNameLine {
+        display: none;
+
+        @include breakpoint(mobile) {
+          display: block;
+          width: 80%;
+          height: 4.5vw;
+          border-top: 1px solid transparent;
+          border-bottom: 1px solid transparent;
+          border-image: $RevGoldGrad;
+          border-image-slice: 1;
+          margin: 0 10%;
+        }
+      }
+
       .productImage {
-        width: 528px;
-        height: 370px;
+        width: 34.4vw;
+        // height: 24.1vw;
         margin: auto;
         margin-top: 89px;
-        margin-right: 80px;
-        margin-left: 128px;
-
+        margin-right: 5.2vw;
+        margin-left: 8.3vw;
         background: url("/src/assets/Image/product/2022newyearT.png") top center
             no-repeat,
-          url("/src/assets/Image/product/2022newyearB.png") bottom center
+          url("/src/assets/Image/product/2022newyearB2.png") bottom center
             no-repeat;
         background-color: white;
+        background-size: 13% auto;
+        border: 1px solid $Gold;
+
+        @include breakpoint(mobile) {
+          width: 100%;
+          margin: auto;
+          border: none;
+        }
 
         .piCorner {
-          height: 330px;
+          height: 24.1vw;
           background: url("/src/assets/Image/product/VectorTL.png") top left
               no-repeat,
             url("/src/assets/Image/product/VectorBR.png") bottom right no-repeat;
-          margin: 20px;
+          margin: 1.3vw;
           display: flex;
+          background-size: 13% auto;
+
+          @include breakpoint(mobile) {
+            height: 51.3vw;
+            margin: 5.1vw;
+
+            background-size: 15% auto;
+          }
 
           .piPicture {
             margin: auto auto;
+
+            @include breakpoint(mobile) {
+              // margin: auto 7vw;
+            }
+
+            img {
+              width: 25.9vw;
+              height: 11.7vw;
+
+              @include breakpoint(mobile) {
+                width: 75.4vw;
+                height: 33.7vw;
+              }
+            }
           }
         }
       }
       .productPrice {
-        width: 580px;
-        height: 528px;
-        // margin-right: ;
+        width: 37.8vw;
+
+        @include breakpoint(mobile) {
+          width: 84%;
+          margin: 0 8%;
+        }
 
         ul {
           flex-direction: column;
@@ -521,6 +628,22 @@ export default {
             margin-top: 16px;
             margin-bottom: 16px;
             margin-left: 56px;
+
+            @include breakpoint(mobile) {
+              position: relative;
+              margin: auto;
+            }
+
+            h2 {
+              @include breakpoint(mobile) {
+                font-size: 24px;
+
+                position: absolute;
+                top: -76vw;
+                left: -9vw;
+                width: 200px;
+              }
+            }
           }
 
           .productCount {
@@ -528,35 +651,58 @@ export default {
             border-bottom: 1px solid transparent;
             border-image: $RevGoldGrad;
             border-image-slice: 1;
-
             width: 100%;
             padding: 44px 0;
             margin-bottom: 44px;
 
+            @include breakpoint(mobile) {
+              border-top: none;
+              padding-top: 32px;
+              padding-bottom: 29px;
+            }
+
             ul {
               li {
-                margin-left: 40px;
+                margin: 0 40px;
               }
               .productCountNav {
                 margin-bottom: 44px;
+                @include breakpoint(mobile) {
+                  margin: auto 0;
+                  margin-bottom: 32px;
+                }
               }
 
               .productCountNav div {
-                width: 500px;
+                width: 100%;
                 height: 60px;
                 background-color: white;
                 border-radius: 300px;
                 text-align: center;
-                line-height: 60px;
+                // line-height: 60px;
+                padding-top: 12px;
+                padding-bottom: 12px;
+
+                @include breakpoint(mobile) {
+                  height: auto;
+                  padding-top: 1.6vw;
+                  padding-bottom: 1.6vw;
+                }
 
                 button {
-                  width: 88px;
+                  // width: 88px;
+                  width: 5.7vw;
                   height: 36px;
                   border: none;
                   border-radius: 50px;
                   color: $Black;
                   background-color: white;
                   font-size: 20px;
+
+                  @include breakpoint(mobile) {
+                    height: 7.2vw;
+                    width: 15.4vw;
+                  }
                 }
                 .pcnon {
                   background-color: $Gold;
@@ -570,12 +716,17 @@ export default {
                 display: flex;
                 position: relative;
 
+                @include breakpoint(mobile) {
+                  margin-left: 5px;
+                  margin-bottom: 12px;
+                }
+
                 .cpOriginal::before {
                   content: "";
                   display: block;
                   position: absolute;
                   height: 1px;
-                  width: 48px;
+                  width: 50px;
                   top: 50%;
                   left: 92px;
                   background: $Black;
@@ -591,6 +742,10 @@ export default {
               .countButton {
                 display: flex;
                 margin-left: 68px;
+
+                @include breakpoint(mobile) {
+                  margin-left: 5px;
+                }
 
                 h4 {
                   margin-right: 22px;
@@ -614,7 +769,7 @@ export default {
                 }
 
                 p {
-                  width: 114px;
+                  width: 7.4vw;
                   height: 30px;
                   font-size: 20px;
                   background-color: white;
@@ -632,16 +787,21 @@ export default {
             margin-left: 68px;
             margin-bottom: 48px;
 
+            @include breakpoint(mobile) {
+              margin-left: 5px;
+              margin-bottom: 32px;
+            }
+
             p {
               font-size: 24px;
             }
           }
 
-          .right-4 {
+          .buttonList {
             display: flex;
 
             button {
-              width: 224px;
+              width: 14.6vw;
               height: 50px;
               color: $Gold;
               background-color: white;
@@ -652,11 +812,26 @@ export default {
               font-size: 20px;
               font-weight: bold;
               cursor: pointer;
+
+              @include breakpoint(mobile) {
+                width: 33.9vw;
+                height: 9.3vw;
+                line-height: 9.3vw;
+              }
+
+              h4 {
+                color: $Gold;
+              }
             }
 
             .shopping {
               margin-right: 52px;
               margin-left: 40px;
+
+              @include breakpoint(mobile) {
+                margin-right: 4.6vw;
+                margin-left: 4.6vw;
+              }
             }
           }
         }
@@ -674,10 +849,18 @@ export default {
     .pcUp {
       background-image: url("/src/assets/Image/product/Frame\ 1476.png");
       height: 36px;
+
+      @include breakpoint(mobile) {
+        height: 30px;
+      }
     }
     .pcDrown {
       background-image: url("/src/assets/Image/product/Frame\ 1476.png");
       height: 36px;
+
+      @include breakpoint(mobile) {
+        height: 30px;
+      }
     }
     .contentText {
       // height: 424px;
@@ -685,25 +868,54 @@ export default {
       padding-top: 24px;
       padding-bottom: 64px;
 
+      @include breakpoint(mobile) {
+        padding-top: 32px;
+        padding-bottom: 40px;
+      }
+
       h2 {
         background: $DarkGoldGrad;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-
         text-align: center;
         margin-bottom: 44px;
+
+        @include breakpoint(mobile) {
+          font-size: 24px;
+          margin-bottom: 28px;
+        }
       }
       h4 {
         color: white;
         line-height: 40px;
+
+        @include breakpoint(mobile) {
+          font-size: 16px;
+          // word-wrap: break-word;
+          margin: 0 8.2vw;
+        }
       }
     }
   }
 
   .productbottom {
+    // 手機版才有這個標題
+    .pbMobileText {
+      font-size: 24px;
+      text-align: center;
+      color: $DarkBrown;
+      font-weight: bold;
+      padding-top: 48px;
+      display: none;
+
+      @include breakpoint(mobile) {
+        display: block;
+      }
+    }
+
     ul {
       display: flex;
-      width: 1240px;
+      width: 80.7vw;
       justify-content: space-between;
       margin: 48px auto;
 
@@ -713,11 +925,11 @@ export default {
         background-color: white;
         border-radius: 20px;
         box-shadow: 0 0 10px rgba(#000000, 0.5);
-        padding: 36px 40px;
+        padding: 36px 2.6vw;
 
         div {
-          width: 200px;
-          height: 200px;
+          width: 13vw;
+          height: 13vw;
           border-radius: 100px;
         }
 
@@ -726,6 +938,11 @@ export default {
         }
         .i1 {
           background-image: url("/src/assets/Image/product/system_update.png");
+          @include breakpoint(mobile) {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto;
+          }
         }
         .i2 {
           background-image: url("/src/assets/Image/product/system_update2.png");
@@ -741,27 +958,70 @@ export default {
           background-color: white;
           border-radius: 0;
           margin-top: 28px;
+          height: auto;
+
+          @include breakpoint(mobile) {
+            width: 200px;
+            height: 72px;
+            margin: 0 auto;
+          }
         }
 
         p {
           font-size: 20px;
           text-align: center;
-
           margin-bottom: 24px;
           font-weight: bold;
+
+          @include breakpoint(mobile) {
+            font-size: 24px;
+          }
+        }
+
+        h4 {
+          @include breakpoint(mobile) {
+            font-size: 16px;
+          }
+        }
+      }
+
+      .pbList1 {
+        @include breakpoint(mobile) {
+          width: 280px;
+          height: 380px;
+          margin: 0 auto;
+        }
+      }
+      .pbList2 {
+        @include breakpoint(mobile) {
+          display: none;
+        }
+      }
+      .pbList3 {
+        @include breakpoint(mobile) {
+          display: none;
+        }
+      }
+      .pbList4 {
+        @include breakpoint(mobile) {
+          display: none;
         }
       }
     }
 
     .pseudoText {
       position: relative;
-      width: 1240px;
+      width: 80.7vw;
       margin: 0 auto;
       margin-bottom: 44px;
 
       h3 {
         text-align: center;
         font-weight: bold;
+
+        @include breakpoint(mobile) {
+          font-size: 20px;
+        }
       }
 
       h3::before,
@@ -770,9 +1030,13 @@ export default {
         display: block;
         position: absolute;
         height: 3px;
-        width: 520px;
+        width: 33.9vw;
         top: 50%;
         background: $DarkBrown;
+
+        @include breakpoint(mobile) {
+          width: 25.7vw;
+        }
       }
 
       h3::before {
@@ -784,13 +1048,27 @@ export default {
     }
 
     .ptContent {
-      width: 1240px;
+      width: 80.7vw;
       margin: 0 auto;
+
+      @include breakpoint(mobile) {
+        width: 61.2vw;
+      }
+
+      h4 {
+        @include breakpoint(mobile) {
+          font-size: 14px;
+        }
+      }
     }
   }
 
   footer {
     height: 100px;
+
+    @include breakpoint(mobile) {
+      height: 52px;
+    }
   }
 }
 </style>

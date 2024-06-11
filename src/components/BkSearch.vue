@@ -22,7 +22,7 @@
       <button class="Bkdrop" @click="dd">編號</button>
       <ul :class="{ drop: down == true }">
         <li v-for="i in dropdown">
-          <a href="">{{ i }}</a>
+          <a>{{ dropValue(i) }}</a>
         </li>
       </ul>
     </div>
@@ -54,6 +54,11 @@ export default {
         return (this.down = true);
       } else if (this.down == true) {
         return (this.down = false);
+      }
+    },
+    dropValue(t) {
+      for (let v in t) {
+        return v;
       }
     },
   },
@@ -120,12 +125,15 @@ export default {
     ul {
       display: none;
       position: absolute;
+      z-index: 10;
 
       li {
         background-color: antiquewhite;
         width: 126px;
-        height: 40px;
+        height: 32px;
         border: 1px solid black;
+        line-height: 32px;
+        padding: 0 6px;
       }
     }
   }
