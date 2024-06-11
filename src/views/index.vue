@@ -127,10 +127,10 @@ export default {
     }
     .yiayng{
         position: absolute;
-        top: 41%;
-        left: 42.6%;
-        width: 14.4vw;
-        height: 15.8vw;
+        top: 40%;
+        left: 42.3%;
+        width: 16vw;
+        height: 16vw;
         &.rotate {
             animation: cycle 2s linear forwards;
         }

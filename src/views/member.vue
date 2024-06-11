@@ -445,12 +445,10 @@ export default {
 
             a{
                 text-decoration: none;
-                position: relative;
-                // li{
-                //     position: absolute;
-                //     top: 0;
-                //     left: 0;
-                // }
+                margin: 2vh auto;
+                li{
+                    margin: 0;
+                }
             }
         }
     }
