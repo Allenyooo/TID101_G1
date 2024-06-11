@@ -38,7 +38,7 @@
 
           <td v-if="dataTd == 2">
             <!-- <button></button> -->
-            <BC></BC>
+            <BC :BCH="BCHref"></BC>
           </td>
         </tr>
 
@@ -83,7 +83,7 @@ import BC from "/src/components/BkCheck.vue";
 export default {
   components: { BR, BState, BC },
 
-  props: ["bd", "title", "dataTd", "stateTd"],
+  props: ["bd", "title", "dataTd", "stateTd", "BCHref"],
 
   data() {
     return {

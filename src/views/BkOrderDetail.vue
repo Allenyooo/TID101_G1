@@ -7,25 +7,30 @@
         <p>{{ manage[page - 1].manageName }}</p>
         <div class="Bkline"></div>
 
-        <p class="breadCrumbs">首頁 > 訂單管理 > 詳細資料</p>
+        <div class="BkBreadCrumbs">
+          <p class="breadCrumbs">首頁 > 訂單管理 > 詳細資料</p>
+          <button>
+            <router-link to="/BkOrder"><h5>返回</h5></router-link>
+          </button>
+        </div>
 
         <div class="MDText">
           <ul>
             <li>訂單編號:1</li>
             <li>會員帳號:123@gmail.com</li>
-            <li>收件人姓名:xxx</li>
+            <!-- <li>收件人姓名:xxx</li> -->
           </ul>
 
           <ul class="MDUl2">
             <li>訂單日期:2024-01-01</li>
             <li>訂單金額:200</li>
-            <li>收件人信箱:123@gmail.com</li>
+            <!-- <li>收件人信箱:123@gmail.com</li> -->
           </ul>
 
           <ul>
             <li>會員姓名:xxx</li>
             <li>付款方式:信用卡</li>
-            <li>收件人電話:0000-123-123</li>
+            <!-- <li>收件人電話:0000-123-123</li> -->
           </ul>
         </div>
 
@@ -56,7 +61,7 @@
                 <tr>
                   <td>$100梨饗券</td>
                   <td>1</td>
-                  <td>已使用</td>
+                  <td>未使用</td>
                   <td>2024-01-01</td>
                   <td>2024-01-01~2024-12-31</td>
                 </tr>
@@ -64,9 +69,9 @@
                 <tr>
                   <td>$100梨饗券</td>
                   <td>1</td>
-                  <td>已使用</td>
+                  <td>已過期</td>
                   <td>2024-01-01</td>
-                  <td>2024-01-01~2024-12-31</td>
+                  <td>2024-01-01~2024-02-02</td>
                 </tr>
               </tbody>
             </table>
@@ -74,12 +79,17 @@
             <table class="table" style="margin-bottom: 24px; width: 300px">
               <thead class="tableHead">
                 <tr>
-                  <th>備註</th>
+                  <th colspan="2">備註</th>
                 </tr>
               </thead>
               <tbody class="tableBody">
                 <tr>
-                  <td><button></button></td>
+                  <td class="ODRemark">
+                    <p>xxx..</p>
+                  </td>
+                  <td class="ODRemark">
+                    <button></button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -113,7 +123,7 @@
               <tr>
                 <td></td>
                 <td></td>
-                <td class="BODTd">折扣 :$100</td>
+                <td>折扣 :$100</td>
               </tr>
 
               <tr>
@@ -156,7 +166,7 @@ export default {
         {
           index: 2,
           manageName: "會員資料管理",
-          src: "/BkMamber",
+          src: "/BkMember",
           border: 2,
         },
         {
@@ -255,10 +265,16 @@ export default {
 @import "/src/sass/style.scss";
 .BkBody {
   background-color: $OffWhite;
+  font-family: $fontFamily;
+
+  a {
+    text-decoration: none;
+    display: block;
+  }
 
   .BkM {
     display: flex;
-    height: 100vh;
+    padding-bottom: 40px;
 
     .BkContent {
       width: 80vw;
@@ -276,19 +292,32 @@ export default {
         margin-bottom: 24px;
       }
 
-      .breadCrumbs {
-        font-size: 16px;
+      .BkBreadCrumbs {
+        display: flex;
+
+        .breadCrumbs {
+          font-size: 16px;
+          margin-top: 0;
+        }
+
+        button {
+          margin-left: auto;
+
+          h5 {
+            color: $Black;
+          }
+        }
       }
 
       .MDText {
         display: flex;
-        margin-top: 28px;
+        margin-top: 36px;
 
         ul {
           li {
             width: 360px;
             height: 48px;
-            font-size: 24px;
+            font-size: 20px;
           }
         }
         .MDUl2 {
@@ -310,6 +339,12 @@ export default {
               height: 36px;
             }
           }
+          .ODRemark {
+            p {
+              font-size: 16px;
+              font-weight: normal;
+            }
+          }
         }
 
         table {
@@ -327,16 +362,6 @@ export default {
               line-height: 32px;
               text-align: center;
             }
-            // .centered {
-            //   display: flex;
-
-            //   button {
-            //     height: 32px;
-
-            //     margin: auto 0;
-            //     margin-left: 52%;
-            //   }
-            // }
           }
 
           .tableBody {
@@ -360,10 +385,12 @@ export default {
               vertical-align: middle;
 
               overflow: hidden;
+
+              height: 44px;
             }
 
             .BODTd {
-              // text-align: right;
+              font-weight: bold;
             }
 
             .widthT {

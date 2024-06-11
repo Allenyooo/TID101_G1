@@ -42,7 +42,7 @@ export default {
         {
           index: 2,
           manageName: "會員資料管理",
-          src: "/BkMamber",
+          src: "/BkMember",
           border: 2,
         },
         {
@@ -78,10 +78,10 @@ export default {
       ],
       dropdown: [
         {
-          id: "管理員編號",
+          編號: "管理員編號",
         },
         {
-          name: "姓名",
+          狀態: "狀態",
         },
       ],
       bd: [

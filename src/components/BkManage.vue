@@ -10,14 +10,23 @@
           BmOn: i.index == page,
         }"
       >
-        <a
+        <router-link
+          :to="i.src"
+          :class="{
+            BmaOn: i.index == page,
+          }"
+        >
+          {{ i.manageName }}
+        </router-link>
+
+        <!-- <a
           :href="i.src"
           :class="{
             BmaOn: i.index == page,
           }"
         >
           {{ i.manageName }}
-        </a>
+        </a> -->
       </li>
     </ul>
   </div>

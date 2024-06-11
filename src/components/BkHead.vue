@@ -1,9 +1,9 @@
 <template>
   <div class="Bkhead">
     <div class="headLeft">
-      <a href="">
+      <router-link to="/BkHome">
         <img src="/src/assets/Image/product/Logo.svg" alt="" />
-      </a>
+      </router-link>
     </div>
     <div class="headRight">
       <p>User:</p>
