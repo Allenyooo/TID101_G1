@@ -24,6 +24,13 @@ import floatingButton from "./floatingButton.vue";
 .default-page-wrapper {
     background-color: #F6F1ED;
 }
+
+.hamburger{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
 /* Sticky footer */
 // html {
 //   position: relative;
