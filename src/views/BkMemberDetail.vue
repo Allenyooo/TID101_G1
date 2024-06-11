@@ -7,7 +7,12 @@
         <p>{{ manage[page - 1].manageName }}</p>
         <div class="Bkline"></div>
 
-        <p class="breadCrumbs">首頁 > 會員資料管理 > 詳細資料</p>
+        <div class="BkBreadCrumbs">
+          <p class="breadCrumbs">首頁 > 會員資料管理 > 詳細資料</p>
+          <button>
+            <router-link to="/BkMember"><h5>返回</h5></router-link>
+          </button>
+        </div>
 
         <div class="MDText">
           <ul>
@@ -32,7 +37,9 @@
           <table class="table">
             <thead class="tableHead">
               <tr>
-                <th colspan="3">歷史訂單</th>
+                <th><h4>歷史訂單</h4></th>
+                <th><h4></h4></th>
+                <th><h4></h4></th>
                 <th class="centered"><button>查看訂單明細</button></th>
               </tr>
             </thead>
@@ -45,21 +52,21 @@
               </tr>
 
               <tr>
-                <td>xxx01</td>
+                <td>1</td>
                 <td>2024-01-01 00:00:00</td>
                 <td>1000</td>
                 <td>已付款</td>
               </tr>
 
               <tr>
-                <td>xxx02</td>
+                <td>2</td>
                 <td>2024-01-01 00:00:00</td>
                 <td>1000</td>
                 <td>已付款</td>
               </tr>
 
               <tr>
-                <td>xxx03</td>
+                <td>3</td>
                 <td>2024-01-01 00:00:00</td>
                 <td>1000</td>
                 <td>已付款</td>
@@ -99,7 +106,7 @@ export default {
         {
           index: 2,
           manageName: "會員資料管理",
-          src: "/BkMamber",
+          src: "/BkMember",
           border: 2,
         },
         {
@@ -198,6 +205,12 @@ export default {
 @import "/src/sass/style.scss";
 .BkBody {
   background-color: $OffWhite;
+  font-family: $fontFamily;
+
+  a {
+    text-decoration: none;
+    display: block;
+  }
 
   .BkM {
     display: flex;
@@ -219,19 +232,32 @@ export default {
         margin-bottom: 24px;
       }
 
-      .breadCrumbs {
-        font-size: 16px;
+      .BkBreadCrumbs {
+        display: flex;
+
+        .breadCrumbs {
+          font-size: 16px;
+          margin-top: 0;
+        }
+
+        button {
+          margin-left: auto;
+
+          h5 {
+            color: $Black;
+          }
+        }
       }
 
       .MDText {
         display: flex;
-        margin-top: 28px;
+        margin-top: 36px;
 
         ul {
           li {
             width: 360px;
             height: 48px;
-            font-size: 24px;
+            font-size: 20px;
           }
         }
         .MDUl2 {
@@ -255,7 +281,11 @@ export default {
               color: $White;
               height: 48px;
 
-              text-align: left;
+              h4 {
+                font-weight: bold;
+              }
+
+              // text-align: left;
             }
             .centered {
               display: flex;
@@ -290,6 +320,8 @@ export default {
               vertical-align: middle;
 
               overflow: hidden;
+
+              height: 44px;
             }
           }
         }
