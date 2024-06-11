@@ -3,7 +3,7 @@ export default {
     props: {
         isHoverEnabled: {
             type: Boolean,
-            default: true
+            default: false
         }
     },
 
@@ -107,8 +107,8 @@ li {
     // outline: 2px solid blue;
     // width: 460px;
     width: 24vw;
-    // height: 202px;
-    height: 36.59vh;
+    height: 202px;
+    // height: 36.59vh;
     background-color: $OffWhite;
     border-radius: 15px;
     position: relative;
@@ -147,9 +147,9 @@ li {
 .normal {
     // outline: 1px red solid;
     // width: 460px;
-    // height: 202px;
+    height: 202px;
     width: 24vw;
-    height: 36.59vh;
+    // height: 36.59vh;
     border-radius: 15px;
     overflow: hidden;
     transition: 0.2s;
@@ -331,18 +331,18 @@ li {
 
 // 不給hover效果
 
-.shops .no-hover:hover {
+.member_collection .no-hover:hover {
   width: 460px;
   height: 202px;
 }
 
-.shops .no-hover:hover .normal {
+.member_collection .no-hover:hover .normal {
   opacity: 1;
   transform: scale(1);
   display: block;
 }
 
-.shops .no-hover:hover .opened {
+.member_collection .no-hover:hover .opened {
   opacity: 0;
 //   transform: scale(0.8);
 }
