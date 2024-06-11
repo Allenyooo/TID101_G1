@@ -63,9 +63,9 @@
             </div>
 
             <div class="login_forgotPW">
-                <router-link to="/login/forgotpw">
-                    <h6>忘記密碼?</h6>
-                </router-link>
+                <!-- <router-link to="/login/forgotpw"> -->
+                    <h6 @click="forgotpw">忘記密碼?</h6>
+                <!-- </router-link> -->
             </div>
 
             <div class="login_rmb">
@@ -98,9 +98,15 @@
 
 <script>
 // import LoginInfo from "../components/LoginInfo.vue"
+import ForgotPW from '../components/ForgotPW.vue';
 
 export default {
     // components: { LoginInfo },
+    methods: {
+        forgotpw() {
+            this.$router.push("/login/forgotpw");
+        }
+    }
 
 }
 </script>
