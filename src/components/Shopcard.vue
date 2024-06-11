@@ -1,9 +1,10 @@
 <script>
 export default {
     props: {
-        can_hover: {
-            default: true,
-        },
+        isHoverEnabled: {
+            type: Boolean,
+            default: true
+        }
     },
 
     data() {
@@ -22,7 +23,10 @@ export default {
 
 <template>
     <!-- <li :class="{ map_open : hovered }" @mouseover="cardOpen" @mouseleave="cardOpen"> -->
-    <li @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
+    <li 
+    @mouseenter="$emit('mouseenter')" 
+    @mouseleave="$emit('mouseleave')"
+    :class="{ 'no-hover': !isHoverEnabled }">
         <div class="normal">
             <img src="/src/assets/Image/map/koreawaybgi.png" alt="" />
             <div class="shopinfo">
@@ -98,34 +102,54 @@ export default {
 @import "/src/sass/style.scss";
 
 li {
+    display: block;
     transition: 0.1s;
     // outline: 2px solid blue;
-    width: 460px;
+    // width: 460px;
+    width: 24vw;
+    // height: 202px;
+    height: 36.59vh;
+    background-color: $OffWhite;
+    border-radius: 15px;
+    position: relative;
     // margin-bottom: 24px;
     // margin: 0 auto;
+
+    &:hover{
+        transition: 0.1s;
+        width: 720px;
+        height: 364px;
+    }
 
     &:hover .opened {
         transition: 0.1s;
         width: 720px;
         height: 364px;
-        z-index: 16;
+        z-index: 20;
+        // margin-left: -28%;
         opacity: 1;
-        margin-left: -28%;
-
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
+
     &:hover .normal {
-        transition: 0.1s;
-        width: 1px;
-        height: 1px;
-        z-index: 0;
         opacity: 0;
+        transition: 0.1s;
+        width: 460px;
+        height: 202px;
+        z-index: 0;
+        display: none;
     }
 }
 
 .normal {
     // outline: 1px red solid;
-    width: 460px;
-    height: 202px;
+    // width: 460px;
+    // height: 202px;
+    width: 24vw;
+    height: 36.59vh;
     border-radius: 15px;
     overflow: hidden;
     transition: 0.2s;
@@ -173,11 +197,12 @@ li {
     border-radius: 15px;
     background-color: $OffWhite;
     overflow: hidden;
-    width: 1px;
-    height: 1px;
+    width: 720px;
+    height: 364px;
     z-index: 0;
     opacity: 0;
     margin-bottom: 12px;
+    display: none;
 
     .card_header {
         width: 100%;
@@ -302,5 +327,23 @@ li {
         object-fit: cover;
         border-radius: 15px;
     }
+}
+
+// 不給hover效果
+
+.shops .no-hover:hover {
+  width: 460px;
+  height: 202px;
+}
+
+.shops .no-hover:hover .normal {
+  opacity: 1;
+  transform: scale(1);
+  display: block;
+}
+
+.shops .no-hover:hover .opened {
+  opacity: 0;
+//   transform: scale(0.8);
 }
 </style>

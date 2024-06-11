@@ -12,9 +12,20 @@ export default {
     };
   },
 
+
+
   methods: {
-    backToIsland() {
+    backToIsland(event) {
+        event.stopPropagation(); //停止冒泡事件
+        const img = document.querySelector('.eastIsland');
+        img.style.opacity = '1';
+        img.style.transform = 'translate(0px, 0px)';
+        img.style.transition = 'all 0.5s ease';
+        img.style.width = '232px';
+        img.style.height = '524px';
         this.$router.push('/map');
+        console.log('backToIsland is called');
+        img.style.transform = '';
     },
     markLight1() {
         this.marker1Src="/src/assets/Image/map/marker.png";
@@ -41,6 +52,7 @@ export default {
 
 <template>
     <section >
+
         <div class="filter" @click="backToIsland"></div>
         <div class="sidemap">
             <div class="nmap">
@@ -55,10 +67,12 @@ export default {
                 </span>
             </div>
         </div>
-        <ul class="shops">
+
         <div class="map_shoptitle">
             <h1>精 選 店 家</h1>
         </div>
+
+        <ul class="shops">
 
         <router-link to="/restaurant" class="marker">
             <shopcard can_hover="true" @mouseenter.native="markLight1" @mouseleave.native="unmarker1"></shopcard>
@@ -82,6 +96,7 @@ export default {
 .marker{
     text-decoration: none;
     color: #333;
+    margin-bottom: 24px;
 }
 
 section {
@@ -138,26 +153,40 @@ section {
   }
 
   .shops {
+    // outline: 2px solid red;
     position: fixed;
-    top: 10vh;
-    right: 15vw;
+    top: 20vh;
+    right: 10vw;
     z-index: 16;
-    width: 460px;
+    width: 740px;
+    height: 79vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
 
-    .map_shoptitle {
+    &::-webkit-scrollbar {
+        width: 12px; /* 滾動條寬度 */
+    }
+
+  }
+  .map_shoptitle {
       width: 312px;
       height: 88px;
       background-image: url(/src/assets/Image/map/bannerBGI.png);
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0 auto;
       margin-bottom: 5vh;
+      position: fixed;
+      top: 8vh;
+      right: 21.5vw;
+      z-index: 16;
 
       h1 {
         font-size: $fontSize * 2;
       }
     }
-  }
 }
 </style>

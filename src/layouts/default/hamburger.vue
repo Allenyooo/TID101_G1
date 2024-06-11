@@ -1,7 +1,9 @@
 <template>
     <nav>
         <!--Logo-->
-        <a href="#"><img src="/src/assets/Image/navAndFooter/hamburger/logoWord.svg" alt="logo"></a>
+        <router-link to="/home">
+            <img src="/src/assets/Image/navAndFooter/hamburger/logoWord.svg" alt="logo">
+        </router-link>
         <!--漢堡-->
         <button id="btnMenu" class="c-btnMenu" aria-label="梨花殿" @click="show=!show">
             <!--漢堡上方文字-->
@@ -26,33 +28,33 @@
             <div id="o-menulist" :class="{'show' : show}">
                 <ul class="menu_list">
                     <li class="menu_list_food">
-                        <a href="#">
+                        <router-link to="/food">
                             <h3>食物介紹</h3>
                             <p>음식소개</p>
-                        </a>
+                        </router-link>
                     </li>
                     <li class="menu_list_box">
                         <div class="menu_list_recommend">
-                            <a href="#">
+                            <router-link to="/map">
                                 <h3>全台推薦</h3>
                                 <p>매장 추천</p>
-                            </a>
+                            </router-link>
                         </div>
                     </li>
                     <li class="menu_list_box">
                         <div class="menu_list_ticket">
-                            <a href="#">
+                            <router-link to="/product">
                                 <h3>餐券販售</h3>
                                 <p>쿠폰 판매</p>
-                            </a>
+                            </router-link>
                         </div>
                     </li>
                     <li class="menu_list_box">
                         <div class="menu_list_user">
-                            <a href="#">
+                            <router-link to="/member">
                                 <h3>會員中心</h3>
                                 <p>회원센터</p>
-                            </a>
+                            </router-link>
                         </div>
                     </li>
                     <li class="menu_list_box">
@@ -116,13 +118,13 @@ export default {
         transition: opacity .4s ,transform .9s;
         transition-delay: .3s;
         opacity: 0;
-        z-index: 0;
+        z-index: 100;
         transform: translateY(-100%);
     }
     .deco1.show{
         opacity: 1;
         transform: none;
-        z-index: 0;
+        z-index: 100;
     }
     .deco2{
         position: absolute;
@@ -156,7 +158,7 @@ export default {
         position: absolute;
         inset: 0;
         margin: auto;
-        z-index: 0;
+        z-index: 101;
         font-family: Arial, Helvetica, sans-serif; /*改系統字體色*/
         font-weight: 700;
         top: 0px;
@@ -197,7 +199,7 @@ export default {
         position: absolute;
         inset: 0;
         margin: auto;
-        z-index: 2;
+        z-index: 101;
         width: 60px;
         height: 60px;
         background: #c8ac96;
@@ -220,7 +222,7 @@ export default {
         position: absolute;
         inset: 0;
         margin: 0 auto;
-        z-index: 0;
+        z-index: 101;
         top: 88px;
         width: 28px;
         height: 4px;
@@ -244,7 +246,7 @@ export default {
         position: fixed;
         top: 0;
         right: 0;
-        z-index: 10;
+        z-index: 110;
         width: 533px;
         height: 533px;
         border-radius: 0 0 0% 90%; 
@@ -300,33 +302,43 @@ export default {
         position: absolute;
         top: 0px;
         right: 348px;
+        z-index: 120;
+
     }
     .menu_list .menu_list_recommend {
         position: absolute;
         top: 90px;
         right: 308px;
+        z-index: 120;
+
     }
     .menu_list .menu_list_ticket{
         position: absolute;
         top: 180px;
         right: 245px;
+        z-index: 120;
+
     }
     .menu_list .menu_list_user{
         position: absolute;
         top: 265px;
         right: 158px;
+        z-index: 120;
+
     }
     .menu_list .menu_list_shoppingcart{
         position: absolute;
         top: 330px;
         right: 52px;
+        z-index: 120;
+
     }
     .o-menu_bg .circle{
         position: absolute;
         top: -350px;
         right: -330px;
         transform-origin: right;
-        z-index: 0;
+        z-index: 102;
         width: 780px;
         height: 770px;
         border-radius: 50%;
@@ -376,7 +388,7 @@ export default {
         position: absolute;
         inset: 0;
         margin: 0 auto;
-        z-index: 0;
+        z-index: 100;
         top: 50%;
         width: 28px;
         height: 4px;
@@ -402,6 +414,7 @@ export default {
         width: 100px;
         height: 70px;
         position: fixed;
+        z-index: 120;
         top: 32px;
         left: 40px;
     }

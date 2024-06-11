@@ -6,6 +6,7 @@ import App from './App.vue';
 import Default from './layouts/default/Default.vue';
 import DefaultBack from './layouts/default/DefaulBack.vue';
 
+
 const pinia = createPinia();
 const app = createApp(App);
 
