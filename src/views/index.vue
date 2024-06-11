@@ -104,7 +104,7 @@ export default {
         display: flex;
         .left, .right {
             width: 23vw;
-            height: 84vh;
+            height: 86vh;
         }
         .left {
             transform-origin: left;
@@ -128,7 +128,7 @@ export default {
     .yiayng{
         position: absolute;
         top: 41%;
-        left: 43.5%;
+        left: 42.6%;
         width: 14.4vw;
         height: 15.8vw;
         &.rotate {
@@ -149,14 +149,14 @@ export default {
                 z-index: 1;
                 width: 58px;
                 top: 1px;
-                left: -28px;
+                left: -16px;
             }
             .yia{
                 width: 15.0vw;
                 cursor: pointer;
                 position: absolute;
-                top: -1.76vw;
-                left: -6.9vw;
+                top: -2.1vw;
+                left: -5.9vw;
                 transition: all .5s ease;
                 &:hover{
                     transform: translateY(-10px);
@@ -179,8 +179,8 @@ export default {
                 position: absolute;
                 width: 48px;
                 z-index: 1;
-                top: -1vw;
-                left: 0vw;
+                top: 0vw;
+                left: 0.5vw;
             }
             .yng{
                 width: 15vw;
@@ -188,7 +188,7 @@ export default {
                 position: absolute;
                 z-index: 0;
                 bottom: -5.0vw;
-                left: -6.68vw;
+                left: -5.68vw;
                 transition: all .5s ease;
                 &:hover{
                     transform: translateY(-10px);

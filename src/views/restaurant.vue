@@ -709,7 +709,7 @@ button {
                 height: 44px;
                 background-color: #C8AC96;
                 border-radius: 50px;
-                margin-right: 16px;
+                margin-right: 8px;
 
                 @include breakpoint(1024px) {
 
@@ -749,7 +749,7 @@ button {
                 height: 44px;
                 background-color: #C8AC96;
                 border-radius: 50px;
-                margin-right: 16px;
+                margin-right: 8px;
 
                 @include breakpoint(1024px) {
                     margin-right: 8px;
@@ -1754,7 +1754,8 @@ button {
                         .user {
                             width: 36px;
                             height: 36px;
-                            padding-left: 30px;
+                            // padding-left: 30px;
+                            margin-left: 1.7vw;
 
                             @include breakpoint(1280px) {
                                 padding-left: 6px;
@@ -1835,7 +1836,7 @@ button {
 
                 .star {
                     display: flex;
-                    padding-left: 15px;
+                    padding-left: 26px;
 
                     @include breakpoint(1024px) {
                         padding-left: 2px;
@@ -1919,7 +1920,8 @@ button {
     height: 52PX;
     background-color: #CB4847;
     border-radius: 15px;
-    margin: 16px 0 16px 446px;
+    margin: 16px auto;
+    display: block;
     border: none;
 
     @include breakpoint(1024px) {

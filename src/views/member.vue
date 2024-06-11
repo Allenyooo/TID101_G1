@@ -442,8 +442,15 @@ export default {
             flex-wrap: wrap;
             margin: 0 auto 3vh;
             cursor: pointer;
+
             a{
                 text-decoration: none;
+                position: relative;
+                // li{
+                //     position: absolute;
+                //     top: 0;
+                //     left: 0;
+                // }
             }
         }
     }
