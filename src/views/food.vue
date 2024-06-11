@@ -497,7 +497,7 @@
                 <p class="food-bottom-text">
                     秉持對食物的熱情，繼續探索韓食的美好。
                 </p>
-                <router-link to="/map">點擊看更多</router-link>
+                <router-link to="/map"> 點擊看更多</router-link>
             </div>
         </div>
     </div>
@@ -602,21 +602,21 @@ export default {
                     text: "韓式炸醬麵",
                     title: "韓式炸醬麵 짜장면",
                     description:
-                        "韓式炸醬麵是深受歡迎的韓國中華料理，這道菜以中華炸醬為主要調味料，醬料由黑豆醬、洋蔥、豬肉和蔬菜炒製而成，味道濃郁香甜。麵條Q彈有嚼勁，搭配上豐富的黑色炸醬，使整道菜充滿了濃郁的風味和多層次的口感，是韓國家庭聚餐和外出用餐的首選之一。",
+                        "韓式炸醬麵是深受歡迎的韓國中華料理，這道菜以炸醬為主要調味料，醬料由黑豆醬、洋蔥、豬肉和蔬菜炒製而成，味道濃郁香甜。麵條Q彈有嚼勁，搭配上豐富的炸醬，使整道菜充滿了濃郁的風味和多層次的口感，是家庭聚餐和外出用餐的首選之一，成為韓國飲食文化的象徵。",
                 },
                 {
                     image: bibimbap,
                     text: "韓式拌飯",
                     title: "韓式拌飯 비빔밥",
                     description:
-                        "韓式拌飯是一道將各種豐富食材混合攪拌的韓國傳統料理。米飯上覆蓋著豐富的蔬菜、牛肉(或是其他肉類)、雞蛋和辣椒醬等食材，口感豐富且均衡，既有肉類的鮮美，又有蔬菜的清爽，並且因為辣椒醬的加入，整道菜更加香辣可口，是深受喜愛的家庭料理和餐廳必備菜品。",
+                        "韓式拌飯是一道將各種食材混合攪拌的韓國傳統料理。米飯上覆蓋著豐富的蔬菜、牛肉、雞蛋和辣椒醬等食材，口感豐富且均衡，既有肉類的鮮美，又有蔬菜的清爽，並且因為辣椒醬的加入，整道菜更加香辣可口，是深受喜愛的家庭料理和餐廳必備菜品，成為韓國飲食文化的象徵。",
                 },
                 {
                     image: ShinRamyun,
                     text: "辛拉麵",
                     title: "辛拉麵 신라면",
                     description:
-                        "辛拉麵是一款經典的韓國速食麵，起源於韓國農心方便麵公司，以其獨特的辛辣口感和豐富的湯底而聞名。這款速食麵自問世以來，便憑藉其濃郁的香氣和火辣的味道，成為了韓國乃至全球消費者喜愛的速食選擇。辛拉麵的製作過程簡單方便，只需幾分鐘即可享受到美味的韓式辣湯麵。",
+                        "辛拉麵是一款經典的韓國速食麵，以其獨特的辛辣口感和豐富的湯底而聞名。這款速食麵自問世以來，便憑藉其濃郁的香氣和火辣的味道，成為了韓國乃至全球消費者喜愛的速食選擇。辛拉麵的製作過程簡單方便，只需幾分鐘即可享受到美味的韓式辣湯麵，成為韓國飲食文化的象徵。",
                 },
             ], // 2肉類項目
             items2: [
@@ -736,7 +736,7 @@ export default {
                     text: "大醬湯",
                     title: "大醬湯 된장찌개",
                     description:
-                        "大醬湯是韓食料理中的經典之一，擁有濃郁的風味和營養價值。以韓國大醬為基礎，加入豆腐、蔬菜等食材，經過燉煮而成。大醬湯不僅具有美味的口感，還被認為有益於消化和增強體力。作為家常菜或節日料理，大醬湯常見於韓國餐桌上，體現了韓國人對傳統食品和健康飲食的追求。",
+                        "大醬湯是韓食料理中的經典之一，擁有濃郁的風味和營養價值。以韓國大醬為基礎，加入豆腐、蔬菜等食材，經過燉煮而成。大醬湯不僅具有美味的口感，還被認為有益於消化和增強體力。作為家常菜或節日料理，大醬湯常見於韓國餐桌上，體現了韓國人對傳統食品和健康飲食的追求，成為韓國飲食文化的象徵。",
                 },
                 {
                     image: tofuSoup,
@@ -939,6 +939,14 @@ export default {
             );
         });
     },
+    created() {
+        let html_el = document.getElementsByTagName("html")[0];
+        html_el.scrollTo({
+            top: 0,
+            // left: 0,
+            behavior: "smooth",
+        });
+    },
 };
 </script>
 
@@ -985,8 +993,7 @@ export default {
 }
 /* food-main-description */
 .food-description-blue {
-    width: 100%;
-    // height: 100vh;
+    // width: 100vw;
     background-color: $Blue;
     justify-content: center;
     padding: 56px 268px 40px;
@@ -1003,7 +1010,7 @@ export default {
 }
 
 .food-description-red {
-    width: 100%;
+    // width: 100vw;
     background-color: $Red;
     justify-content: center;
     padding: 56px 268px 40px;
@@ -1021,10 +1028,9 @@ export default {
 /* food-category */
 .food-category {
     width: 100%;
-    height: 100vh;
+    height: 809px;
     background-color: $OffWhite;
     display: flex;
-
     .food-category-left {
         flex: 2;
         position: relative;
@@ -1047,7 +1053,6 @@ export default {
                 max-height: 100%;
                 width: auto;
                 height: auto;
-                object-fit: cover;
             }
         }
     }
@@ -1135,7 +1140,6 @@ export default {
     line-height: 150%;
     padding-top: 281px;
     padding-left: 36px;
-    overflow: hidden;
     .category-item {
         display: flex;
         margin-bottom: 16px;

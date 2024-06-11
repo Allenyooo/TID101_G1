@@ -54,7 +54,7 @@ export default {
 
 .floating-button-container {
     position: fixed;
-    bottom: 152px;
+    bottom: 104px;
     right: 20px;
     display: flex;
     flex-direction: column;
@@ -117,7 +117,7 @@ export default {
 .back-to-top-button {
     z-index: 100;
     position: fixed;
-    bottom: 84px;
+    bottom: 36px;
     right: 20px;
     width: 60px;
     height: 60px;
