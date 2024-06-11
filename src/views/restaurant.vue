@@ -26,11 +26,11 @@
                 <!---麵包屑-->
                 <ol class="breadcrumb">
                     <li class="crumb1">
-                        <a href="#">首頁</a>
+                        <router-link to="/home">首頁</router-link>
                         <img src="/src/assets/Image/restaurant/north/left.png" alt="">
                     </li>
                     <li class="crumb2">
-                        <a href="#">商店列表</a>
+                        <router-link to="/map">商店列表</router-link>
                         <img src="/src/assets/Image/restaurant/north/left.png" alt="">
                     </li>
                     <li class="crumb3">
@@ -45,8 +45,10 @@
                     </button>
 
                     <button>
-                        <li class="share">
-                            <img src="../assets/Image/restaurant/north/share.svg" alt="collect">
+                        <li class="share"> <!--分享 連接fb訊息-->
+                            <a href="http://m.me/sparkassociationorg" target="_blank">
+                                <img src="../assets/Image/restaurant/north/share.svg" alt="collect">
+                            </a>
                         </li>
                     </button>
 
@@ -337,13 +339,16 @@
 
                     <!--彈跳視窗按鈕-->
                     <button class="readmord"> <!--btn btn-primary-->
-                        <a href="#">READ MORE</a>
+                        <router-link to="/review">READ MORE</router-link>
                     </button>
                 </div>
             </section>
         </div>
     </div>
 </template>
+
+<!--test button-->
+
 
 
 <script>
@@ -372,26 +377,6 @@ export default {
             //alert()
         },
         fileChange(e, index) {
-            // 1
-            // let file = e.target.files[0]
-
-            // let readFile = new FileReader()
-            // readFile.readAsDataURL(file)
-
-            // readFile.addEventListener('load', () => {
-            //     let image = document.createElement('img')
-
-            //     image.src = readFile.result
-            //     image.style.width = '100%'
-            //     image.style.height = '100%'
-
-            //     let box = document.querySelector('.box')
-
-            //     box.innerHTML = ''
-
-            //     box.appendChild(image)
-            // })
-
             let file = e.target.files[0];
             let readFile = new FileReader();
             readFile.readAsDataURL(file);
@@ -409,6 +394,8 @@ export default {
         }
     }
 }
+
+//line插件
 
 
 </script>
@@ -662,6 +649,10 @@ button {
                 a {
                     margin-right: 12px;
                     color: #333333;
+
+                    &:hover {
+                    color: #999999;
+                }
                 }
             }
 
@@ -671,6 +662,9 @@ button {
 
                 a {
                     color: #333333;
+                    &:hover {
+                    color: #999999;
+                }
                 }
 
                 img {
@@ -685,6 +679,9 @@ button {
 
                 a {
                     color: #333333;
+                    &:hover {
+                    color: #999999;
+                }
                 }
             }
         }
@@ -715,7 +712,7 @@ button {
                 margin-right: 16px;
 
                 @include breakpoint(1024px) {
-            
+
                     margin-right: 8px;
                 }
 
@@ -771,6 +768,7 @@ button {
                     margin-left: -1vw;
                 }
 
+                a{}
 
                 img {
                     width: 23px;
@@ -837,6 +835,9 @@ button {
         @include breakpoint(820px) {
             // width: 90px;
         }
+        @include breakpoint(430px) {
+            flex-direction: column;
+        }
 
         .restaurant_slogan {
             line-height: 150%;
@@ -862,8 +863,14 @@ button {
             }
 
             @include breakpoint(430px) {
-                margin-left: 7px;
-                margin-top: 44%;
+                font-size: 30px;
+                margin-left: 0vw;
+                width: 81vw;
+                margin-top: 2vw;
+            }
+            @include breakpoint(390px) {
+                
+                width: 89vw;
             }
         }
 
@@ -886,9 +893,12 @@ button {
                 font-size: 17px;
                 width: 459px;
             }
+
             @include breakpoint(430px) {
                 font-size: 16px;
-                width: 298px;
+                width: 74vw;
+                margin-top: 3vw;
+                margin-bottom: 4vw;
             }
         }
     }
@@ -898,18 +908,26 @@ button {
 .restaurant_section {
     background-color: #F6F1ED;
     width: 70vw;
-    padding-bottom: 20px;
+    padding-bottom: 46px;
     border-bottom: 2px solid #CB4847;
     margin: 0 auto;
 
     @include breakpoint(1280px) {
         width: 68vw;
     }
+
     @include breakpoint(1024px) {
         width: 68vw;
+        padding-bottom: 8vw;
     }
+    
+
     @include breakpoint(430px) {
-        width: 86vw;
+         width: 86vw;
+    }
+    @include breakpoint(390px) {
+         width: 86vw;
+         padding-bottom: 0vw;
     }
 
     .restaurant_h3 {
@@ -924,6 +942,7 @@ button {
             @include breakpoint(820px) {
                 font-size: 26px;
             }
+
             @include breakpoint(430px) {
                 font-size: 23px;
                 width: 86vw;
@@ -945,12 +964,8 @@ button {
             width: 71vw;
         }
 
-
         @include breakpoint(1100px) {
             margin-left: -3vw;
-        }
-
-        @include breakpoint(110px) {
             gap: 0vw;
             width: 80vw;
         }
@@ -958,6 +973,15 @@ button {
         @include breakpoint(1024px) {
             width: 94vw;
             flex-direction: column;
+        }
+
+        @include breakpoint(820px) {
+            margin-left: 0vw;
+            margin-bottom: 5vw;
+        }
+        @include breakpoint(390px) {
+            margin-left: 0vw;
+            margin-bottom: 1vw;
         }
 
         .restaurant_info {
@@ -968,6 +992,7 @@ button {
                 @include breakpoint(1350px) {
                     width: 40vw;
                 }
+
                 @include breakpoint(1280px) {
                     width: 39vw;
                     margin-left: 2vw;
@@ -980,9 +1005,11 @@ button {
                 @include breakpoint(1024px) {
                     width: 662px;
                 }
+
                 @include breakpoint(820px) {
                     width: 60vw;
                 }
+
                 @include breakpoint(430px) {
                     width: 86vw;
                 }
@@ -1012,6 +1039,7 @@ button {
                         @include breakpoint(1280px) {
                             width: 10vw;
                         }
+
                         @include breakpoint(1100px) {
                             margin-left: 145px;
                             width: 10vw;
@@ -1024,10 +1052,16 @@ button {
                         @include breakpoint(820px) {
                             font-size: 18px;
                         }
+
                         @include breakpoint(820px) {
                             font-size: 17px;
                             width: 93px;
                         }
+                        @include breakpoint(390px) {
+                            font-size: 17px;
+                            width: 76px;
+                        }
+                        
                     }
 
                     td {
@@ -1046,6 +1080,9 @@ button {
 
                         @include breakpoint(820px) {
                             font-size: 18px;
+                        }
+                        @include breakpoint(390px) {
+                            font-size: 17px;
                         }
                     }
                 }
@@ -1066,6 +1103,9 @@ button {
                     img {
                         margin-right: 12px;
                         flex-direction: row-reverse;
+                        @include breakpoint(390px) {
+                            width: 26px;
+                        }
                     }
 
                     h4 {
@@ -1100,7 +1140,11 @@ button {
                             font-size: 18px;
                             width: 45vw;
                         }
-                        
+                        @include breakpoint(390px) {
+                            font-size: 17px;
+                            width: 49vw;
+                        }
+
                     }
                 }
 
@@ -1110,6 +1154,7 @@ button {
                     @include breakpoint(1280px) {
                         padding-left: 0px;
                     }
+
                     @include breakpoint(430px) {
                         margin: 4vw 0 4vw 7vw;
                     }
@@ -1122,23 +1167,31 @@ button {
 
                         @include breakpoint(1280px) {
                             margin-left: 1vw;
-                            
+
                         }
 
                         @include breakpoint(1200px) {
                             margin-left: 28px;
                             // padding-bottom: 5px;
                         }
+
                         @include breakpoint(1024px) {
                             margin-left: 48px;
                             // padding-bottom: 5px;
                         }
-                        
-                        
+                        @include breakpoint(390px) {
+                            width: 26px;
+                        }
+
+
                     }
-                    h4{
+
+                    h4 {
                         @include breakpoint(430px) {
-                        font-size: 18px;
+                            font-size: 18px;
+                        }
+                        @include breakpoint(390px) {
+                            font-size: 17px;
                         }
                     }
                 }
@@ -1146,15 +1199,22 @@ button {
                 .line {
                     width: 1096 vw;
                     border-bottom: 2px solid #CB4847;
+
                     @include breakpoint(1024px) {
-                            width: 68vw;
-                            margin-left: -53vw;
-                            // padding-bottom: 5px;
+                        width: 68vw;
+                        margin-left: -53vw;
+                        // padding-bottom: 5px;
                     }
+
                     @include breakpoint(790px) {
-                            width: 68vw;
-                            margin-left: -61vw;
-                            // padding-bottom: 5px;
+                        width: 68vw;
+                        margin-left: -61vw;
+                        // padding-bottom: 5px;
+                    }
+
+                    @include breakpoint(820px) {
+                        margin-bottom: -2vw;
+                        margin-left: -56vw;
                     }
                 }
             }
@@ -1172,10 +1232,11 @@ button {
             @include breakpoint(1024px) {
                 width: 83vw;
                 margin-right: 2vw;
-                margin-top: 1vw;
-                margin-left: 5vw;
-                padding-bottom: 5vw;
+                margin-top: 3vw;
+                margin-left: 12vw;
+                padding-bottom: 4vw;
             }
+
             @include breakpoint(820px) {
                 margin-left: 6vw;
                 padding-left: 0vw;
@@ -1194,26 +1255,37 @@ button {
             @include breakpoint(820px) {
                 width: 87vw;
                 margin-right: 0vw;
-                margin-top: 4vw;
+                margin-top: 10vw;
                 margin-left: 9vw;
                 padding-bottom: 8vw;
 
                 #google_map {
                     width: 500px;
                     height: 300px;
+                    margin-left: -7vw;
+                    margin-top: -4vw;
                 }
 
             }
+
             @include breakpoint(430px) {
                 width: 80vw;
                 margin-right: 0vw;
                 margin-top: 4vw;
-                margin-left: -13vw;
+                margin-left: 4vw;
                 padding-bottom: 11vw;
 
                 #google_map {
                     width: 400px;
                     height: 300px;
+                }
+            }
+            @include breakpoint(390px) {
+                
+
+                #google_map {
+                    width: 350px;
+                    height: 250px;
                 }
             }
 
@@ -1266,6 +1338,11 @@ button {
     flex-wrap: wrap;
     justify-content: center;
 
+    @include breakpoint(390px) {
+        margin-left: 2vw;
+    }
+
+
     .restaurant_content1 {
         display: flex;
 
@@ -1283,7 +1360,7 @@ button {
                 font-size: 20px;
                 margin-top: 2vw;
             }
-            
+
             @include breakpoint(1024px) {
                 font-size: 20px;
                 margin-top: 2vw;
@@ -1303,6 +1380,9 @@ button {
                 font-size: 17px;
                 width: 76vw;
             }
+            @include breakpoint(390px) {
+                width: 83vw;
+            }
         }
 
         img {
@@ -1310,7 +1390,9 @@ button {
 
             @include breakpoint(1024px) {
                 padding-left: 5px;
+                width: 32vw;
             }
+
             // @include breakpoint(1106px) {
             //     width: 33vw;
             //     padding-left: 32px;
@@ -1320,6 +1402,7 @@ button {
                 width: 34vw;
                 height: 23vw;
             }
+
             @include breakpoint(430px) {
                 width: 57vw;
                 height: 38vw;
@@ -1348,9 +1431,13 @@ button {
                 margin-left: 2vw;
                 font-size: 17px;
             }
+
             @include breakpoint(430px) {
                 margin-left: 11.3vw;
                 font-size: 16px;
+            }
+            @include breakpoint(390px) {
+                margin-left: 3.3vw;
             }
         }
 
@@ -1358,15 +1445,24 @@ button {
             margin-left: -25px;
             margin-top: 40px;
 
+            @include breakpoint(1024px) {
+                padding-left: 5px;
+                width: 32vw;
+            }
+
             @include breakpoint(820px) {
                 width: 34vw;
                 height: 23vw;
                 margin-left: 11px;
             }
+
             @include breakpoint(430px) {
                 width: 57vw;
                 height: 38vw;
                 margin-left: 20vw;
+            }
+            @include breakpoint(390px) {
+                height: 35vw;
             }
         }
     }
@@ -1374,6 +1470,7 @@ button {
     .restaurant_content3 {
         display: flex;
         padding-bottom: 61px;
+
         @include breakpoint(430px) {
             flex-direction: column-reverse;
         }
@@ -1394,6 +1491,9 @@ button {
                 margin-left: 11.3vw;
                 font-size: 16px;
             }
+            @include breakpoint(390px) {
+                margin-left: 3.3vw;
+            }
         }
 
         img {
@@ -1402,12 +1502,15 @@ button {
 
             @include breakpoint(1024px) {
                 margin-left: 5px;
+                padding-left: 5px;
+                width: 32vw;
             }
 
             @include breakpoint(820px) {
                 width: 34vw;
                 height: 23vw;
             }
+
             @include breakpoint(430px) {
                 width: 57vw;
                 height: 38vw;
@@ -1434,14 +1537,15 @@ button {
         margin: 0 auto;
 
         @include breakpoint(820px) {
-            height: 119vh;
+            height: 74vh;
             width: 71vw;
         }
+
         @include breakpoint(430px) {
-        width: 78vw;
-        margin-left: 10vw;
-        height: 197vw;
-    }
+            width: 78vw;
+            margin-left: 10vw;
+            height: 197vw;
+        }
 
         .restaurant_review_content {
             display: flex;
@@ -1458,8 +1562,9 @@ button {
 
                 @include breakpoint(820px) {
                     margin-left: 1vw;
-                    width: 62vw;
+                    width: 56vw;
                 }
+
                 @include breakpoint(430px) {
                     width: 61vw;
                 }
@@ -1474,8 +1579,12 @@ button {
                         font-size: 26px;
                         width: 32vw;
                     }
+
                     @include breakpoint(430px) {
                         font-size: 23px;
+                    }
+                    @include breakpoint(390px) {
+                        font-size: 21px;
                     }
                 }
 
@@ -1493,6 +1602,9 @@ button {
                         font-size: 20px;
                         font-weight: bold;
                         margin-left: 8px;
+                        @include breakpoint(390px) {
+                        font-size: 18px;
+                    }
                     }
 
                     .restaurant_review_num {
@@ -1501,9 +1613,13 @@ button {
                         font-weight: bold;
                         width: 107px;
                         margin-left: 8px;
+
                         @include breakpoint(430px) {
-                        font-size: 18px;
-                    }
+                            font-size: 18px;
+                        }
+                        @include breakpoint(390px) {
+                            font-size: 16px;
+                        }
                     }
                 }
             }
@@ -1527,48 +1643,74 @@ button {
                 @include breakpoint(820px) {
                     margin-left: -7vw;
                 }
+
                 @include breakpoint(430px) {
                     width: 30px;
                     height: 30px;
                     margin-left: 2vw;
                 }
+                @include breakpoint(390px) {
+                    width: 28px;
+                    height: 28px;
+                    margin-left: -4vw;
+                }
 
                 img {
                     margin: 10.76px 11.49px 11.96px 11px;
-                
 
-                @include breakpoint(820px) {
-                    width: 28px;
-                    height: 28px;
-                    margin: 7px 0px 7px 2px;
-                }
 
-                @include breakpoint(430px) {
-                    width: 20px;
-                    height: 20px;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50% -50%);
+                    @include breakpoint(820px) {
+                        width: 28px;
+                        height: 28px;
+                        margin: 7px 0px 7px 2px;
+                    }
+
+                    @include breakpoint(430px) {
+                        width: 20px;
+                        height: 20px;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50% -50%);
+                    }
+                    @include breakpoint(390px) {
+                        width: 18px;
+                        height: 18px;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50% -50%);
+                    }
                 }
-            }
             }
         }
 
         .customer_review {
             display: flex;
-            width: 77vw;
+            width: 75vw;
             height: 220px;
             justify-content: space-between;
             margin-top: 20px;
 
+            @include breakpoint(1024px) {
+                display: flex;
+                height: 220px;
+                width: 75vw;
+                // justify-content: space-between;
+                // margin-top: 20px;
+            }
+
             @include breakpoint(820px) {
                 display: block;
-                height: 82vh;
-                width: 70vw;
+                height: 25vh;
+                width: 48vw;
+                margin-left: 9vw;
             }
-            
+
             @include breakpoint(430px) {
-                height: 74vh;
+                height: 60%;
+            }
+
+            @include breakpoint(390px) {
+                height: 72%;
             }
 
             li {
@@ -1582,7 +1724,8 @@ button {
                 @include breakpoint(820px) {
                     margin: auto;
                     width: 48vw;
-                    height: 29vh;
+                    height: 18vh;
+                    margin-bottom: 3vw;
                 }
 
                 // @include breakpoint(820px) {
@@ -1592,9 +1735,8 @@ button {
                 // }
 
                 @include breakpoint(430px) {
-                    margin-left: 15vw;
                     width: 72vw;
-                    margin-left: 1vw;
+                    margin-left: -11vw;
                     margin-bottom: 6vw;
                     height: 47vw;
                 }
@@ -1603,7 +1745,7 @@ button {
                     display: flex;
 
                     @include breakpoint(820px) {
-                        margin-top: 2vw;
+                        margin-left: 3vw;
                     }
 
                     span {
@@ -1624,7 +1766,7 @@ button {
                             }
 
                             @include breakpoint(820px) {
-                                padding-left: 2.5vw;
+                                // padding-left: 2.5vw;
                             }
 
                         }
@@ -1666,7 +1808,8 @@ button {
                             }
 
                             @include breakpoint(820px) {
-                                padding-left: 13vw;
+                                // padding-left: 110px;
+                                // margin-left: 113vw;
                             }
                         }
 
@@ -1699,8 +1842,7 @@ button {
                     }
 
                     @include breakpoint(820px) {
-                        padding-left: 3vw;
-                        padding-top: 0vw;
+                        padding-left: 2vw;
                     }
 
                     .starbar {
@@ -1720,9 +1862,7 @@ button {
                                 height: 18px;
                             }
 
-                            @include breakpoint(820px) {
-                                padding-left: 1vw;
-                            }
+                            @include breakpoint(820px) {}
                         }
                     }
 
@@ -1740,9 +1880,16 @@ button {
 
                             @include breakpoint(820px) {
                                 padding-left: 10vw;
-                                margin-left: -2.5vw;
-                                width: 139px;
+                                margin-left: -0.5vw;
+                                width: -1px;
                                 font-size: 15px;
+                            }
+                            @include breakpoint(430px) {
+                                padding-left: 8vw;
+                            }
+                            @include breakpoint(390px) {
+                                padding-left: 2vw;
+                                margin-left: -6.2vw;
                             }
                         }
                     }
@@ -1759,7 +1906,7 @@ button {
                     }
 
                     @include breakpoint(820px) {
-                        margin-left: 4vw;
+                        margin-left: 5vw;
                     }
                 }
             }
@@ -1781,11 +1928,16 @@ button {
 
     @include breakpoint(820px) {
         margin-left: 26vw;
-        margin-top: 11vw;
+        margin-top: 48vw;
     }
+
     @include breakpoint(430px) {
         margin-left: 21vw;
-        margin-top: 0vw;
+        margin-top: 30vw;
+    }
+    @include breakpoint(390px) {
+        margin-left: 16vw;
+        margin-top: 16vw;
     }
 
 
@@ -1794,8 +1946,8 @@ button {
         color: #fff;
 
         @include breakpoint(430px) {
-        font-size: 16px;
-    }
+            font-size: 16px;
+        }
     }
 }
 
@@ -1816,12 +1968,25 @@ button {
 
     &.active {
         width: 412px;
-        height: 636px;
+        height: 588px;
         opacity: 1;
         pointer-events: auto;
         text-align: center;
-        top: 32px;
+        top: 14px;
         left: 513px;
+        @include breakpoint(1024px) {
+            top: 332px;
+            left: 403px;
+        }
+        @include breakpoint(820px) {
+            top: 213px;
+            left: 280px;
+        }
+        @include breakpoint(390px) {
+            top: 253px;
+            left: 18px;
+            width: 93vw;
+        }
     }
 
     .concent_one {
@@ -1857,11 +2022,26 @@ button {
             border: 1px dashed #333333;
             margin: 20px auto 0;
 
+            @include breakpoint(1024px) {
+                width: 34vw;
+                margin-left: 3vw;
+                margin-bottom: -2vw;
+            }
+
             @include breakpoint(820px) {
                 width: 68vw;
                 margin-left: -55vw;
                 margin-bottom: -1vw;
+                margin-left: 5vw;
+                width: 40vw;
             }
+
+            @include breakpoint(390px) {
+                margin-bottom: -1vw;
+                margin-left: 6vw;
+                width: 76vw;
+            }
+            
         }
 
         .masg {
@@ -1890,9 +2070,13 @@ button {
                 color: #C3A988;
                 padding: 9px 0 0 10px;
 
+                @include breakpoint(390px) {
+                        width: 329px;
+                    }
+
                 &::placeholder {
                     color: #C3A988;
-                    font-size: 12px;
+                    font-size: 12px; 
                 }
             }
         }
@@ -1961,8 +2145,8 @@ button {
             }
 
             input[type="file"] {
-                width: 124px;
-                height: 124px;
+                width: 80px;
+                height: 80px;
                 opacity: 0;
             }
         }
@@ -1975,6 +2159,18 @@ button {
         justify-content: space-between;
         align-items: center;
         margin: auto;
+        margin-left: 8vw;
+        margin-top: 1.5vw;
+
+        @include breakpoint(820px) {
+            margin-left: 13vw;
+            margin-top: 1.5vw;
+        }
+
+        @include breakpoint(390px) {
+            margin-left: 22vw;
+            margin-top: 4.5vw;
+        }
 
         .cancel {
             width: 100px;
@@ -2027,4 +2223,7 @@ button {
         padding-left: 34px;
     }
 }
+
+
+
 </style>
