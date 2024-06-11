@@ -2,20 +2,20 @@
     <!--這是前後台首頁-->
     <div class="wrapper">
         <img src="../assets/Image/index/gate.png" alt="" class="gate">
-        
-        <div class="door" :class="{rotate: rotating}">
+
+        <div class="door" :class="{ rotate: rotating }">
             <img class="left" src="/src/assets/Image/index/door_left.png" alt="">
             <img class="right" src="/src/assets/Image/index/door_right.png" alt="">
         </div>
 
-        <div class="yiayng" @click="cyclerotate" :class="{rotate: rotating}">
+        <div class="yiayng" @click="cyclerotate" :class="{ rotate: rotating }">
 
             <div class="FrontDesk" :class="{ 'move-right': moved, 'highlight': rotating }">
-                
+
                 <router-link to="/enter">
                     <h5 class="frontdesk">前台</h5>
                 </router-link>
-                
+
                 <img class="yia" src="../assets/Image/index/yin.png" alt="">
             </div>
 
@@ -24,7 +24,7 @@
                 <router-link to="/BkHome">
                     <h5 class="Backstage">後台</h5>
                 </router-link>
-                
+
                 <img class="yng" src="../assets/Image/index/yng.png" alt="">
             </div>
 
@@ -47,7 +47,7 @@ export default {
 
             setTimeout(() => {
                 this.moved = true;
-            }, 2500); 
+            }, 2500);
         }
     }
 }
@@ -86,26 +86,31 @@ export default {
 //   }
 // }
 
-.wrapper{
+.wrapper {
     background-color: #333;
     width: 100vw;
     height: 100vh;
     position: relative;
     overflow: hidden;
-    .gate{
+
+    .gate {
         width: 100vw;
         height: 100vh;
     }
-    .door{
+
+    .door {
         position: absolute;
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
-        .left, .right {
+
+        .left,
+        .right {
             width: 23vw;
             height: 86vh;
         }
+
         .left {
             transform-origin: left;
         }
@@ -113,6 +118,7 @@ export default {
         .right {
             transform-origin: right;
         }
+
         &.rotate .left {
             animation: door-left-rotate 2.5s linear forwards;
 
@@ -125,22 +131,26 @@ export default {
             animation-delay: 2.5s; // 門打開時間
         }
     }
-    .yiayng{
+
+    .yiayng {
         position: absolute;
         top: 41%;
         left: 42.6%;
-        width: 15.8vw;
+        width: 14.4vw;
         height: 15.8vw;
+
         &.rotate {
             animation: cycle 2s linear forwards;
         }
-        .FrontDesk{
+
+        .FrontDesk {
             position: absolute;
             top: 30px;
             left: 90px;
             z-index: 1;
             transition: transform 5s;
-            .frontdesk{
+
+            .frontdesk {
                 color: #ccc;
                 font-size: 24px;
                 font-weight: 800;
@@ -151,28 +161,34 @@ export default {
                 top: 1px;
                 left: -16px;
             }
-            .yia{
+
+            .yia {
                 width: 15.0vw;
                 cursor: pointer;
                 position: absolute;
-                top: -2.1vw;
+                top: -2.16vw;
                 left: -5.9vw;
                 transition: all .5s ease;
-                &:hover{
+
+                &:hover {
                     transform: translateY(-10px);
-                &:hover{
-                    filter: drop-shadow(5px 8px 2px rgba(0, 0, 0, 0.7));
-                }
+
+                    &:hover {
+                        filter: drop-shadow(5px 8px 2px rgba(0, 0, 0, 0.7));
+                    }
                 }
             }
         }
-        .BackStage{
+
+        .BackStage {
             position: absolute;
             top: 150px;
             left: 80px;
             z-index: 1;
             transition: transform 1s;
-            .Backstage{  //字
+
+            .Backstage {
+                //字
                 color: #ccc;
                 font-size: 24px;
                 font-weight: 800;
@@ -182,7 +198,8 @@ export default {
                 top: 0vw;
                 left: 0.5vw;
             }
-            .yng{
+
+            .yng {
                 width: 15vw;
                 cursor: pointer;
                 position: absolute;
@@ -190,15 +207,17 @@ export default {
                 bottom: -5.0vw;
                 left: -5.68vw;
                 transition: all .5s ease;
-                &:hover{
+
+                &:hover {
                     transform: translateY(-10px);
                 }
-                &:hover{
+
+                &:hover {
                     filter: drop-shadow(5px 8px 2px rgba(0, 0, 0, 0.7));
                 }
             }
         }
-        
+
         .move-right {
             transform: translateY(-50px);
         }
@@ -207,7 +226,8 @@ export default {
             transform: translateY(50px);
         }
 
-        .highlight .frontdesk, .highlight .Backstage {
+        .highlight .frontdesk,
+        .highlight .Backstage {
             width: 68px;
             font-size: 28px;
             text-shadow: 4px 1px 4px rgb(8, 8, 9);
@@ -219,14 +239,17 @@ export default {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
 }
+
 @keyframes door-left-rotate {
     0% {
         transform: rotateY(0deg);
     }
+
     100% {
         transform: rotateY(-70deg);
     }
@@ -236,10 +259,9 @@ export default {
     0% {
         transform: rotateY(0deg);
     }
+
     100% {
         transform: rotateY(70deg);
     }
 }
-
-
 </style>

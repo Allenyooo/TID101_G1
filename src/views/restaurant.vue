@@ -345,13 +345,38 @@
             </section>
         </div>
     </div>
-</template>
 
 <!--test button-->
+<div class="line-it-button" data-lang="en" data-type="share-a" data-env="REAL" data-url="https://developers.line.biz/en/docs/line-social-plugins/install-guide/using-line-share-buttons/" data-color="default" data-size="small" data-count="true" data-ver="3" style="display: none;">
+
+</div>
+
+
+
+
+</template>
+
 
 
 
 <script>
+// const btn = document.querySelector('#share-btn');
+
+// btn.addEventListener('click', async () => {
+//     try {
+//         if (!navigator.share) {
+//             return;
+//         }
+//         await navigator.share({
+//             title: '分享梨花殿',
+//             text: 'Share Content',
+//             url: 'https://www.apple.com/tw/macbook-air/specs/'
+//         })
+//     } catch (err) {
+//         console.log(err.message);
+//     }
+// });
+
 //星級評論
 export default {
     data() {
@@ -415,6 +440,14 @@ export default {
     list-style: none;
 }
 
+#share-btn{   //測試按鈕
+    width: 90px;
+    height: 30px;
+    margin-left: 20px;
+    border-radius: 50px;
+    color: #FFF;
+    background-color: #7A625B;
+}
 .restaurant_wrapper {
     overflow: hidden;
     width: 100vw;

@@ -437,7 +437,7 @@ export default {
         }
 
         .card_container{
-            width: 78%;
+            width: 85%;
             display: flex;
             flex-wrap: wrap;
             margin: 0 auto 3vh;
