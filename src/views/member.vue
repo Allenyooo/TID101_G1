@@ -1,7 +1,5 @@
 <template>
-    <div class="member_wrapper">
-
-    </div>
+    <h1>TID101</h1>
 </template>
 
 <script></script>
