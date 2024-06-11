@@ -83,14 +83,14 @@
                 >
             </div>
 
-            <div class="register_in">
+            <router-link to="/login" class="register_in">
                 <button>
                     <h3>註冊</h3>
                 </button>
-            </div>
+            </router-link>
 
             <div class="register_login">
-                <h5>已經有帳號了?<a href="#"> 立即登入!</a></h5>
+                <h5>已經有帳號了?<router-link to="/login"> 立即登入!</router-link></h5>
             </div>
 
             <img

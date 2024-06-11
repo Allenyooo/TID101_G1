@@ -737,6 +737,7 @@ export default {
                 x: -1300,
                 y: -1725,
                 duration: 30,
+                ease: "none",
             })
                 .to(
                     ".banner-img",
@@ -744,6 +745,7 @@ export default {
                         x: 0,
                         y: -1725,
                         duration: 30,
+                        ease: "none",
                     },
                     ">"
                 )
@@ -753,6 +755,7 @@ export default {
                         x: -1300,
                         y: 0,
                         duration: 30,
+                        ease: "none",
                     },
                     ">"
                 )
@@ -762,6 +765,7 @@ export default {
                         x: 0,
                         y: 0,
                         duration: 30,
+                        ease: "none",
                     },
                     ">"
                 );
@@ -769,8 +773,8 @@ export default {
             let tls = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".home_intro",
-                    start: "50% center",
-                    end: "250%",
+                    start: "0% top",
+                    end: "150%",
                     scrub: 1,
                     id: "pin",
                     pin: true,
@@ -789,7 +793,6 @@ export default {
                         autoAlpha: 0,
                         scale: 0,
                         stagger: 0.03,
-                        scrub: 1,
                     },
                     "<+=0.1"
                 )
