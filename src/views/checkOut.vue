@@ -1,5 +1,18 @@
 <script>
 
+    export default{
+
+        methods: {
+            nextStep(){
+                // this.$emit('nextStep');
+                this.$router.push('/receipt');
+            }
+        },
+
+        computed:{}
+
+    }
+
 </script>
 
 
@@ -64,7 +77,7 @@
                     </div>
                 </div>
                 <form action="" class="checkOut_nextStep">
-                    <input type="submit" id="checkOut_next" value="下一步">
+                    <input type="button" id="checkOut_next" value="下一步" @click.native="nextStep">
                 </form>
                 <!-- <button id="checkOut_next">下一步</button> -->
                 <img src="../assets/Image/checkOut/envelope_forward.png" alt="">
@@ -80,7 +93,7 @@
     .checkOut_body {
         background-color: $OffWhite;
         max-width: 100vw;
-        height: 98vh;
+        height: 95vh;
         padding-top: 1%;
     }
 
@@ -221,6 +234,7 @@
                         
                         p{
                             color: $Red;
+                            display: none;
                         }
                     }
                     #checkOut_promoCode{
