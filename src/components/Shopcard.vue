@@ -23,20 +23,15 @@ export default {
 
 <template>
     <!-- <li :class="{ map_open : hovered }" @mouseover="cardOpen" @mouseleave="cardOpen"> -->
-    <li 
-    @mouseenter="$emit('mouseenter')" 
-    @mouseleave="$emit('mouseleave')"
-    :class="{ 'no-hover': !isHoverEnabled }">
+    <li @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')" :class="{ 'no-hover': !isHoverEnabled }">
+
         <div class="normal">
             <img src="/src/assets/Image/map/koreawaybgi.png" alt="" />
             <div class="shopinfo">
                 <h3>高麗味</h3>
                 <div class="content">
                     <div class="address">
-                        <img
-                            src="/src/assets/Image/map/addressLogo.png"
-                            alt=""
-                        />
+                        <img src="/src/assets/Image/map/addressLogo.png" alt="" />
                         <h5>台北市，天母區</h5>
                     </div>
                     <div class="star">
@@ -50,10 +45,7 @@ export default {
             <div class="card_header"></div>
             <div class="card_main">
                 <div class="maininfo">
-                    <img
-                        src="/src/assets/Image/map/koreawaybgi.png"
-                        class="shopImg"
-                    />
+                    <img src="/src/assets/Image/map/koreawaybgi.png" class="shopImg" />
                     <div class="maincontent">
                         <div class="name_collect">
                             <h2>高麗味</h2>
@@ -62,10 +54,7 @@ export default {
                         <div class="star_price">
                             <div class="score">
                                 <h4>4.8</h4>
-                                <img
-                                    src="/src/assets/Image/map/star.png"
-                                    class="scorestar"
-                                />
+                                <img src="/src/assets/Image/map/star.png" class="scorestar" />
                             </div>
                             <h4>( 100則評論 )</h4>
                             <h4>．均消 $300</h4>
@@ -75,10 +64,7 @@ export default {
                             <h4>營業時間 : 11:00 - 21:00</h4>
                         </div>
                         <div class="shop_address">
-                            <img
-                                src="/src/assets/Image/map/addressLogo.png"
-                                alt=""
-                            />
+                            <img src="/src/assets/Image/map/addressLogo.png" alt="" />
                             <h4>台北市士林區忠誠路二段152號</h4>
                         </div>
                     </div>
@@ -115,33 +101,37 @@ li {
     // margin-bottom: 24px;
     // margin: 0 auto;
 
-    &:hover{
-        transition: 0.1s;
-        width: 720px;
-        height: 364px;
+    &:not(.no-hover) {
+        &:hover {
+            transition: 0.1s;
+            width: 720px;
+            height: 364px;
+        }
+
+        &:hover .opened {
+            transition: 0.1s;
+            width: 720px;
+            height: 364px;
+            z-index: 20;
+            // margin-left: -28%;
+            opacity: 1;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        &:hover .normal {
+            opacity: 0;
+            transition: 0.1s;
+            width: 460px;
+            height: 202px;
+            z-index: 0;
+            display: none;
+        }
     }
 
-    &:hover .opened {
-        transition: 0.1s;
-        width: 720px;
-        height: 364px;
-        z-index: 20;
-        // margin-left: -28%;
-        opacity: 1;
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
 
-    &:hover .normal {
-        opacity: 0;
-        transition: 0.1s;
-        width: 460px;
-        height: 202px;
-        z-index: 0;
-        display: none;
-    }
 }
 
 .normal {
@@ -162,29 +152,35 @@ li {
         object-fit: cover;
         display: block;
     }
+
     .shopinfo {
         width: 100%;
         height: 100%;
         background-color: $OffWhite;
         padding-left: 32px;
         padding-top: 4px;
+
         & h3 {
             margin-bottom: 4px;
             font-weight: bold;
         }
+
         .content {
             display: flex;
             align-items: center;
+
             & img {
                 width: 16px;
                 height: 16px;
                 margin-right: 5px;
             }
+
             .address {
                 display: flex;
                 align-items: center;
                 margin-right: 32px;
             }
+
             .star {
                 display: flex;
                 align-items: center;
@@ -209,6 +205,7 @@ li {
         height: 32px;
         background-color: $Red;
     }
+
     .card_main {
         margin: 20px 28px;
     }
@@ -216,6 +213,7 @@ li {
 
 .maininfo {
     display: flex;
+
     .shopImg {
         display: block;
         width: 244px;
@@ -225,6 +223,7 @@ li {
         margin-right: 28px;
     }
 }
+
 .maincontent {
     display: flex;
     flex-direction: column;
@@ -236,10 +235,12 @@ li {
         justify-content: space-between;
         margin-bottom: 20px;
     }
+
     .star_price {
         display: flex;
         flex-direction: row;
         margin-bottom: 16px;
+
         // align-items: left;
         .score {
             width: 84px;
@@ -252,6 +253,7 @@ li {
             border-radius: 16px;
             // outline: 1px solid green;
             margin-right: 4px;
+
             h4 {
                 display: inline-block;
                 width: 30px;
@@ -264,23 +266,28 @@ li {
                 height: 16px;
             }
         }
-        & > h4:nth-child(2) {
+
+        &>h4:nth-child(2) {
             color: #999999;
         }
     }
+
     .opentime {
         display: flex;
         align-items: center;
         margin-bottom: 8px;
+
         img {
             width: 16px;
             height: 16px;
             margin-right: 8px;
         }
     }
+
     .shop_address {
         display: flex;
         align-items: center;
+
         img {
             width: 16px;
             height: 16px;
@@ -288,6 +295,7 @@ li {
         }
     }
 }
+
 .bestreview {
     display: flex;
     align-items: center;
@@ -296,12 +304,13 @@ li {
     width: 670px;
     height: 88px;
     border-radius: 15px;
-    & > div {
+
+    &>div {
         display: flex;
         align-items: center;
         justify-content: space-around;
 
-        & > h4 {
+        &>h4 {
             width: 80px;
             height: 64px;
             text-align: center;
@@ -311,15 +320,18 @@ li {
             border-radius: 20px;
             margin-right: 16px;
         }
+
         .reviewcontent {
             h4 {
                 font-weight: bold;
             }
+
             h5 {
                 color: #898888;
             }
         }
     }
+
     img {
         display: block;
         width: 64px;
@@ -331,19 +343,18 @@ li {
 
 // 不給hover效果
 
-.member_collection .no-hover:hover {
-  width: 460px;
-  height: 202px;
-}
+// .member_collection .no-hover:hover {
+//     width: 460px;
+//     height: 202px;
+// }
 
-.member_collection .no-hover:hover .normal {
-  opacity: 1;
-  transform: scale(1);
-  display: block;
-}
+// .member_collection .no-hover:hover .normal {
+//     opacity: 1;
+//     transform: scale(1);
+//     display: block;
+// }
 
-.member_collection .no-hover:hover .opened {
-  opacity: 0;
-//   transform: scale(0.8);
-}
-</style>
+// .member_collection .no-hover:hover .opened {
+//     opacity: 0;
+//     //   transform: scale(0.8);
+// }</style>
