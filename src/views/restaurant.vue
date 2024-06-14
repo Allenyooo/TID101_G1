@@ -2,14 +2,22 @@
     <div class="restaurant_wrapper">
         <!--店家測軸-->
         <div class="restaurant_sidebar">
-            <img class="storeimg" src="../assets/Image/restaurant/north/logo.svg" alt="logo">
+            <img
+                class="storeimg"
+                src="../assets/Image/restaurant/north/logo.svg"
+                alt="logo"
+            />
             <div class="column">
                 <h2>高麗味</h2>
                 <h6>고려미</h6>
             </div>
             <span class="restaurant_star">
                 <div class="star">4.8</div>
-                <img class="restaurant_starimg" src="../assets/Image/restaurant/star.png" alt="star">
+                <img
+                    class="restaurant_starimg"
+                    src="../assets/Image/restaurant/star.png"
+                    alt="star"
+                />
             </span>
             <ul class="list">
                 <li>- 前言</li>
@@ -19,19 +27,33 @@
             </ul>
         </div>
         <div class="restaurant_content">
-            <img class="Banner" src="../assets/Image/restaurant/north/storebanner.jpg" alt="banner">
-            <img class="Banner430" src="../assets/Image/restaurant/north/storebannerRWD.jpg" alt="">
+            <img
+                class="Banner"
+                src="../assets/Image/restaurant/north/storebanner.jpg"
+                alt="banner"
+            />
+            <img
+                class="Banner430"
+                src="../assets/Image/restaurant/north/storebannerRWD.jpg"
+                alt=""
+            />
             <!--banner-->
             <div class="restaurant_breadcrumb">
                 <!---麵包屑-->
                 <ol class="breadcrumb">
                     <li class="crumb1">
                         <router-link to="/home">首頁</router-link>
-                        <img src="/src/assets/Image/restaurant/north/left.png" alt="">
+                        <img
+                            src="/src/assets/Image/restaurant/north/left.png"
+                            alt=""
+                        />
                     </li>
                     <li class="crumb2">
                         <router-link to="/map">商店列表</router-link>
-                        <img src="/src/assets/Image/restaurant/north/left.png" alt="">
+                        <img
+                            src="/src/assets/Image/restaurant/north/left.png"
+                            alt=""
+                        />
                     </li>
                     <li class="crumb3">
                         <a href="#">高麗味</a>
@@ -40,30 +62,45 @@
                 <ol class="restaurant_btns">
                     <button>
                         <li class="collect">
-                            <img src="../assets/Image/restaurant/north/collect.svg" alt="collect">
+                            <img
+                                src="../assets/Image/restaurant/north/collect.svg"
+                                alt="collect"
+                            />
                         </li>
                     </button>
 
                     <button>
-                        <li class="share"> <!--分享 連接fb訊息-->
-                            <a href="http://m.me/sparkassociationorg" target="_blank">
-                                <img src="../assets/Image/restaurant/north/share.svg" alt="collect">
+                        <li class="share">
+                            <!--分享 連接fb訊息-->
+                            <a
+                                href="http://m.me/sparkassociationorg"
+                                target="_blank"
+                            >
+                                <img
+                                    src="../assets/Image/restaurant/north/share.svg"
+                                    alt="collect"
+                                />
                             </a>
                         </li>
                     </button>
 
                     <button>
                         <li class="message">
-                            <img src="../assets/Image/restaurant/north/message.svg" alt="collect">
+                            <img
+                                src="../assets/Image/restaurant/north/message.svg"
+                                alt="collect"
+                            />
                         </li>
                     </button>
                 </ol>
             </div>
 
             <header class="restaurant_header">
-                <h2 class="restaurant_slogan">“ 品味正宗韓國美味！<br>來，一起享受美食之旅！”</h2>
+                <h2 class="restaurant_slogan">
+                    “ 品味正宗韓國美味！<br />來，一起享受美食之旅！”
+                </h2>
                 <h4>
-                    歡迎光臨！高麗味是一家由韓國人親自經營的韓國餐廳，致力於將最正統的韓國風味從韓國帶到台灣。<br><br>我們的廚師們擁有精湛的手藝，將傳統的韓國料理製作得口感鮮美、味道道地。無論是韓式烤肉、泡菜、大醬湯還是韓式炸雞，每道菜都是我們對傳統飲食文化的真摯致敬。<br><br>無論您是想要品嚐道地的韓國美食，還是尋找一個溫馨舒適的用餐環境，我們都竭誠歡迎您的光臨。讓高麗味成為您感受韓國風情的第一選擇！
+                    歡迎光臨！高麗味是一家由韓國人親自經營的韓國餐廳，致力於將最正統的韓國風味從韓國帶到台灣。<br /><br />我們的廚師們擁有精湛的手藝，將傳統的韓國料理製作得口感鮮美、味道道地。無論是韓式烤肉、泡菜、大醬湯還是韓式炸雞，每道菜都是我們對傳統飲食文化的真摯致敬。<br /><br />無論您是想要品嚐道地的韓國美食，還是尋找一個溫馨舒適的用餐環境，我們都竭誠歡迎您的光臨。讓高麗味成為您感受韓國風情的第一選擇！
                 </h4>
             </header>
 
@@ -98,11 +135,17 @@
                         </table>
                         <div class="restaurant_media">
                             <div class="restaurant_fb">
-                                <img src="../assets/Image/restaurant/FB.png" alt="fb">
+                                <img
+                                    src="../assets/Image/restaurant/FB.png"
+                                    alt="fb"
+                                />
                                 <h4>高麗味 • 韓之味小吃店</h4>
                             </div>
                             <div class="restaurant_ig">
-                                <img src="../assets/Image/restaurant/ig.png" alt="ig">
+                                <img
+                                    src="../assets/Image/restaurant/ig.png"
+                                    alt="ig"
+                                />
                                 <h4>@KoreawayBBQ</h4>
                             </div>
                             <div class="line"></div>
@@ -110,8 +153,13 @@
                     </div>
                     <!---google map-->
                     <div class="map">
-                        <iframe src="https://map.google.com?output=embed&q=高麗味" width="500px" height="300px"
-                            frameborder="0" id="google_map">
+                        <iframe
+                            src="https://map.google.com?output=embed&q=高麗味"
+                            width="500px"
+                            height="300px"
+                            frameborder="0"
+                            id="google_map"
+                        >
                         </iframe>
                     </div>
                 </div>
@@ -120,21 +168,30 @@
             <main class="restaurant_mainContent">
                 <div class="restaurant_content1">
                     <h4>
-                        高麗味的生醃螃蟹，在醃製過程中以醬汁和<br>調味料醃製，保留了螃蟹原始鮮味，同時帶<br>來了濃郁的醬汁風味。我們以大蒜、辣椒醬<br>和其他調味料入味，口感香辣鮮美。作為小<br>菜（반찬）或配菜，搭配米飯和其他主食一<br>同享用，為餐桌增添了豐富的風味和營養。
+                        高麗味的生醃螃蟹，在醃製過程中以醬汁和<br />調味料醃製，保留了螃蟹原始鮮味，同時帶<br />來了濃郁的醬汁風味。我們以大蒜、辣椒醬<br />和其他調味料入味，口感香辣鮮美。作為小<br />菜（반찬）或配菜，搭配米飯和其他主食一<br />同享用，為餐桌增添了豐富的風味和營養。
                     </h4>
-                    <img src="../assets/Image/restaurant/north/crab.png" alt="crab">
+                    <img
+                        src="../assets/Image/restaurant/north/crab.png"
+                        alt="crab"
+                    />
                 </div>
                 <div class="restaurant_content2">
-                    <img src="../assets/Image/restaurant/north/chicken.png" alt="chicken">
+                    <img
+                        src="../assets/Image/restaurant/north/chicken.png"
+                        alt="chicken"
+                    />
                     <h4>
-                        韓國炸雞，被譽為「黃金雞」，是韓國料理<br>中的經典美食。高麗味的炸雞，外皮酥脆、<br>內裡多汁，口感極佳。經過特殊調味和炸製<br>技術，使得炸雞的風味豐富多樣。我們特別<br>選用雞腿肉，肉質鮮嫩多汁，常搭配韓式泡<br>菜和啤酒，是韓國人非常喜愛的下酒菜。
+                        韓國炸雞，被譽為「黃金雞」，是韓國料理<br />中的經典美食。高麗味的炸雞，外皮酥脆、<br />內裡多汁，口感極佳。經過特殊調味和炸製<br />技術，使得炸雞的風味豐富多樣。我們特別<br />選用雞腿肉，肉質鮮嫩多汁，常搭配韓式泡<br />菜和啤酒，是韓國人非常喜愛的下酒菜。
                     </h4>
                 </div>
                 <div class="restaurant_content3">
                     <h4>
-                        高麗味的牛肉湯，加入蔬菜和牛肉片，燉煮<br>成濃郁湯品。湯頭澄清鮮美，牛肉軟嫩入<br>味。搭配白飯和泡菜，營養豐富，口感溫<br>暖。不論是冬天進補，或是想要來一碗熱<br>湯，牛肉湯都是非常受歡迎的料理選項。
+                        高麗味的牛肉湯，加入蔬菜和牛肉片，燉煮<br />成濃郁湯品。湯頭澄清鮮美，牛肉軟嫩入<br />味。搭配白飯和泡菜，營養豐富，口感溫<br />暖。不論是冬天進補，或是想要來一碗熱<br />湯，牛肉湯都是非常受歡迎的料理選項。
                     </h4>
-                    <img src="../assets/Image/restaurant/north/soup.png" alt="soup">
+                    <img
+                        src="../assets/Image/restaurant/north/soup.png"
+                        alt="soup"
+                    />
                 </div>
             </main>
 
@@ -145,57 +202,111 @@
                         <div class="restaurant_review_title">
                             <h3>評論區</h3>
                             <span>
-                                <img class="restaurantstarimg" src="../assets/Image/restaurant/star.png" alt="star">
+                                <img
+                                    class="restaurantstarimg"
+                                    src="../assets/Image/restaurant/star.png"
+                                    alt="star"
+                                />
                                 <h4 class="restaurant_rating">4.8</h4>
-                                <h4 class="restaurant_review_num">(100+評論)</h4>
+                                <h4 class="restaurant_review_num">
+                                    (100+評論)
+                                </h4>
                             </span>
                         </div>
 
                         <button @click="pop()">
-                            <div class="icon_bg" @click=" popup_open = true">
-                                <img class="restaurantstarimg" src="../assets/Image/restaurant/north/message.svg"
-                                    alt="message">
+                            <div class="icon_bg" @click="popup_open = true">
+                                <img
+                                    class="restaurantstarimg"
+                                    src="../assets/Image/restaurant/north/message.svg"
+                                    alt="message"
+                                />
                             </div>
                         </button>
-                        <button @click=" popup_open = true">
-                        </button>
-                        <div id="pop" :class="{ 'active': popup_open === true }">
+                        <button @click="popup_open = true"></button>
+                        <div id="pop" :class="{ active: popup_open === true }">
                             <div class="concent_one">
                                 <div class="starbars">
                                     <h4 class="starbar_store">整體評價</h4>
                                     <div id="stars" class="left">
-
                                         <!--星級test-->
-                                        <img src="/src/assets/Image/restaurant/north/pentagram.png" alt=""
-                                            v-if="rating >= 1" @click="change_rating(0)">
-                                        <img src="/src/assets/Image/restaurant/north/empty_pentagram.png" alt="" v-else
-                                            @click="change_rating(1)">
-                                        <img src="/src/assets/Image/restaurant/north/pentagram.png" alt=""
-                                            v-if="rating >= 2" @click="change_rating(1)">
-                                        <img src="/src/assets/Image/restaurant/north/empty_pentagram.png" alt="" v-else
-                                            @click="change_rating(2)">
-                                        <img src="/src/assets/Image/restaurant/north/pentagram.png" alt=""
-                                            v-if="rating >= 3" @click="change_rating(2)">
-                                        <img src="/src/assets/Image/restaurant/north/empty_pentagram.png" alt="" v-else
-                                            @click="change_rating(3)">
-                                        <img src="/src/assets/Image/restaurant/north/pentagram.png" alt=""
-                                            v-if="rating >= 4" @click="change_rating(3)">
-                                        <img src="/src/assets/Image/restaurant/north/empty_pentagram.png" alt="" v-else
-                                            @click="change_rating(4)">
-                                        <img src="/src/assets/Image/restaurant/north/pentagram.png" alt=""
-                                            v-if="rating >= 5" @click="change_rating(4)">
-                                        <img src="/src/assets/Image/restaurant/north/empty_pentagram.png" alt="" v-else
-                                            @click="change_rating(5)">
-                                        <span v-text="rating_text[rating]"></span>
+                                        <img
+                                            src="/src/assets/Image/restaurant/north/pentagram.png"
+                                            alt=""
+                                            v-if="rating >= 1"
+                                            @click="change_rating(0)"
+                                        />
+                                        <img
+                                            src="/src/assets/Image/restaurant/north/empty_pentagram.png"
+                                            alt=""
+                                            v-else
+                                            @click="change_rating(1)"
+                                        />
+                                        <img
+                                            src="/src/assets/Image/restaurant/north/pentagram.png"
+                                            alt=""
+                                            v-if="rating >= 2"
+                                            @click="change_rating(1)"
+                                        />
+                                        <img
+                                            src="/src/assets/Image/restaurant/north/empty_pentagram.png"
+                                            alt=""
+                                            v-else
+                                            @click="change_rating(2)"
+                                        />
+                                        <img
+                                            src="/src/assets/Image/restaurant/north/pentagram.png"
+                                            alt=""
+                                            v-if="rating >= 3"
+                                            @click="change_rating(2)"
+                                        />
+                                        <img
+                                            src="/src/assets/Image/restaurant/north/empty_pentagram.png"
+                                            alt=""
+                                            v-else
+                                            @click="change_rating(3)"
+                                        />
+                                        <img
+                                            src="/src/assets/Image/restaurant/north/pentagram.png"
+                                            alt=""
+                                            v-if="rating >= 4"
+                                            @click="change_rating(3)"
+                                        />
+                                        <img
+                                            src="/src/assets/Image/restaurant/north/empty_pentagram.png"
+                                            alt=""
+                                            v-else
+                                            @click="change_rating(4)"
+                                        />
+                                        <img
+                                            src="/src/assets/Image/restaurant/north/pentagram.png"
+                                            alt=""
+                                            v-if="rating >= 5"
+                                            @click="change_rating(4)"
+                                        />
+                                        <img
+                                            src="/src/assets/Image/restaurant/north/empty_pentagram.png"
+                                            alt=""
+                                            v-else
+                                            @click="change_rating(5)"
+                                        />
+                                        <span
+                                            v-text="rating_text[rating]"
+                                        ></span>
                                     </div>
                                     <div id="comment" class="left"></div>
                                 </div>
 
-                                <p class="masg">根據你的體驗，整體而言你會給該店家幾顆星？</p>
+                                <p class="masg">
+                                    根據你的體驗，整體而言你會給該店家幾顆星？
+                                </p>
                                 <div class="line"></div>
                                 <h4 class="experience">體驗心得</h4>
                                 <h5 class="text_1">
-                                    <textarea class="text_concent" placeholder="大家都想聽聽你的感想，給還沒去過的人一個參考吧！"></textarea>
+                                    <textarea
+                                        class="text_concent"
+                                        placeholder="大家都想聽聽你的感想，給還沒去過的人一個參考吧！"
+                                    ></textarea>
                                 </h5>
                                 <p class="text_words">字元數限制 0/100 字</p>
                             </div>
@@ -208,34 +319,58 @@
                             <div class="concent_two">
                                 <div class="box1">
                                     <div class="add">+</div>
-                                    <input type="file" @change="fileChange($event, 1)">
+                                    <input
+                                        type="file"
+                                        @change="fileChange($event, 1)"
+                                    />
                                 </div>
                                 <div class="box2">
                                     <div class="add">+</div>
-                                    <input type="file" @change="fileChange($event, 2)">
+                                    <input
+                                        type="file"
+                                        @change="fileChange($event, 2)"
+                                    />
                                 </div>
                                 <div class="box3">
                                     <div class="add">+</div>
-                                    <input type="file" @change="fileChange($event, 3)">
+                                    <input
+                                        type="file"
+                                        @change="fileChange($event, 3)"
+                                    />
                                 </div>
                                 <div class="box4">
                                     <div class="add">+</div>
-                                    <input type="file" @change="fileChange($event, 4)">
+                                    <input
+                                        type="file"
+                                        @change="fileChange($event, 4)"
+                                    />
                                 </div>
                                 <div class="box5">
                                     <div class="add">+</div>
-                                    <input type="file" @change="fileChange($event, 5)">
+                                    <input
+                                        type="file"
+                                        @change="fileChange($event, 5)"
+                                    />
                                 </div>
                                 <div class="box6">
                                     <div class="add">+</div>
-                                    <input type="file" @change="fileChange($event, 6)">
+                                    <input
+                                        type="file"
+                                        @change="fileChange($event, 6)"
+                                    />
                                 </div>
                             </div>
                             <div class="buttons">
-                                <button class="cancel" @click=" popup_open = false">
+                                <button
+                                    class="cancel"
+                                    @click="popup_open = false"
+                                >
                                     <h4>取消</h4>
                                 </button>
-                                <button class="sendout" @click=" popup_open = false">
+                                <button
+                                    class="sendout"
+                                    @click="popup_open = false"
+                                >
                                     <h4>送出</h4>
                                 </button>
                             </div>
@@ -247,63 +382,129 @@
                         <li>
                             <div>
                                 <span>
-                                    <img class="user" src="../assets/Image/restaurant/north/user.png" alt="user">
-                                    <h4 class="restaurant_username">來自火星的阿霈</h4>
+                                    <img
+                                        class="user"
+                                        src="../assets/Image/restaurant/north/user.png"
+                                        alt="user"
+                                    />
+                                    <h4 class="restaurant_username">
+                                        來自火星的阿霈
+                                    </h4>
                                 </span>
                                 <span>
-                                    <img class="good" src="../assets/Image/restaurant/north/good.png" alt="good">
+                                    <img
+                                        class="good"
+                                        src="../assets/Image/restaurant/north/good.png"
+                                        alt="good"
+                                    />
                                     <h5 class="number">250</h5>
                                 </span>
                             </div>
                             <div class="star">
                                 <span class="starbar">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull">
-                                    <img src="../assets/Image/restaurant/north/Starnull.png" alt="Starfull">
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starfull.png"
+                                        alt="Starfull"
+                                    />
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starfull.png"
+                                        alt="Starfull"
+                                    />
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starfull.png"
+                                        alt="Starfull"
+                                    />
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starfull.png"
+                                        alt="Starfull"
+                                    />
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starnull.png"
+                                        alt="Starfull"
+                                    />
                                 </span>
                                 <span class="date">
                                     <h5>2024/05/12 13:14</h5>
                                 </span>
                             </div>
-                            <h4>上次聚餐同事一致好評!<br> 好想再二訪</h4>
+                            <h4>
+                                上次聚餐同事一致好評!<br />
+                                好想再二訪
+                            </h4>
                         </li>
                         <!---評論卡片2-->
                         <li>
                             <div>
                                 <span>
-                                    <img class="user" src="../assets/Image/restaurant/north/user.png" alt="user">
-                                    <h4 class="restaurant_username">來自火星的阿霈</h4>
+                                    <img
+                                        class="user"
+                                        src="../assets/Image/restaurant/north/user.png"
+                                        alt="user"
+                                    />
+                                    <h4 class="restaurant_username">
+                                        來自火星的阿霈
+                                    </h4>
                                 </span>
                                 <span>
-                                    <img class="good" src="../assets/Image/restaurant/north/good.png" alt="good">
+                                    <img
+                                        class="good"
+                                        src="../assets/Image/restaurant/north/good.png"
+                                        alt="good"
+                                    />
                                     <h5 class="number">250</h5>
                                 </span>
                             </div>
                             <div class="star">
                                 <span class="starbar">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull">
-                                    <img src="../assets/Image/restaurant/north/Starnull.png" alt="Starfull">
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starfull.png"
+                                        alt="Starfull"
+                                    />
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starfull.png"
+                                        alt="Starfull"
+                                    />
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starfull.png"
+                                        alt="Starfull"
+                                    />
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starfull.png"
+                                        alt="Starfull"
+                                    />
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starnull.png"
+                                        alt="Starfull"
+                                    />
                                 </span>
                                 <span class="date">
                                     <h5>2024/05/12 13:14</h5>
                                 </span>
                             </div>
-                            <h4>上次聚餐同事一致好評!<br> 好想再二訪</h4>
+                            <h4>
+                                上次聚餐同事一致好評!<br />
+                                好想再二訪
+                            </h4>
                         </li>
                         <!---評論卡片3-->
                         <li>
                             <div>
                                 <span>
-                                    <img class="user" src="../assets/Image/restaurant/north/user.png" alt="user">
-                                    <h4 class="restaurant_username">來自火星的阿霈</h4>
+                                    <img
+                                        class="user"
+                                        src="../assets/Image/restaurant/north/user.png"
+                                        alt="user"
+                                    />
+                                    <h4 class="restaurant_username">
+                                        來自火星的阿霈
+                                    </h4>
                                 </span>
                                 <span>
-                                    <img class="good" src="../assets/Image/restaurant/north/good.png" alt="good">
+                                    <img
+                                        class="good"
+                                        src="../assets/Image/restaurant/north/good.png"
+                                        alt="good"
+                                    />
                                     <h5 class="number">250</h5>
                                 </span>
                             </div>
@@ -311,34 +512,66 @@
                             <!---彈跳視窗-->
                             <div class="star">
                                 <div id="stars" class="left">
-                                    <img src="./pentagram.png" alt="">
-                                    <img src="./pentagram.png" alt="">
-                                    <img src="./pentagram.png" alt="">
-                                    <img src="./pentagram.png" alt="">
-                                    <img src="./pentagram.png" alt="">
+                                    <img
+                                        src="/src/assets/Image/restaurant/north/pentagram.png"
+                                        alt=""
+                                    />
+                                    <img
+                                        src="/src/assets/Image/restaurant/north/pentagram.png"
+                                        alt=""
+                                    />
+                                    <img
+                                        src="/src/assets/Image/restaurant/north/pentagram.png"
+                                        alt=""
+                                    />
+                                    <img
+                                        src="/src/assets/Image/restaurant/north/pentagram.png"
+                                        alt=""
+                                    />
+                                    <img
+                                        src="/src/assets/Image/restaurant/north/pentagram.png"
+                                        alt=""
+                                    />
                                 </div>
-                                <div id="comment" class="left">
-                                </div>
+                                <div id="comment" class="left"></div>
 
                                 <span class="starbar">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull">
-                                    <img src="../assets/Image/restaurant/north/Starnull.png" alt="Starfull">
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starfull.png"
+                                        alt="Starfull"
+                                    />
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starfull.png"
+                                        alt="Starfull"
+                                    />
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starfull.png"
+                                        alt="Starfull"
+                                    />
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starfull.png"
+                                        alt="Starfull"
+                                    />
+                                    <img
+                                        src="../assets/Image/restaurant/north/Starnull.png"
+                                        alt="Starfull"
+                                    />
                                 </span>
                                 <span class="date">
                                     <h5>2024/05/12 13:14</h5>
                                 </span>
                             </div>
 
-
-                            <h4>上次聚餐同事一致好評!<br> 好想再二訪</h4>
+                            <h4>
+                                上次聚餐同事一致好評!<br />
+                                好想再二訪
+                            </h4>
                         </li>
                     </ul>
 
                     <!--彈跳視窗按鈕-->
-                    <button class="readmord"> <!--btn btn-primary-->
+                    <button class="readmord">
+                        <!--btn btn-primary-->
                         <router-link to="/review">READ MORE</router-link>
                     </button>
                 </div>
@@ -346,18 +579,20 @@
         </div>
     </div>
 
-<!--test button-->
-<div class="line-it-button" data-lang="en" data-type="share-a" data-env="REAL" data-url="https://developers.line.biz/en/docs/line-social-plugins/install-guide/using-line-share-buttons/" data-color="default" data-size="small" data-count="true" data-ver="3" style="display: none;">
-
-</div>
-
-
-
-
+    <!--test button-->
+    <div
+        class="line-it-button"
+        data-lang="en"
+        data-type="share-a"
+        data-env="REAL"
+        data-url="https://developers.line.biz/en/docs/line-social-plugins/install-guide/using-line-share-buttons/"
+        data-color="default"
+        data-size="small"
+        data-count="true"
+        data-ver="3"
+        style="display: none"
+    ></div>
 </template>
-
-
-
 
 <script>
 // const btn = document.querySelector('#share-btn');
@@ -383,20 +618,14 @@ export default {
         return {
             rating: 0,
             popup_open: false,
-            rating_text: [
-                '',
-                '1級星',
-                '2級星',
-                '3級星',
-                '4級星',
-                '5級星'
-            ],
+            rating_text: ["", "1級星", "2級星", "3級星", "4級星", "5級星"],
             // photoArray: [],
-        }
+        };
     },
-    methods: {    // 照片新增
+    methods: {
+        // 照片新增
         change_rating(value) {
-            this.rating = value
+            this.rating = value;
         },
         pop() {
             //alert()
@@ -406,25 +635,22 @@ export default {
             let readFile = new FileReader();
             readFile.readAsDataURL(file);
 
-            readFile.addEventListener('load', () => {
-                let image = document.createElement('img');
+            readFile.addEventListener("load", () => {
+                let image = document.createElement("img");
                 image.src = readFile.result;
-                image.style.width = '100%';
-                image.style.height = '100%';
+                image.style.width = "100%";
+                image.style.height = "100%";
 
                 let box = document.querySelector(`.box${index}`);
-                box.innerHTML = '';
+                box.innerHTML = "";
                 box.appendChild(image);
             });
-        }
-    }
-}
+        },
+    },
+};
 
 //line插件
-
-
 </script>
-
 
 <style lang="scss" scoped>
 @import url(/src/sass/style.scss);
@@ -440,18 +666,19 @@ export default {
     list-style: none;
 }
 
-#share-btn{   //測試按鈕
+#share-btn {
+    //測試按鈕
     width: 90px;
     height: 30px;
     margin-left: 20px;
     border-radius: 50px;
-    color: #FFF;
-    background-color: #7A625B;
+    color: #fff;
+    background-color: #7a625b;
 }
 .restaurant_wrapper {
     overflow: hidden;
     width: 100vw;
-    background-color: #F6F1ED;
+    background-color: #f6f1ed;
     display: flex;
 
     @include breakpoint(430px) {
@@ -459,7 +686,6 @@ export default {
         position: relative;
         width: 100vw;
     }
-
 
     // @include breakpoint(1280px) {
 
@@ -469,7 +695,8 @@ export default {
 
     // }
 
-    @include breakpoint(820px) {}
+    @include breakpoint(820px) {
+    }
 
     // @include breakpoint(430px) {
 
@@ -495,8 +722,6 @@ button {
         position: absolute;
         z-index: 1;
     }
-
-
 
     .storeimg {
         padding-top: 212px;
@@ -560,7 +785,7 @@ button {
     }
 
     .restaurant_star {
-        background-color: #7A625B;
+        background-color: #7a625b;
         display: flex;
         width: 83px;
         height: 30px;
@@ -574,10 +799,9 @@ button {
             left: 39vw;
         }
 
-
         .star {
             font-size: 20px;
-            color: #DBCEC6;
+            color: #dbcec6;
             margin: 5px 41px 5px 12px;
 
             @include breakpoint(1024px) {
@@ -618,7 +842,7 @@ button {
     width: 83vw;
     object-fit: cover;
     overflow: hidden;
-    background-color: #F6F1ED;
+    background-color: #f6f1ed;
 
     @include breakpoint(430px) {
         width: 100vw;
@@ -641,7 +865,7 @@ button {
             object-fit: contain;
             width: 100vw;
             background-color: #000;
-            opacity: .5;
+            opacity: 0.5;
             position: relative;
             margin-top: 21vw;
         }
@@ -675,7 +899,6 @@ button {
                 width: fit-content;
             }
 
-
             .crumb1 {
                 position: absolute;
 
@@ -684,8 +907,8 @@ button {
                     color: #333333;
 
                     &:hover {
-                    color: #999999;
-                }
+                        color: #999999;
+                    }
                 }
             }
 
@@ -696,8 +919,8 @@ button {
                 a {
                     color: #333333;
                     &:hover {
-                    color: #999999;
-                }
+                        color: #999999;
+                    }
                 }
 
                 img {
@@ -713,8 +936,8 @@ button {
                 a {
                     color: #333333;
                     &:hover {
-                    color: #999999;
-                }
+                        color: #999999;
+                    }
                 }
             }
         }
@@ -740,12 +963,11 @@ button {
             .collect {
                 width: 44px;
                 height: 44px;
-                background-color: #C8AC96;
+                background-color: #c8ac96;
                 border-radius: 50px;
                 margin-right: 8px;
 
                 @include breakpoint(1024px) {
-
                     margin-right: 8px;
                 }
 
@@ -780,7 +1002,7 @@ button {
             .share {
                 width: 44px;
                 height: 44px;
-                background-color: #C8AC96;
+                background-color: #c8ac96;
                 border-radius: 50px;
                 margin-right: 8px;
 
@@ -801,7 +1023,8 @@ button {
                     margin-left: -1vw;
                 }
 
-                a{}
+                a {
+                }
 
                 img {
                     width: 23px;
@@ -821,7 +1044,7 @@ button {
             .message {
                 width: 44px;
                 height: 44px;
-                background-color: #C8AC96;
+                background-color: #c8ac96;
                 border-radius: 50px;
 
                 @include breakpoint(820px) {
@@ -833,7 +1056,6 @@ button {
                     width: 28px;
                     height: 28px;
                     position: relative;
-
                 }
 
                 img {
@@ -874,7 +1096,7 @@ button {
 
         .restaurant_slogan {
             line-height: 150%;
-            color: #7A625B;
+            color: #7a625b;
             margin-top: 5%;
             margin-left: 6.5%;
 
@@ -902,7 +1124,6 @@ button {
                 margin-top: 2vw;
             }
             @include breakpoint(390px) {
-                
                 width: 89vw;
             }
         }
@@ -937,12 +1158,11 @@ button {
     }
 }
 
-
 .restaurant_section {
-    background-color: #F6F1ED;
+    background-color: #f6f1ed;
     width: 70vw;
     padding-bottom: 46px;
-    border-bottom: 2px solid #CB4847;
+    border-bottom: 2px solid #cb4847;
     margin: 0 auto;
 
     @include breakpoint(1280px) {
@@ -953,24 +1173,23 @@ button {
         width: 68vw;
         padding-bottom: 8vw;
     }
-    
 
     @include breakpoint(430px) {
-         width: 86vw;
+        width: 86vw;
     }
     @include breakpoint(390px) {
-         width: 86vw;
-         padding-bottom: 0vw;
+        width: 86vw;
+        padding-bottom: 0vw;
     }
 
     .restaurant_h3 {
         h3 {
-            color: #CB4847;
+            color: #cb4847;
             font-weight: bold;
             padding-bottom: 10px;
             margin-bottom: 16px;
             width: 70vw;
-            border-bottom: 2px solid #CB4847;
+            border-bottom: 2px solid #cb4847;
 
             @include breakpoint(820px) {
                 font-size: 26px;
@@ -1047,16 +1266,13 @@ button {
                     width: 86vw;
                 }
 
-
                 tr {
                     @include breakpoint(1280px) {
                         margin-left: 10px;
-
                     }
 
                     @include breakpoint(1100px) {
                         margin-left: 12px;
-
                     }
 
                     th {
@@ -1094,7 +1310,6 @@ button {
                             font-size: 17px;
                             width: 76px;
                         }
-                        
                     }
 
                     td {
@@ -1177,7 +1392,6 @@ button {
                             font-size: 17px;
                             width: 49vw;
                         }
-
                     }
                 }
 
@@ -1200,7 +1414,6 @@ button {
 
                         @include breakpoint(1280px) {
                             margin-left: 1vw;
-
                         }
 
                         @include breakpoint(1200px) {
@@ -1215,8 +1428,6 @@ button {
                         @include breakpoint(390px) {
                             width: 26px;
                         }
-
-
                     }
 
                     h4 {
@@ -1231,7 +1442,7 @@ button {
 
                 .line {
                     width: 1096 vw;
-                    border-bottom: 2px solid #CB4847;
+                    border-bottom: 2px solid #cb4847;
 
                     @include breakpoint(1024px) {
                         width: 68vw;
@@ -1251,7 +1462,6 @@ button {
                     }
                 }
             }
-
         }
 
         .map {
@@ -1298,7 +1508,6 @@ button {
                     margin-left: -7vw;
                     margin-top: -4vw;
                 }
-
             }
 
             @include breakpoint(430px) {
@@ -1314,15 +1523,11 @@ button {
                 }
             }
             @include breakpoint(390px) {
-                
-
                 #google_map {
                     width: 350px;
                     height: 250px;
                 }
             }
-
-
         }
 
         img {
@@ -1360,12 +1565,11 @@ button {
     //         }
     //     }
     // }
-
 }
 
 .restaurant_mainContent {
     width: 82vw;
-    background-color: #F6F1ED;
+    background-color: #f6f1ed;
     padding-top: 38px;
     display: flex;
     flex-wrap: wrap;
@@ -1374,7 +1578,6 @@ button {
     @include breakpoint(390px) {
         margin-left: 2vw;
     }
-
 
     .restaurant_content1 {
         display: flex;
@@ -1554,7 +1757,7 @@ button {
 }
 
 .restaurant {
-    background-color: #F6F1ED;
+    background-color: #f6f1ed;
     width: 82.75vw;
     padding-bottom: 40px;
 
@@ -1591,7 +1794,7 @@ button {
                 width: 535px;
                 line-height: 50px;
                 font-weight: bold;
-                border-bottom: 2px solid #CB4847;
+                border-bottom: 2px solid #cb4847;
 
                 @include breakpoint(820px) {
                     margin-left: 1vw;
@@ -1606,7 +1809,7 @@ button {
                     margin-top: 8px;
                     width: 535px;
                     height: 50px;
-                    color: #CB4847;
+                    color: #cb4847;
 
                     @include breakpoint(820px) {
                         font-size: 26px;
@@ -1631,13 +1834,13 @@ button {
                     }
 
                     .restaurant_rating {
-                        color: #7A625B;
+                        color: #7a625b;
                         font-size: 20px;
                         font-weight: bold;
                         margin-left: 8px;
                         @include breakpoint(390px) {
-                        font-size: 18px;
-                    }
+                            font-size: 18px;
+                        }
                     }
 
                     .restaurant_review_num {
@@ -1661,7 +1864,7 @@ button {
                 margin-top: 16px;
                 width: 44px;
                 height: 44px;
-                background-color: #C8AC96;
+                background-color: #c8ac96;
                 border-radius: 50%;
                 margin-left: 35vw;
 
@@ -1690,7 +1893,6 @@ button {
 
                 img {
                     margin: 10.76px 11.49px 11.96px 11px;
-
 
                     @include breakpoint(820px) {
                         width: 28px;
@@ -1750,7 +1952,7 @@ button {
                 width: 24vw;
                 height: 220px;
                 border-radius: 5px;
-                background-color: #F6F1ED;
+                background-color: #f6f1ed;
                 border-radius: 5px;
                 filter: drop-shadow(0 0 7px rgba(207, 81, 61, 0.4));
 
@@ -1802,14 +2004,13 @@ button {
                             @include breakpoint(820px) {
                                 // padding-left: 2.5vw;
                             }
-
                         }
 
                         .restaurant_username {
                             padding-left: 16px;
                             font-size: 20px;
                             font-weight: bold;
-                            color: #7A625B;
+                            color: #7a625b;
                             margin: 0 auto;
 
                             @include breakpoint(1024px) {
@@ -1818,7 +2019,6 @@ button {
                                 width: 140px;
                                 padding-top: 12px;
                             }
-
                         }
                     }
 
@@ -1852,7 +2052,7 @@ button {
                             height: 24px;
                             text-align: center;
                             margin: 0 auto;
-                            color: #CB4847;
+                            color: #cb4847;
                             margin-left: 4px;
                             padding-top: 5px;
 
@@ -1896,7 +2096,8 @@ button {
                                 height: 18px;
                             }
 
-                            @include breakpoint(820px) {}
+                            @include breakpoint(820px) {
+                            }
                         }
                     }
 
@@ -1950,8 +2151,8 @@ button {
 
 .readmord {
     width: 144px;
-    height: 52PX;
-    background-color: #CB4847;
+    height: 52px;
+    background-color: #cb4847;
     border-radius: 15px;
     margin: 16px auto;
     display: block;
@@ -1975,7 +2176,6 @@ button {
         margin-top: 16vw;
     }
 
-
     a {
         font-size: 20px;
         color: #fff;
@@ -1987,7 +2187,7 @@ button {
 }
 
 #pop {
-    background-color: #F6F1ED;
+    background-color: #f6f1ed;
     margin: 0 auto;
     border: none;
     border-radius: 12px;
@@ -1998,7 +2198,7 @@ button {
     left: 450px;
     opacity: 0;
     pointer-events: none;
-    transition: opacity .4s;
+    transition: opacity 0.4s;
     text-align: center;
 
     &.active {
@@ -2025,7 +2225,6 @@ button {
     }
 
     .concent_one {
-
         .starbars {
             display: flex;
             margin-top: 26px;
@@ -2034,7 +2233,7 @@ button {
                 margin-left: 28px;
                 margin-right: 16px;
                 font-weight: 800;
-                color: #7A625B;
+                color: #7a625b;
             }
 
             #stars {
@@ -2045,7 +2244,7 @@ button {
 
                 span {
                     font-size: 16px;
-                    color: #7A625B;
+                    color: #7a625b;
                     margin-left: 10px;
                 }
             }
@@ -2076,20 +2275,19 @@ button {
                 margin-left: 6vw;
                 width: 76vw;
             }
-            
         }
 
         .masg {
             width: 252px;
             margin-top: 8px;
-            color: #7A625B;
+            color: #7a625b;
             margin-left: 28px;
         }
 
         .experience {
             width: 100px;
             font-weight: 800;
-            color: #7A625B;
+            color: #7a625b;
             margin-left: 20px;
             margin-top: 28px;
         }
@@ -2102,22 +2300,22 @@ button {
                 height: 108px;
                 font-size: 14px;
                 border-radius: 9px;
-                color: #C3A988;
+                color: #c3a988;
                 padding: 9px 0 0 10px;
 
                 @include breakpoint(390px) {
-                        width: 329px;
-                    }
+                    width: 329px;
+                }
 
                 &::placeholder {
-                    color: #C3A988;
-                    font-size: 12px; 
+                    color: #c3a988;
+                    font-size: 12px;
                 }
             }
         }
 
         .text_words {
-            color: #7A625B;
+            color: #7a625b;
             text-align: right;
             margin-right: 28px;
         }
@@ -2129,13 +2327,13 @@ button {
         &_photo {
             width: fit-content;
             font-weight: 800;
-            color: #7A625B;
+            color: #7a625b;
             margin-left: 30px;
         }
 
         &_six {
             margin-top: 5px;
-            color: #7A625B;
+            color: #7a625b;
             margin-left: 12px;
         }
     }
@@ -2156,8 +2354,8 @@ button {
         .box4,
         .box5,
         .box6 {
-            border: 1px solid #DBCEC6;
-            background-color: #DBCEC6;
+            border: 1px solid #dbcec6;
+            background-color: #dbcec6;
             width: 80px;
             height: 80px;
             text-align: center;
@@ -2212,7 +2410,7 @@ button {
             height: 40px;
             font-size: 32px;
             font-weight: bold;
-            background-color: #C8AC96;
+            background-color: #c8ac96;
             color: #fff;
             border-radius: 9px;
         }
@@ -2221,7 +2419,7 @@ button {
             width: 100px;
             height: 40px;
             font-weight: bold;
-            background-color: #CB4847;
+            background-color: #cb4847;
             color: #fff;
             border-radius: 9px;
             margin-left: 24px;
@@ -2230,7 +2428,6 @@ button {
 }
 
 .test {
-
     // display: flex;
     .test1 {
         display: flex;
@@ -2251,14 +2448,11 @@ button {
         border-radius: 9px;
     }
 
-    input[type=file] {
+    input[type="file"] {
         padding: 10px;
-        background-color: #F6F1ED;
+        background-color: #f6f1ed;
         border-radius: 9px;
         padding-left: 34px;
     }
 }
-
-
-
 </style>

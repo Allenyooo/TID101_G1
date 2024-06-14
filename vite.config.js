@@ -6,7 +6,7 @@ import path from "path"; // 載入 path
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: "./", // 設定相對路徑
+    base: "/tid101/g1/", // 設定相對路徑
     plugins: [vue()],
     server: {
         host: "0.0.0.0",

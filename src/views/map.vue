@@ -154,6 +154,10 @@ export default {
                 />
         </div>
     </div>
+
+    <div class="map_animaObj">
+        
+    </div>
 </template>
 
 <style lang="scss" scoped>
