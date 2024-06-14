@@ -311,11 +311,11 @@
                             <!---彈跳視窗-->
                             <div class="star">
                                 <div id="stars" class="left">
-                                    <img src="./pentagram.png" alt="">
-                                    <img src="./pentagram.png" alt="">
-                                    <img src="./pentagram.png" alt="">
-                                    <img src="./pentagram.png" alt="">
-                                    <img src="./pentagram.png" alt="">
+                                    <img src="../assets/Image/restaurant/north/pentagram.png" alt="">
+                                    <img src="../assets/Image/restaurant/north/pentagram.png" alt="">
+                                    <img src="../assets/Image/restaurant/north/pentagram.png" alt="">
+                                    <img src="../assets/Image/restaurant/north/pentagram.png" alt="">
+                                    <img src="../assets/Image/restaurant/north/pentagram.png" alt="">
                                 </div>
                                 <div id="comment" class="left">
                                 </div>
@@ -800,8 +800,6 @@ button {
                     position: relative;
                     margin-left: -1vw;
                 }
-
-                a{}
 
                 img {
                     width: 23px;

@@ -31,7 +31,12 @@
 
                 <li>
                     <label for="container_name">會員姓名</label>
-                    <input type="text" id="container_name" value="陳小明" disabled />
+                    <input
+                        type="text"
+                        id="container_name"
+                        value="陳小明"
+                        disabled
+                    />
                 </li>
 
                 <li>
@@ -43,7 +48,12 @@
                         />
                         <button></button>
                     </div>
-                    <input type="text" id="container_nickname" value="陳小明" disabled />
+                    <input
+                        type="text"
+                        id="container_nickname"
+                        value="陳小明"
+                        disabled
+                    />
                 </li>
 
                 <li>
@@ -76,17 +86,84 @@
                             src="/src/assets/Image/member/PencilSquare.svg"
                             alt="edit"
                         />
-                        <button @click="showModal = true; console.log('showModal:', showModal)"></button>
+                        <button
+                            @click="
+                                showModal = true;
+                                console.log('showModal:', showModal);
+                            "
+                        ></button>
                     </div>
                     <div class="password-input">
-                        <input type="password" id="container_password" value="**********" disabled />
-                        <img src="../assets/Image/member/eye-closed.svg" alt="eye-closed" class="eye">
+                        <input
+                            type="password"
+                            id="container_password"
+                            value="**********"
+                            disabled
+                        />
+                        <img
+                            src="../assets/Image/member/eye-closed.svg"
+                            alt="eye-closed"
+                            class="eye"
+                        />
                         <button class="eye-toggle"></button>
                     </div>
                 </li>
 
-                <div class="modal" v-if="showModal" @click.self="showModal = false">
-                    <PWChange />
+                <div
+                    class="modal"
+                    v-if="showModal"
+                    @click.self="showModal = false"
+                >
+                    <div class="pop_container">
+                        <h4>修改密碼</h4>
+
+                        <label for="old_PW">輸入舊密碼</label>
+                        <div class="password-input">
+                            <input
+                                type="password"
+                                id="old_PW"
+                                placeholder="* * * * * * * * * *"
+                            />
+                            <img
+                                src="../assets/Image/member/eye-closed.svg"
+                                alt="eye-closed"
+                                class="eye"
+                            />
+                            <button class="eye-toggle"></button>
+                        </div>
+
+                        <label for="new_PW">輸入新密碼</label>
+                        <div class="password-input">
+                            <input
+                                type="password"
+                                id="new_PW"
+                                placeholder="* * * * * * * * * *"
+                            />
+                            <img
+                                src="../assets/Image/member/eye-closed.svg"
+                                alt="eye-closed"
+                                class="eye"
+                            />
+                            <button class="eye-toggle"></button>
+                        </div>
+
+                        <label for="repeat_PW">重新輸入新密碼</label>
+                        <div class="password-input">
+                            <input
+                                type="password"
+                                id="repeat_PW"
+                                placeholder="* * * * * * * * * *"
+                            />
+                            <img
+                                src="../assets/Image/member/eye-closed.svg"
+                                alt="eye-closed"
+                                class="eye"
+                            />
+                            <button class="eye-toggle"></button>
+                        </div>
+
+                        <button class="confirm">確認</button>
+                    </div>
                 </div>
 
                 <li>
@@ -109,7 +186,7 @@
                 <router-link to="/restaurant">
                     <ShopCard class="card" />
                 </router-link>
-                
+
                 <router-link to="/restaurant">
                     <ShopCard class="card" />
                 </router-link>
@@ -126,8 +203,6 @@
                     <ShopCard class="card" />
                 </router-link>
             </div>
-            
-            
         </section>
 
         <!--voucher-->
@@ -136,10 +211,10 @@
             <div class="voucher_code">
                 <input
                     type="text"
-                    placeholder=" &#127991 輸入優惠碼"
+                    placeholder=" &#127991; 輸入優惠碼"
                     class="voucher_number"
                 />
-                <input type="submit" value="確認" class="voucher_sure">
+                <input type="submit" value="確認" class="voucher_sure" />
             </div>
 
             <table class="voucher_data">
@@ -206,14 +281,13 @@
 
 <script>
 //掛載shopCard
-import PWChange from "../components/memberPWChange.vue"
-import ShopCard from "../components/Shopcard.vue"
+import ShopCard from "../components/Shopcard.vue";
 
 export default {
     data() {
         return { a: false, showModal: false };
     },
-    components: { PWChange, ShopCard}
+    components: { ShopCard },
 };
 </script>
 
@@ -379,17 +453,17 @@ export default {
                     border-bottom: 1px solid $Black;
                     background-color: transparent;
                 }
-                .password-input{
+                .password-input {
                     position: relative;
                     width: 330px;
-                    .eye{
+                    .eye {
                         width: 20px;
                         height: 20px;
                         position: absolute;
                         bottom: 0;
                         right: 4px;
                     }
-                    .eye-toggle{
+                    .eye-toggle {
                         width: 20px;
                         height: 20px;
                         position: absolute;
@@ -410,6 +484,71 @@ export default {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                .pop_container {
+                    width: 50vw;
+                    background-color: $White;
+                    border: 1px solid $Gold;
+                    border-radius: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    h4 {
+                        width: 70%;
+                        font-size: 20px;
+                        font-weight: bold;
+                        margin: 3vh 0;
+                    }
+                    label {
+                        width: 70%;
+                        margin-bottom: 1vh;
+                        font-weight: normal;
+                        font-size: 16px;
+                    }
+
+                    .password-input {
+                        width: 70%;
+                        margin-bottom: 1vh;
+                        position: relative;
+                        input {
+                            width: 100%;
+                            height: 30px;
+                            border: none;
+                            border-bottom: 1px solid black;
+                            margin-bottom: 2vh;
+                        }
+                        .eye {
+                            width: 20px;
+                            position: absolute;
+                            top: 30%;
+                            right: 0;
+                            transform: translateY(-70%);
+                            margin-right: 10px;
+                        }
+                        .eye-toggle {
+                            width: 20px;
+                            height: 20px;
+                            border: none;
+                            background-color: transparent;
+                            position: absolute;
+                            top: 30%;
+                            right: 0;
+                            transform: translateY(-70%);
+                            margin-right: 10px;
+                            cursor: pointer;
+                        }
+                    }
+                    .confirm {
+                        font-size: 16px;
+                        width: 20%;
+                        height: 40px;
+                        color: $Gold;
+                        border: 4px solid $Gold;
+                        border-radius: 15px;
+                        background-color: $White;
+                        margin: 2vh;
+                        cursor: pointer;
+                    }
+                }
             }
 
             .close {
@@ -436,17 +575,17 @@ export default {
             margin: 5vh auto 2vh;
         }
 
-        .card_container{
+        .card_container {
             width: 85%;
             display: flex;
             flex-wrap: wrap;
             margin: 0 auto 3vh;
             cursor: pointer;
 
-            a{
+            a {
                 text-decoration: none;
                 margin: 2vh auto;
-                li{
+                li {
                     margin: 0;
                 }
             }
@@ -491,18 +630,18 @@ export default {
             }
         }
 
-        .voucher_data{
+        .voucher_data {
             width: 90%;
             margin: 0 auto 4vh;
-            tr{
+            tr {
                 height: 40px;
-                th{
-                    h5{
+                th {
+                    h5 {
                         font-weight: 800;
                         color: $Black;
                     }
                 }
-                td{
+                td {
                     color: $Black;
                 }
             }
@@ -525,20 +664,20 @@ export default {
             margin: 5vh auto 2vh;
         }
 
-        .ticket_data{
+        .ticket_data {
             width: 90%;
             margin: 0 auto 4vh;
-            tr{
+            tr {
                 height: 40px;
-                th{
-                    h5{
+                th {
+                    h5 {
                         font-weight: 800;
                         color: $Black;
                     }
                 }
-                td{
+                td {
                     color: $Black;
-                    a{
+                    a {
                         color: $Black;
                     }
                 }

@@ -11,9 +11,9 @@
     <h4>提醒您<br />下次請以新密碼登入</h4>
 
     <div class="PWSuccess_in">
-        <button>
+        <router-link to="/login">
             <h3>返回登入</h3>
-        </button>
+        </router-link>
     </div>
 
     <img
@@ -56,12 +56,15 @@ h4 {
     &:active {
         background-image: $RevGoldGrad;
     }
-    button {
-        width: 165px;
-        height: 52px;
+    a {
         background-color: transparent;
         border: none;
+        text-decoration: none;
+        text-align: center;
+        line-height: 52px;
         h3 {
+            width: 165px;
+            height: 52px;
             color: $DarkBrown;
             font-size: 24px;
             font-weight: 600;

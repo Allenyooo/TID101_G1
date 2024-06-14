@@ -27,7 +27,13 @@
 
     <div class="login_account">
         <label for="login_acc">會員帳號</label>
-        <input type="text" id="login_acc" placeholder="example@account.com" />
+        <input
+            type="text"
+            id="login_acc"
+            v-model.trim="account"
+            placeholder="example@account.com"
+        />
+        <p v-if="errors.account" class="error">{{ errors.account }}</p>
     </div>
 
     <div class="login_password">
@@ -35,8 +41,10 @@
         <input
             type="password"
             id="login_pw"
-            placeholder="* * * * * * * * * *"
+            v-model.trim="password"
+            placeholder="* * * * * * * * *"
         />
+        <p v-if="errors.password" class="error">{{ errors.password }}</p>
     </div>
 
     <div class="login_forgotPW">
@@ -51,7 +59,7 @@
     </div>
 
     <div class="login_in">
-        <button>
+        <button :disabled="!isValid" @click="login">
             <h3>登入</h3>
         </button>
     </div>
@@ -59,7 +67,7 @@
     <div class="login_register">
         <h5>
             還沒辦帳號?
-            <RouterLink to="/register">立即註冊!</RouterLink> 
+            <router-link to="/register">立即註冊!</router-link>
         </h5>
     </div>
 
@@ -73,7 +81,42 @@
 
 <script>
 export default {
-
+    data() {
+        return {
+            account: "",
+            password: "",
+            errors: {
+                account: "",
+                password: "",
+            },
+        };
+    },
+    computed: {
+        isValid() {
+            return this.account !== "" && this.password !== "";
+        },
+    },
+    methods: {
+        login() {
+            console.log("Login button clicked!");
+            const trimmedAccount = this.account.trim();
+            const trimmedPassword = this.password.trim();
+            if (trimmedAccount === "" || trimmedPassword === "") {
+                if (trimmedAccount === "") {
+                    this.errors.account = "請輸入帳號";
+                }
+                if (trimmedPassword === "") {
+                    this.errors.password = "請輸入密碼";
+                }
+                console.log("Error messages set:", this.errors);
+            } else {
+                // Assume the account and password are valid, log in the user
+                this.$router.push("/member");
+                this.errors.account = "";
+                this.errors.password = "";
+            }
+        },
+    },
 };
 </script>
 
@@ -139,6 +182,10 @@ h2 {
         border-bottom: 1px solid $Black;
     }
 }
+.error {
+    color: red;
+    font-size: 12px;
+}
 .login_password {
     display: flex;
     flex-direction: column;
@@ -191,11 +238,16 @@ h2 {
         background-image: $RevGoldGrad;
     }
     button {
-        width: 165px;
-        height: 52px;
         background-color: transparent;
         border: none;
+        text-decoration: none;
+        text-align: center;
+        line-height: 52px;
+        user-select: none;
+        cursor: pointer;
         h3 {
+            width: 165px;
+            height: 52px;
             color: $DarkBrown;
             font-weight: 600;
             font-size: 24px;
