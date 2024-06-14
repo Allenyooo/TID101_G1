@@ -418,7 +418,7 @@ export default {
 
             .to(".enter_emperor", {
                 onComplete: () => {
-                    window.location.href = "http://localhost:5173/home";
+                    window.location.href = import.meta.env.BASE_URL + "home";
                     // this.$router.push('/home');
                 },
             });
