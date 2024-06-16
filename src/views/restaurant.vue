@@ -2,22 +2,14 @@
     <div class="restaurant_wrapper">
         <!--店家測軸-->
         <div class="restaurant_sidebar">
-            <img
-                class="storeimg"
-                src="../assets/Image/restaurant/north/logo.svg"
-                alt="logo"
-            />
+            <img class="storeimg" src="../assets/Image/restaurant/north/logo.svg" alt="logo" />
             <div class="column">
                 <h2>高麗味</h2>
                 <h6>고려미</h6>
             </div>
             <span class="restaurant_star">
                 <div class="star">4.8</div>
-                <img
-                    class="restaurant_starimg"
-                    src="../assets/Image/restaurant/star.png"
-                    alt="star"
-                />
+                <img class="restaurant_starimg" src="../assets/Image/restaurant/star.png" alt="star" />
             </span>
             <ul class="list">
                 <li>- 前言</li>
@@ -27,33 +19,19 @@
             </ul>
         </div>
         <div class="restaurant_content">
-            <img
-                class="Banner"
-                src="../assets/Image/restaurant/north/storebanner.jpg"
-                alt="banner"
-            />
-            <img
-                class="Banner430"
-                src="../assets/Image/restaurant/north/storebannerRWD.jpg"
-                alt=""
-            />
+            <img class="Banner" src="../assets/Image/restaurant/north/storebanner.jpg" alt="banner" />
+            <img class="Banner430" src="../assets/Image/restaurant/north/storebannerRWD.jpg" alt="" />
             <!--banner-->
             <div class="restaurant_breadcrumb">
                 <!---麵包屑-->
                 <ol class="breadcrumb">
                     <li class="crumb1">
                         <router-link to="/home">首頁</router-link>
-                        <img
-                            src="/src/assets/Image/restaurant/north/left.png"
-                            alt=""
-                        />
+                        <img src="/src/assets/Image/restaurant/north/left.png" alt="" />
                     </li>
                     <li class="crumb2">
                         <router-link to="/map">商店列表</router-link>
-                        <img
-                            src="/src/assets/Image/restaurant/north/left.png"
-                            alt=""
-                        />
+                        <img src="/src/assets/Image/restaurant/north/left.png" alt="" />
                     </li>
                     <li class="crumb3">
                         <a href="#">高麗味</a>
@@ -62,10 +40,7 @@
                 <ol class="restaurant_btns">
                     <button>
                         <li class="collect">
-                            <img
-                                src="../assets/Image/restaurant/north/collect.svg"
-                                alt="collect"
-                            />
+                            <img src="../assets/Image/restaurant/north/collect.svg" alt="collect" />
                         </li>
                     </button>
 
@@ -132,17 +107,11 @@
                         </table>
                         <div class="restaurant_media">
                             <div class="restaurant_fb">
-                                <img
-                                    src="../assets/Image/restaurant/FB.png"
-                                    alt="fb"
-                                />
+                                <img src="../assets/Image/restaurant/FB.png" alt="fb" />
                                 <h4>高麗味 • 韓之味小吃店</h4>
                             </div>
                             <div class="restaurant_ig">
-                                <img
-                                    src="../assets/Image/restaurant/ig.png"
-                                    alt="ig"
-                                />
+                                <img src="../assets/Image/restaurant/ig.png" alt="ig" />
                                 <h4>@KoreawayBBQ</h4>
                             </div>
                             <div class="line"></div>
@@ -150,13 +119,8 @@
                     </div>
                     <!---google map-->
                     <div class="map">
-                        <iframe
-                            src="https://map.google.com?output=embed&q=高麗味"
-                            width="500px"
-                            height="300px"
-                            frameborder="0"
-                            id="google_map"
-                        >
+                        <iframe src="https://map.google.com?output=embed&q=高麗味" width="500px" height="300px"
+                            frameborder="0" id="google_map">
                         </iframe>
                     </div>
                 </div>
@@ -167,16 +131,10 @@
                     <h4>
                         高麗味的生醃螃蟹，在醃製過程中以醬汁和<br />調味料醃製，保留了螃蟹原始鮮味，同時帶<br />來了濃郁的醬汁風味。我們以大蒜、辣椒醬<br />和其他調味料入味，口感香辣鮮美。作為小<br />菜（반찬）或配菜，搭配米飯和其他主食一<br />同享用，為餐桌增添了豐富的風味和營養。
                     </h4>
-                    <img
-                        src="../assets/Image/restaurant/north/crab.png"
-                        alt="crab"
-                    />
+                    <img src="../assets/Image/restaurant/north/crab.png" alt="crab" />
                 </div>
                 <div class="restaurant_content2">
-                    <img
-                        src="../assets/Image/restaurant/north/chicken.png"
-                        alt="chicken"
-                    />
+                    <img src="../assets/Image/restaurant/north/chicken.png" alt="chicken" />
                     <h4>
                         韓國炸雞，被譽為「黃金雞」，是韓國料理<br />中的經典美食。高麗味的炸雞，外皮酥脆、<br />內裡多汁，口感極佳。經過特殊調味和炸製<br />技術，使得炸雞的風味豐富多樣。我們特別<br />選用雞腿肉，肉質鮮嫩多汁，常搭配韓式泡<br />菜和啤酒，是韓國人非常喜愛的下酒菜。
                     </h4>
@@ -185,10 +143,7 @@
                     <h4>
                         高麗味的牛肉湯，加入蔬菜和牛肉片，燉煮<br />成濃郁湯品。湯頭澄清鮮美，牛肉軟嫩入<br />味。搭配白飯和泡菜，營養豐富，口感溫<br />暖。不論是冬天進補，或是想要來一碗熱<br />湯，牛肉湯都是非常受歡迎的料理選項。
                     </h4>
-                    <img
-                        src="../assets/Image/restaurant/north/soup.png"
-                        alt="soup"
-                    />
+                    <img src="../assets/Image/restaurant/north/soup.png" alt="soup" />
                 </div>
             </main>
 
@@ -199,11 +154,7 @@
                         <div class="restaurant_review_title">
                             <h3>評論區</h3>
                             <span>
-                                <img
-                                    class="restaurantstarimg"
-                                    src="../assets/Image/restaurant/star.png"
-                                    alt="star"
-                                />
+                                <img class="restaurantstarimg" src="../assets/Image/restaurant/star.png" alt="star" />
                                 <h4 class="restaurant_rating">4.8</h4>
                                 <h4 class="restaurant_review_num">
                                     (100+評論)
@@ -213,11 +164,8 @@
 
                         <button @click="pop()">
                             <div class="icon_bg" @click="popup_open = true">
-                                <img
-                                    class="restaurantstarimg"
-                                    src="../assets/Image/restaurant/north/message.svg"
-                                    alt="message"
-                                />
+                                <img class="restaurantstarimg" src="../assets/Image/restaurant/north/message.svg"
+                                    alt="message" />
                             </div>
                         </button>
                         <button @click="popup_open = true"></button>
@@ -227,69 +175,27 @@
                                     <h4 class="starbar_store">整體評價</h4>
                                     <div id="stars" class="left">
                                         <!--星級test-->
-                                        <img
-                                            src="/src/assets/Image/restaurant/north/pentagram.png"
-                                            alt=""
-                                            v-if="rating >= 1"
-                                            @click="change_rating(0)"
-                                        />
-                                        <img
-                                            src="/src/assets/Image/restaurant/north/empty_pentagram.png"
-                                            alt=""
-                                            v-else
-                                            @click="change_rating(1)"
-                                        />
-                                        <img
-                                            src="/src/assets/Image/restaurant/north/pentagram.png"
-                                            alt=""
-                                            v-if="rating >= 2"
-                                            @click="change_rating(1)"
-                                        />
-                                        <img
-                                            src="/src/assets/Image/restaurant/north/empty_pentagram.png"
-                                            alt=""
-                                            v-else
-                                            @click="change_rating(2)"
-                                        />
-                                        <img
-                                            src="/src/assets/Image/restaurant/north/pentagram.png"
-                                            alt=""
-                                            v-if="rating >= 3"
-                                            @click="change_rating(2)"
-                                        />
-                                        <img
-                                            src="/src/assets/Image/restaurant/north/empty_pentagram.png"
-                                            alt=""
-                                            v-else
-                                            @click="change_rating(3)"
-                                        />
-                                        <img
-                                            src="/src/assets/Image/restaurant/north/pentagram.png"
-                                            alt=""
-                                            v-if="rating >= 4"
-                                            @click="change_rating(3)"
-                                        />
-                                        <img
-                                            src="/src/assets/Image/restaurant/north/empty_pentagram.png"
-                                            alt=""
-                                            v-else
-                                            @click="change_rating(4)"
-                                        />
-                                        <img
-                                            src="/src/assets/Image/restaurant/north/pentagram.png"
-                                            alt=""
-                                            v-if="rating >= 5"
-                                            @click="change_rating(4)"
-                                        />
-                                        <img
-                                            src="/src/assets/Image/restaurant/north/empty_pentagram.png"
-                                            alt=""
-                                            v-else
-                                            @click="change_rating(5)"
-                                        />
-                                        <span
-                                            v-text="rating_text[rating]"
-                                        ></span>
+                                        <img src="/src/assets/Image/restaurant/north/pentagram.png" alt=""
+                                            v-if="rating >= 1" @click="change_rating(0)" />
+                                        <img src="/src/assets/Image/restaurant/north/empty_pentagram.png" alt="" v-else
+                                            @click="change_rating(1)" />
+                                        <img src="/src/assets/Image/restaurant/north/pentagram.png" alt=""
+                                            v-if="rating >= 2" @click="change_rating(1)" />
+                                        <img src="/src/assets/Image/restaurant/north/empty_pentagram.png" alt="" v-else
+                                            @click="change_rating(2)" />
+                                        <img src="/src/assets/Image/restaurant/north/pentagram.png" alt=""
+                                            v-if="rating >= 3" @click="change_rating(2)" />
+                                        <img src="/src/assets/Image/restaurant/north/empty_pentagram.png" alt="" v-else
+                                            @click="change_rating(3)" />
+                                        <img src="/src/assets/Image/restaurant/north/pentagram.png" alt=""
+                                            v-if="rating >= 4" @click="change_rating(3)" />
+                                        <img src="/src/assets/Image/restaurant/north/empty_pentagram.png" alt="" v-else
+                                            @click="change_rating(4)" />
+                                        <img src="/src/assets/Image/restaurant/north/pentagram.png" alt=""
+                                            v-if="rating >= 5" @click="change_rating(4)" />
+                                        <img src="/src/assets/Image/restaurant/north/empty_pentagram.png" alt="" v-else
+                                            @click="change_rating(5)" />
+                                        <span v-text="rating_text[rating]"></span>
                                     </div>
                                     <div id="comment" class="left"></div>
                                 </div>
@@ -300,10 +206,7 @@
                                 <div class="line"></div>
                                 <h4 class="experience">體驗心得</h4>
                                 <h5 class="text_1">
-                                    <textarea
-                                        class="text_concent"
-                                        placeholder="大家都想聽聽你的感想，給還沒去過的人一個參考吧！"
-                                    ></textarea>
+                                    <textarea class="text_concent" placeholder="大家都想聽聽你的感想，給還沒去過的人一個參考吧！"></textarea>
                                 </h5>
                                 <p class="text_words">字元數限制 0/100 字</p>
                             </div>
@@ -316,45 +219,27 @@
                             <div class="concent_two">
                                 <div class="box1">
                                     <div class="add">+</div>
-                                    <input
-                                        type="file"
-                                        @change="fileChange($event, 1)"
-                                    />
+                                    <input type="file" @change="fileChange($event, 1)" />
                                 </div>
                                 <div class="box2">
                                     <div class="add">+</div>
-                                    <input
-                                        type="file"
-                                        @change="fileChange($event, 2)"
-                                    />
+                                    <input type="file" @change="fileChange($event, 2)" />
                                 </div>
                                 <div class="box3">
                                     <div class="add">+</div>
-                                    <input
-                                        type="file"
-                                        @change="fileChange($event, 3)"
-                                    />
+                                    <input type="file" @change="fileChange($event, 3)" />
                                 </div>
                                 <div class="box4">
                                     <div class="add">+</div>
-                                    <input
-                                        type="file"
-                                        @change="fileChange($event, 4)"
-                                    />
+                                    <input type="file" @change="fileChange($event, 4)" />
                                 </div>
                                 <div class="box5">
                                     <div class="add">+</div>
-                                    <input
-                                        type="file"
-                                        @change="fileChange($event, 5)"
-                                    />
+                                    <input type="file" @change="fileChange($event, 5)" />
                                 </div>
                                 <div class="box6">
                                     <div class="add">+</div>
-                                    <input
-                                        type="file"
-                                        @change="fileChange($event, 6)"
-                                    />
+                                    <input type="file" @change="fileChange($event, 6)" />
                                 </div>
                             </div>
                             <div class="buttons">
@@ -373,46 +258,23 @@
                         <li>
                             <div>
                                 <span>
-                                    <img
-                                        class="user"
-                                        src="../assets/Image/restaurant/north/user.png"
-                                        alt="user"
-                                    />
+                                    <img class="user" src="../assets/Image/restaurant/north/user.png" alt="user" />
                                     <h4 class="restaurant_username">
                                         來自火星的阿霈
                                     </h4>
                                 </span>
                                 <span>
-                                    <img
-                                        class="good"
-                                        src="../assets/Image/restaurant/north/good.png"
-                                        alt="good"
-                                    />
+                                    <img class="good" src="../assets/Image/restaurant/north/good.png" alt="good" />
                                     <h5 class="number">250</h5>
                                 </span>
                             </div>
                             <div class="star">
                                 <span class="starbar">
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starfull.png"
-                                        alt="Starfull"
-                                    />
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starfull.png"
-                                        alt="Starfull"
-                                    />
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starfull.png"
-                                        alt="Starfull"
-                                    />
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starfull.png"
-                                        alt="Starfull"
-                                    />
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starnull.png"
-                                        alt="Starfull"
-                                    />
+                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
+                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
+                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
+                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
+                                    <img src="../assets/Image/restaurant/north/Starnull.png" alt="Starfull" />
                                 </span>
                                 <span class="date">
                                     <h5>2024/05/12 13:14</h5>
@@ -427,46 +289,23 @@
                         <li>
                             <div>
                                 <span>
-                                    <img
-                                        class="user"
-                                        src="../assets/Image/restaurant/north/user.png"
-                                        alt="user"
-                                    />
+                                    <img class="user" src="../assets/Image/restaurant/north/user.png" alt="user" />
                                     <h4 class="restaurant_username">
                                         來自火星的阿霈
                                     </h4>
                                 </span>
                                 <span>
-                                    <img
-                                        class="good"
-                                        src="../assets/Image/restaurant/north/good.png"
-                                        alt="good"
-                                    />
+                                    <img class="good" src="../assets/Image/restaurant/north/good.png" alt="good" />
                                     <h5 class="number">250</h5>
                                 </span>
                             </div>
                             <div class="star">
                                 <span class="starbar">
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starfull.png"
-                                        alt="Starfull"
-                                    />
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starfull.png"
-                                        alt="Starfull"
-                                    />
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starfull.png"
-                                        alt="Starfull"
-                                    />
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starfull.png"
-                                        alt="Starfull"
-                                    />
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starnull.png"
-                                        alt="Starfull"
-                                    />
+                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
+                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
+                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
+                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
+                                    <img src="../assets/Image/restaurant/north/Starnull.png" alt="Starfull" />
                                 </span>
                                 <span class="date">
                                     <h5>2024/05/12 13:14</h5>
@@ -481,21 +320,13 @@
                         <li>
                             <div>
                                 <span>
-                                    <img
-                                        class="user"
-                                        src="../assets/Image/restaurant/north/user.png"
-                                        alt="user"
-                                    />
+                                    <img class="user" src="../assets/Image/restaurant/north/user.png" alt="user" />
                                     <h4 class="restaurant_username">
                                         來自火星的阿霈
                                     </h4>
                                 </span>
                                 <span>
-                                    <img
-                                        class="good"
-                                        src="../assets/Image/restaurant/north/good.png"
-                                        alt="good"
-                                    />
+                                    <img class="good" src="../assets/Image/restaurant/north/good.png" alt="good" />
                                     <h5 class="number">250</h5>
                                 </span>
                             </div>
@@ -513,26 +344,11 @@
                                 </div> -->
 
                                 <span class="starbar">
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starfull.png"
-                                        alt="Starfull"
-                                    />
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starfull.png"
-                                        alt="Starfull"
-                                    />
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starfull.png"
-                                        alt="Starfull"
-                                    />
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starfull.png"
-                                        alt="Starfull"
-                                    />
-                                    <img
-                                        src="../assets/Image/restaurant/north/Starnull.png"
-                                        alt="Starfull"
-                                    />
+                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
+                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
+                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
+                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
+                                    <img src="../assets/Image/restaurant/north/Starnull.png" alt="Starfull" />
                                 </span>
                                 <span class="date">
                                     <h5>2024/05/12 13:14</h5>
@@ -653,253 +469,254 @@ export default {
 }
 
 #share-btn {
+
     //測試按鈕
-#share-btn {
-    //測試按鈕
-    width: 90px;
-    height: 30px;
-    margin-left: 20px;
-    border-radius: 50px;
-    color: #fff;
-    background-color: #7a625b;
-}
-
-.restaurant_wrapper {
-    overflow: hidden;
-    width: 100vw;
-    background-color: #f6f1ed;
-    display: flex;
-
-    @include breakpoint(430px) {
-        display: block;
-        position: relative;
-        width: 100vw;
-    }
-
-    // @include breakpoint(1280px) {
-
-    // }
-
-    // @include breakpoint(1024px) {
-
-    // }
-
-    @include breakpoint(820px) {
-    }
-
-    // @include breakpoint(430px) {
-
-    // }
-
-    // @include breakpoint(375px) {
-
-    // }
-}
-
-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    margin-bottom: 28px;
-    padding-left: 1px;
-}
-
-.restaurant_sidebar {
-    background-color: #fff;
-    width: 17vw;
-
-    @include breakpoint(430px) {
-        background-color: #f6f1ed;
-        position: absolute;
-        z-index: 1;
-    }
-
-    .storeimg {
-        padding-top: 212px;
-        width: 80px;
-        height: 80px;
-        margin: 0 auto;
-        display: block;
-
-        @include breakpoint(430px) {
-            display: none;
-        }
-    }
-
-    .column {
-        display: flex;
-        width: fit-content;
-        margin: 0 auto;
-
-        @include breakpoint(430px) {
-            position: absolute;
-            top: 31vw;
-            left: 35vw;
-            width: 43vw;
-            display: flex;
-            flex-direction: column;
-        }
-
-        h2 {
-            -webkit-writing-mode: vertical-lr;
-            writing-mode: vertical-lr;
-            margin-top: 16px;
-
-            @include breakpoint(1280px) {
-                margin-left: 2vw;
-            }
-
-            @include breakpoint(820px) {
-                font-size: 34px;
-            }
-
-            @include breakpoint(430px) {
-                -webkit-writing-mode: unset;
-                writing-mode: unset;
-                font-weight: 800;
-            }
-        }
-
-        h6 {
-            -webkit-writing-mode: vertical-lr;
-            writing-mode: vertical-lr;
-            margin-top: 16px;
-            margin-left: 8px;
-
-            @include breakpoint(430px) {
-                -webkit-writing-mode: unset;
-                writing-mode: unset;
-                font-weight: 800;
-                margin-left: 9vw;
-            }
-        }
-    }
-
-    .restaurant_star {
-        background-color: #7a625b;
-        display: flex;
-        width: 83px;
+    #share-btn {
+        //測試按鈕
+        width: 90px;
         height: 30px;
+        margin-left: 20px;
         border-radius: 50px;
-        margin: 0 auto;
-        margin-top: 26px;
-
-        @include breakpoint(430px) {
-            position: absolute;
-            top: 48vw;
-            left: 39vw;
-        }
-
-        .star {
-            font-size: 20px;
-            color: #dbcec6;
-            margin: 5px 41px 5px 12px;
-
-            @include breakpoint(1024px) {
-                padding-left: 8px;
-            }
-        }
-
-        .restaurant_starimg {
-            width: 20px;
-            height: 20px;
-            margin: 5px 12px 5px -35px;
-        }
+        color: #fff;
+        background-color: #7a625b;
     }
 
-    .list {
-        width: 93px;
-        height: 168px;
-        margin: 0 auto;
-        margin-top: 26px;
-
-        @include breakpoint(1280px) {
-            width: 76px;
-        }
-
-        @include breakpoint(430px) {
-            display: none;
-        }
-
-        li {
-            margin-top: 16px;
-        }
-    }
-}
-
-.restaurant_content {
-    top: 0;
-    left: 17vw;
-    width: 83vw;
-    object-fit: cover;
-    overflow: hidden;
-    background-color: #f6f1ed;
-
-    @include breakpoint(430px) {
+    .restaurant_wrapper {
+        overflow: hidden;
         width: 100vw;
-    }
-
-    .Banner {
-        opacity: 50%;
-        width: 82vw;
-
-        @include breakpoint(430px) {
-            display: none;
-        }
-    }
-
-    .Banner430 {
-        display: none;
+        background-color: #f6f1ed;
+        display: flex;
 
         @include breakpoint(430px) {
             display: block;
-            object-fit: contain;
-            width: 100vw;
-            background-color: #000;
-            opacity: 0.5;
             position: relative;
-            margin-top: 21vw;
+            width: 100vw;
+        }
+
+        // @include breakpoint(1280px) {
+
+        // }
+
+        // @include breakpoint(1024px) {
+
+        // }
+
+        @include breakpoint(820px) {}
+
+        // @include breakpoint(430px) {
+
+        // }
+
+        // @include breakpoint(375px) {
+
+        // }
+    }
+
+    button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 28px;
+        padding-left: 1px;
+    }
+
+    .restaurant_sidebar {
+        background-color: #fff;
+        width: 17vw;
+
+        @include breakpoint(430px) {
+            background-color: #f6f1ed;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .storeimg {
+            padding-top: 212px;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            display: block;
+
+            @include breakpoint(430px) {
+                display: none;
+            }
+        }
+
+        .column {
+            display: flex;
+            width: fit-content;
+            margin: 0 auto;
+
+            @include breakpoint(430px) {
+                position: absolute;
+                top: 31vw;
+                left: 35vw;
+                width: 43vw;
+                display: flex;
+                flex-direction: column;
+            }
+
+            h2 {
+                -webkit-writing-mode: vertical-lr;
+                writing-mode: vertical-lr;
+                margin-top: 16px;
+
+                @include breakpoint(1280px) {
+                    margin-left: 2vw;
+                }
+
+                @include breakpoint(820px) {
+                    font-size: 34px;
+                }
+
+                @include breakpoint(430px) {
+                    -webkit-writing-mode: unset;
+                    writing-mode: unset;
+                    font-weight: 800;
+                }
+            }
+
+            h6 {
+                -webkit-writing-mode: vertical-lr;
+                writing-mode: vertical-lr;
+                margin-top: 16px;
+                margin-left: 8px;
+
+                @include breakpoint(430px) {
+                    -webkit-writing-mode: unset;
+                    writing-mode: unset;
+                    font-weight: 800;
+                    margin-left: 9vw;
+                }
+            }
+        }
+
+        .restaurant_star {
+            background-color: #7a625b;
+            display: flex;
+            width: 83px;
+            height: 30px;
+            border-radius: 50px;
+            margin: 0 auto;
+            margin-top: 26px;
+
+            @include breakpoint(430px) {
+                position: absolute;
+                top: 48vw;
+                left: 39vw;
+            }
+
+            .star {
+                font-size: 20px;
+                color: #dbcec6;
+                margin: 5px 41px 5px 12px;
+
+                @include breakpoint(1024px) {
+                    padding-left: 8px;
+                }
+            }
+
+            .restaurant_starimg {
+                width: 20px;
+                height: 20px;
+                margin: 5px 12px 5px -35px;
+            }
+        }
+
+        .list {
+            width: 93px;
+            height: 168px;
+            margin: 0 auto;
+            margin-top: 26px;
+
+            @include breakpoint(1280px) {
+                width: 76px;
+            }
+
+            @include breakpoint(430px) {
+                display: none;
+            }
+
+            li {
+                margin-top: 16px;
+            }
         }
     }
 
-    .restaurant_breadcrumb {
-        height: 88px;
-        width: 82vw;
-        color: #333333;
-        display: flex;
-        justify-content: space-between;
-
-        @include breakpoint(1024px) {
-            width: 67vw;
-        }
-
-        @include breakpoint(820px) {
-            width: 66vw;
-        }
+    .restaurant_content {
+        top: 0;
+        left: 17vw;
+        width: 83vw;
+        object-fit: cover;
+        overflow: hidden;
+        background-color: #f6f1ed;
 
         @include breakpoint(430px) {
             width: 100vw;
         }
 
-        .breadcrumb {
-            margin: 20px 20px 0 20px;
-            width: 206px;
-            height: 23px;
+        .Banner {
+            opacity: 50%;
+            width: 82vw;
 
             @include breakpoint(430px) {
-                width: fit-content;
+                display: none;
+            }
+        }
+
+        .Banner430 {
+            display: none;
+
+            @include breakpoint(430px) {
+                display: block;
+                object-fit: contain;
+                width: 100vw;
+                background-color: #000;
+                opacity: 0.5;
+                position: relative;
+                margin-top: 21vw;
+            }
+        }
+
+        .restaurant_breadcrumb {
+            height: 88px;
+            width: 82vw;
+            color: #333333;
+            display: flex;
+            justify-content: space-between;
+
+            @include breakpoint(1024px) {
+                width: 67vw;
             }
 
-            .crumb1 {
-                position: absolute;
+            @include breakpoint(820px) {
+                width: 66vw;
+            }
 
-                a {
-                    margin-right: 12px;
-                    color: #333333;
+            @include breakpoint(430px) {
+                width: 100vw;
+            }
 
-                    &:hover {
-                        color: #999999;
-                    }
+            .breadcrumb {
+                margin: 20px 20px 0 20px;
+                width: 206px;
+                height: 23px;
+
+                @include breakpoint(430px) {
+                    width: fit-content;
+                }
+
+                .crumb1 {
+                    position: absolute;
+
+                    a {
+                        margin-right: 12px;
+                        color: #333333;
+
+                        &:hover {
+                            color: #999999;
+                        }
+
                         color: #999999;
                     }
                 }
@@ -915,265 +732,265 @@ button {
                     &:hover {
                         color: #999999;
                     }
-                        color: #999999;
-                    }
-                }
 
-                img {
-                    margin-left: 12px;
+                    color: #999999;
                 }
             }
 
-            .crumb3 {
-                margin-left: 158px;
-                margin-top: -18px;
-
-                a {
-                    color: #333333;
-
-                    &:hover {
-                        color: #999999;
-                    }
-                        color: #999999;
-                    }
-                }
+            img {
+                margin-left: 12px;
             }
         }
 
-        .restaurant_btns {
-            display: flex;
-            margin-top: 22px;
-            margin-right: 30px;
+        .crumb3 {
+            margin-left: 158px;
+            margin-top: -18px;
 
-            @include breakpoint(1350px) {
-                margin-right: 1vw;
+            a {
+                color: #333333;
+
+                &:hover {
+                    color: #999999;
+                }
+
+                color: #999999;
             }
+        }
+    }
+}
 
-            @include breakpoint(1024px) {
+.restaurant_btns {
+    display: flex;
+    margin-top: 22px;
+    margin-right: 30px;
+
+    @include breakpoint(1350px) {
+        margin-right: 1vw;
+    }
+
+    @include breakpoint(1024px) {
+        width: 20px;
+        height: 20px;
+    }
+
+    @include breakpoint(430px) {
+        width: fit-content;
+    }
+
+    .collect {
+        width: 44px;
+        height: 44px;
+        background-color: #c8ac96;
+        border-radius: 50px;
+        margin-right: 8px;
+
+        &:hover {
+            transform: translateY(-5px);
+            filter: drop-shadow(3px 3px 2px rgba(97, 97, 97, 0.7));
+        }
+
+        @include breakpoint(1024px) {
+
+            margin-right: 8px;
+        }
+
+        @include breakpoint(820px) {
+            width: 40px;
+            height: 40px;
+            margin-right: 0px;
+        }
+
+        @include breakpoint(430px) {
+            width: 30px;
+            height: 30px;
+            margin: 0px 8px 2px 8px;
+            position: relative;
+        }
+
+        img {
+            width: 13px;
+            height: 16px;
+            margin: 14px 12px 12px 12px;
+
+            @include breakpoint(430px) {
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+
+    .share {
+        width: 44px;
+        height: 44px;
+        background-color: #c8ac96;
+        border-radius: 50px;
+        margin-right: 8px;
+
+        &:hover {
+            transform: translateY(-5px);
+            filter: drop-shadow(3px 5px 2px rgba(97, 97, 97, 0.7));
+        }
+
+        @include breakpoint(1024px) {
+            margin-right: 8px;
+        }
+
+        @include breakpoint(820px) {
+            width: 40px;
+            height: 40px;
+            margin-right: 0px;
+        }
+
+        @include breakpoint(430px) {
+            width: 28px;
+            height: 28px;
+            position: relative;
+            margin-left: -1vw;
+        }
+
+        img {
+            width: 23px;
+            height: 18.57px;
+            margin: 10px 10px 10px 10px;
+
+            @include breakpoint(430px) {
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+
+    .message {
+        width: 44px;
+        height: 44px;
+        background-color: #c8ac96;
+        border-radius: 50px;
+        // margin-right: 8px;
+
+        &:hover {
+            transform: translateY(-5px);
+            filter: drop-shadow(3px 5px 2px rgba(97, 97, 97, 0.7));
+        }
+
+        @include breakpoint(820px) {
+            width: 40px;
+            height: 40px;
+        }
+
+        @include breakpoint(430px) {
+            width: 28px;
+            height: 28px;
+            position: relative;
+        }
+
+        img {
+            width: 23px;
+            height: 22.98px;
+            margin: 9.73px 10px 11.29px 11px;
+
+            @include breakpoint(820px) {
                 width: 20px;
                 height: 20px;
             }
 
             @include breakpoint(430px) {
-                width: fit-content;
-            }
-
-            .collect {
-                width: 44px;
-                height: 44px;
-                background-color: #c8ac96;
-                border-radius: 50px;
-                margin-right: 8px;
-
-                &:hover {
-                    transform: translateY(-5px);
-                    filter: drop-shadow(3px 3px 2px rgba(97, 97, 97, 0.7));
-                }
-
-                @include breakpoint(1024px) {
-
-                    margin-right: 8px;
-                }
-
-                @include breakpoint(820px) {
-                    width: 40px;
-                    height: 40px;
-                    margin-right: 0px;
-                }
-
-                @include breakpoint(430px) {
-                    width: 30px;
-                    height: 30px;
-                    margin: 0px 8px 2px 8px;
-                    position: relative;
-                }
-
-                img {
-                    width: 13px;
-                    height: 16px;
-                    margin: 14px 12px 12px 12px;
-
-                    @include breakpoint(430px) {
-                        margin: 0;
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                    }
-                }
-            }
-
-            .share {
-                width: 44px;
-                height: 44px;
-                background-color: #c8ac96;
-                border-radius: 50px;
-                margin-right: 8px;
-
-                &:hover {
-                    transform: translateY(-5px);
-                    filter: drop-shadow(3px 5px 2px rgba(97, 97, 97, 0.7));
-                }
-
-                @include breakpoint(1024px) {
-                    margin-right: 8px;
-                }
-
-                @include breakpoint(820px) {
-                    width: 40px;
-                    height: 40px;
-                    margin-right: 0px;
-                }
-
-                @include breakpoint(430px) {
-                    width: 28px;
-                    height: 28px;
-                    position: relative;
-                    margin-left: -1vw;
-                }
-
-                a {}
-
-                img {
-                    width: 23px;
-                    height: 18.57px;
-                    margin: 10px 10px 10px 10px;
-
-                    @include breakpoint(430px) {
-                        margin: 0;
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                    }
-                }
-            }
-
-            .message {
-                width: 44px;
-                height: 44px;
-                background-color: #c8ac96;
-                border-radius: 50px;
-                // margin-right: 8px;
-
-                &:hover {
-                    transform: translateY(-5px);
-                    filter: drop-shadow(3px 5px 2px rgba(97, 97, 97, 0.7));
-                }
-
-                @include breakpoint(820px) {
-                    width: 40px;
-                    height: 40px;
-                }
-
-                @include breakpoint(430px) {
-                    width: 28px;
-                    height: 28px;
-                    position: relative;
-                }
-
-                img {
-                    width: 23px;
-                    height: 22.98px;
-                    margin: 9.73px 10px 11.29px 11px;
-
-                    @include breakpoint(820px) {
-                        width: 20px;
-                        height: 20px;
-                    }
-
-                    @include breakpoint(430px) {
-                        margin: 0;
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                    }
-                }
-            }
-        }
-    }
-
-    .restaurant_header {
-        display: flex;
-        width: 78vw;
-        margin: 0 auto;
-        // text-align: center;
-        justify-content: center;
-
-        @include breakpoint(820px) {
-            // width: 90px;
-        }
-
-        @include breakpoint(430px) {
-            flex-direction: column;
-        }
-
-        .restaurant_slogan {
-            line-height: 150%;
-            color: #7a625b;
-            margin-top: 5%;
-            margin-left: 6.5%;
-
-            @include breakpoint(1280px) {
-                margin-left: 2vw;
-            }
-
-            @include breakpoint(1024px) {
-                margin-left: 23px;
-                width: 52vw;
-                margin-top: 17%;
-            }
-
-            @include breakpoint(820px) {
-                font-size: 30px;
-                margin-left: 10px;
-                width: 73vw;
-                margin-top: 21%;
-            }
-
-            @include breakpoint(430px) {
-                font-size: 30px;
-                margin-left: 0vw;
-                width: 81vw;
-                margin-top: 2vw;
-            }
-
-            @include breakpoint(390px) {
-
-                width: 89vw;
-            }
-        }
-
-        h4 {
-            line-height: 150%;
-            margin-left: 9%;
-            width: 478px;
-
-            @include breakpoint(1280px) {
-                margin-left: 2vw;
-            }
-
-            @include breakpoint(1024px) {
-                width: 423px;
-                margin-left: 20px;
-                // font-size: 18px;
-            }
-
-            @include breakpoint(820px) {
-                font-size: 17px;
-                width: 459px;
-            }
-
-            @include breakpoint(430px) {
-                font-size: 16px;
-                width: 74vw;
-                margin-top: 3vw;
-                margin-bottom: 4vw;
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
         }
     }
 }
+
+
+.restaurant_header {
+    display: flex;
+    width: 78vw;
+    margin: 0 auto;
+    // text-align: center;
+    justify-content: center;
+
+    @include breakpoint(820px) {
+        // width: 90px;
+    }
+
+    @include breakpoint(430px) {
+        flex-direction: column;
+    }
+
+    .restaurant_slogan {
+        line-height: 150%;
+        color: #7a625b;
+        margin-top: 5%;
+        margin-left: 6.5%;
+
+        @include breakpoint(1280px) {
+            margin-left: 2vw;
+        }
+
+        @include breakpoint(1024px) {
+            margin-left: 23px;
+            width: 52vw;
+            margin-top: 17%;
+        }
+
+        @include breakpoint(820px) {
+            font-size: 30px;
+            margin-left: 10px;
+            width: 73vw;
+            margin-top: 21%;
+        }
+
+        @include breakpoint(430px) {
+            font-size: 30px;
+            margin-left: 0vw;
+            width: 81vw;
+            margin-top: 2vw;
+        }
+
+        @include breakpoint(390px) {
+
+            width: 89vw;
+        }
+    }
+
+    h4 {
+        line-height: 150%;
+        margin-left: 9%;
+        width: 478px;
+
+        @include breakpoint(1280px) {
+            margin-left: 2vw;
+        }
+
+        @include breakpoint(1024px) {
+            width: 423px;
+            margin-left: 20px;
+            // font-size: 18px;
+        }
+
+        @include breakpoint(820px) {
+            font-size: 17px;
+            width: 459px;
+        }
+
+        @include breakpoint(430px) {
+            font-size: 16px;
+            width: 74vw;
+            margin-top: 3vw;
+            margin-bottom: 4vw;
+        }
+    }
+}
+
 
 .restaurant_section {
     background-color: #f6f1ed;
@@ -1880,320 +1697,320 @@ button {
                         @include breakpoint(390px) {
                             font-size: 18px;
                         }
-                            font-size: 18px;
-                        }
-                    }
 
-                    .restaurant_review_num {
-                        color: #999999;
-                        font-size: 20px;
-                        font-weight: bold;
-                        width: 107px;
-                        margin-left: 8px;
-
-                        @include breakpoint(430px) {
-                            font-size: 18px;
-                        }
-
-                        @include breakpoint(390px) {
-                            font-size: 16px;
-                        }
+                        font-size: 18px;
                     }
                 }
-            }
 
-            .icon_bg {
-                margin-top: 16px;
-                width: 44px;
-                height: 44px;
-                background-color: #c8ac96;
-                border-radius: 50%;
-                margin-left: 35vw;
-
-                @include breakpoint(1280px) {
-                    margin-left: 30vw;
-                }
-
-                @include breakpoint(1024px) {
-                    margin-left: 18vw;
-                }
-
-                @include breakpoint(820px) {
-                    margin-left: -7vw;
-                }
-
-                @include breakpoint(430px) {
-                    width: 30px;
-                    height: 30px;
-                    margin-left: 2vw;
-                }
-
-                @include breakpoint(390px) {
-                    width: 28px;
-                    height: 28px;
-                    margin-left: -4vw;
-                }
-
-                img {
-                    margin: 10.76px 11.49px 11.96px 11px;
-
-                    @include breakpoint(820px) {
-                        width: 28px;
-                        height: 28px;
-                        margin: 7px 0px 7px 2px;
-                    }
+                .restaurant_review_num {
+                    color: #999999;
+                    font-size: 20px;
+                    font-weight: bold;
+                    width: 107px;
+                    margin-left: 8px;
 
                     @include breakpoint(430px) {
-                        width: 20px;
-                        height: 20px;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50% -50%);
+                        font-size: 18px;
                     }
 
                     @include breakpoint(390px) {
-                        width: 18px;
-                        height: 18px;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50% -50%);
+                        font-size: 16px;
                     }
                 }
             }
         }
 
-        .customer_review {
-            display: flex;
-            width: 75vw;
-            height: 220px;
-            justify-content: space-between;
-            margin-top: 20px;
+        .icon_bg {
+            margin-top: 16px;
+            width: 44px;
+            height: 44px;
+            background-color: #c8ac96;
+            border-radius: 50%;
+            margin-left: 35vw;
+
+            @include breakpoint(1280px) {
+                margin-left: 30vw;
+            }
 
             @include breakpoint(1024px) {
-                display: flex;
-                height: 220px;
-                width: 75vw;
-                // justify-content: space-between;
-                // margin-top: 20px;
+                margin-left: 18vw;
             }
 
             @include breakpoint(820px) {
-                display: block;
-                height: 25vh;
-                width: 48vw;
-                margin-left: 9vw;
+                margin-left: -7vw;
             }
 
             @include breakpoint(430px) {
-                height: 60%;
+                width: 30px;
+                height: 30px;
+                margin-left: 2vw;
             }
 
             @include breakpoint(390px) {
-                height: 72%;
+                width: 28px;
+                height: 28px;
+                margin-left: -4vw;
             }
 
-            li {
-                width: 24vw;
-                height: 220px;
-                border-radius: 5px;
-                background-color: #f6f1ed;
-                border-radius: 5px;
-                filter: drop-shadow(0 0 7px rgba(207, 81, 61, 0.4));
+            img {
+                margin: 10.76px 11.49px 11.96px 11px;
 
                 @include breakpoint(820px) {
-                    margin: auto;
-                    width: 48vw;
-                    height: 18vh;
-                    margin-bottom: 3vw;
+                    width: 28px;
+                    height: 28px;
+                    margin: 7px 0px 7px 2px;
                 }
-
-                // @include breakpoint(820px) {
-                //     margin-left: 15vw;
-                //     width: 40vw;
-                //     height: 24vh;
-                // }
 
                 @include breakpoint(430px) {
-                    width: 72vw;
-                    margin-left: -11vw;
-                    margin-bottom: 6vw;
-                    height: 47vw;
+                    width: 20px;
+                    height: 20px;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50% -50%);
                 }
 
-                div {
+                @include breakpoint(390px) {
+                    width: 18px;
+                    height: 18px;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50% -50%);
+                }
+            }
+        }
+    }
+
+    .customer_review {
+        display: flex;
+        width: 75vw;
+        height: 220px;
+        justify-content: space-between;
+        margin-top: 20px;
+
+        @include breakpoint(1024px) {
+            display: flex;
+            height: 220px;
+            width: 75vw;
+            // justify-content: space-between;
+            // margin-top: 20px;
+        }
+
+        @include breakpoint(820px) {
+            display: block;
+            height: 25vh;
+            width: 48vw;
+            margin-left: 9vw;
+        }
+
+        @include breakpoint(430px) {
+            height: 60%;
+        }
+
+        @include breakpoint(390px) {
+            height: 72%;
+        }
+
+        li {
+            width: 24vw;
+            height: 220px;
+            border-radius: 5px;
+            background-color: #f6f1ed;
+            border-radius: 5px;
+            filter: drop-shadow(0 0 7px rgba(207, 81, 61, 0.4));
+
+            @include breakpoint(820px) {
+                margin: auto;
+                width: 48vw;
+                height: 18vh;
+                margin-bottom: 3vw;
+            }
+
+            // @include breakpoint(820px) {
+            //     margin-left: 15vw;
+            //     width: 40vw;
+            //     height: 24vh;
+            // }
+
+            @include breakpoint(430px) {
+                width: 72vw;
+                margin-left: -11vw;
+                margin-bottom: 6vw;
+                height: 47vw;
+            }
+
+            div {
+                display: flex;
+
+                @include breakpoint(820px) {
+                    margin-left: 3vw;
+                }
+
+                span {
+                    margin-top: 20px;
+
+                    .user {
+                        width: 36px;
+                        height: 36px;
+                        // padding-left: 30px;
+                        margin-left: 1.7vw;
+
+                        @include breakpoint(1280px) {
+                            padding-left: 6px;
+                        }
+
+                        @include breakpoint(1024px) {
+                            padding-left: 8px;
+                            padding-top: 8px;
+                        }
+
+                        @include breakpoint(820px) {
+                            // padding-left: 2.5vw;
+                        }
+                    }
+
+                    .restaurant_username {
+                        padding-left: 16px;
+                        font-size: 20px;
+                        font-weight: bold;
+                        color: #7a625b;
+                        margin: 0 auto;
+
+                        @include breakpoint(1024px) {
+                            padding-left: 9px;
+                            font-size: 18px;
+                            width: 140px;
+                            padding-top: 12px;
+                        }
+                    }
+                }
+
+                span {
                     display: flex;
+                    padding-left: 0px;
 
-                    @include breakpoint(820px) {
-                        margin-left: 3vw;
-                    }
-
-                    span {
-                        margin-top: 20px;
-
-                        .user {
-                            width: 36px;
-                            height: 36px;
-                            // padding-left: 30px;
-                            margin-left: 1.7vw;
-
-                            @include breakpoint(1280px) {
-                                padding-left: 6px;
-                            }
-
-                            @include breakpoint(1024px) {
-                                padding-left: 8px;
-                                padding-top: 8px;
-                            }
-
-                            @include breakpoint(820px) {
-                                // padding-left: 2.5vw;
-                            }
-                        }
-
-                        .restaurant_username {
-                            padding-left: 16px;
-                            font-size: 20px;
-                            font-weight: bold;
-                            color: #7a625b;
-                            margin: 0 auto;
-
-                            @include breakpoint(1024px) {
-                                padding-left: 9px;
-                                font-size: 18px;
-                                width: 140px;
-                                padding-top: 12px;
-                            }
-                        }
-                    }
-
-                    span {
-                        display: flex;
+                    @include breakpoint(1024px) {
                         padding-left: 0px;
+                    }
+
+                    .good {
+                        margin-top: 7px;
+                        margin-left: 52px;
+                        width: 16px;
+                        height: 16px;
 
                         @include breakpoint(1024px) {
-                            padding-left: 0px;
+                            margin-left: 0px;
+                            margin-top: 16px;
                         }
 
-                        .good {
+                        @include breakpoint(820px) {
+                            // padding-left: 110px;
+                            // margin-left: 113vw;
+                        }
+                    }
+
+                    .number {
+                        width: 28px;
+                        height: 24px;
+                        text-align: center;
+                        margin: 0 auto;
+                        color: #cb4847;
+                        margin-left: 4px;
+                        padding-top: 5px;
+
+                        @include breakpoint(1024px) {
                             margin-top: 7px;
-                            margin-left: 52px;
-                            width: 16px;
-                            height: 16px;
-
-                            @include breakpoint(1024px) {
-                                margin-left: 0px;
-                                margin-top: 16px;
-                            }
-
-                            @include breakpoint(820px) {
-                                // padding-left: 110px;
-                                // margin-left: 113vw;
-                            }
                         }
 
-                        .number {
-                            width: 28px;
-                            height: 24px;
-                            text-align: center;
-                            margin: 0 auto;
-                            color: #cb4847;
-                            margin-left: 4px;
-                            padding-top: 5px;
-
-                            @include breakpoint(1024px) {
-                                margin-top: 7px;
-                            }
-
-                            @include breakpoint(820px) {
-                                padding-left: 0vw;
-                            }
+                        @include breakpoint(820px) {
+                            padding-left: 0vw;
                         }
                     }
                 }
+            }
 
-                .star {
+            .star {
+                display: flex;
+                padding-left: 26px;
+
+                @include breakpoint(1024px) {
+                    padding-left: 2px;
+                }
+
+                @include breakpoint(820px) {
+                    padding-left: 2vw;
+                }
+
+                .starbar {
                     display: flex;
-                    padding-left: 26px;
 
                     @include breakpoint(1024px) {
                         padding-left: 2px;
                     }
 
-                    @include breakpoint(820px) {
-                        padding-left: 2vw;
-                    }
-
-                    .starbar {
-                        display: flex;
+                    img {
+                        width: 24px;
+                        height: 24px;
+                        padding-left: 4px;
 
                         @include breakpoint(1024px) {
-                            padding-left: 2px;
+                            width: 18px;
+                            height: 18px;
                         }
 
-                        img {
-                            width: 24px;
-                            height: 24px;
-                            padding-left: 4px;
-
-                            @include breakpoint(1024px) {
-                                width: 18px;
-                                height: 18px;
-                            }
-
-                            @include breakpoint(820px) {
-                            }
-                        }
-                    }
-
-                    .date {
-                        margin-left: 28px;
-
-                        h5 {
-                            padding-right: 15px;
-                            font-size: 16px;
-
-                            @include breakpoint(1280px) {
-                                margin-left: -1.9vw;
-                                font-size: 13.7px;
-                            }
-
-                            @include breakpoint(820px) {
-                                padding-left: 10vw;
-                                margin-left: -0.5vw;
-                                width: -1px;
-                                font-size: 15px;
-                            }
-
-                            @include breakpoint(430px) {
-                                padding-left: 8vw;
-                            }
-
-                            @include breakpoint(390px) {
-                                padding-left: 2vw;
-                                margin-left: -6.2vw;
-                            }
-                        }
+                        @include breakpoint(820px) {}
                     }
                 }
 
-                h4 {
-                    margin-top: 12px;
-                    padding-left: 30px;
+                .date {
+                    margin-left: 28px;
 
-                    @include breakpoint(1024px) {
-                        margin-left: 18px;
-                        font-size: 18px;
-                        padding-left: 2px;
-                    }
+                    h5 {
+                        padding-right: 15px;
+                        font-size: 16px;
 
-                    @include breakpoint(820px) {
-                        margin-left: 5vw;
+                        @include breakpoint(1280px) {
+                            margin-left: -1.9vw;
+                            font-size: 13.7px;
+                        }
+
+                        @include breakpoint(820px) {
+                            padding-left: 10vw;
+                            margin-left: -0.5vw;
+                            width: -1px;
+                            font-size: 15px;
+                        }
+
+                        @include breakpoint(430px) {
+                            padding-left: 8vw;
+                        }
+
+                        @include breakpoint(390px) {
+                            padding-left: 2vw;
+                            margin-left: -6.2vw;
+                        }
                     }
+                }
+            }
+
+            h4 {
+                margin-top: 12px;
+                padding-left: 30px;
+
+                @include breakpoint(1024px) {
+                    margin-left: 18px;
+                    font-size: 18px;
+                    padding-left: 2px;
+                }
+
+                @include breakpoint(820px) {
+                    margin-left: 5vw;
                 }
             }
         }
     }
 }
+
 
 .readmord {
     width: 144px;
@@ -2357,130 +2174,132 @@ button {
                 @include breakpoint(390px) {
                     width: 329px;
                 }
-                    width: 329px;
-                }
 
-                &::placeholder {
-                    color: #C3A988;
-                    font-size: 12px;
-                }
+                width: 329px;
+            }
+
+            &::placeholder {
+                color: #C3A988;
+                font-size: 12px;
             }
         }
-
-        .text_words {
-            color: #7a625b;
-            text-align: right;
-            margin-right: 28px;
-        }
     }
 
-    .share {
-        display: flex;
+    .text_words {
+        color: #7a625b;
+        text-align: right;
+        margin-right: 28px;
+    }
+}
 
-        &_photo {
-            width: fit-content;
-            font-weight: 800;
-            color: #7a625b;
-            margin-left: 30px;
-        }
+.share {
+    display: flex;
 
-        &_six {
-            margin-top: 5px;
-            color: #7a625b;
-            margin-left: 12px;
-        }
+    &_photo {
+        width: fit-content;
+        font-weight: 800;
+        color: #7a625b;
+        margin-left: 30px;
     }
 
-    .concent_two {
-        width: 264px;
-        height: 168px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin: auto;
-        margin-top: 16px;
-        padding-bottom: 40px;
+    &_six {
+        margin-top: 5px;
+        color: #7a625b;
+        margin-left: 12px;
+    }
+}
 
-        .box1,
-        .box2,
-        .box3,
-        .box4,
-        .box5,
-        .box6 {
-            border: 1px solid #dbcec6;
-            background-color: #dbcec6;
+.concent_two {
+    width: 264px;
+    height: 168px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 16px;
+    padding-bottom: 40px;
+
+    .box1,
+    .box2,
+    .box3,
+    .box4,
+    .box5,
+    .box6 {
+        border: 1px solid #dbcec6;
+        background-color: #dbcec6;
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        border-radius: 6px;
+        position: relative;
+        margin-bottom: 12px;
+
+        .add {
+            font: bold 15px Tahoma;
+            color: #999999;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            margin-left: 39px;
+            margin-top: 37px;
+        }
+
+        & img {
+            width: 124px;
+            height: 124px;
+        }
+
+        input[type="file"] {
             width: 80px;
             height: 80px;
-            text-align: center;
-            border-radius: 6px;
-            position: relative;
-            margin-bottom: 12px;
-
-            .add {
-                font: bold 15px Tahoma;
-                color: #999999;
-                position: absolute;
-                transform: translate(-50%, -50%);
-                margin-left: 39px;
-                margin-top: 37px;
-            }
-
-            & img {
-                width: 124px;
-                height: 124px;
-            }
-
-            input[type="file"] {
-                width: 80px;
-                height: 80px;
-                opacity: 0;
-            }
-        }
-    }
-
-    .buttons {
-        display: flex;
-        text-align: center;
-        width: 200px;
-        justify-content: space-between;
-        align-items: center;
-        margin: auto;
-        margin-left: 8vw;
-        margin-top: 1.5vw;
-
-        @include breakpoint(820px) {
-            margin-left: 13vw;
-            margin-top: 1.5vw;
-        }
-
-        @include breakpoint(390px) {
-            margin-left: 22vw;
-            margin-top: 4.5vw;
-        }
-
-        .cancel {
-            width: 100px;
-            height: 40px;
-            font-size: 32px;
-            font-weight: bold;
-            background-color: #c8ac96;
-            color: #fff;
-            border-radius: 9px;
-        }
-
-        .sendout {
-            width: 100px;
-            height: 40px;
-            font-weight: bold;
-            background-color: #cb4847;
-            color: #fff;
-            border-radius: 9px;
-            margin-left: 24px;
+            opacity: 0;
         }
     }
 }
 
+.buttons {
+    display: flex;
+    text-align: center;
+    width: 200px;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    margin-left: 8vw;
+    margin-top: 1.5vw;
+
+    @include breakpoint(820px) {
+        margin-left: 13vw;
+        margin-top: 1.5vw;
+    }
+
+    @include breakpoint(390px) {
+        margin-left: 22vw;
+        margin-top: 4.5vw;
+    }
+
+    .cancel {
+        width: 100px;
+        height: 40px;
+        font-size: 32px;
+        font-weight: bold;
+        background-color: #c8ac96;
+        color: #fff;
+        border-radius: 9px;
+    }
+
+    .sendout {
+        width: 100px;
+        height: 40px;
+        font-weight: bold;
+        background-color: #cb4847;
+        color: #fff;
+        border-radius: 9px;
+        margin-left: 24px;
+    }
+}
+
+
 .test {
+
     // display: flex;
     .test1 {
         display: flex;

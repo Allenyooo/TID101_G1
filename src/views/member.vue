@@ -33,12 +33,7 @@
 
                 <li>
                     <label for="container_name">會員姓名</label>
-                    <input
-                        type="text"
-                        id="container_name"
-                        value="陳小明"
-                        disabled
-                    />
+                    <input type="text" id="container_name" value="陳小明" disabled />
                 </li>
 
                 <li>
@@ -136,7 +131,7 @@
 
                         <img src="../assets/Image/member/eye-closed.svg" alt="eyeClosed" class="eye" v-if="eyeClose" />
 
-                        <img src="../assets/Image/member/eye.svg" alt="eyeOpen" class="eye"  v-else>
+                        <img src="../assets/Image/member/eye.svg" alt="eyeOpen" class="eye" v-else>
 
 
                         <button class="eye-toggle" @click="eyeClose = !eyeClose">
@@ -590,8 +585,6 @@ export default {
                     font-size: 14px;
                 }
             }
-
-            img {}
         }
     }
 
@@ -1211,201 +1204,204 @@ export default {
         }
 
         .voucher_data {
-        .voucher_data {
-            width: 90%;
-            margin: 0 auto 4vh;
-
-            @include breakpoint(430px) {
-                // margin: 20px 15px;
-            }
-
-            tr {
-                height: 40px;
+            .voucher_data {
+                width: 90%;
+                margin: 0 auto 4vh;
 
                 @include breakpoint(430px) {
-                    font-size: 14px;
+                    // margin: 20px 15px;
                 }
 
-                th {
-                    h5 {
-                        font-weight: 800;
+                tr {
+                    height: 40px;
+
+                    @include breakpoint(430px) {
+                        font-size: 14px;
+                    }
+
+                    th {
+                        h5 {
+                            font-weight: 800;
+                            color: $Black;
+
+                            @include breakpoint(430px) {
+                                font-size: 14px;
+                                // text-align: center;
+                            }
+                        }
+                    }
+
+                    td {
                         color: $Black;
 
                         @include breakpoint(430px) {
-                            font-size: 14px;
                             // text-align: center;
                         }
                     }
                 }
-
-                td {
-                    color: $Black;
-
-                    @include breakpoint(430px) {
-                        // text-align: center;
-                    }
-                }
-            }
-        }
-    }
-
-    //my ticket
-    .member_ticket {
-        background-color: $White;
-        border: 1px solid $Gold;
-        border-radius: 20px;
-        width: 83vw;
-        margin: 0 auto 4vh;
-
-        @include breakpoint(1280px) {
-            // height: 22vh;
-        }
-
-        @include breakpoint(820px) {
-            width: 76vw;
-        }
-
-        @include breakpoint(430px) {
-            width: 82vw;
-            background-color: #F6F1ED;
-            border-radius: 0px;
-            font-size: 16px;
-            height: 47vw;
-        }
-
-        @include breakpoint(390px) {
-            height: 50vw;
-        }
-
-        h4 {
-            width: 90%;
-            font-weight: 800;
-            font-size: 24px;
-            color: $Black;
-            margin: 5vh auto 2vh;
-
-            @include breakpoint(430px) {
-                margin: 2vh auto 2vh;
-                font-size: 16px;
             }
         }
 
-        .ticket_data {
-        .ticket_data {
-            width: 90%;
+        //my ticket
+        .member_ticket {
+            background-color: $White;
+            border: 1px solid $Gold;
+            border-radius: 20px;
+            width: 83vw;
             margin: 0 auto 4vh;
 
+            @include breakpoint(1280px) {
+                // height: 22vh;
+            }
+
             @include breakpoint(820px) {
-                // margin-left: 4vw;
-                // padding-left: 2vw;
+                width: 76vw;
             }
 
             @include breakpoint(430px) {
-                // width: 100%;
-                // margin: 1vh -1vh 1vh;
+                width: 82vw;
+                background-color: #F6F1ED;
+                border-radius: 0px;
+                font-size: 16px;
+                height: 47vw;
             }
 
-            tr {
-                height: 40px;
+            @include breakpoint(390px) {
+                height: 50vw;
+            }
+
+            h4 {
+                width: 90%;
+                font-weight: 800;
+                font-size: 24px;
+                color: $Black;
+                margin: 5vh auto 2vh;
+
                 @include breakpoint(430px) {
-                    text-align: center;
+                    margin: 2vh auto 2vh;
+                    font-size: 16px;
                 }
+            }
 
-                th {
-                    h5 {
-                        font-weight: 800;
-                        color: $Black;
-
-                        @include breakpoint(1280px) {
-                            width: 8vw;
-                            height: 4vh;
-                        }
-
-                        @include breakpoint(1024px) {
-                            width: 10vw;
-                            padding-bottom: 2vw;
-                        }
-
-                        @include breakpoint(820px) {
-                            width: 12vw;
-                        }
-
-                        @include breakpoint(796px) {
-                            padding-bottom: 2vw;
-                            padding-left: 4vw;
-                        }
-
-                        @include breakpoint(430px) {
-                            width: 20vw;
-                            font-size: 14px;
-                            text-align: center;
-                        }
-                    }
-                }
-
-                td {
-                    color: $Black;
-                    // padding-top: 0vw;
-                    // padding-bottom: 1vw;
-                    // padding-left: 2.4vw;
-                    // margin-left: 3.2vw;
-
+            .ticket_data {
+                .ticket_data {
+                    width: 90%;
+                    margin: 0 auto 4vh;
 
                     @include breakpoint(820px) {
-                        padding-bottom: 2vw;
-                        // padding-top: 
-                    }
-
-                    @include breakpoint(796px) {
-                        padding-bottom: 2vw;
-                        padding-left: 4vw;
+                        // margin-left: 4vw;
+                        // padding-left: 2vw;
                     }
 
                     @include breakpoint(430px) {
-                        font-size: 14px;
-                        text-align: center;
-                        padding-left: 0vw;
+                        // width: 100%;
+                        // margin: 1vh -1vh 1vh;
                     }
 
-                    @include breakpoint(390px) {
-                        padding-left: 0vw;
-                    }
-
-                    a {
-                        color: $Black;
-                        // padding-left: 1vw;
-                        // margin-right: 4vw;
-
-                        @include breakpoint(820px) {
-                            margin-left: 1vw;
-                        }
+                    tr {
+                        height: 40px;
 
                         @include breakpoint(430px) {
-                            margin-left: 4vw;
+                            text-align: center;
+                        }
+
+                        th {
+                            h5 {
+                                font-weight: 800;
+                                color: $Black;
+
+                                @include breakpoint(1280px) {
+                                    width: 8vw;
+                                    height: 4vh;
+                                }
+
+                                @include breakpoint(1024px) {
+                                    width: 10vw;
+                                    padding-bottom: 2vw;
+                                }
+
+                                @include breakpoint(820px) {
+                                    width: 12vw;
+                                }
+
+                                @include breakpoint(796px) {
+                                    padding-bottom: 2vw;
+                                    padding-left: 4vw;
+                                }
+
+                                @include breakpoint(430px) {
+                                    width: 20vw;
+                                    font-size: 14px;
+                                    text-align: center;
+                                }
+                            }
+                        }
+
+                        td {
+                            color: $Black;
+                            // padding-top: 0vw;
+                            // padding-bottom: 1vw;
+                            // padding-left: 2.4vw;
+                            // margin-left: 3.2vw;
+
+
+                            @include breakpoint(820px) {
+                                padding-bottom: 2vw;
+                                // padding-top: 
+                            }
+
+                            @include breakpoint(796px) {
+                                padding-bottom: 2vw;
+                                padding-left: 4vw;
+                            }
+
+                            @include breakpoint(430px) {
+                                font-size: 14px;
+                                text-align: center;
+                                padding-left: 0vw;
+                            }
+
+                            @include breakpoint(390px) {
+                                padding-left: 0vw;
+                            }
+
+                            a {
+                                color: $Black;
+                                // padding-left: 1vw;
+                                // margin-right: 4vw;
+
+                                @include breakpoint(820px) {
+                                    margin-left: 1vw;
+                                }
+
+                                @include breakpoint(430px) {
+                                    margin-left: 4vw;
+                                }
+                            }
                         }
                     }
                 }
             }
-        }
-    }
 
-    .return {
-        display: block;
-        width: 203px;
-        height: 64px;
-        background-color: $White;
-        border-radius: 20px;
-        font-size: 20px;
-        color: $Gold;
-        border: 4px solid $Gold;
-        margin: 0 auto;
-        text-align: center;
-        margin-bottom: 4vh;
+            .return {
+                display: block;
+                width: 203px;
+                height: 64px;
+                background-color: $White;
+                border-radius: 20px;
+                font-size: 20px;
+                color: $Gold;
+                border: 4px solid $Gold;
+                margin: 0 auto;
+                text-align: center;
+                margin-bottom: 4vh;
 
-        @include breakpoint(430px) {
-            font-size: 16px;
-            width: 132px;
-            height: 42px;
+                @include breakpoint(430px) {
+                    font-size: 16px;
+                    width: 132px;
+                    height: 42px;
+                }
+            }
         }
     }
 }
