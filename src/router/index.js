@@ -47,12 +47,12 @@ const routes = [
         },
         children: [
             {
-                path: "/login/forgotpw",
-                component: () => import("../components/ForgotPW.vue"),
+                path: "",
+                component: () => import("../components/LoginInfo.vue"),
             },
             {
-                path: "/login/logininfo",
-                component: () => import("../components/LoginInfo.vue"),
+                path: "/login/forgotpw",
+                component: () => import("../components/ForgotPW.vue"),
             },
             {
                 path: "/login/newpw",
@@ -125,7 +125,7 @@ const routes = [
         },
         children: [
             {
-                path: "/register/regisinfo",
+                path: "",
                 component: () => import("../components/RegisInfo.vue"),
             },
             {

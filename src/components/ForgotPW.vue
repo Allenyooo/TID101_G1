@@ -24,13 +24,13 @@
 
     <div class="forgot_code">
         <label for="forgot_int">輸入驗證碼</label>
-        <input type="text" id="forgot_int" placeholder="* * * * * * * * * *" />
+        <input type="text" id="forgot_int" placeholder="* * * * * *" />
     </div>
 
     <div class="forgot_in">
-        <button>
+        <router-link to="/login/newpw">
             <h3>送出</h3>
-        </button>
+        </router-link>
     </div>
 
     <img
@@ -132,12 +132,15 @@ h2 {
     &:active {
         background-image: $RevGoldGrad;
     }
-    button {
-        width: 165px;
-        height: 52px;
+    a {
         background-color: transparent;
         border: none;
+        text-align: center;
+        text-decoration: none;
+        line-height: 52px;
         h3 {
+            width: 165px;
+            height: 52px;
             color: $DarkBrown;
             font-weight: 600;
             font-size: 24px;

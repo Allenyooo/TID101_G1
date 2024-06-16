@@ -21,92 +21,23 @@
             />
         </div>
         <div id="register_right">
-            <img
-                src="../assets/Image/login/decoTop.svg"
-                alt="deco"
-                class="decoTop"
-                draggable="false"
-            />
-
-            <h2>會員註冊</h2>
-
-            <div class="register_google">
-                <button>
-                    <img src="../assets/Image/login/google.svg" alt="google" draggable="false"/>
-                    <h5>以 Google 帳號登入</h5>
-                </button>
-            </div>
-
-            <div class="register_or">
-                <div class="line"></div>
-                <h4>或</h4>
-                <div class="line"></div>
-            </div>
-
-            <div class="register_emailadd">
-                <label for="register_email">電子信箱</label>
-                <input
-                    type="text"
-                    id="register_email"
-                    placeholder="example@account.com"
-                />
-            </div>
-
-            <div class="register_password">
-                <label for="register_pw">設定密碼</label>
-                <input
-                    type="password"
-                    id="register_pw"
-                    placeholder="* * * * * * * * * *"
-                />
-                <p>8 ~ 10個字符，必須至少各一個大小寫字符</p>
-            </div>
-
-            <div class="register_confirmPassword">
-                <label for="register_Cpw">確認密碼</label>
-                <input
-                    type="password"
-                    id="register_Cpw"
-                    placeholder="* * * * * * * * * *"
-                />
-            </div>
-
-            <div class="register_realname">
-                <label for="register_name">會員姓名</label>
-                <input type="text" id="register_name" placeholder="王小明" />
-            </div>
-
-            <div class="register_acceptCondition">
-                <input type="checkbox" id="register_accept" />
-                <label for="register_accept"
-                    >請在此處勾選以表明您接受我們的條款<br />用於線上或行動服務的用途。</label
-                >
-            </div>
-
-            <router-link to="/login" class="register_in">
-                <button>
-                    <h3>註冊</h3>
-                </button>
-            </router-link>
-
-            <div class="register_login">
-                <h5>已經有帳號了?<router-link to="/login"> 立即登入!</router-link></h5>
-            </div>
-
-            <img
-                src="../assets/Image/login/decoBottom.svg"
-                alt="deco"
-                class="decoBottom"
-                draggable="false"
-            />
+            <router-view />
         </div>
     </section>
 </template>
 
-<script></script>
+<script>
+export default {};
+</script>
 
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
+
+@mixin breakpoint($point) {
+    @media screen and (max-width: $point) {
+        @content;
+    }
+}
 
 .register_wrapper {
     max-width: 100vw;
@@ -218,6 +149,11 @@
                 border: none;
                 border-bottom: 1px solid $Black;
             }
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            padding-top: 4px;
         }
         .register_password {
             display: flex;

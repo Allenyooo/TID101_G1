@@ -3,7 +3,7 @@ export default {
     props: {
         isHoverEnabled: {
             type: Boolean,
-            default: false
+            default: true
         }
     },
 

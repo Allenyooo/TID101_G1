@@ -31,40 +31,67 @@
             type="text"
             id="register_email"
             placeholder="example@account.com"
+            v-model="email"
+            @blur="validateEmail"
+            required
         />
+        <span v-if="!isValidEmail" class="error-message">
+            {{ errorMessage }}
+        </span>
     </div>
 
     <div class="register_password">
         <label for="register_pw">設定密碼</label>
-        <input type="password" id="register_pw" placeholder="**********" />
-        <p>8 ~ 10個字符，必須至少各一個大小寫字符</p>
+        <input
+            type="password"
+            id="register_pw"
+            placeholder="* * * * * * * * * *"
+            v-model="password"
+            @input="validatePassword"
+            required
+        />
+        <p>8 ~ 10個字符，必須至少一個數字跟英文字母</p>
+        <span v-if="isPasswordEmpty" class="error-message">請輸入密碼</span>
+        <span v-else-if="isPasswordInvalid" class="error-message">{{
+            passwordErrorMessage
+        }}</span>
     </div>
 
     <div class="register_confirmPassword">
         <label for="register_Cpw">確認密碼</label>
-        <input type="password" id="register_Cpw" placeholder="**********" />
+        <input
+            type="password"
+            id="register_Cpw"
+            placeholder="* * * * * * * * * *"
+            v-model="confirmPassword"
+            @input="validateConfirmPassword"
+            required
+        />
+        <span v-if="!isConfirmPasswordMatch" class="error-message"
+            >密碼不匹配</span
+        >
     </div>
 
     <div class="register_realname">
         <label for="register_name">會員姓名</label>
-        <input type="text" id="register_name" placeholder="王小明" />
+        <input type="text" id="register_name" placeholder="王小明" required />
     </div>
 
     <div class="register_acceptCondition">
-        <input type="checkbox" id="register_accept" />
-        <label for="register_accept"
-            >請在此處勾選以表明您接受我們的條款<br />用於線上或行動服務的用途。</label
-        >
+        <input type="checkbox" id="register_accept" required />
+        <label for="register_accept">
+            請在此處勾選以表明您接受我們的條款<br />用於線上或行動服務的用途。
+        </label>
     </div>
 
     <div class="register_in">
-        <button>
+        <button @click.prevent="handleSubmit">
             <h3>註冊</h3>
         </button>
     </div>
 
     <div class="register_login">
-        <h5>已經有帳號了?<a href="#"> 立即登入!</a></h5>
+        <h5>已經有帳號了?<router-link to="/login"> 立即登入!</router-link></h5>
     </div>
 
     <img
@@ -76,7 +103,130 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            email: "",
+            errorMessage: "",
+            isValidEmail: true,
+            password: "",
+            confirmPassword: "",
+            passwordErrorMessage: "",
+            isValidPassword: true,
+            isConfirmPasswordMatch: true,
+        };
+    },
+    methods: {
+        validateEmail() {
+            const emailRegex =
+                /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const emailValue = this.email.trim();
+
+            if (emailValue === "") {
+                this.errorMessage = "請輸入電子信箱";
+                this.isValidEmail = false;
+            } else if (!emailRegex.test(emailValue)) {
+                this.errorMessage = "電子信箱無效";
+                this.isValidEmail = false;
+            } else {
+                this.errorMessage = "";
+                this.isValidEmail = true;
+            }
+        },
+        validatePassword() {
+            const passwordValue = this.password.trim();
+
+            if (passwordValue === "") {
+                this.passwordErrorMessage = "請輸入密碼";
+                this.isValidPassword = false;
+            } else if (passwordValue.length < 8) {
+                this.passwordErrorMessage = "密碼至少需要8個字元";
+                this.isValidPassword = false;
+            } else if (
+                !/[a-zA-Z]/.test(passwordValue) ||
+                !/\d/.test(passwordValue)
+            ) {
+                this.passwordErrorMessage = "密碼必須至少包含一個數字跟英文字母";
+                this.isValidPassword = false;
+            } else {
+                this.passwordErrorMessage = "";
+                this.isValidPassword = true;
+            }
+        },
+
+        validateConfirmPassword() {
+            const confirmPasswordValue = this.confirmPassword.trim();
+            const passwordValue = this.password.trim();
+
+            if (confirmPasswordValue !== passwordValue) {
+                this.isConfirmPasswordMatch = false;
+            } else {
+                this.isConfirmPasswordMatch = true;
+            }
+        },
+        handleSubmit() {
+            if (this.isValidForm) {
+                // navigate to the next page
+                this.$router.push("/register/regisuccess");
+            }
+        },
+        isValidForm() {
+            return (
+                this.isValidEmail &&
+                this.isValidPassword &&
+                this.isConfirmPasswordMatch &&
+                this.email !== "" &&
+                this.password !== "" &&
+                this.confirmPassword !== "" &&
+                document.getElementById("register_accept").checked &&
+                document.getElementById("register_name").value !== ""
+            );
+        },
+        handleSubmit() {
+            if (this.formIsValid) {
+                this.$router.push("/register/regisuccess");
+            }
+        },
+    },
+    computed: {
+        formIsValid() {
+            return (
+                this.isValidEmail &&
+                this.isValidPassword &&
+                this.isConfirmPasswordMatch &&
+                this.email !== "" &&
+                this.password !== "" &&
+                this.confirmPassword !== "" &&
+                document.getElementById("register_accept").checked &&
+                document.getElementById("register_name").value !== ""
+            );
+        },
+        isPasswordEmpty() {
+            return this.password === "";
+        },
+        isPasswordInvalid() {
+            return (
+                this.password.length < 8 ||
+                !/[a-zA-Z]/.test(this.password) ||
+                !/\d/.test(this.password)
+            );
+        },
+        isValidPassword() {
+            return !this.isPasswordEmpty && !this.isPasswordInvalid;
+        },
+    },
+    watch: {
+        email: function () {
+            this.validateEmail();
+        },
+        password: function () {
+            this.validatePassword();
+        },
+        confirmPassword: function () {
+            this.validateConfirmPassword();
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -143,6 +293,11 @@ h2 {
         border: none;
         border-bottom: 1px solid $Black;
     }
+}
+.error-message {
+    color: red;
+    font-size: 12px;
+    padding-top: 4px;
 }
 .register_password {
     display: flex;
@@ -226,11 +381,14 @@ h2 {
         background-image: $RevGoldGrad;
     }
     button {
-        width: 165px;
-        height: 52px;
         background-color: transparent;
         border: none;
+        text-decoration: none;
+        text-align: center;
+        line-height: 52px;
         h3 {
+            width: 165px;
+            height: 52px;
             color: $DarkBrown;
             font-weight: 600;
             font-size: 24px;

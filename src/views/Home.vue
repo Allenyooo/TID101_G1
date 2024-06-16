@@ -331,90 +331,105 @@
                         alt="untensil1"
                         class="utensil1"
                         draggable="false"
+                        @click="showCard('spoon')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/fishcake.png"
                         alt="fish_cake1"
                         class="fish_cake1"
                         draggable="false"
+                        @click="showCard('side')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/rice.png"
                         alt="rice1"
                         class="rice1"
                         draggable="false"
+                        @click="showCard('steelbowl')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/beannoodle.png"
                         alt="bean_noodle"
                         class="bean_noodle"
                         draggable="false"
+                        @click="showCard('carbs')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/pork.png"
                         alt="pork"
                         class="pork"
                         draggable="false"
+                        @click="showCard('meat')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/coldnoodle.png"
                         alt="cold_noodle"
                         class="cold_noodle"
                         draggable="false"
+                        @click="showCard('carbs')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/bibimbap.png"
                         alt="bibimbap"
                         class="bibimbap"
                         draggable="false"
+                        @click="showCard('stonepot')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/ricecake_big.png"
                         alt="rice_cake_big"
                         class="rice_cake_big"
                         draggable="false"
+                        @click="showCard('carbs')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/kimchisoup.png"
                         alt="kimchi_soup"
                         class="kimchi_soup"
                         draggable="false"
+                        @click="showCard('soup')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/squid.png"
                         alt="squid"
                         class="squid"
                         draggable="false"
+                        @click="showCard('seafood')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/ricecake.png"
                         alt="rice_cake"
                         class="rice_cake"
                         draggable="false"
+                        @click="showCard('carbs')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/kimchi.png"
                         alt="kimchi"
                         class="kimchi"
                         draggable="false"
+                        @click="showCard('side')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/rice.png"
                         alt="rice2"
                         class="rice2"
                         draggable="false"
+                        @click="showCard('steelbowl')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/fishcake.png"
                         alt="fish_cake2"
                         class="fish_cake2"
                         draggable="false"
+                        @click="showCard('side')"
                     />
                     <img
                         src="../assets/Image/home/TableIntro/utensil.png"
                         alt="utensil2"
                         class="utensil2"
                         draggable="false"
+                        @click="showCard('chopsticks')"
                     />
                 </div>
                 <div class="home_table_multiCards">
@@ -423,15 +438,20 @@
                         <br />
                         <h2>
                             點擊餐具<br />查看內容
-                            <img
+                            <!-- <img
                                 src="../assets/Image/home/TableIntro/click.svg"
                                 alt="click"
                                 draggable="false"
-                            />
+                            /> -->
+                            <span class="click"></span>
                         </h2>
                     </div>
                     <div class="home_table_card">
-                        <div class="table_card">
+                        <div
+                            class="table_card"
+                            id="side"
+                            :style="{ opacity: cardOpacity.side }"
+                        >
                             <div class="home_card_title">
                                 <h3>小菜</h3>
                             </div>
@@ -445,7 +465,11 @@
                             </h5>
                         </div>
 
-                        <div class="table_card">
+                        <div
+                            class="table_card"
+                            id="steelbowl"
+                            :style="{ opacity: cardOpacity.steelbowl }"
+                        >
                             <div class="home_card_title">
                                 <h3>韓式鐵碗</h3>
                             </div>
@@ -459,7 +483,11 @@
                             </h5>
                         </div>
 
-                        <div class="table_card">
+                        <div
+                            class="table_card"
+                            id="stonepot"
+                            :style="{ opacity: cardOpacity.stonepot }"
+                        >
                             <div class="home_card_title">
                                 <h3>韓式石鍋</h3>
                             </div>
@@ -473,7 +501,11 @@
                             </h5>
                         </div>
 
-                        <div class="table_card">
+                        <div
+                            class="table_card"
+                            id="spoon"
+                            :style="{ opacity: cardOpacity.spoon }"
+                        >
                             <div class="home_card_title">
                                 <h3>韓式湯匙</h3>
                             </div>
@@ -487,12 +519,16 @@
                             </h5>
                         </div>
 
-                        <div class="table_card">
+                        <div
+                            class="table_card"
+                            id="chopsticks"
+                            :style="{ opacity: cardOpacity.chopsticks }"
+                        >
                             <div class="home_card_title">
                                 <h3>韓式筷子</h3>
                             </div>
                             <img
-                                src="../assets/Image/home/TableIntro/card/side.jpg"
+                                src="../assets/Image/home/TableIntro/card/chopsticks.jpg"
                                 alt="chopsticks"
                                 draggable="false"
                             />
@@ -501,7 +537,11 @@
                             </h5>
                         </div>
 
-                        <div class="table_card">
+                        <div
+                            class="table_card"
+                            id="soup"
+                            :style="{ opacity: cardOpacity.soup }"
+                        >
                             <div class="home_card_title">
                                 <h3>湯品</h3>
                             </div>
@@ -515,7 +555,11 @@
                             </h5>
                         </div>
 
-                        <div class="table_card">
+                        <div
+                            class="table_card"
+                            id="seafood"
+                            :style="{ opacity: cardOpacity.seafood }"
+                        >
                             <div class="home_card_title">
                                 <h3>海鮮</h3>
                             </div>
@@ -529,7 +573,11 @@
                             </h5>
                         </div>
 
-                        <div class="table_card">
+                        <div
+                            class="table_card"
+                            id="meat"
+                            :style="{ opacity: cardOpacity.meat }"
+                        >
                             <div class="home_card_title">
                                 <h3>肉類</h3>
                             </div>
@@ -543,7 +591,11 @@
                             </h5>
                         </div>
 
-                        <div class="table_card">
+                        <div
+                            class="table_card"
+                            id="carbs"
+                            :style="{ opacity: cardOpacity.carbs }"
+                        >
                             <div class="home_card_title">
                                 <h3>主食</h3>
                             </div>
@@ -729,6 +781,31 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default {
+    data() {
+        return {
+            cardOpacity: {
+                side: 0,
+                steelbowl: 0,
+                stonepot: 0,
+                spoon: 0,
+                chopsticks: 0,
+                soup: 0,
+                seafood: 0,
+                meat: 0,
+                carbs: 0,
+            },
+        };
+    },
+    methods: {
+        showCard(cardId) {
+            for (let key in this.cardOpacity) {
+                if (key !== cardId) {
+                    this.cardOpacity[key] = 0;
+                }
+            }
+            this.cardOpacity[cardId] = 1;
+        },
+    },
     setup() {
         onMounted(() => {
             let tl = gsap.timeline({ repeat: -1 });
@@ -875,16 +952,23 @@ export default {
                     "<"
                 )
                 .to(
+                    ".home_cloud3",
+                    {
+                        x: -100,
+                    },
+                    "<"
+                )
+                .to(
                     ".home_drum",
                     {
-                        x: -120,
+                        x: -200,
                     },
                     "<"
                 )
                 .to(
                     ".home_statue",
                     {
-                        x: 150,
+                        x: 200,
                     },
                     "<"
                 )
@@ -1308,6 +1392,9 @@ export default {
             background: $GreenGrad;
             background-clip: text;
             -webkit-text-stroke: 8px transparent;
+            @include breakpoint(820px) {
+                width: 256px;
+            }
         }
         h1::after {
             content: "梨花韓食";
@@ -1318,6 +1405,9 @@ export default {
             background-clip: text;
             -webkit-text-fill-color: transparent;
             -webkit-text-stroke: 0px transparent;
+            @include breakpoint(820px) {
+                width: 256px;
+            }
         }
         h2 {
             margin-top: 13vh;
@@ -1325,6 +1415,10 @@ export default {
             background-clip: text;
             -webkit-text-stroke: 4px transparent;
             position: relative;
+            @include breakpoint(820px) {
+                margin-top: 6vh;
+                font-size: 4vw;
+            }
         }
         h2::after {
             content: "體驗正宗韓國美食文化的饗宴";
@@ -1350,6 +1444,9 @@ export default {
         top: 3vh;
         right: 12vw;
         z-index: 1;
+        @include breakpoint(820px) {
+            width: 20vw;
+        }
     }
     .home_cloud2 {
         width: 266px;
@@ -1358,6 +1455,9 @@ export default {
         top: 24vh;
         left: 7vw;
         z-index: 1;
+        @include breakpoint(820px) {
+            width: 25vw;
+        }
     }
     .home_cloud3 {
         width: 204px;
@@ -1366,6 +1466,9 @@ export default {
         top: 68vh;
         left: 21vw;
         z-index: 1;
+        @include breakpoint(820px) {
+            width: 20vw;
+        }
     }
     .home_introImg {
         width: 17.5vw;
@@ -1417,6 +1520,12 @@ export default {
             &:last-child {
                 padding-top: 44px;
             }
+            @include breakpoint(1280px) {
+                font-size: 2.5vw;
+            }
+            @include breakpoint(820px) {
+                font-size: 3.5vw;
+            }
         }
     }
     .home_introWord2 {
@@ -1431,6 +1540,12 @@ export default {
             color: $Black;
             text-align: center;
             font-size: 1.2vw;
+            @include breakpoint(1280px) {
+                font-size: 1.5vw;
+            }
+            @include breakpoint(820px) {
+                font-size: 2.3vw;
+            }
         }
         h3 {
             font-size: 1.66vw;
@@ -1440,6 +1555,12 @@ export default {
             background: $RevGoldGrad;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            @include breakpoint(1280px) {
+                font-size: 2.4vw;
+            }
+            @include breakpoint(820px) {
+                font-size: 2.9vw;
+            }
         }
     }
 }
@@ -1456,13 +1577,19 @@ export default {
         transform: translate(-50%, -50%);
         width: 77vw;
         height: 48vw;
-        // object-fit: contain;
         background-size: 100% 100%;
         background-position: center;
         background-repeat: no-repeat;
         display: flex;
         align-items: center;
         justify-content: center;
+        @include breakpoint(820px) {
+            height: 115vw;
+            width: 80vw;
+            background-image: url(../assets/Image/home/TableIntro/table_bg1.png);
+            background-repeat: no-repeat;
+            flex-direction: column;
+        }
         .home_table {
             width: 43vw;
             height: 43vw;
@@ -1470,6 +1597,10 @@ export default {
             background-repeat: no-repeat;
             background-image: url(../assets/Image/home/TableIntro/table.png);
             position: relative;
+            @include breakpoint(820px) {
+                width: 60vw;
+                height: 60vw;
+            }
             .utensil1 {
                 width: 2vw;
                 position: absolute;
@@ -1480,6 +1611,9 @@ export default {
                     transform: scale(1.1);
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
+                }
+                @include breakpoint(820px) {
+                    width: 3.5vw;
                 }
             }
             .fish_cake1 {
@@ -1493,6 +1627,11 @@ export default {
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
                 }
+                @include breakpoint(820px) {
+                    width: 9vw;
+                    top: 9%;
+                    left: 44%;
+                }
             }
             .rice1 {
                 width: 5vw;
@@ -1504,6 +1643,9 @@ export default {
                     transform: scale(1.1);
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
+                }
+                @include breakpoint(820px) {
+                    width: 7vw;
                 }
             }
             .bean_noodle {
@@ -1517,6 +1659,11 @@ export default {
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
                 }
+                @include breakpoint(820px) {
+                    width: 11vw;
+                    top: 20%;
+                    left: 14%;
+                }
             }
             .pork {
                 width: 12vw;
@@ -1528,6 +1675,11 @@ export default {
                     transform: scale(1.1);
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
+                }
+                @include breakpoint(820px) {
+                    width: 15vw;
+                    top: 28%;
+                    left: 38%;
                 }
             }
             .cold_noodle {
@@ -1541,6 +1693,9 @@ export default {
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
                 }
+                @include breakpoint(820px) {
+                    width: 11.5vw;
+                }
             }
             .bibimbap {
                 width: 9vw;
@@ -1552,6 +1707,10 @@ export default {
                     transform: scale(1.1);
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
+                }
+                @include breakpoint(820px) {
+                    width: 12vw;
+                    left: 10%;
                 }
             }
             .rice_cake_big {
@@ -1565,6 +1724,10 @@ export default {
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
                 }
+                @include breakpoint(820px) {
+                    width: 20vw;
+                    top: 38%;
+                }
             }
             .kimchi_soup {
                 width: 9vw;
@@ -1576,6 +1739,10 @@ export default {
                     transform: scale(1.1);
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
+                }
+                @include breakpoint(820px) {
+                    width: 11vw;
+                    right: 10%;
                 }
             }
             .squid {
@@ -1589,6 +1756,10 @@ export default {
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
                 }
+                @include breakpoint(820px) {
+                    width: 10vw;
+                    left: 16%;
+                }
             }
             .rice_cake {
                 width: 11vw;
@@ -1600,6 +1771,11 @@ export default {
                     transform: scale(1.1);
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
+                }
+                @include breakpoint(820px) {
+                    width: 14vw;
+                    top: 64%;
+                    right: 40%;
                 }
             }
             .kimchi {
@@ -1613,6 +1789,9 @@ export default {
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
                 }
+                @include breakpoint(820px) {
+                    width: 6vw;
+                }
             }
             .rice2 {
                 width: 5vw;
@@ -1624,6 +1803,9 @@ export default {
                     transform: scale(1.1);
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
+                }
+                @include breakpoint(820px) {
+                    width: 7vw;
                 }
             }
             .fish_cake2 {
@@ -1637,6 +1819,10 @@ export default {
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
                 }
+                @include breakpoint(820px) {
+                    width: 9vw;
+                    left: 45%;
+                }
             }
             .utensil2 {
                 width: 2vw;
@@ -1649,29 +1835,59 @@ export default {
                     filter: drop-shadow(0 0 3px $Red);
                     cursor: pointer;
                 }
+                @include breakpoint(820px) {
+                    width: 3.5vw;
+                    right: 33%;
+                }
             }
         }
         .home_table_multiCards {
             text-align: center;
             width: 30vw;
+            @include breakpoint(820px) {
+                width: 40vw;
+            }
             .home_card_info {
                 position: fixed;
                 width: inherit;
                 top: 42%;
+                @include breakpoint(820px) {
+                    top: 65%;
+                }
                 h1 {
                     color: $Black;
                     font-size: 3.6vw;
+                    @include breakpoint(820px) {
+                        color: $Gold;
+                        font-size: 5vw;
+                    }
                 }
                 h2 {
                     color: $Black;
                     position: relative;
                     font-size: 2.14vw;
-                    img {
-                        width: 2.38vw;
+                    @include breakpoint(820px) {
+                        color: $Nude;
+                        font-size: 3.5vw;
+                        margin-top: 2vw;
+                    }
+                    .click {
+                        width: 40px;
+                        height: 40px;
                         position: absolute;
                         z-index: 0;
                         top: 100%;
                         right: 25%;
+                        background-image: url(../assets/Image/home/TableIntro/click.svg);
+                        background-size: contain;
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        @include breakpoint(820px) {
+                            background-image: url(../assets/Image/home/TableIntro/hand.svg);
+                            top: 150%;
+                            right: 50%;
+                            transform: translateX(50%);
+                        }
                     }
                 }
             }
@@ -1681,9 +1897,9 @@ export default {
                 width: 91%;
                 height: 43vw;
                 margin: 0 auto;
-
-                display: none;
-
+                @include breakpoint(820px) {
+                    width: 100%;
+                }
                 .table_card {
                     background-color: $OffWhite;
                     border: 3px solid $DarkBrown;
@@ -1693,21 +1909,31 @@ export default {
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
+                    opacity: 0;
+                    transition: opacity 0.3s;
+
                     .home_card_title {
                         width: 30%;
                         background-color: $Gold;
                         margin: 24px auto 16px;
                         border-radius: 10px;
                         text-align: center;
+                        
                         h3 {
                             color: $OffWhite;
                             line-height: 143%;
                             font-size: 1.7vw;
+                            @include breakpoint(820px) {
+                                font-size: 2.5vw;
+                            }
                         }
                     }
                     img {
                         width: 22vw;
                         border-radius: 20px;
+                        @include breakpoint(820px) {
+                            width: 30vw;
+                        }
                     }
                     h5 {
                         color: $Black;
@@ -1716,12 +1942,14 @@ export default {
                         width: 80%;
                         margin: 16px auto 32px;
                         text-align: left;
+                        @include breakpoint(1280px) {
+                            font-size: 1.1vw;
+                        }
+                        @include breakpoint(820px) {
+                            font-size: 1.7vw;
+                        }
                     }
                 }
-                // add remaining cards here
-
-                // opacity: 0;
-                // transition: opacity 0.3s;
             }
         }
     }

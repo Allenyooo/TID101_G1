@@ -33,7 +33,12 @@
 
                 <li>
                     <label for="container_name">會員姓名</label>
-                    <input type="text" id="container_name" value="陳小明" disabled />
+                    <input
+                        type="text"
+                        id="container_name"
+                        value="陳小明"
+                        disabled
+                    />
                 </li>
 
                 <li>
@@ -298,8 +303,7 @@
 <script>
 
 //掛載shopCard
-import PWChange from "../components/memberPWChange.vue"
-import ShopCard from "../components/Shopcard.vue"
+import ShopCard from "../components/Shopcard.vue";
 
 export default {
     name: "Member",
@@ -1207,6 +1211,7 @@ export default {
         }
 
         .voucher_data {
+        .voucher_data {
             width: 90%;
             margin: 0 auto 4vh;
 
@@ -1285,6 +1290,7 @@ export default {
             }
         }
 
+        .ticket_data {
         .ticket_data {
             width: 90%;
             margin: 0 auto 4vh;

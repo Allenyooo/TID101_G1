@@ -11,9 +11,21 @@ export default {
 
   data() {
     return {
-        marker1Src : "/src/assets/Image/map/unmarker.png",
-        marker2Src : "/src/assets/Image/map/unmarker.png",
-        marker3Src : "/src/assets/Image/map/unmarker.png",
+        // marker1Src : "/src/assets/Image/map/unmarker.png",
+        // marker2Src : "/src/assets/Image/map/unmarker.png",
+        // marker3Src : "/src/assets/Image/map/unmarker.png",
+        marker1Src: new URL(
+            "@/assets/Image/map/unmarker.png",
+            import.meta.url
+        ).href,
+        marker2Src: new URL(
+            "@/assets/Image/map/unmarker.png",
+            import.meta.url
+        ).href,
+        marker3Src: new URL(
+            "@/assets/Image/map/unmarker.png",
+            import.meta.url
+        ).href,
     };
   },
 
@@ -31,23 +43,47 @@ export default {
       img.style.transform = '';
     },
     markLight1() {
-        this.marker1Src="/src/assets/Image/map/marker.png";
+        //this.marker1Src = "/src/assets/Image/map/marker.png";
+        this.marker1Src = new URL(
+            "@/assets/Image/map/marker.png",
+            import.meta.url
+        ).href;
     },
     unmarker1() {
-        this.marker1Src="/src/assets/Image/map/unmarker.png";
+        //this.marker1Src = "/src/assets/Image/map/unmarker.png";
+        this.marker1Src = new URL(
+            "@/assets/Image/map/unmarker.png",
+            import.meta.url
+        ).href;
     },
     markLight2() {
-        this.marker2Src="/src/assets/Image/map/marker.png";
+        //this.marker2Src = "/src/assets/Image/map/marker.png";
+        this.marker2Src = new URL(
+            "@/assets/Image/map/marker.png",
+            import.meta.url
+        ).href;
     },
     unmarker2() {
-        this.marker2Src="/src/assets/Image/map/unmarker.png";
+        //this.marker2Src = "/src/assets/Image/map/unmarker.png";
+        this.marker2Src = new URL(
+            "@/assets/Image/map/unmarker.png",
+            import.meta.url
+        ).href;
     },
     markLight3() {
-        this.marker3Src="/src/assets/Image/map/marker.png";
+        //this.marker3Src = "/src/assets/Image/map/marker.png";
+        this.marker3Src = new URL(
+            "@/assets/Image/map/marker.png",
+            import.meta.url
+        ).href;
     },
     unmarker3() {
-        this.marker3Src="/src/assets/Image/map/unmarker.png";
-    }
+        //this.marker3Src = "/src/assets/Image/map/unmarker.png";
+        this.marker3Src = new URL(
+            "@/assets/Image/map/unmarker.png",
+            import.meta.url
+        ).href;
+    },
   },
 };
 
@@ -103,7 +139,7 @@ export default {
 }
 
 section {
-  display: none;
+  // display: none;
 
   .filter{
     width: 100vw;
@@ -161,8 +197,8 @@ section {
     position: fixed;
     top: 20vh;
     right: 10vw;
-    z-index: 16;
-    width: 740px;
+    z-index: 20;
+    width: 725px;
     height: 79vh;
     display: flex;
     flex-direction: column;
@@ -176,16 +212,20 @@ section {
 
   }
   .map_shoptitle {
-      width: 312px;
+      // outline: 1px red solid;
+      // width: 312px;
+      width: 720px;
       height: 88px;
       background-image: url(/src/assets/Image/map/bannerBGI.png);
+      background-repeat: no-repeat;
+      background-position: center center;
       display: flex;
       justify-content: center;
       align-items: center;
       margin-bottom: 5vh;
       position: fixed;
       top: 8vh;
-      right: 21.5vw;
+      right: 10vw;
       z-index: 16;
 
       h1 {
