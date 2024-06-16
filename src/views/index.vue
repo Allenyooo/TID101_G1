@@ -1,34 +1,40 @@
 <template>
     <!--這是前後台首頁-->
     <div class="wrapper">
-        <img src="../assets/Image/index/gate.png" alt="" class="gate">
-
-        <div class="door" :class="{ rotate: rotating }">
-            <img class="left" src="/src/assets/Image/index/door_left.png" alt="">
-            <img class="right" src="/src/assets/Image/index/door_right.png" alt="">
+        <div class="gap">
+            <img src="../assets/Image/index/wall.png" alt="">
         </div>
+        <div class="main">
+            <img src="../assets/Image/index/gate.png" alt="" class="gate">
 
-        <div class="yiayng" @click="cyclerotate" :class="{ rotate: rotating }">
-
-            <div class="FrontDesk" :class="{ 'move-right': moved, 'highlight': rotating }">
-
-                <router-link to="/enter">
-                    <h5 class="frontdesk">前台</h5>
-                </router-link>
-
-                <img class="yia" src="../assets/Image/index/yin.png" alt="">
+            <div class="door" :class="{ rotate: rotating }">
+                <img class="left" src="/src/assets/Image/index/door_left.png" alt="">
+                <img class="right" src="/src/assets/Image/index/door_right.png" alt="">
             </div>
 
-            <div class="BackStage" :class="{ 'move-left': moved, 'highlight': rotating }">
+            <div class="yiayng" @click="cyclerotate" :class="{ rotate: rotating }">
 
-                <router-link to="/BkHome">
-                    <h5 class="Backstage">後台</h5>
-                </router-link>
+                <div class="yiayng__group -top" :class="{ 'move-right': moved, 'highlight': rotating }">
 
-                <img class="yng" src="../assets/Image/index/yng.png" alt="">
+                    <router-link to="/enter" class="yiayng__link -frontend">
+                        <h5 class="yiayng__title">前台</h5>
+                    </router-link>
+
+                    <img class="yiayng__img -yia" src="../assets/Image/index/top.svg" alt="">
+                </div>
+
+                <div class="yiayng__group -bottom" :class="{ 'move-left': moved, 'highlight': rotating }">
+
+                    <router-link to="/BkHome" class="yiayng__link -backend">
+                        <h5 class="yiayng__title">後台</h5>
+                    </router-link>
+
+                    <img class="yiayng__img -yng" src="../assets/Image/index/bottom.svg" alt="">
+                </div>
+
             </div>
-
         </div>
+
 
     </div>
 </template>
@@ -88,149 +94,208 @@ export default {
 
 .wrapper {
     background-color: #333;
-    width: 100vw;
-    height: 100vh;
-    position: relative;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    z-index: 3;
 
-    .gate {
-        width: 100vw;
-        height: 100vh;
-    }
+}
 
-    .door {
+.gap {
+    flex: 1 0 auto;
+    position: relative;
+    background: #fff;
+
+    img {
+        width: 100%;
+        height: auto;
         position: absolute;
-        bottom: 0;
-        left: 50%;
+        bottom: -100px;
+        left: 0;
+        object-position: center bottom;
+
+        @include breakpoint(1174px) {
+            bottom: 0px;
+        }
+
+        @include breakpoint(1077px) {
+            width: auto;
+        }
+        @include breakpoint(1028px) {
+            height: 99%;
+            bottom: 17px;
+        }
+    }
+}
+
+.door {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+
+    @include breakpoint(430px) {
         transform: translateX(-50%);
         display: flex;
-
-        .left,
-        .right {
-            width: 23vw;
-            height: 86vh;
+        width: 22%;
+        height: 89%;
+        scale: 496%;
+        bottom: 82vw;
         }
 
-        .left {
-            transform-origin: left;
-        }
+    .left,
+    .right {
+        width: 23vw;
+        height: 42vw;
+    }
 
-        .right {
-            transform-origin: right;
-        }
+    .left {
+        transform-origin: left;
+    }
 
-        &.rotate .left {
-            animation: door-left-rotate 2.5s linear forwards;
+    .right {
+        transform-origin: right;
+    }
 
-            animation-delay: 2.5s; //門打開時間
-        }
+    &.rotate .left {
+        animation: door-left-rotate 2.5s linear forwards;
 
-        &.rotate .right {
-            animation: door-right-rotate 2.5s linear forwards;
+        animation-delay: 2.5s; //門打開時間
+    }
 
-            animation-delay: 2.5s; // 門打開時間
+    &.rotate .right {
+        animation: door-right-rotate 2.5s linear forwards;
+
+        animation-delay: 2.5s; // 門打開時間
+    }
+}
+
+.gate {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    margin-top: -20px;
+}
+
+.main {
+    position: relative;
+}
+
+
+.yiayng {
+    position: absolute;
+    top: 42%;
+    left: 42%;
+    // top: 41%;
+    // left: 46.6%;
+    width: 15.8vw;
+    height: 15.8vw;
+
+    @include breakpoint(1280px) {
+        top: 42%;
+        left: 42%;
+    }
+
+    @include breakpoint(430px) {
+        position: absolute;
+        top: -143%;
+        left: 47.6%;
+        width: 15.8vw;
+        height: 15.8vw;
+        scale: 4.3;
+    }
+
+    h5 {
+        font-size: 24px;
+
+        @include breakpoint(430px) {
+        font-size: 10px;
+        margin-bottom: 1vw;
         }
     }
 
-    .yiayng {
+    &.rotate {
+        animation: cycle 2s linear forwards;
+    }
+
+    &__group {
         position: absolute;
-        top: 41%;
-        left: 42.6%;
-        width: 14.4vw;
-        height: 15.8vw;
+        top: 0px;
+        left: 0px;
+        z-index: 1;
+        transition: transform 1s;
+        width: 100%;
+        height: 100%;
 
-        &.rotate {
-            animation: cycle 2s linear forwards;
-        }
-
-        .FrontDesk {
-            position: absolute;
-            top: 30px;
-            left: 90px;
-            z-index: 1;
-            transition: transform 5s;
-
-            .frontdesk {
-                color: #ccc;
-                font-size: 24px;
-                font-weight: 800;
-                position: absolute;
-                padding-left: 10px;
-                z-index: 1;
-                width: 58px;
-                top: 1px;
-                left: -16px;
-            }
-
-            .yia {
-                width: 15.0vw;
-                cursor: pointer;
-                position: absolute;
-                top: -2.16vw;
-                left: -5.9vw;
-                transition: all .5s ease;
-
-                &:hover {
-                    transform: translateY(-10px);
-
-                    &:hover {
-                        filter: drop-shadow(5px 8px 2px rgba(0, 0, 0, 0.7));
-                    }
-                }
-            }
-        }
-
-        .BackStage {
-            position: absolute;
-            top: 150px;
-            left: 80px;
-            z-index: 1;
-            transition: transform 1s;
-
-            .Backstage {
-                //字
-                color: #ccc;
-                font-size: 24px;
-                font-weight: 800;
-                position: absolute;
-                width: 48px;
-                z-index: 1;
-                top: 0vw;
-                left: 0.5vw;
-            }
-
-            .yng {
-                width: 15vw;
-                cursor: pointer;
-                position: absolute;
-                z-index: 0;
-                bottom: -5.0vw;
-                left: -5.68vw;
-                transition: all .5s ease;
-
-                &:hover {
-                    transform: translateY(-10px);
-                }
-
-                &:hover {
-                    filter: drop-shadow(5px 8px 2px rgba(0, 0, 0, 0.7));
-                }
-            }
-        }
-
-        .move-right {
+        &.move-right {
             transform: translateY(-50px);
         }
 
-        .move-left {
+        &.move-left {
             transform: translateY(50px);
         }
+    }
 
-        .highlight .frontdesk,
-        .highlight .Backstage {
-            width: 68px;
-            font-size: 28px;
+    &__title {
+
+        .highlight & {
+            transform: scale(1.2);
             text-shadow: 4px 1px 4px rgb(8, 8, 9);
+        }
+    }
+
+    &__link {
+        color: #ccc;
+        font-size: 24px;
+        font-weight: 800;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 50%;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+
+        &.-frontend {
+            top: 0;
+        }
+
+        &.-backend {
+            bottom: 0;
+        }
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        display: block;
+        transition: all .3s ease;
+
+        &:hover {
+            transform: translateY(-10px);
+
+            @include breakpoint(1280px) {
+                transform: translateY(-2px);
+            }
+
+            @include breakpoint(430px) {
+                transform: translateY(-1px);
+            }
+
+            &:hover {
+                filter: drop-shadow(5px 8px 2px rgba(0, 0, 0, 0.7));
+            }
         }
     }
 }

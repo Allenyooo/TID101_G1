@@ -33,12 +33,24 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // position: absolute;
-    // bottom: 0;
 
     img {
         margin-left: 49px;
         top: 12px;
+
+        @include breakpoint(820px) {
+            margin-left: 4vw;   
+        }
+
+        @include breakpoint(570px) {
+            margin-left: 2vw; 
+            width: 18vw;  
+        }
+
+        @include breakpoint(430px) {
+            margin-left: 2vw; 
+            width: 16vw;  
+        }
     }
 
     p {
@@ -49,15 +61,50 @@ footer {
         font-family: noto serif tc;
         margin-top: 22px;
         margin-bottom: 22px;
+
+        @include breakpoint(820px) {
+            width: 48vw;   
+        }
+
+        @include breakpoint(570px) {
+            width: 58vw;
+            font-size: 12px;   
+        }
+
+        @include breakpoint(500px) {
+            font-size: 10px;   
+        }
+
+        @include breakpoint(400px) {
+            font-size: 9px;   
+        }
+
+        @include breakpoint(430px) {
+            width: 60vw;
+        }
     }
 
     .contact {
         display: flex;
         align-items: center;
 
+        @include breakpoint(820px) {
+            margin-right: 2vw;   
+        }
+
         img {
             scale: 0.8;
             margin: 25px 8px 27px 0px;
+
+            @include breakpoint(570px) {
+                scale: 0.5;
+                margin: 27px 0px 26px 0px;  
+                width: 4vw;
+            }
+
+            @include breakpoint(430px) {
+                width: 6vw;
+            }
         }
 
         h5 {
@@ -66,6 +113,21 @@ footer {
             font-weight: 800;
             font-size: 16px;
             font-family: noto serif tc;
+
+            @include breakpoint(820px) {
+                margin: 26px 0px 26px 0px;
+                font-size: 15px;   
+            }
+
+            @include breakpoint(570px) {
+                font-size: 12px;   
+            }
+
+            @include breakpoint(430px) {
+                margin: 26px 0px 24px 0px;
+                font-size: 10px;
+                width: 12vw;   
+            }
         }
     }
 }

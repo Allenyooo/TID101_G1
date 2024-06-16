@@ -46,19 +46,26 @@
 
                     <button>
                         <li class="share"> <!--分享 連接fb訊息-->
-                            <a href="http://m.me/sparkassociationorg" target="_blank">
-                                <img src="../assets/Image/restaurant/north/share.svg" alt="collect">
+                            <a href='javascript: void(window.open(&apos;https://lineit.line.me/share/ui?url=&apos; .concat(encodeURIComponent(location.href)) ));'
+                                title='分享給 LINE 好友'>
+                                <img alt='分享梨花殿給LINE好友 !' height='44' src='../assets/Image/restaurant/north/share.svg'
+                                    width='44' />
                             </a>
                         </li>
                     </button>
-
-                    <button>
-                        <li class="message">
-                            <img src="../assets/Image/restaurant/north/message.svg" alt="collect">
-                        </li>
-                    </button>
+                    <!--寫留言按鈕-->
+                    <li class="message">
+                        <button @click="pop()">
+                            <div class="icon_bg" @click=" popup_open = true">
+                                <img class="restaurantstarimg" src="../assets/Image/restaurant/north/message.svg"
+                                    alt="message">
+                            </div>
+                        </button>
+                    </li>
                 </ol>
             </div>
+
+
 
             <header class="restaurant_header">
                 <h2 class="restaurant_slogan">“ 品味正宗韓國美味！<br>來，一起享受美食之旅！”</h2>
@@ -232,10 +239,10 @@
                                 </div>
                             </div>
                             <div class="buttons">
-                                <button class="cancel" @click=" popup_open = false">
+                                <button class="cancel" @click=" popup_close()">
                                     <h4>取消</h4>
                                 </button>
-                                <button class="sendout" @click=" popup_open = false">
+                                <button class="sendout" @click=" submit()">
                                     <h4>送出</h4>
                                 </button>
                             </div>
@@ -310,15 +317,15 @@
 
                             <!---彈跳視窗-->
                             <div class="star">
-                                <div id="stars" class="left">
+                                <!-- <div id="stars" class="left">
                                     <img src="./pentagram.png" alt="">
                                     <img src="./pentagram.png" alt="">
                                     <img src="./pentagram.png" alt="">
                                     <img src="./pentagram.png" alt="">
                                     <img src="./pentagram.png" alt="">
-                                </div>
-                                <div id="comment" class="left">
-                                </div>
+                                </div> -->
+                                <!-- <div id="comment" class="left">
+                                </div> -->
 
                                 <span class="starbar">
                                     <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull">
@@ -346,10 +353,8 @@
         </div>
     </div>
 
-<!--test button-->
-<div class="line-it-button" data-lang="en" data-type="share-a" data-env="REAL" data-url="https://developers.line.biz/en/docs/line-social-plugins/install-guide/using-line-share-buttons/" data-color="default" data-size="small" data-count="true" data-ver="3" style="display: none;">
 
-</div>
+
 
 
 
@@ -401,6 +406,23 @@ export default {
         pop() {
             //alert()
         },
+        popup_close() {
+            this.popup_open = false
+        },
+        submit() {
+
+            this.popup_close()
+
+            // $.ajax({
+            //     type: "method",
+            //     url: "url",
+            //     data: "data",
+            //     dataType: "dataType",
+            //     success: function (response) {
+
+            //     }
+            // });
+        },
         fileChange(e, index) {
             let file = e.target.files[0];
             let readFile = new FileReader();
@@ -420,9 +442,6 @@ export default {
     }
 }
 
-//line插件
-
-
 </script>
 
 
@@ -440,7 +459,8 @@ export default {
     list-style: none;
 }
 
-#share-btn{   //測試按鈕
+#share-btn {
+    //測試按鈕
     width: 90px;
     height: 30px;
     margin-left: 20px;
@@ -448,6 +468,7 @@ export default {
     color: #FFF;
     background-color: #7A625B;
 }
+
 .restaurant_wrapper {
     overflow: hidden;
     width: 100vw;
@@ -484,6 +505,8 @@ button {
     background-color: transparent;
     border: none;
     cursor: pointer;
+    margin-bottom: 28px;
+    padding-left: 1px;
 }
 
 .restaurant_sidebar {
@@ -684,8 +707,8 @@ button {
                     color: #333333;
 
                     &:hover {
-                    color: #999999;
-                }
+                        color: #999999;
+                    }
                 }
             }
 
@@ -695,9 +718,10 @@ button {
 
                 a {
                     color: #333333;
+
                     &:hover {
-                    color: #999999;
-                }
+                        color: #999999;
+                    }
                 }
 
                 img {
@@ -706,15 +730,15 @@ button {
             }
 
             .crumb3 {
-                margin-left: 140px;
                 margin-left: 158px;
-                margin-top: -16px;
+                margin-top: -18px;
 
                 a {
                     color: #333333;
+
                     &:hover {
-                    color: #999999;
-                }
+                        color: #999999;
+                    }
                 }
             }
         }
@@ -743,6 +767,11 @@ button {
                 background-color: #C8AC96;
                 border-radius: 50px;
                 margin-right: 8px;
+
+                &:hover {
+                    transform: translateY(-5px);
+                    filter: drop-shadow(3px 3px 2px rgba(97, 97, 97, 0.7));
+                }
 
                 @include breakpoint(1024px) {
 
@@ -784,6 +813,11 @@ button {
                 border-radius: 50px;
                 margin-right: 8px;
 
+                &:hover {
+                    transform: translateY(-5px);
+                    filter: drop-shadow(3px 5px 2px rgba(97, 97, 97, 0.7));
+                }
+
                 @include breakpoint(1024px) {
                     margin-right: 8px;
                 }
@@ -801,7 +835,7 @@ button {
                     margin-left: -1vw;
                 }
 
-                a{}
+                a {}
 
                 img {
                     width: 23px;
@@ -823,6 +857,12 @@ button {
                 height: 44px;
                 background-color: #C8AC96;
                 border-radius: 50px;
+                // margin-right: 8px;
+
+                &:hover {
+                    transform: translateY(-5px);
+                    filter: drop-shadow(3px 5px 2px rgba(97, 97, 97, 0.7));
+                }
 
                 @include breakpoint(820px) {
                     width: 40px;
@@ -868,6 +908,7 @@ button {
         @include breakpoint(820px) {
             // width: 90px;
         }
+
         @include breakpoint(430px) {
             flex-direction: column;
         }
@@ -901,8 +942,9 @@ button {
                 width: 81vw;
                 margin-top: 2vw;
             }
+
             @include breakpoint(390px) {
-                
+
                 width: 89vw;
             }
         }
@@ -953,14 +995,15 @@ button {
         width: 68vw;
         padding-bottom: 8vw;
     }
-    
+
 
     @include breakpoint(430px) {
-         width: 86vw;
+        width: 86vw;
     }
+
     @include breakpoint(390px) {
-         width: 86vw;
-         padding-bottom: 0vw;
+        width: 86vw;
+        padding-bottom: 0vw;
     }
 
     .restaurant_h3 {
@@ -1012,6 +1055,7 @@ button {
             margin-left: 0vw;
             margin-bottom: 5vw;
         }
+
         @include breakpoint(390px) {
             margin-left: 0vw;
             margin-bottom: 1vw;
@@ -1090,11 +1134,12 @@ button {
                             font-size: 17px;
                             width: 93px;
                         }
+
                         @include breakpoint(390px) {
                             font-size: 17px;
                             width: 76px;
                         }
-                        
+
                     }
 
                     td {
@@ -1114,6 +1159,7 @@ button {
                         @include breakpoint(820px) {
                             font-size: 18px;
                         }
+
                         @include breakpoint(390px) {
                             font-size: 17px;
                         }
@@ -1136,6 +1182,7 @@ button {
                     img {
                         margin-right: 12px;
                         flex-direction: row-reverse;
+
                         @include breakpoint(390px) {
                             width: 26px;
                         }
@@ -1173,6 +1220,7 @@ button {
                             font-size: 18px;
                             width: 45vw;
                         }
+
                         @include breakpoint(390px) {
                             font-size: 17px;
                             width: 49vw;
@@ -1212,6 +1260,7 @@ button {
                             margin-left: 48px;
                             // padding-bottom: 5px;
                         }
+
                         @include breakpoint(390px) {
                             width: 26px;
                         }
@@ -1223,6 +1272,7 @@ button {
                         @include breakpoint(430px) {
                             font-size: 18px;
                         }
+
                         @include breakpoint(390px) {
                             font-size: 17px;
                         }
@@ -1313,8 +1363,9 @@ button {
                     height: 300px;
                 }
             }
+
             @include breakpoint(390px) {
-                
+
 
                 #google_map {
                     width: 350px;
@@ -1413,6 +1464,7 @@ button {
                 font-size: 17px;
                 width: 76vw;
             }
+
             @include breakpoint(390px) {
                 width: 83vw;
             }
@@ -1469,6 +1521,7 @@ button {
                 margin-left: 11.3vw;
                 font-size: 16px;
             }
+
             @include breakpoint(390px) {
                 margin-left: 3.3vw;
             }
@@ -1494,6 +1547,7 @@ button {
                 height: 38vw;
                 margin-left: 20vw;
             }
+
             @include breakpoint(390px) {
                 height: 35vw;
             }
@@ -1524,6 +1578,7 @@ button {
                 margin-left: 11.3vw;
                 font-size: 16px;
             }
+
             @include breakpoint(390px) {
                 margin-left: 3.3vw;
             }
@@ -1564,7 +1619,7 @@ button {
 
     .restaurant_review {
         width: 78vw;
-        height: 393px;
+        height: 425px;
         background-color: #fff;
         padding-left: 20px;
         margin: 0 auto;
@@ -1616,6 +1671,7 @@ button {
                     @include breakpoint(430px) {
                         font-size: 23px;
                     }
+
                     @include breakpoint(390px) {
                         font-size: 21px;
                     }
@@ -1635,9 +1691,10 @@ button {
                         font-size: 20px;
                         font-weight: bold;
                         margin-left: 8px;
+
                         @include breakpoint(390px) {
-                        font-size: 18px;
-                    }
+                            font-size: 18px;
+                        }
                     }
 
                     .restaurant_review_num {
@@ -1650,6 +1707,7 @@ button {
                         @include breakpoint(430px) {
                             font-size: 18px;
                         }
+
                         @include breakpoint(390px) {
                             font-size: 16px;
                         }
@@ -1682,6 +1740,7 @@ button {
                     height: 30px;
                     margin-left: 2vw;
                 }
+
                 @include breakpoint(390px) {
                     width: 28px;
                     height: 28px;
@@ -1705,6 +1764,7 @@ button {
                         left: 50%;
                         transform: translate(-50% -50%);
                     }
+
                     @include breakpoint(390px) {
                         width: 18px;
                         height: 18px;
@@ -1918,9 +1978,11 @@ button {
                                 width: -1px;
                                 font-size: 15px;
                             }
+
                             @include breakpoint(430px) {
                                 padding-left: 8vw;
                             }
+
                             @include breakpoint(390px) {
                                 padding-left: 2vw;
                                 margin-left: -6.2vw;
@@ -1970,6 +2032,7 @@ button {
         margin-left: 21vw;
         margin-top: 30vw;
     }
+
     @include breakpoint(390px) {
         margin-left: 16vw;
         margin-top: 16vw;
@@ -2009,14 +2072,17 @@ button {
         text-align: center;
         top: 14px;
         left: 513px;
+
         @include breakpoint(1024px) {
             top: 332px;
             left: 403px;
         }
+
         @include breakpoint(820px) {
             top: 213px;
             left: 280px;
         }
+
         @include breakpoint(390px) {
             top: 253px;
             left: 18px;
@@ -2076,7 +2142,7 @@ button {
                 margin-left: 6vw;
                 width: 76vw;
             }
-            
+
         }
 
         .masg {
@@ -2106,12 +2172,12 @@ button {
                 padding: 9px 0 0 10px;
 
                 @include breakpoint(390px) {
-                        width: 329px;
-                    }
+                    width: 329px;
+                }
 
                 &::placeholder {
                     color: #C3A988;
-                    font-size: 12px; 
+                    font-size: 12px;
                 }
             }
         }
@@ -2258,7 +2324,4 @@ button {
         padding-left: 34px;
     }
 }
-
-
-
 </style>
