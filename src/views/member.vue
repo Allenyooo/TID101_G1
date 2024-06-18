@@ -63,7 +63,7 @@
                         <h4>成功訊息</h4>
                         <p>成功修改暱稱為：{{ newNickname }}</p>
                         <button class="modal__confirm" @click="closeNicknameSuccessModal">確認</button>
-                        <button class="modal__cancel" @click="updateNickname">取消</button>
+                        <button class="modal__cancel" @click="cancelUpdate">取消</button>
                     </div>
                 </div>
 
@@ -309,6 +309,8 @@ export default {
         return {
             shownickname: false, //修改暱稱closePhoneErrorModal
             nickname: '陳小明',
+            newNickname: '',
+            nicknameSuccess: false,
 
             showniPhone: false,
             newiPhone: '',
@@ -318,11 +320,9 @@ export default {
             showModal: false,
             eyeClose: true,
             password: '12345678',
-
             eyeCloseOld: true,
             eyeCloseNew: true,
             eyeCloseConfirm: true,
-
             oldPassword: '',
             newPassword: '',
             confirmPassword: '',
@@ -330,9 +330,6 @@ export default {
             passwordSuccess: false,
 
             imageSrc: '',
-            newNickname: '',
-            nicknameSuccess: false,
-            // iPhoneSuccess: false
         };
     },
     methods: {
@@ -344,30 +341,34 @@ export default {
         },
         closeSuccessModal() {
             this.passwordSuccess = false;
-            this.iPhoneSuccessModal = false;  //修改電話成功後彈窗按下確定後關閉彈窗，不能被關閉(問老師)
+            // this.iPhoneSuccessModal = false;  //修改電話成功後彈窗按下確定後關閉彈窗，不能被關閉(問老師)
         },
 
         closeNicknameSuccessModal() {
-            this.nicknameSuccess = false;
+            this.nicknameSuccess = false; //修改會員暱稱成功v-if(nicknameSuccess)  = false;
             this.shownickname = false;
         },
         closeiPhoneSuccessModal() { //修改電話號碼
             this.showniPhoneSuccess = false;
-            // this.showniPhone = false; 
-            // this.phoneError = '';
+            this.showniPhone = false; 
         },
         closePhoneErrorModal() {
-            this.showniPhoneError = false;
+            this.showniPhone = false;
             this.phoneError = '';
+        },
+        closeSuccessModal(){
+            this.showniPhoneSuccess = false;
         },
         submitPhone() {
             if (this.newPhone === '') {
                 this.phoneError = '您尚未输入信息';
+
             } else {
                 this.updatePhone().then(() => {
                     this.showniPhoneSuccess = true;
                 }).catch(() => {
-                    this.showniPhoneError = true;
+                    // this.showniPhoneError = true;
+                    this.phoneError = '電話號碼格式不正確';
                 });
             }
         },
@@ -382,12 +383,18 @@ export default {
             }
         },
         updateNickname() {
-            if (this.newNickname) {
-                this.nickname = this.newNickname;
-                this.nicknameSuccess = true;
-                this.shownickname = false;
+            if (this.newNickname.trim() === '') {
+                alert("請輸入新的暱稱");
+                return;
             }
+            this.nickname = this.newNickname;
+            this.nicknameSuccess = true;
+            // this.shownickname = false; // 關閉修改暱稱彈窗 
         },
+        cancelUpdate() {
+            this.shownickname = false; // 取消修改，關閉修改暱稱彈窗
+        },
+        
         updatePhone() {
             const phonePattern = /^[0-9]{4}-[0-9]{3}-[0-9]{3}$/;
             if (phonePattern.test(this.newiPhone)) {
@@ -395,7 +402,8 @@ export default {
                 this.showniPhone = false;
                 this.phoneError = '';
             } else {
-                this.phoneError = '電話號碼格式不正確。';
+                this.phoneError = '電話號碼格式不正確。'; 
+                
             }
         },
         //照片類型
@@ -500,27 +508,24 @@ export default {
 
     @include breakpoint(820px) {
         display: block;
+        margin-left: 7vw;
     }
 
     @include breakpoint(430px) {
         height: 186vh;
         width: 80vw;
-        margin-left: -2vw;
+        margin-left: 0vw;
+    }
+
+    @include breakpoint(390px) {
+        height: 226vh;
+        margin-left: 0vw;
     }
 
 }
 
 .card {
-    // margin: 0 50%;
-    // text-decoration: none;
-    // width: auto;
     width: 100%;
-    // pointer-events: none;
-
-    // :deep(.no-hover card){
-    //     background-color: #fff;
-
-    // }
 
     @include breakpoint(430px) {
         background-color: #fff;
@@ -541,6 +546,10 @@ export default {
         }
 
         .shopinfo {
+            @include breakpoint(698px) {
+                padding-left: 32px;
+            }
+
             @include breakpoint(430px) {
                 margin-left: 0px;
                 padding-left: 0;
@@ -565,12 +574,36 @@ export default {
 
         .content {
             .address {
+                @include breakpoint(1024px) {
+                    margin-right: 0;
+                }
+
                 h5 {
                     width: 23vw;
                     font-size: 14px;
 
+                    @include breakpoint(1024px) {
+                        font-size: 14px;
+                        width: 20vw;
+                    }
+
+                    @include breakpoint(820px) {
+                        font-size: 14px;
+                        width: 42vw;
+                    }
+
+                    @include breakpoint(498px) {
+                        font-size: 16px;
+                        width: 27vw;
+                    }
+
+                    @include breakpoint(420px) {
+                        font-size: 16px;
+                        width: 27vw;
+                    }
+
                     @include breakpoint(390px) {
-                        width: 26vw;
+                        width: 29vw;
                     }
                 }
             }
@@ -587,13 +620,9 @@ export default {
             }
         }
     }
-
-    :deep(h3) {
-        font-size: 24px;
+    :deep(h3) {  //card
+        font-size: 24px; 
         margin-top: 5px;
-        // @include breakpoint(1280px) {
-        //            margin-top: 5px;
-        //         }
     }
 
     @include breakpoint(1024px) {
@@ -603,16 +632,23 @@ export default {
     @include breakpoint(820px) {
         font-size: 20px;
         margin-top: 5%;
-        height: 39vh;
+        height: 45vh;
         width: 60vw;
     }
 
+    @include breakpoint(700px) {
+        height: 28vh;
+    }
+
     @include breakpoint(430px) {
-        height: 20vh;
+        height: 43vh;
+        width: 73vw;
     }
 
     @include breakpoint(390px) {
-        height: 19vh;
+        height: 52vh;
+        margin-left: 1vw;
+        width: 75vw;
     }
 }
 
@@ -676,7 +712,8 @@ export default {
         margin: 2vh auto 3vh;
 
         @include breakpoint(430px) {
-            font-size: 30px;
+            font-size: 28px;
+            margin: 6vh auto 3vh;
         }
     }
 
@@ -699,7 +736,8 @@ export default {
             width: 94vw;
             border: none;
             background-color: #F6F1ED;
-            margin: 0 auto -4vh;
+            margin: 0 auto 0vh;
+            margin-left: 7vw;
         }
 
         @include breakpoint(390px) {
@@ -815,15 +853,19 @@ export default {
                 @include breakpoint(430px) {
                     font-size: 16px;
                 }
+
+                @include breakpoint(390px) {
+                    margin-left: 5vw;
+                }
             }
 
             li {
                 display: flex;
                 flex-direction: column;
 
-                // @include breakpoint(430px){
-                //     flex-direction: row;
-                // }
+                @include breakpoint(390px){
+                    margin-left: 5vw;
+                }
 
                 label {
                     font-size: 16px;
@@ -1013,8 +1055,6 @@ export default {
                     }
 
                     .modal__confirm {
-                        // background: #fff;
-                        // border-radius: 50px;
                         font-size: 16px;
                         width: 20%;
                         height: 40px;
@@ -1075,19 +1115,20 @@ export default {
         }
 
         @include breakpoint(1024px) {
-            height: 78vw;
+            height: 75vw;
         }
 
         @include breakpoint(820px) {
-            height: 198vw;
+            height: 196vw;
             width: 75vw;
         }
 
-        @include breakpoint(796px) {
-            height: 205vw;
+        @include breakpoint(698px) {
+            height: 228vw;
         }
 
         @include breakpoint(430px) {
+            height: 105vw;
             border: none;
             background-color: #F6F1ED;
         }
@@ -1126,7 +1167,7 @@ export default {
         }
 
         @include breakpoint(430px) {
-            margin-top: 146vw;
+            margin-top: 123vw;
             width: 80vw;
             background-color: #F6F1ED;
             border-radius: 0px;
@@ -1134,7 +1175,7 @@ export default {
 
         @include breakpoint(390px) {
             margin-top: 141vw;
-            margin: 54vh 3.5vh 4vh;
+            margin: 132vh 8vh 4vh;
         }
 
 
@@ -1171,6 +1212,10 @@ export default {
                     width: 64%;
                 }
 
+                @include breakpoint(700px) {
+                    width: 83%;
+                }
+
                 @include breakpoint(820px) {
                     width: 84%;
                 }
@@ -1180,6 +1225,7 @@ export default {
                     height: 32px;
                     font-size: 14px;
                     margin-left: 10px;
+                    margin-bottom: 4vw;
                 }
 
                 @include breakpoint(390px) {
@@ -1267,6 +1313,7 @@ export default {
         }
 
         @include breakpoint(390px) {
+            width: 80vw;
             height: 50vw;
         }
 
@@ -1317,6 +1364,10 @@ export default {
                         @include breakpoint(1024px) {
                             width: 10vw;
                             padding-bottom: 2vw;
+                        }
+
+                        @include breakpoint(698px) {
+                            width: 18vw;
                         }
 
                         @include breakpoint(820px) {

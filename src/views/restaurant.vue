@@ -469,10 +469,8 @@ export default {
 }
 
 #share-btn {
-
     //測試按鈕
     #share-btn {
-        //測試按鈕
         width: 90px;
         height: 30px;
         margin-left: 20px;
@@ -480,251 +478,250 @@ export default {
         color: #fff;
         background-color: #7a625b;
     }
+}
 
-    .restaurant_wrapper {
-        overflow: hidden;
+.restaurant_wrapper {
+    overflow: hidden;
+    width: 100vw;
+    background-color: #f6f1ed;
+    display: flex;
+
+    @include breakpoint(430px) {
+        display: block;
+        position: relative;
         width: 100vw;
-        background-color: #f6f1ed;
-        display: flex;
-
-        @include breakpoint(430px) {
-            display: block;
-            position: relative;
-            width: 100vw;
-        }
-
-        // @include breakpoint(1280px) {
-
-        // }
-
-        // @include breakpoint(1024px) {
-
-        // }
-
-        @include breakpoint(820px) {}
-
-        // @include breakpoint(430px) {
-
-        // }
-
-        // @include breakpoint(375px) {
-
-        // }
     }
 
-    button {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        margin-bottom: 28px;
+    // @include breakpoint(1280px) {
+
+    // }
+
+    // @include breakpoint(1024px) {
+
+    // }
+
+    @include breakpoint(820px) {}
+
+    // @include breakpoint(430px) {
+
+    // }
+
+    // @include breakpoint(375px) {
+
+    // }
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 28px;
+    padding-left: 1px;
+
+    @include breakpoint(430px) {
+        margin-bottom: 4px;
         padding-left: 1px;
     }
+    
+    @include breakpoint(390px) {
+        margin-bottom: 0px;
+    }
 
-    .restaurant_sidebar {
-        background-color: #fff;
-        width: 17vw;
+}
+
+.restaurant_sidebar {
+    background-color: #fff;
+    width: 17vw;
+
+    @include breakpoint(430px) {
+        background-color: #f6f1ed;
+        position: absolute;
+        z-index: 1;
+    }
+
+    .storeimg {
+        padding-top: 212px;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        display: block;
 
         @include breakpoint(430px) {
-            background-color: #f6f1ed;
-            position: absolute;
-            z-index: 1;
-        }
-
-        .storeimg {
-            padding-top: 212px;
-            width: 80px;
-            height: 80px;
-            margin: 0 auto;
-            display: block;
-
-            @include breakpoint(430px) {
-                display: none;
-            }
-        }
-
-        .column {
-            display: flex;
-            width: fit-content;
-            margin: 0 auto;
-
-            @include breakpoint(430px) {
-                position: absolute;
-                top: 31vw;
-                left: 35vw;
-                width: 43vw;
-                display: flex;
-                flex-direction: column;
-            }
-
-            h2 {
-                -webkit-writing-mode: vertical-lr;
-                writing-mode: vertical-lr;
-                margin-top: 16px;
-
-                @include breakpoint(1280px) {
-                    margin-left: 2vw;
-                }
-
-                @include breakpoint(820px) {
-                    font-size: 34px;
-                }
-
-                @include breakpoint(430px) {
-                    -webkit-writing-mode: unset;
-                    writing-mode: unset;
-                    font-weight: 800;
-                }
-            }
-
-            h6 {
-                -webkit-writing-mode: vertical-lr;
-                writing-mode: vertical-lr;
-                margin-top: 16px;
-                margin-left: 8px;
-
-                @include breakpoint(430px) {
-                    -webkit-writing-mode: unset;
-                    writing-mode: unset;
-                    font-weight: 800;
-                    margin-left: 9vw;
-                }
-            }
-        }
-
-        .restaurant_star {
-            background-color: #7a625b;
-            display: flex;
-            width: 83px;
-            height: 30px;
-            border-radius: 50px;
-            margin: 0 auto;
-            margin-top: 26px;
-
-            @include breakpoint(430px) {
-                position: absolute;
-                top: 48vw;
-                left: 39vw;
-            }
-
-            .star {
-                font-size: 20px;
-                color: #dbcec6;
-                margin: 5px 41px 5px 12px;
-
-                @include breakpoint(1024px) {
-                    padding-left: 8px;
-                }
-            }
-
-            .restaurant_starimg {
-                width: 20px;
-                height: 20px;
-                margin: 5px 12px 5px -35px;
-            }
-        }
-
-        .list {
-            width: 93px;
-            height: 168px;
-            margin: 0 auto;
-            margin-top: 26px;
-
-            @include breakpoint(1280px) {
-                width: 76px;
-            }
-
-            @include breakpoint(430px) {
-                display: none;
-            }
-
-            li {
-                margin-top: 16px;
-            }
+            display: none;
         }
     }
 
-    .restaurant_content {
-        top: 0;
-        left: 17vw;
-        width: 83vw;
-        object-fit: cover;
-        overflow: hidden;
-        background-color: #f6f1ed;
+    .column {
+        display: flex;
+        width: fit-content;
+        margin: 0 auto;
 
         @include breakpoint(430px) {
-            width: 100vw;
-        }
-
-        .Banner {
-            opacity: 50%;
-            width: 82vw;
-
-            @include breakpoint(430px) {
-                display: none;
-            }
-        }
-
-        .Banner430 {
-            display: none;
-
-            @include breakpoint(430px) {
-                display: block;
-                object-fit: contain;
-                width: 100vw;
-                background-color: #000;
-                opacity: 0.5;
-                position: relative;
-                margin-top: 21vw;
-            }
-        }
-
-        .restaurant_breadcrumb {
-            height: 88px;
-            width: 82vw;
-            color: #333333;
+            position: absolute;
+            top: 31vw;
+            left: 35vw;
+            width: 43vw;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+        }
 
-            @include breakpoint(1024px) {
-                width: 67vw;
+        h2 {
+            -webkit-writing-mode: vertical-lr;
+            writing-mode: vertical-lr;
+            margin-top: 16px;
+
+            @include breakpoint(1280px) {
+                margin-left: 2vw;
             }
 
             @include breakpoint(820px) {
-                width: 66vw;
+                font-size: 34px;
             }
 
             @include breakpoint(430px) {
-                width: 100vw;
+                -webkit-writing-mode: unset;
+                writing-mode: unset;
+                font-weight: 800;
+            }
+        }
+
+        h6 {
+            -webkit-writing-mode: vertical-lr;
+            writing-mode: vertical-lr;
+            margin-top: 16px;
+            margin-left: 8px;
+
+            @include breakpoint(430px) {
+                -webkit-writing-mode: unset;
+                writing-mode: unset;
+                font-weight: 800;
+                margin-left: 9vw;
+            }
+        }
+    }
+
+    .restaurant_star {
+        background-color: #7a625b;
+        display: flex;
+        width: 83px;
+        height: 30px;
+        border-radius: 50px;
+        margin: 0 auto;
+        margin-top: 26px;
+
+        @include breakpoint(430px) {
+            position: absolute;
+            top: 48vw;
+            left: 39vw;
+        }
+
+        .star {
+            font-size: 20px;
+            color: #dbcec6;
+            margin: 5px 41px 5px 12px;
+
+            @include breakpoint(1024px) {
+                padding-left: 8px;
+            }
+        }
+
+        .restaurant_starimg {
+            width: 20px;
+            height: 20px;
+            margin: 5px 12px 5px -35px;
+        }
+    }
+
+    .list {
+        width: 93px;
+        height: 168px;
+        margin: 0 auto;
+        margin-top: 26px;
+
+        @include breakpoint(1280px) {
+            width: 76px;
+        }
+
+        @include breakpoint(430px) {
+            display: none;
+        }
+
+        li {
+            margin-top: 16px;
+        }
+    }
+}
+
+.restaurant_content {
+    top: 0;
+    left: 17vw;
+    width: 83vw;
+    object-fit: cover;
+    overflow: hidden;
+    background-color: #f6f1ed;
+
+    @include breakpoint(430px) {
+        width: 100vw;
+    }
+
+    .Banner {
+        opacity: 50%;
+        width: 82vw;
+
+        @include breakpoint(430px) {
+            display: none;
+        }
+    }
+
+    .Banner430 {
+        display: none;
+
+        @include breakpoint(430px) {
+            display: block;
+            object-fit: contain;
+            width: 100vw;
+            background-color: #000;
+            opacity: 0.5;
+            position: relative;
+            margin-top: 21vw;
+        }
+    }
+
+    .restaurant_breadcrumb {
+        height: 88px;
+        width: 82vw;
+        color: #333333;
+        display: flex;
+        justify-content: space-between;
+
+        @include breakpoint(1024px) {
+            width: 67vw;
+        }
+
+        @include breakpoint(820px) {
+            width: 66vw;
+        }
+
+        @include breakpoint(430px) {
+            height: 8vh;
+            width: 95vw;
+        }
+
+        .breadcrumb {
+            margin: 20px 20px 0 20px;
+            width: 206px;
+            height: 23px;
+
+            @include breakpoint(430px) {
+                width: fit-content;
             }
 
-            .breadcrumb {
-                margin: 20px 20px 0 20px;
-                width: 206px;
-                height: 23px;
-
-                @include breakpoint(430px) {
-                    width: fit-content;
-                }
-
-                .crumb1 {
-                    position: absolute;
-
-                    a {
-                        margin-right: 12px;
-                        color: #333333;
-
-                        &:hover {
-                            color: #999999;
-                        }
-
-                        color: #999999;
-                    }
-                }
+            @include breakpoint(390px) {
+                margin: 10px 10px 10px 10px;
             }
 
-            .crumb2 {
-                margin-left: 60px;
-                margin-right: 20px;
+            .crumb1 {
+                position: absolute;
 
                 a {
                     color: #333333;
@@ -732,32 +729,47 @@ export default {
                     &:hover {
                         color: #999999;
                     }
-
-                    color: #999999;
                 }
-            }
-
-            img {
-                margin-left: 12px;
             }
         }
 
-        .crumb3 {
-            margin-left: 158px;
-            margin-top: -18px;
+        .crumb2 {
+            margin-left: 56px;
+            margin-right: 20px;
 
             a {
                 color: #333333;
+                // margin-left: 1vw;
 
                 &:hover {
                     color: #999999;
                 }
+            }
+        }
 
+        img {
+            margin-left: 0.5vw;
+
+            @include breakpoint(430px) {
+                margin-left: 2.0vw;
+            }
+        }
+    }
+
+    .crumb3 {
+        margin-left: 143px;
+        margin-top: -19px;
+
+        a {
+            color: #333333;
+
+            &:hover {
                 color: #999999;
             }
         }
     }
 }
+
 
 .restaurant_btns {
     display: flex;
@@ -775,6 +787,11 @@ export default {
 
     @include breakpoint(430px) {
         width: fit-content;
+        margin-top: 14px;
+    }
+
+    @include breakpoint(390px) {
+        margin-top: 10px;
     }
 
     .collect {
@@ -924,6 +941,11 @@ export default {
 
     @include breakpoint(430px) {
         flex-direction: column;
+        margin: 3vw 10vw 2vw 6vw;
+    }
+
+    @include breakpoint(390px) {
+        width: 91vw;
     }
 
     .restaurant_slogan {
@@ -951,13 +973,13 @@ export default {
 
         @include breakpoint(430px) {
             font-size: 30px;
-            margin-left: 0vw;
+            margin-left: 7vw;
             width: 81vw;
             margin-top: 2vw;
         }
 
         @include breakpoint(390px) {
-
+            margin-left: 0vw;
             width: 89vw;
         }
     }
@@ -985,8 +1007,7 @@ export default {
         @include breakpoint(430px) {
             font-size: 16px;
             width: 74vw;
-            margin-top: 3vw;
-            margin-bottom: 4vw;
+            margin: 3vw 10vw 6vw 9vw;
         }
     }
 }
@@ -1008,17 +1029,17 @@ export default {
         padding-bottom: 8vw;
     }
 
+    @include breakpoint(820px) {
+        padding-bottom: 0vw;
+    }
 
     @include breakpoint(430px) {
-        width: 86vw;
-        width: 86vw;
+        width: 85vw;
+        margin: 0 auto;
     }
 
     @include breakpoint(390px) {
-        width: 86vw;
-        padding-bottom: 0vw;
-        width: 86vw;
-        padding-bottom: 0vw;
+        width: 98vw;
     }
 
     .restaurant_h3 {
@@ -1038,6 +1059,10 @@ export default {
                 font-size: 23px;
                 width: 86vw;
             }
+
+            @include breakpoint(390px) {
+                margin-left: 8vw;
+            }
         }
     }
 
@@ -1052,7 +1077,8 @@ export default {
         }
 
         @include breakpoint(1280px) {
-            width: 71vw;
+            width: 70vw;
+            margin-left: 3vw;
         }
 
         @include breakpoint(1100px) {
@@ -1071,8 +1097,13 @@ export default {
             margin-bottom: 5vw;
         }
 
-        @include breakpoint(390px) {
+        @include breakpoint(430px) {
             margin-left: 0vw;
+            margin-bottom: 20vw;
+        }
+
+        @include breakpoint(390px) {
+            margin-left: 6vw;
             margin-bottom: 1vw;
         }
 
@@ -1086,7 +1117,7 @@ export default {
                 }
 
                 @include breakpoint(1280px) {
-                    width: 39vw;
+                    width: 38vw;
                     margin-left: 2vw;
                 }
 
@@ -1124,6 +1155,10 @@ export default {
                         border-bottom: 1px solid #333333;
                         text-align: left;
                         width: 160px;
+
+                        @include breakpoint(1314px) {
+                            width: 8vw;
+                        }
 
                         @include breakpoint(1280px) {
                             width: 10vw;
@@ -1184,8 +1219,13 @@ export default {
                 display: flex;
                 margin-left: -80px;
 
+                @include breakpoint(1280px) {
+                    margin-left: -30px;
+                }
+
                 @include breakpoint(430px) {
                     display: block;
+                    margin-left: -72px;
                 }
 
                 .restaurant_fb {
@@ -1194,6 +1234,10 @@ export default {
                     img {
                         margin-right: 12px;
                         flex-direction: row-reverse;
+
+                        @include breakpoint(430px) {
+                            width: 28px;
+                        }
 
                         @include breakpoint(390px) {
                             width: 26px;
@@ -1257,8 +1301,12 @@ export default {
                         margin-left: 76px;
                         display: inline;
 
+                        @include breakpoint(1314px) {
+                            margin-left: 12px;
+                        }
+
                         @include breakpoint(1280px) {
-                            margin-left: 1vw;
+                            margin-left: 0vw;
                         }
 
                         @include breakpoint(1200px) {
@@ -1271,8 +1319,13 @@ export default {
                             // padding-bottom: 5px;
                         }
 
+                        @include breakpoint(430px) {
+                            width: 28px;
+                        }
+
                         @include breakpoint(390px) {
                             width: 26px;
+                            margin-left: 52px;
                         }
                     }
 
@@ -1293,8 +1346,8 @@ export default {
 
                     @include breakpoint(1024px) {
                         width: 68vw;
-                        margin-left: -53vw;
-                        // padding-bottom: 5px;
+                        margin-left: -55vw;
+                        margin-bottom: -2vw;
                     }
 
                     @include breakpoint(790px) {
@@ -1304,8 +1357,18 @@ export default {
                     }
 
                     @include breakpoint(820px) {
+                        width: 70vw;
                         margin-bottom: -2vw;
-                        margin-left: -56vw;
+                        margin-left: -65vw;
+                    }
+
+                    @include breakpoint(430px) {
+                        margin-left: 17vw;
+                        width: 85vw;
+                    }
+
+                    @include breakpoint(390px) {
+                        margin-left: 20vw;
                     }
                 }
             }
@@ -1317,6 +1380,10 @@ export default {
 
             @include breakpoint(1440px) {
                 padding-left: 0px;
+            }
+            @include breakpoint(1280px) {
+                padding-left: 0px;
+                padding-right: 3vw;
             }
 
             @include breakpoint(1024px) {
@@ -1335,6 +1402,10 @@ export default {
             #google_map {
                 width: 500px;
                 height: 300px;
+
+                @include breakpoint(1280px) {
+                    scale: 0.89;
+                }
 
                 @include breakpoint(1024px) {
                     width: 600px;
@@ -1355,23 +1426,25 @@ export default {
                     margin-left: -7vw;
                     margin-top: -4vw;
                 }
-            }
 
-            @include breakpoint(430px) {
-                width: 80vw;
-                margin-right: 0vw;
-                margin-top: 4vw;
-                margin-left: 4vw;
-                padding-bottom: 11vw;
-
-                #google_map {
-                    width: 400px;
-                    height: 300px;
+                @include breakpoint(430px){
+                    #google_map {
+                        margin-left: -3vw;
+                        margin-top: -2vw;
+                        width: 380px;
+                        height: 350px;
+                    }
                 }
             }
 
-            @include breakpoint(390px) {
+            @include breakpoint(430px) {
+                width: 88vw;
+                margin-right: 0vw;
+                margin-top: 8vw;
+                margin-left: 2vw;
+            }
 
+            @include breakpoint(390px) {
 
                 #google_map {
                     width: 350px;
@@ -1425,8 +1498,12 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
 
+    @include breakpoint(430px) {
+        width: 100vw;
+    }
+    
     @include breakpoint(390px) {
-        margin-left: 2vw;
+        width: 90vw;
     }
 
     .restaurant_content1 {
@@ -1434,7 +1511,10 @@ export default {
 
         @include breakpoint(430px) {
             flex-direction: column-reverse;
-            margin-left: 20vw;
+        }
+
+        @include breakpoint(390px) {
+            margin-left: 10vw;
         }
 
         h4 {
@@ -1465,6 +1545,7 @@ export default {
             @include breakpoint(430px) {
                 font-size: 17px;
                 width: 76vw;
+                margin: 0;
             }
 
             @include breakpoint(390px) {
@@ -1480,11 +1561,6 @@ export default {
                 width: 32vw;
             }
 
-            // @include breakpoint(1106px) {
-            //     width: 33vw;
-            //     padding-left: 32px;
-            // }
-
             @include breakpoint(820px) {
                 width: 34vw;
                 height: 23vw;
@@ -1493,7 +1569,7 @@ export default {
             @include breakpoint(430px) {
                 width: 57vw;
                 height: 38vw;
-                margin-left: 8vw;
+                margin: 0 auto 5vw;
             }
         }
     }
@@ -1503,6 +1579,10 @@ export default {
 
         @include breakpoint(430px) {
             flex-direction: column;
+        }
+
+        @include breakpoint(390px) {
+            margin-left: 3vw;
         }
 
         h4 {
@@ -1520,12 +1600,12 @@ export default {
             }
 
             @include breakpoint(430px) {
-                margin-left: 11.3vw;
-                font-size: 16px;
+                font-size: 17px;
+                margin: 0 auto;
             }
 
             @include breakpoint(390px) {
-                margin-left: 3.3vw;
+                margin-left: 4.0vw;
             }
         }
 
@@ -1547,11 +1627,12 @@ export default {
             @include breakpoint(430px) {
                 width: 57vw;
                 height: 38vw;
-                margin-left: 20vw;
+                margin: 5vw auto;
             }
 
             @include breakpoint(390px) {
                 height: 35vw;
+                margin-left: 16vw;
             }
         }
     }
@@ -1562,6 +1643,13 @@ export default {
 
         @include breakpoint(430px) {
             flex-direction: column-reverse;
+            padding-bottom: 20px;
+        }
+
+        @include breakpoint(3900px) {
+            text-align: center;
+            padding-bottom: 0px;
+            margin: 0 auto;
         }
 
         h4 {
@@ -1577,12 +1665,12 @@ export default {
             }
 
             @include breakpoint(430px) {
-                margin-left: 11.3vw;
-                font-size: 16px;
+                font-size: 17px;
+                margin: 0 auto;
             }
 
             @include breakpoint(390px) {
-                margin-left: 3.3vw;
+                margin-left: 4.0vw;
             }
         }
 
@@ -1604,6 +1692,10 @@ export default {
             @include breakpoint(430px) {
                 width: 57vw;
                 height: 38vw;
+                margin: 5vw auto;
+            }
+
+            @include breakpoint(390px) {
                 margin-left: 18vw;
             }
         }
@@ -1627,14 +1719,20 @@ export default {
         margin: 0 auto;
 
         @include breakpoint(820px) {
-            height: 74vh;
+            height: 90vh;
             width: 71vw;
         }
 
         @include breakpoint(430px) {
-            width: 78vw;
+            width: 81vw;
             margin-left: 10vw;
-            height: 197vw;
+            padding-left: 6vw;
+            height: 186vw;
+        }
+
+        @include breakpoint(390px) {
+            margin-left: 10vw;
+            margin-top: 5vw;
         }
 
         .restaurant_review_content {
@@ -1660,7 +1758,7 @@ export default {
                 }
 
                 h3 {
-                    margin-top: 8px;
+                    margin-top: 18px;
                     width: 535px;
                     height: 50px;
                     color: #cb4847;
@@ -1682,6 +1780,10 @@ export default {
                 span {
                     display: flex;
                     align-items: center;
+
+                    @include breakpoint(390px) {
+                            padding-top: 4vw;
+                        }
 
                     .restaurantstarimg {
                         width: 20px;
@@ -1715,6 +1817,7 @@ export default {
 
                     @include breakpoint(390px) {
                         font-size: 16px;
+                        width: 88px;
                     }
                 }
             }
@@ -1733,7 +1836,7 @@ export default {
             }
 
             @include breakpoint(1024px) {
-                margin-left: 18vw;
+                margin-left: 14vw;
             }
 
             @include breakpoint(820px) {
@@ -1775,6 +1878,7 @@ export default {
                     top: 50%;
                     left: 50%;
                     transform: translate(-50% -50%);
+                    margin: 4px 2px 3px 4px;
                 }
             }
         }
@@ -1799,7 +1903,7 @@ export default {
             display: block;
             height: 25vh;
             width: 48vw;
-            margin-left: 9vw;
+            margin-left: 7vw;
         }
 
         @include breakpoint(430px) {
@@ -1818,31 +1922,37 @@ export default {
             border-radius: 5px;
             filter: drop-shadow(0 0 7px rgba(207, 81, 61, 0.4));
 
+            @include breakpoint(1024px) {
+                width: 24vw;
+                height: 24vh;
+            }
+            
+            
             @include breakpoint(820px) {
                 margin: auto;
                 width: 48vw;
-                height: 18vh;
+                height: 20vh;
                 margin-bottom: 3vw;
             }
 
-            // @include breakpoint(820px) {
-            //     margin-left: 15vw;
-            //     width: 40vw;
-            //     height: 24vh;
-            // }
-
             @include breakpoint(430px) {
-                width: 72vw;
-                margin-left: -11vw;
+                width: 71vw;
+                margin-left: -8vw;
                 margin-bottom: 6vw;
-                height: 47vw;
+                height: 42vw;
             }
+
+            @include breakpoint(390px) {
+                width: 68vw;
+                margin-left: -8vw;
+            }
+
 
             div {
                 display: flex;
 
                 @include breakpoint(820px) {
-                    margin-left: 3vw;
+                    // margin-left: 3vw;
                 }
 
                 span {
@@ -1855,16 +1965,17 @@ export default {
                         margin-left: 1.7vw;
 
                         @include breakpoint(1280px) {
-                            padding-left: 6px;
+                            padding-left: 0px;
                         }
 
                         @include breakpoint(1024px) {
                             padding-left: 8px;
                             padding-top: 8px;
+                            margin-left: 0.7vw;
                         }
 
                         @include breakpoint(820px) {
-                            // padding-left: 2.5vw;
+                            margin-left: 1.7vw;
                         }
                     }
 
@@ -1874,6 +1985,10 @@ export default {
                         font-weight: bold;
                         color: #7a625b;
                         margin: 0 auto;
+
+                        @include breakpoint(1280px) {
+                            width: 14vw;
+                        }
 
                         @include breakpoint(1024px) {
                             padding-left: 9px;
@@ -1898,14 +2013,26 @@ export default {
                         width: 16px;
                         height: 16px;
 
+                        @include breakpoint(1280px) {
+                            margin-left: 12px;
+                        }
+
                         @include breakpoint(1024px) {
                             margin-left: 0px;
                             margin-top: 16px;
                         }
 
                         @include breakpoint(820px) {
-                            // padding-left: 110px;
-                            // margin-left: 113vw;
+                            margin-top: 16px;
+                            margin-left: 124px;
+                        }
+
+                        @include breakpoint(430px) {
+                            margin-left: 13vw;
+                        }
+
+                        @include breakpoint(390px) {
+                            margin-left: 19px;
                         }
                     }
 
@@ -1938,7 +2065,11 @@ export default {
                 }
 
                 @include breakpoint(820px) {
-                    padding-left: 2vw;
+                    padding-left: 7vw;
+                }
+
+                @include breakpoint(430px) {
+                    padding-left: 4vw;
                 }
 
                 .starbar {
@@ -1953,12 +2084,24 @@ export default {
                         height: 24px;
                         padding-left: 4px;
 
-                        @include breakpoint(1024px) {
-                            width: 18px;
-                            height: 18px;
+                        @include breakpoint(1280px) {
+                            height: 20px;
                         }
 
-                        @include breakpoint(820px) {}
+                        @include breakpoint(1024px) {
+                            width: 18px;
+                            height: 16px;
+                        }
+
+                        @include breakpoint(430px) {
+                            // width: 18px;
+                            // height: 16px;
+                        }
+
+                        @include breakpoint(390px) {
+                            width: 18px;
+                            height: 15px;
+                        }
                     }
                 }
 
@@ -1970,7 +2113,7 @@ export default {
                         font-size: 16px;
 
                         @include breakpoint(1280px) {
-                            margin-left: -1.9vw;
+                            margin-left: -0.9vw;
                             font-size: 13.7px;
                         }
 
@@ -2006,6 +2149,10 @@ export default {
                 @include breakpoint(820px) {
                     margin-left: 5vw;
                 }
+
+                @include breakpoint(390px) {
+                    font-size: 16px;
+                }
             }
         }
     }
@@ -2022,22 +2169,22 @@ export default {
     border: none;
 
     @include breakpoint(1024px) {
-        margin: 16px 0 16px 330px;
+        margin: 16px 0 16px 314px;
     }
 
     @include breakpoint(820px) {
         margin-left: 26vw;
-        margin-top: 48vw;
+        margin-top: 50vw;
     }
 
     @include breakpoint(430px) {
         margin-left: 21vw;
-        margin-top: 30vw;
+        margin-top: 34vw;
     }
 
     @include breakpoint(390px) {
         margin-left: 16vw;
-        margin-top: 16vw;
+        margin-top: 10vw;
     }
 
     a {
@@ -2067,12 +2214,12 @@ export default {
 
     &.active {
         width: 412px;
-        height: 588px;
+        height: 625px;
         opacity: 1;
         pointer-events: auto;
         text-align: center;
-        top: 14px;
-        left: 513px;
+        top: 10%;
+        left: 41%;
 
         @include breakpoint(1024px) {
             top: 332px;
@@ -2126,7 +2273,7 @@ export default {
             @include breakpoint(1024px) {
                 width: 34vw;
                 margin-left: 3vw;
-                margin-bottom: -2vw;
+                
             }
 
             @include breakpoint(820px) {
@@ -2164,7 +2311,7 @@ export default {
             margin-top: 8px;
 
             .text_concent {
-                width: 356px;
+                width: 350px;
                 height: 108px;
                 font-size: 14px;
                 border-radius: 9px;
@@ -2175,7 +2322,7 @@ export default {
                     width: 329px;
                 }
 
-                width: 329px;
+                
             }
 
             &::placeholder {
@@ -2264,7 +2411,7 @@ export default {
     align-items: center;
     margin: auto;
     margin-left: 8vw;
-    margin-top: 1.5vw;
+    margin-top: 2.5vw;
 
     @include breakpoint(820px) {
         margin-left: 13vw;

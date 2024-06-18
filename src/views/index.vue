@@ -121,14 +121,11 @@ export default {
         object-position: center bottom;
 
         @include breakpoint(1174px) {
-            bottom: 0px;
-        }
-
-        @include breakpoint(1077px) {
+            height: auto;
             width: auto;
         }
+
         @include breakpoint(1028px) {
-            height: 99%;
             bottom: 17px;
         }
     }
@@ -141,14 +138,21 @@ export default {
     transform: translateX(-50%);
     display: flex;
 
+    @include breakpoint(820px) {
+        scale: 2.25;
+        top: 48%;
+        left: 78%;
+    }
+
     @include breakpoint(430px) {
         transform: translateX(-50%);
         display: flex;
-        width: 22%;
-        height: 89%;
-        scale: 496%;
-        bottom: 82vw;
-        }
+        width: 33%;
+        height: 87%;
+        scale: 508%;
+        top: 81%;
+        left: 88%;
+    }
 
     .left,
     .right {
@@ -158,10 +162,22 @@ export default {
 
     .left {
         transform-origin: left;
+
+        @include breakpoint(820px) {
+            width: 23vw;
+            height: 45vw;
+            margin-top: -3vw;
+        }
     }
 
     .right {
         transform-origin: right;
+
+        @include breakpoint(820px) {
+            width: 23vw;
+            height: 45vw;
+            margin-top: -3vw;
+        }
     }
 
     &.rotate .left {
@@ -183,6 +199,16 @@ export default {
     display: block;
     position: relative;
     margin-top: -20px;
+
+    @include breakpoint(820px) {
+        height: 85vh;
+        width: 238%;
+        margin-top: -63.5px;
+        margin-left: -70vw;
+    }
+    @include breakpoint(810px) {
+        height: unset;
+    }
 }
 
 .main {
@@ -194,8 +220,6 @@ export default {
     position: absolute;
     top: 42%;
     left: 42%;
-    // top: 41%;
-    // left: 46.6%;
     width: 15.8vw;
     height: 15.8vw;
 
@@ -206,19 +230,39 @@ export default {
 
     @include breakpoint(430px) {
         position: absolute;
-        top: -143%;
-        left: 47.6%;
+        top: -25%;
+        left: 43%;
         width: 15.8vw;
         height: 15.8vw;
-        scale: 4.3;
+        scale: 2.2;
     }
+
+    .-top {
+        .-frontend {
+            @include breakpoint(820px) {
+                top: 3px
+            }
+        }
+    }
+
+    .-bottom {
+        .-backend {
+            @include breakpoint(820px) {
+                top: 94px;
+            }
+            @include breakpoint(430px) {
+                top: 85px;
+            }
+        }
+    }
+
 
     h5 {
         font-size: 24px;
 
         @include breakpoint(430px) {
-        font-size: 10px;
-        margin-bottom: 1vw;
+            font-size: 16px;
+            margin-bottom: 1vw;
         }
     }
 
@@ -282,6 +326,11 @@ export default {
         display: block;
         transition: all .3s ease;
 
+        @include breakpoint(840px) {
+            margin-top: 5vw;
+            scale: 2.3;
+        }
+
         &:hover {
             transform: translateY(-10px);
 
@@ -298,6 +347,12 @@ export default {
             }
         }
     }
+
+    // .yiayng__group -top{
+    // }
+    // .yiayng__group -bottom{
+
+    // }
 }
 
 @keyframes cycle {
