@@ -164,8 +164,12 @@ section {
     z-index: 20;
     .nmap {
       background-image: url("../assets/Image/map/northsideOpen2.png");
-      width: 592px;
-      height: 484px;
+      background-size: cover;
+      // outline: 1px red solid;
+      // width: 592px;
+      width: 39vw;
+      // height: 484px;
+      height: 31.88484vw;
       opacity: 1;
       position: relative;
       // object-fit: cover;
