@@ -20,14 +20,14 @@
                 draggable="false"
             />
         </div>
-        <div id="login_right" >
+        <div id="login_right">
             <router-view />
         </div>
     </section>
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style lang="scss" scoped>
@@ -49,7 +49,9 @@ export default {}
     align-items: center;
     justify-content: center;
     gap: 10vw;
-
+    @include breakpoint(430px) {
+        flex-direction: column-reverse;
+    }
     .login_left {
         width: 30vw;
         position: relative;
@@ -59,6 +61,13 @@ export default {}
             margin: 0 auto;
             transform: translate(-2vw);
             filter: drop-shadow(2px 10px 5px #aaa);
+            @include breakpoint(430px) {
+                position: absolute;
+                height: 70vh;
+                top: -70vh;
+                right: -50vw;
+                opacity: 0.1;
+            }
         }
         .login_cup1 {
             width: 7vw;
@@ -67,6 +76,13 @@ export default {}
             right: 29%;
             transform: rotate(20deg);
             filter: drop-shadow(7px 7px 3px #bbb);
+            @include breakpoint(430px) {
+                width: 40vw;
+                transform: rotate(0);
+                top: -25vh;
+                right: 130%;
+                opacity: 0.2;
+            }
         }
         .login_cup2 {
             width: 7vw;
@@ -75,6 +91,14 @@ export default {}
             right: 2%;
             transform: rotate(-15deg);
             filter: drop-shadow(2px 7px 3px #bbb);
+            @include breakpoint(430px) {
+                width: 40vw;
+                transform: rotate(0);
+                top: -35vh;
+                right: 130%;
+                opacity: 0.2;
+                filter: unset;
+            }
         }
     }
     #login_right {
@@ -88,6 +112,14 @@ export default {}
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
+        @include breakpoint(820px) {
+            width: 40vw;
+        }
+        @include breakpoint(430px) {
+            background-color: unset;
+            border-image: unset;
+            width: 80vw;
+        }
     }
 }
 </style>

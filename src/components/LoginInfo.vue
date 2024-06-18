@@ -127,9 +127,20 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
+    @include breakpoint(820px) {
+        width: 13vw;
+    }
+    @include breakpoint(430px) {
+        display: none;
+    }
 }
 h2 {
+    position: relative;
+    z-index: 1;
     margin: 2vw;
+    @include breakpoint(430px) {
+        margin-bottom: 8vw;
+    }
 }
 .login_google {
     background-color: #fff;
@@ -138,6 +149,11 @@ h2 {
     width: 207px;
     height: 40px;
     margin-bottom: 1vw;
+    position: relative;
+    z-index: 1;
+    @include breakpoint(430px) {
+        margin-bottom: 5vw;
+    }
     &:active {
         background-color: #eee;
     }
@@ -160,6 +176,15 @@ h2 {
         width: 9vw;
         height: 0px;
         border: 0.5px solid $Black;
+        @include breakpoint(1280px) {
+            width: 11vw;
+        }
+        @include breakpoint(820px) {
+            width: 15vw;
+        }
+        @include breakpoint(430px) {
+            width: 30vw;
+        }
     }
     h4 {
         margin: 0 0.5vw;
@@ -180,6 +205,15 @@ h2 {
         background-color: transparent;
         border: none;
         border-bottom: 1px solid $Black;
+        @include breakpoint(1280px) {
+            width: 25vw;
+        }
+        @include breakpoint(820px) {
+            width: 33vw;
+        }
+        @include breakpoint(430px) {
+            width: 66vw;
+        }
     }
 }
 .error {
@@ -200,6 +234,15 @@ h2 {
         background-color: transparent;
         border: none;
         border-bottom: 1px solid $Black;
+        @include breakpoint(1280px) {
+            width: 25vw;
+        }
+        @include breakpoint(820px) {
+            width: 33vw;
+        }
+        @include breakpoint(430px) {
+            width: 66vw;
+        }
     }
 }
 .login_forgotPW {
@@ -208,6 +251,15 @@ h2 {
     justify-content: flex-end;
     margin-right: 1vw;
     margin-top: 8px;
+    @include breakpoint(1280px) {
+        width: 25vw;
+    }
+    @include breakpoint(820px) {
+        width: 33vw;
+    }
+    @include breakpoint(430px) {
+        width: 66vw;
+    }
     a {
         text-decoration: none;
         color: $DarkBrown;
@@ -268,5 +320,11 @@ h2 {
     position: absolute;
     bottom: 3%;
     left: 0;
+    @include breakpoint(820px) {
+        height: 20vw;
+    }
+    @include breakpoint(430px) {
+        display: none;
+    }
 }
 </style>

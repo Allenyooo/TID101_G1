@@ -53,8 +53,16 @@ export default {};
     position: absolute;
     top: 0;
     right: 0;
+    @include breakpoint(820px) {
+        width: 13vw;
+    }
+    @include breakpoint(430px) {
+        display: none;
+    }
 }
 h2 {
+    position: relative;
+    z-index: 1;
     margin: 2vw;
     color: $Black;
 }
@@ -80,6 +88,12 @@ h2 {
         background-color: transparent;
         border: none;
         border-bottom: 1px solid $Black;
+        @include breakpoint(820px) {
+            width: 33vw;
+        }
+        @include breakpoint(430px) {
+            width: 66vw;
+        }
     }
 }
 
@@ -99,6 +113,12 @@ h2 {
         height: 30px;
         background-color: transparent;
         border: none;
+        @include breakpoint(820px) {
+            width: 25vw;
+        }
+        @include breakpoint(430px) {
+            width: 55vw;
+        }
         h4 {
             color: $Gold;
             font-weight: bold;
@@ -121,6 +141,12 @@ h2 {
         background-color: transparent;
         border: none;
         border-bottom: 1px solid $Black;
+        @include breakpoint(820px) {
+            width: 33vw;
+        }
+        @include breakpoint(430px) {
+            width: 66vw;
+        }
     }
 }
 
@@ -153,5 +179,11 @@ h2 {
     position: absolute;
     bottom: 3%;
     left: 0;
+    @include breakpoint(820px) {
+        height: 20vw;
+    }
+    @include breakpoint(430px) {
+        display: none;
+    }
 }
 </style>
