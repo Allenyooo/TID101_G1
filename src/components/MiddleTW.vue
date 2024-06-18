@@ -166,8 +166,11 @@ section {
         z-index: 20;
         .nmap {
             background-image: url("../assets/Image/map/middlesideOpen2.png");
-            width: 531px;
-            height: 621px;
+            background-size: cover;
+            // width: 531px;
+            width: 33vw;
+            // height: 621px;
+            height: 38.593vw;
             opacity: 1;
             position: relative;
             // object-fit: cover;

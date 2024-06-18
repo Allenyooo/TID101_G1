@@ -166,8 +166,11 @@ section {
         z-index: 20;
         .nmap {
             background-image: url("../assets/Image/map/southsideOpen2.png");
-            width: 512px;
-            height: 667px;
+            background-size: cover;
+            // width: 512px;
+            width: 32vw;
+            // height: 667px;
+            height: 41.6864vw;
             opacity: 1;
             position: relative;
             // object-fit: cover;

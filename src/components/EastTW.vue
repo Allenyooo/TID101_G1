@@ -160,8 +160,11 @@ section {
     z-index: 20;
     .nmap {
       background-image: url("../assets/Image/map/eastsideOpen2.png");
-      width: 443px;
-      height: 689px;
+      background-size: cover;
+    //   width: 443px;
+      width: 25vw;
+    //   height: 689px;
+      height: 38.88vw;
       opacity: 1;
       position: relative;
       // object-fit: cover;
