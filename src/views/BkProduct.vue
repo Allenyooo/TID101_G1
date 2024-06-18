@@ -7,7 +7,13 @@
         <p>{{ manage[page - 1].manageName }}</p>
         <div class="Bkline"></div>
 
-        <BD :bd="bd" :title="title" :dataTd="dataTd" :stateTd="stateTd"></BD>
+        <BD
+          :bd="bd"
+          :title="title"
+          :dataTd="dataTd"
+          :stateTd="stateTd"
+          :page="page"
+        ></BD>
       </div>
     </div>
 

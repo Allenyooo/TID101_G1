@@ -6,9 +6,41 @@
       <div class="BkContent">
         <p>{{ manage[page - 1].manageName }}</p>
         <div class="Bkline"></div>
-        <BS :dropdown="dropdown" :search="search" :newButton="newButton"></BS>
+        <!-- <BS :dropdown="dropdown" :search="search" :newButton="newButton" :searchdrop="search""></BS> -->
+        <!-- <BS :searchdrop="searchdrop"></BS> -->
 
-        <BD :bd="bd" :title="title" :dataTd="dataTd" :stateTd="stateTd"></BD>
+        <div class="Bksearchbody">
+          <select @change="sIdchange($event.target.value)">
+            <option
+              v-for="s in searchdrop"
+              :key="s.id"
+              class="search"
+              :value="s.id"
+            >
+              <h4>{{ s.name }}</h4>
+            </option>
+          </select>
+
+          <div class="inputSearch">
+            <input type="text" :placeholder="placeholder[sId].name" />
+          </div>
+          <div class="searchButton">
+            <button><h5>搜尋</h5></button>
+          </div>
+          <div class="newButton">
+            <button>
+              <h5>新增操作人員帳號</h5>
+            </button>
+          </div>
+        </div>
+
+        <BD
+          :bd="bd"
+          :title="title"
+          :dataTd="dataTd"
+          :stateTd="stateTd"
+          :page="page"
+        ></BD>
       </div>
     </div>
 
@@ -23,10 +55,10 @@ import BS from "/src/components/BkSearch.vue";
 import BD from "/src/components/BkData.vue";
 import BDate from "/src/components/BkDate.vue";
 import BSort from "/src/components/BkSort.vue";
-// import BR from "/src/components/BkRevise.vue";
+import BRS from "/src/components/BkReviseSweet.vue";
 
 export default {
-  components: { BH, BM, BS, BD, BDate, BSort },
+  components: { BH, BM, BS, BD, BDate, BSort, BRS },
 
   data() {
     return {
@@ -83,6 +115,16 @@ export default {
           狀態: "狀態",
         },
       ],
+      searchdrop: [
+        { id: 0, name: "管理員編號" },
+        { id: 1, name: "管理員姓名" },
+      ],
+      sId: 0,
+
+      placeholder: [
+        { id: 1, name: "管理員編號" },
+        { id: 2, name: "管理員姓名" },
+      ],
       bd: [
         {
           id: 1,
@@ -117,6 +159,13 @@ export default {
       dataTd: 1,
     };
   },
+
+  methods: {
+    sIdchange(e) {
+      console.log("Selected value:", e);
+      this.sId = e;
+    },
+  },
 };
 </script>
 
@@ -143,6 +192,34 @@ export default {
 
         background-color: $Black;
         margin-bottom: 24px;
+      }
+
+      .Bksearchbody {
+        display: flex;
+        margin-bottom: 12px;
+
+        select {
+          font-family: $fontFamily;
+          background-color: $LightBrown;
+          color: $White;
+
+          .search {
+            background-color: $White;
+            color: $Black;
+          }
+        }
+
+        .inputSearch {
+          margin-left: 8px;
+        }
+
+        .searchButton {
+          margin-left: 8px;
+        }
+
+        .newButton {
+          margin-left: auto;
+        }
       }
     }
   }
