@@ -36,6 +36,12 @@ export default {};
     position: absolute;
     top: 0;
     right: 0;
+    @include breakpoint(820px) {
+        width: 13vw;
+    }
+    @include breakpoint(430px) {
+        display: none;
+    }
 }
 h2 {
     margin: 2vw;
@@ -77,5 +83,11 @@ h4 {
     position: absolute;
     bottom: 3%;
     left: 0;
+    @include breakpoint(820px) {
+        height: 20vw;
+    }
+    @include breakpoint(430px) {
+        display: none;
+    }
 }
 </style>

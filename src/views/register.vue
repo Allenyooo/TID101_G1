@@ -49,7 +49,9 @@ export default {};
     align-items: center;
     justify-content: center;
     gap: 10vw;
-
+    @include breakpoint(430px) {
+        flex-direction: column-reverse;
+    }
     .register_left {
         width: 30vw;
         position: relative;
@@ -59,6 +61,13 @@ export default {};
             margin: 0 auto;
             transform: translate(-2vw);
             filter: drop-shadow(2px 10px 5px #aaa);
+            @include breakpoint(430px) {
+                position: absolute;
+                height: 70vh;
+                top: -70vh;
+                right: -50vw;
+                opacity: 0.1;
+            }
         }
         .register_cup1 {
             width: 7vw;
@@ -67,6 +76,13 @@ export default {};
             right: 29%;
             transform: rotate(20deg);
             filter: drop-shadow(7px 7px 3px #bbb);
+            @include breakpoint(430px) {
+                width: 40vw;
+                transform: rotate(0);
+                top: -25vh;
+                right: 130%;
+                opacity: 0.2;
+            }
         }
         .register_cup2 {
             width: 7vw;
@@ -75,6 +91,14 @@ export default {};
             right: 2%;
             transform: rotate(-15deg);
             filter: drop-shadow(2px 7px 3px #bbb);
+            @include breakpoint(430px) {
+                width: 40vw;
+                transform: rotate(0);
+                top: -35vh;
+                right: 130%;
+                opacity: 0.2;
+                filter: unset;
+            }
         }
     }
     #register_right {
@@ -88,180 +112,14 @@ export default {};
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
-        .decoTop {
-            width: 9vw;
-            position: absolute;
-            top: 0;
-            right: 0;
+        margin: 5vh 0;
+        @include breakpoint(820px) {
+            width: 40vw;
         }
-        h2 {
-            margin: 2vw;
-            color: $Black;
-        }
-        .register_google {
-            background-color: #fff;
-            border: 1px solid $Black;
-            border-radius: 34px;
-            width: 207px;
-            height: 40px;
-            margin-bottom: 1vw;
-            &:active {
-                background-color: #eee;
-            }
-            button {
-                cursor: pointer;
-                width: 207px;
-                height: 40px;
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                background-color: transparent;
-                border: none;
-            }
-        }
-
-        .register_or {
-            display: flex;
-            align-items: center;
-            div {
-                width: 9vw;
-                height: 0px;
-                border: 0.5px solid $Black;
-            }
-            h4 {
-                margin: 0 0.5vw;
-            }
-        }
-
-        .register_emailadd {
-            display: flex;
-            flex-direction: column;
-            label {
-                font-size: 20px;
-                margin-top: 24px;
-                margin-bottom: 8px;
-                font-weight: bold;
-            }
-            input {
-                width: 20vw;
-                height: 38px;
-                background-color: transparent;
-                border: none;
-                border-bottom: 1px solid $Black;
-            }
-        }
-        .error-message {
-            color: red;
-            font-size: 12px;
-            padding-top: 4px;
-        }
-        .register_password {
-            display: flex;
-            flex-direction: column;
-            label {
-                font-size: 20px;
-                margin-top: 24px;
-                margin-bottom: 8px;
-                font-weight: bold;
-            }
-            input {
-                width: 20vw;
-                height: 38px;
-                background-color: transparent;
-                border: none;
-                border-bottom: 1px solid $Black;
-            }
-            p {
-                font-weight: bold;
-                color: $DarkBrown;
-            }
-        }
-
-        .register_confirmPassword {
-            display: flex;
-            flex-direction: column;
-            label {
-                font-size: 20px;
-                margin-top: 24px;
-                margin-bottom: 8px;
-                font-weight: bold;
-            }
-            input {
-                width: 20vw;
-                height: 38px;
-                background-color: transparent;
-                border: none;
-                border-bottom: 1px solid $Black;
-            }
-        }
-
-        .register_realname {
-            display: flex;
-            flex-direction: column;
-            label {
-                font-size: 20px;
-                margin-top: 24px;
-                margin-bottom: 8px;
-                font-weight: bold;
-            }
-            input {
-                width: 20vw;
-                height: 38px;
-                background-color: transparent;
-                border: none;
-                border-bottom: 1px solid $Black;
-            }
-        }
-
-        .register_acceptCondition {
-            display: flex;
-            align-items: center;
-            justify-content: start;
-            margin: 24px auto;
-            input {
-                width: 16px;
-                height: 16px;
-                margin: 4px;
-            }
-            label {
-                color: $Black;
-            }
-        }
-
-        .register_in {
-            background-image: $GoldGrad;
-            border: 1px solid $Gold;
-            border-radius: 15px;
-            margin: 16px auto 32px;
-            &:active {
-                background-image: $RevGoldGrad;
-            }
-            button {
-                width: 165px;
-                height: 52px;
-                background-color: transparent;
-                border: none;
-                h3 {
-                    color: $DarkBrown;
-                    font-weight: 600;
-                    font-size: 24px;
-                }
-            }
-        }
-
-        .register_login {
-            margin-bottom: 28px;
-            a {
-                text-decoration: none;
-                color: $DarkBrown;
-            }
-        }
-
-        .decoBottom {
-            height: 14vw;
-            position: absolute;
-            bottom: 3%;
-            left: 0;
+        @include breakpoint(430px) {
+            background-color: unset;
+            border-image: unset;
+            width: 80vw;
         }
     }
 }

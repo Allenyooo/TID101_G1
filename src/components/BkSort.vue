@@ -1,5 +1,5 @@
 <template>
-  <div class="BkSort">
+  <!-- <div class="BkSort">
     <div>
       <button class="Bkd" @click="dD">編號:由小到大</button>
       <ul :class="{ sDrop: this.sDown == true }">
@@ -8,12 +8,20 @@
         </li>
       </ul>
     </div>
+  </div> -->
+
+  <div class="BkSortbody">
+    <select class="BkSortSelect">
+      <option v-for="s in sortDrop" :key="s.id" class="sort">
+        <h4>{{ s.name }}</h4>
+      </option>
+    </select>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["dropdown"],
+  props: ["sortDrop"],
 
   data() {
     return {
@@ -40,50 +48,65 @@ export default {
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
 
-.BkSort {
-  height: 32px;
-  font-family: $fontFamily;
+// .BkSort {
+//   height: 32px;
+//   font-family: $fontFamily;
+//   margin-bottom: 12px;
+
+//   div {
+//     position: relative;
+//     width: 160px;
+
+//     .sDrop {
+//       display: block;
+//     }
+
+//     .Bkd {
+//       height: 32px;
+//       width: 160px;
+//       background-color: $LightBrown;
+//       color: $White;
+//       text-align: left;
+//     }
+
+//     .Bkd::before {
+//       content: "";
+//       display: block;
+//       position: absolute;
+//       height: 23px;
+//       width: 23px;
+//       top: 16%;
+//       right: 6%;
+//       background-image: url("/src/assets/Image/BK/sort.svg");
+//     }
+
+//     ul {
+//       display: none;
+//       position: absolute;
+
+//       li {
+//         background-color: antiquewhite;
+//         width: 160px;
+//         height: 32px;
+//         border: 1px solid black;
+//         line-height: 32px;
+//         padding: 0 6px;
+//       }
+//     }
+//   }
+// }
+
+.BkSortbody {
   margin-bottom: 12px;
 
-  div {
-    position: relative;
-    width: 160px;
+  .BkSortSelect {
+    font-family: $fontFamily;
+    background-color: $LightBrown;
+    color: $White;
 
-    .sDrop {
-      display: block;
-    }
-
-    .Bkd {
-      height: 32px;
-      width: 160px;
-      background-color: $LightBrown;
-      color: $White;
-      text-align: left;
-    }
-
-    .Bkd::before {
-      content: "";
-      display: block;
-      position: absolute;
-      height: 23px;
-      width: 23px;
-      top: 16%;
-      right: 6%;
-      background-image: url("/src/assets/Image/BK/sort.svg");
-    }
-
-    ul {
-      display: none;
-      position: absolute;
-
-      li {
-        background-color: antiquewhite;
-        width: 160px;
-        height: 32px;
-        border: 1px solid black;
-        line-height: 32px;
-        padding: 0 6px;
-      }
+    .sort {
+      background-color: $White;
+      color: $Black;
     }
   }
 }

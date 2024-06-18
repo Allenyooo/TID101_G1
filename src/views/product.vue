@@ -8,10 +8,13 @@
       <router-link to="/Product"><h5>梨饗券</h5></router-link>
     </div>
 
-    <!-- <button @click="scToggle()">購物車</button> -->
+    <button @click="scToggle()">購物車</button>
 
     <!-- <div class="left"></div> -->
 
+    <shopping :sp="move"></shopping>
+
+    <!-- 
     <div class="productMove" :class="{ pmOn: move == true }">
       <div class="spTop">
         <ul>
@@ -51,7 +54,7 @@
     <div class="spBottom" :class="{ pmOn: move == true }">
       <p>總計： NT${{ total }}</p>
       <a href="">前往結帳</a>
-    </div>
+    </div> -->
 
     <!-------------- top -------------->
     <div class="productTop" id="app">
@@ -138,47 +141,53 @@
 
     <!-------------- bottom -------------->
     <div class="productbottom">
+      <!-- 手機版本 -->
       <p class="pbMobileText">四大亮點 一次收藏</p>
-      <ul>
-        <li class="pbList1">
-          <div class="pbimage i1"></div>
-          <div class="pbText">
-            <p>便利快捷</p>
-            <h4>
-              簡單的線上購買流程，隨時隨地輕鬆取得QR
-              Code，無需等待即可享受美食體驗。
-            </h4>
-          </div>
-        </li>
+      <div class="pCa2"><pCard></pCard></div>
+      <!-- 手機版本 -->
 
-        <li class="pbList2">
-          <div class="pbimage i2"></div>
-          <div class="pbText">
-            <p>多樣選擇</p>
-            <h4>
-              我們合作的餐廳涵蓋全台灣，從北到南，更延伸到東部，隨時隨地滿足您不同的口味喜好。
-            </h4>
-          </div>
-        </li>
-        <li class="pbList3">
-          <div class="pbimage i3"></div>
-          <div class="pbText">
-            <p>優先訂位</p>
-            <h4>
-              梨饗券享有優先訂位之服務，預定前告知合作餐廳，不論何時、何地都能擁有訂位保留權。
-            </h4>
-          </div>
-        </li>
-        <li class="pbList4">
-          <div class="pbimage i4"></div>
-          <div class="pbText">
-            <p>有效期一年</p>
-            <h4>
-              充足的使用時間，讓您有充分的彈性規劃，享受美味體驗，一年內任選時刻到訪合作餐廳。
-            </h4>
-          </div>
-        </li>
-      </ul>
+      <div class="pCa">
+        <ul>
+          <li class="pbList1">
+            <div class="pbimage i1"></div>
+            <div class="pbText">
+              <p>便利快捷</p>
+              <h4>
+                簡單的線上購買流程，隨時隨地輕鬆取得QR
+                Code，無需等待即可享受美食體驗。
+              </h4>
+            </div>
+          </li>
+
+          <li class="pbList2">
+            <div class="pbimage i2"></div>
+            <div class="pbText">
+              <p>多樣選擇</p>
+              <h4>
+                我們合作的餐廳涵蓋全台灣，從北到南，更延伸到東部，隨時隨地滿足您不同的口味喜好。
+              </h4>
+            </div>
+          </li>
+          <li class="pbList3">
+            <div class="pbimage i3"></div>
+            <div class="pbText">
+              <p>優先訂位</p>
+              <h4>
+                梨饗券享有優先訂位之服務，預定前告知合作餐廳，不論何時、何地都能擁有訂位保留權。
+              </h4>
+            </div>
+          </li>
+          <li class="pbList4">
+            <div class="pbimage i4"></div>
+            <div class="pbText">
+              <p>有效期一年</p>
+              <h4>
+                充足的使用時間，讓您有充分的彈性規劃，享受美味體驗，一年內任選時刻到訪合作餐廳。
+              </h4>
+            </div>
+          </li>
+        </ul>
+      </div>
 
       <div class="pseudoText">
         <h3>使用說明</h3>
@@ -198,7 +207,7 @@
       </div>
 
       <!-- ----- -->
-      <!-- <pCard></pCard> -->
+
       <footer></footer>
     </div>
   </div>
@@ -215,37 +224,53 @@ export default {
     return {
       price: 100,
       discount: 0.9,
-      img: "/src/assets/Image/product/TICKET100.png",
+      img: new URL("@/assets/Image/product/TICKET100.png", import.meta.url)
+        .href,
       currentButton: "b1",
       buttons: [
         {
           id: "b1",
           price: 100,
-          picture: "/src/assets/Image/product/TICKET100.png",
+          picture: new URL(
+            "@/assets/Image/product/TICKET100.png",
+            import.meta.url
+          ).href,
           discount: 0.9,
         },
         {
           id: "b2",
           price: 300,
-          picture: "/src/assets/Image/product/TICKET300.png",
+          picture: new URL(
+            "@/assets/Image/product/TICKET300.png",
+            import.meta.url
+          ).href,
           discount: 0.8,
         },
         {
           id: "b3",
           price: 500,
-          picture: "/src/assets/Image/product/TICKET500.png",
+          picture: new URL(
+            "@/assets/Image/product/TICKET500.png",
+            import.meta.url
+          ).href,
           discount: 0.7,
         },
         {
           id: "b4",
           price: 800,
-          picture: "/src/assets/Image/product/TICKET800.png",
+          picture: new URL(
+            "@/assets/Image/product/TICKET800.png",
+            import.meta.url
+          ).href,
           discount: 0.9,
         },
         {
           id: "b5",
           price: 1000,
-          picture: "/src/assets/Image/product/TICKET1000.png",
+          picture: new URL(
+            "@/assets/Image/product/TICKET1000.png",
+            import.meta.url
+          ).href,
           discount: 0.9,
         },
       ],
@@ -253,6 +278,9 @@ export default {
       total: 0,
       move: false,
       productTasks: [],
+      sp: true,
+
+      test: [],
     };
   },
 
@@ -323,6 +351,12 @@ export default {
       localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
     },
   },
+
+  mounted() {
+    fetch("/public/php/product/test.php")
+      .then((res) => res.json())
+      .then((jsonData) => (this.test = jsonData));
+  },
 };
 </script>
 
@@ -334,6 +368,13 @@ export default {
   @if $point == mobile {
     // 当浏览器宽度小于等于 390px 时，应用下面的样式
     @media (max-width: 391px) {
+      @content; // 插入传入 mixin 的样式
+    }
+  }
+
+  @if $point == table {
+    // 当浏览器宽度小于等于 390px 时，应用下面的样式
+    @media (max-width: 801px) {
       @content; // 插入传入 mixin 的样式
     }
   }
@@ -534,6 +575,10 @@ export default {
       display: flex;
       width: 100%;
 
+      @include breakpoint(table) {
+        flex-direction: column;
+      }
+
       @include breakpoint(mobile) {
         flex-direction: column;
       }
@@ -568,6 +613,11 @@ export default {
         background-size: 13% auto;
         border: 1px solid $Gold;
 
+        @include breakpoint(table) {
+          width: 81.4vw;
+          margin: 0 auto;
+        }
+
         @include breakpoint(mobile) {
           width: 100%;
           margin: auto;
@@ -583,10 +633,15 @@ export default {
           display: flex;
           background-size: 13% auto;
 
+          @include breakpoint(table) {
+            height: 34vw;
+            margin: 3vw;
+            background-size: 11% auto;
+          }
+
           @include breakpoint(mobile) {
             height: 51.3vw;
             margin: 5.1vw;
-
             background-size: 15% auto;
           }
 
@@ -601,6 +656,11 @@ export default {
               width: 25.9vw;
               height: 11.7vw;
 
+              @include breakpoint(table) {
+                width: 46vw;
+                height: 20vw;
+              }
+
               @include breakpoint(mobile) {
                 width: 75.4vw;
                 height: 33.7vw;
@@ -611,6 +671,11 @@ export default {
       }
       .productPrice {
         width: 37.8vw;
+
+        @include breakpoint(table) {
+          width: 84%;
+          margin: 0 8%;
+        }
 
         @include breakpoint(mobile) {
           width: 84%;
@@ -629,12 +694,20 @@ export default {
             margin-bottom: 16px;
             margin-left: 56px;
 
+            @include breakpoint(table) {
+              margin-left: 5.2vw;
+            }
+
             @include breakpoint(mobile) {
               position: relative;
               margin: auto;
             }
 
             h2 {
+              @include breakpoint(table) {
+                font-size: 28px;
+              }
+
               @include breakpoint(mobile) {
                 font-size: 24px;
 
@@ -663,10 +736,11 @@ export default {
 
             ul {
               li {
-                margin: 0 40px;
+                margin: 0 2.6vw;
               }
               .productCountNav {
-                margin-bottom: 44px;
+                margin-bottom: 2.9vw;
+
                 @include breakpoint(mobile) {
                   margin: auto 0;
                   margin-bottom: 32px;
@@ -682,6 +756,12 @@ export default {
                 // line-height: 60px;
                 padding-top: 12px;
                 padding-bottom: 12px;
+
+                @include breakpoint(table) {
+                  height: auto;
+                  padding-top: 1.6vw;
+                  padding-bottom: 1.6vw;
+                }
 
                 @include breakpoint(mobile) {
                   height: auto;
@@ -699,6 +779,11 @@ export default {
                   background-color: white;
                   font-size: 20px;
 
+                  @include breakpoint(table) {
+                    height: 5vw;
+                    width: 14vw;
+                  }
+
                   @include breakpoint(mobile) {
                     height: 7.2vw;
                     width: 15.4vw;
@@ -711,8 +796,9 @@ export default {
               }
 
               .countPrice {
-                margin-left: 68px;
-                margin-bottom: 32px;
+                margin-left: 4.4vw;
+                margin-right: 0;
+                margin-bottom: 2.1vw;
                 display: flex;
                 position: relative;
 
@@ -734,14 +820,15 @@ export default {
                 }
 
                 .cpDiscount {
-                  margin-left: 13px;
+                  margin-left: 0.9vw;
                   color: $Red;
                 }
               }
 
               .countButton {
                 display: flex;
-                margin-left: 68px;
+                margin-left: 4.4vw;
+                margin-right: 0;
 
                 @include breakpoint(mobile) {
                   margin-left: 5px;
@@ -756,10 +843,10 @@ export default {
                   height: 30px;
                   font-size: 20px;
                   border: none;
-                  // border-radius: 5px;
                   background-color: $OffWhite;
-
                   color: $Black;
+                  background-size: 100%;
+                  background-repeat: no-repeat;
                 }
                 .buttonDrown {
                   background-image: url("/src/assets/Image/product/drown.svg");
@@ -773,7 +860,7 @@ export default {
                   height: 30px;
                   font-size: 20px;
                   background-color: white;
-                  margin: 0 12px;
+                  margin: 0 0.8vw;
                   text-align: center;
                   line-height: 30px;
                   border-radius: 5px;
@@ -784,8 +871,8 @@ export default {
           }
 
           .priceTotal {
-            margin-left: 68px;
-            margin-bottom: 48px;
+            margin-left: 4.4vw;
+            margin-bottom: 3.1vw;
 
             @include breakpoint(mobile) {
               margin-left: 5px;
@@ -813,6 +900,12 @@ export default {
               font-weight: bold;
               cursor: pointer;
 
+              @include breakpoint(table) {
+                width: 31vw;
+                height: 7.8vw;
+                line-height: 7.8vw;
+              }
+
               @include breakpoint(mobile) {
                 width: 33.9vw;
                 height: 9.3vw;
@@ -825,8 +918,13 @@ export default {
             }
 
             .shopping {
-              margin-right: 52px;
-              margin-left: 40px;
+              margin-right: 3.4vw;
+              margin-left: 2.6vw;
+
+              @include breakpoint(table) {
+                margin-right: 10vw;
+                margin-left: 4.6vw;
+              }
 
               @include breakpoint(mobile) {
                 margin-right: 4.6vw;
@@ -912,99 +1010,151 @@ export default {
         display: block;
       }
     }
+    // 手機版排版變化
+    .pCa {
+      @include breakpoint(mobile) {
+        display: none;
+      }
 
-    ul {
-      display: flex;
-      width: 80.7vw;
-      justify-content: space-between;
-      margin: 48px auto;
+      ul {
+        display: flex;
+        width: 80.7vw;
+        justify-content: space-between;
+        margin: 48px auto;
 
-      li {
-        // width: 280px;
-        // height: 500px;
-        background-color: white;
-        border-radius: 20px;
-        box-shadow: 0 0 10px rgba(#000000, 0.5);
-        padding: 36px 2.6vw;
+        // @include breakpoint(table) {
+        //   flex-wrap: wrap;
+        // }
 
-        div {
-          width: 13vw;
-          height: 13vw;
-          border-radius: 100px;
-        }
-
-        .pbimage {
-          background-size: 100%;
-        }
-        .i1 {
-          background-image: url("/src/assets/Image/product/system_update.png");
-          @include breakpoint(mobile) {
-            width: 160px;
-            height: 160px;
-            margin: 0 auto;
-          }
-        }
-        .i2 {
-          background-image: url("/src/assets/Image/product/system_update2.png");
-        }
-        .i3 {
-          background-image: url("/src/assets/Image/product/system_update3.png");
-        }
-        .i4 {
-          background-image: url("/src/assets/Image/product/system_update4.png");
+        @include breakpoint(table) {
+          flex-direction: column;
         }
 
-        .pbText {
+        li {
+          // width: 280px;
+          // height: 500px;
           background-color: white;
-          border-radius: 0;
-          margin-top: 28px;
-          height: auto;
+          border-radius: 20px;
+          box-shadow: 0 0 10px rgba(#000000, 0.5);
+          padding: 36px 2.6vw;
 
+          margin: 0 auto;
+
+          @include breakpoint(table) {
+            padding: 30px 4.2vw;
+            display: flex;
+            margin-bottom: 24px;
+          }
+
+          div {
+            width: 13vw;
+            height: 13vw;
+            border-radius: 100px;
+
+            // @include breakpoint(table) {
+            //   width: 200px;
+            //   height: 200px;
+            // }
+
+            @include breakpoint(table) {
+              width: 52vw;
+              height: 18vw;
+            }
+          }
+
+          .pbimage {
+            background-size: 100%;
+
+            @include breakpoint(table) {
+              width: 14vw;
+              height: 14vw;
+              margin: auto 0;
+              margin-right: 3vw;
+            }
+          }
+          .i1 {
+            background-image: url("/src/assets/Image/product/system_update.png");
+            @include breakpoint(mobile) {
+              width: 160px;
+              height: 160px;
+              margin: 0 auto;
+            }
+          }
+          .i2 {
+            background-image: url("/src/assets/Image/product/system_update2.png");
+          }
+          .i3 {
+            background-image: url("/src/assets/Image/product/system_update3.png");
+          }
+          .i4 {
+            background-image: url("/src/assets/Image/product/system_update4.png");
+          }
+
+          .pbText {
+            background-color: white;
+            border-radius: 0;
+            margin-top: 28px;
+            height: auto;
+
+            @include breakpoint(table) {
+              margin-top: 0;
+            }
+
+            @include breakpoint(mobile) {
+              width: 200px;
+              height: 72px;
+              margin: 0 auto;
+            }
+          }
+
+          p {
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 24px;
+            font-weight: bold;
+
+            @include breakpoint(table) {
+              margin-bottom: 12px;
+              text-align: left;
+            }
+
+            @include breakpoint(mobile) {
+              font-size: 24px;
+            }
+          }
+
+          h4 {
+            @include breakpoint(table) {
+              font-size: 18px;
+            }
+
+            @include breakpoint(mobile) {
+              font-size: 16px;
+            }
+          }
+        }
+
+        .pbList1 {
           @include breakpoint(mobile) {
-            width: 200px;
-            height: 72px;
+            width: 280px;
+            height: 380px;
             margin: 0 auto;
           }
         }
-
-        p {
-          font-size: 20px;
-          text-align: center;
-          margin-bottom: 24px;
-          font-weight: bold;
-
+        .pbList2 {
           @include breakpoint(mobile) {
-            font-size: 24px;
+            display: none;
           }
         }
-
-        h4 {
+        .pbList3 {
           @include breakpoint(mobile) {
-            font-size: 16px;
+            display: none;
           }
         }
-      }
-
-      .pbList1 {
-        @include breakpoint(mobile) {
-          width: 280px;
-          height: 380px;
-          margin: 0 auto;
-        }
-      }
-      .pbList2 {
-        @include breakpoint(mobile) {
-          display: none;
-        }
-      }
-      .pbList3 {
-        @include breakpoint(mobile) {
-          display: none;
-        }
-      }
-      .pbList4 {
-        @include breakpoint(mobile) {
-          display: none;
+        .pbList4 {
+          @include breakpoint(mobile) {
+            display: none;
+          }
         }
       }
     }
@@ -1034,6 +1184,10 @@ export default {
         top: 50%;
         background: $DarkBrown;
 
+        @include breakpoint(table) {
+          width: 25.7vw;
+        }
+
         @include breakpoint(mobile) {
           width: 25.7vw;
         }
@@ -1060,6 +1214,14 @@ export default {
           font-size: 14px;
         }
       }
+    }
+  }
+  .pCa2 {
+    padding: 50px 50px;
+    display: none;
+
+    @include breakpoint(mobile) {
+      display: block;
     }
   }
 

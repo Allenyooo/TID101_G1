@@ -438,11 +438,6 @@
                         <br />
                         <h2>
                             點擊餐具<br />查看內容
-                            <!-- <img
-                                src="../assets/Image/home/TableIntro/click.svg"
-                                alt="click"
-                                draggable="false"
-                            /> -->
                             <span class="click"></span>
                         </h2>
                     </div>
@@ -774,7 +769,6 @@
 </template>
 
 <script>
-import { onMounted } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -806,183 +800,181 @@ export default {
             this.cardOpacity[cardId] = 1;
         },
     },
-    setup() {
-        onMounted(() => {
-            let tl = gsap.timeline({ repeat: -1 });
+    mounted() {
+        let tl = gsap.timeline({ repeat: -1 });
 
-            tl.to(".banner-img", {
-                x: -1300,
-                y: -1725,
-                duration: 30,
-                ease: "none",
-            })
-                .to(
-                    ".banner-img",
-                    {
-                        x: 0,
-                        y: -1725,
-                        duration: 30,
-                        ease: "none",
-                    },
-                    ">"
-                )
-                .to(
-                    ".banner-img",
-                    {
-                        x: -1300,
-                        y: 0,
-                        duration: 30,
-                        ease: "none",
-                    },
-                    ">"
-                )
-                .to(
-                    ".banner-img",
-                    {
-                        x: 0,
-                        y: 0,
-                        duration: 30,
-                        ease: "none",
-                    },
-                    ">"
-                );
-
-            let tls = gsap.timeline({
-                scrollTrigger: {
-                    trigger: ".home_intro",
-                    start: "0% top",
-                    end: "150%",
-                    scrub: 1,
-                    id: "pin",
-                    pin: true,
-                    // markers: true,
+        tl.to(".banner-img", {
+            x: -1300,
+            y: -1725,
+            duration: 30,
+            ease: "none",
+        })
+            .to(
+                ".banner-img",
+                {
+                    x: 0,
+                    y: -1725,
+                    duration: 30,
+                    ease: "none",
                 },
-            });
+                ">"
+            )
+            .to(
+                ".banner-img",
+                {
+                    x: -1300,
+                    y: 0,
+                    duration: 30,
+                    ease: "none",
+                },
+                ">"
+            )
+            .to(
+                ".banner-img",
+                {
+                    x: 0,
+                    y: 0,
+                    duration: 30,
+                    ease: "none",
+                },
+                ">"
+            );
 
-            tls.from(".home_cloud1, .home_cloud2, .home_cloud3", {
-                autoAlpha: 0,
-                x: 200,
-                stagger: 0.02,
-            })
-                .from(
-                    ".home_flower, .home_lion, .home_path, .home_pot, .home_lamp, .home_drum, .home_statue",
-                    {
-                        autoAlpha: 0,
-                        scale: 0,
-                        stagger: 0.03,
-                    },
-                    "<+=0.1"
-                )
-                .from(
-                    ".home_introWord1 h2",
-                    {
-                        autoAlpha: 0,
-                        stagger: 0.05,
-                        y: 50,
-                    },
-                    "<"
-                )
-                .to(
-                    ".home_flower, .home_lion, .home_path, .home_pot, .home_lamp, .home_drum, .home_statue",
-                    {
-                        filter: "grayscale(0)",
-                        // duration: 0.7,
-                    }
-                )
-                .to(
-                    ".home_flower, .home_lion, .home_path, .home_pot, .home_lamp, .home_drum, .home_statue, .home_cloud1, .home_cloud2, .home_cloud3",
-                    {
-                        autoAlpha: 0.4,
-                    }
-                )
-                .to(
-                    ".home_introWord1 h2",
-                    {
-                        autoAlpha: 0,
-                    },
-                    "<"
-                )
-                .from(
-                    ".home_introWord2",
-                    {
-                        autoAlpha: 0,
-                    },
-                    "<+0.2"
-                )
-                .to(
-                    ".home_flower, .home_lion, .home_path, .home_pot, .home_lamp, .home_drum, .home_statue, .home_cloud1, .home_cloud2, .home_cloud3",
-                    {
-                        scale: 0.7,
-                    },
-                    "<"
-                )
-                .to(
-                    ".home_flower",
-                    {
-                        x: -100,
-                    },
-                    "<"
-                )
-                .to(
-                    ".home_lion",
-                    {
-                        x: 130,
-                    },
-                    "<"
-                )
-                .to(
-                    ".home_path",
-                    {
-                        x: -40,
-                    },
-                    "<"
-                )
-                .to(
-                    ".home_pot",
-                    {
-                        x: 80,
-                    },
-                    "<"
-                )
-                .to(
-                    ".home_lamp",
-                    {
-                        x: 50,
-                    },
-                    "<"
-                )
-                .to(
-                    ".home_cloud3",
-                    {
-                        x: -100,
-                    },
-                    "<"
-                )
-                .to(
-                    ".home_drum",
-                    {
-                        x: -200,
-                    },
-                    "<"
-                )
-                .to(
-                    ".home_statue",
-                    {
-                        x: 200,
-                    },
-                    "<"
-                )
-                .from(
-                    ".home_introWord2 h4, .home_introWord2 h3",
-                    {
-                        autoAlpha: 0,
-                        stagger: 0.03,
-                        duration: 0.7,
-                        delay: 0.2,
-                    },
-                    "<"
-                );
+        let tls = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".home_intro",
+                start: "0% top",
+                end: "150%",
+                scrub: 1,
+                id: "pin",
+                pin: true,
+                // markers: true,
+            },
         });
+
+        tls.from(".home_cloud1, .home_cloud2, .home_cloud3", {
+            autoAlpha: 0,
+            x: 200,
+            stagger: 0.02,
+        })
+            .from(
+                ".home_flower, .home_lion, .home_path, .home_pot, .home_lamp, .home_drum, .home_statue",
+                {
+                    autoAlpha: 0,
+                    scale: 0,
+                    stagger: 0.03,
+                },
+                "<+=0.1"
+            )
+            .from(
+                ".home_introWord1 h2",
+                {
+                    autoAlpha: 0,
+                    stagger: 0.05,
+                    y: 50,
+                },
+                "<"
+            )
+            .to(
+                ".home_flower, .home_lion, .home_path, .home_pot, .home_lamp, .home_drum, .home_statue",
+                {
+                    filter: "grayscale(0)",
+                    // duration: 0.7,
+                }
+            )
+            .to(
+                ".home_flower, .home_lion, .home_path, .home_pot, .home_lamp, .home_drum, .home_statue, .home_cloud1, .home_cloud2, .home_cloud3",
+                {
+                    autoAlpha: 0.4,
+                }
+            )
+            .to(
+                ".home_introWord1 h2",
+                {
+                    autoAlpha: 0,
+                },
+                "<"
+            )
+            .from(
+                ".home_introWord2",
+                {
+                    autoAlpha: 0,
+                },
+                "<+0.2"
+            )
+            .to(
+                ".home_flower, .home_lion, .home_path, .home_pot, .home_lamp, .home_drum, .home_statue, .home_cloud1, .home_cloud2, .home_cloud3",
+                {
+                    scale: 0.7,
+                },
+                "<"
+            )
+            .to(
+                ".home_flower",
+                {
+                    x: -100,
+                },
+                "<"
+            )
+            .to(
+                ".home_lion",
+                {
+                    x: 130,
+                },
+                "<"
+            )
+            .to(
+                ".home_path",
+                {
+                    x: -40,
+                },
+                "<"
+            )
+            .to(
+                ".home_pot",
+                {
+                    x: 80,
+                },
+                "<"
+            )
+            .to(
+                ".home_lamp",
+                {
+                    x: 50,
+                },
+                "<"
+            )
+            .to(
+                ".home_cloud3",
+                {
+                    x: -100,
+                },
+                "<"
+            )
+            .to(
+                ".home_drum",
+                {
+                    x: -200,
+                },
+                "<"
+            )
+            .to(
+                ".home_statue",
+                {
+                    x: 200,
+                },
+                "<"
+            )
+            .from(
+                ".home_introWord2 h4, .home_introWord2 h3",
+                {
+                    autoAlpha: 0,
+                    stagger: 0.03,
+                    duration: 0.7,
+                    delay: 0.2,
+                },
+                "<"
+            );
     },
 };
 </script>
@@ -1381,19 +1373,25 @@ export default {
         }
     }
     .banner-txt {
-        width: 512px;
-        height: 312px;
         position: absolute;
         z-index: 1;
         top: 368px;
         left: 98px;
+        @include breakpoint(399px) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
         h1 {
             font-size: $bigTitle;
             background: $GreenGrad;
             background-clip: text;
             -webkit-text-stroke: 8px transparent;
+            position: relative;
             @include breakpoint(820px) {
                 width: 256px;
+            }
+            @include breakpoint(399px) {
+                font-size: 25vw;
             }
         }
         h1::after {
@@ -1405,9 +1403,6 @@ export default {
             background-clip: text;
             -webkit-text-fill-color: transparent;
             -webkit-text-stroke: 0px transparent;
-            @include breakpoint(820px) {
-                width: 256px;
-            }
         }
         h2 {
             margin-top: 13vh;
@@ -1418,6 +1413,10 @@ export default {
             @include breakpoint(820px) {
                 margin-top: 6vh;
                 font-size: 4vw;
+            }
+            @include breakpoint(399px) {
+                font-size: 5vw;
+                left: -30px;
             }
         }
         h2::after {
@@ -1436,7 +1435,8 @@ export default {
 .home_intro {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    // height: 100%;
     .home_cloud1 {
         width: 235px;
         height: 82px;
@@ -1526,6 +1526,9 @@ export default {
             @include breakpoint(820px) {
                 font-size: 3.5vw;
             }
+            @include breakpoint(399px) {
+                font-size: 6vw;
+            }
         }
     }
     .home_introWord2 {
@@ -1546,6 +1549,10 @@ export default {
             @include breakpoint(820px) {
                 font-size: 2.3vw;
             }
+            @include breakpoint(399px) {
+                font-size: 4vw;
+                width: 70vw;
+            }
         }
         h3 {
             font-size: 1.66vw;
@@ -1560,6 +1567,9 @@ export default {
             }
             @include breakpoint(820px) {
                 font-size: 2.9vw;
+            }
+            @include breakpoint(399px) {
+                font-size: 6vw;
             }
         }
     }
@@ -1577,7 +1587,7 @@ export default {
         transform: translate(-50%, -50%);
         width: 77vw;
         height: 48vw;
-        background-size: 100% 100%;
+        background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
         display: flex;
@@ -1590,6 +1600,10 @@ export default {
             background-repeat: no-repeat;
             flex-direction: column;
         }
+        @include breakpoint(399px) {
+            width: 100vw;
+            height: 160vw;
+        }
         .home_table {
             width: 43vw;
             height: 43vw;
@@ -1600,6 +1614,10 @@ export default {
             @include breakpoint(820px) {
                 width: 60vw;
                 height: 60vw;
+            }
+            @include breakpoint(399px) {
+                width: 80vw;
+                height: 80vw;
             }
             .utensil1 {
                 width: 2vw;
@@ -1614,6 +1632,9 @@ export default {
                 }
                 @include breakpoint(820px) {
                     width: 3.5vw;
+                }
+                @include breakpoint(399px) {
+                    width: 4.5vw;
                 }
             }
             .fish_cake1 {
@@ -1632,6 +1653,9 @@ export default {
                     top: 9%;
                     left: 44%;
                 }
+                @include breakpoint(399px) {
+                    width: 12vw;
+                }
             }
             .rice1 {
                 width: 5vw;
@@ -1646,6 +1670,9 @@ export default {
                 }
                 @include breakpoint(820px) {
                     width: 7vw;
+                }
+                @include breakpoint(399px) {
+                    width: 10vw;
                 }
             }
             .bean_noodle {
@@ -1664,6 +1691,9 @@ export default {
                     top: 20%;
                     left: 14%;
                 }
+                @include breakpoint(399px) {
+                    width: 15vw;
+                }
             }
             .pork {
                 width: 12vw;
@@ -1681,6 +1711,9 @@ export default {
                     top: 28%;
                     left: 38%;
                 }
+                @include breakpoint(399px) {
+                    width: 20vw;
+                }
             }
             .cold_noodle {
                 width: 9.5vw;
@@ -1695,6 +1728,9 @@ export default {
                 }
                 @include breakpoint(820px) {
                     width: 11.5vw;
+                }
+                @include breakpoint(399px) {
+                    width: 15vw;
                 }
             }
             .bibimbap {
@@ -1712,6 +1748,9 @@ export default {
                     width: 12vw;
                     left: 10%;
                 }
+                @include breakpoint(399px) {
+                    width: 16vw;
+                }
             }
             .rice_cake_big {
                 width: 16vw;
@@ -1727,6 +1766,9 @@ export default {
                 @include breakpoint(820px) {
                     width: 20vw;
                     top: 38%;
+                }
+                @include breakpoint(399px) {
+                    width: 27vw;
                 }
             }
             .kimchi_soup {
@@ -1744,6 +1786,9 @@ export default {
                     width: 11vw;
                     right: 10%;
                 }
+                @include breakpoint(399px) {
+                    width: 15vw;
+                }
             }
             .squid {
                 width: 8vw;
@@ -1759,6 +1804,9 @@ export default {
                 @include breakpoint(820px) {
                     width: 10vw;
                     left: 16%;
+                }
+                @include breakpoint(399px) {
+                    width: 14vw;
                 }
             }
             .rice_cake {
@@ -1777,6 +1825,9 @@ export default {
                     top: 64%;
                     right: 40%;
                 }
+                @include breakpoint(399px) {
+                    width: 20vw;
+                }
             }
             .kimchi {
                 width: 4vw;
@@ -1792,6 +1843,9 @@ export default {
                 @include breakpoint(820px) {
                     width: 6vw;
                 }
+                @include breakpoint(399px) {
+                    width: 8vw;
+                }
             }
             .rice2 {
                 width: 5vw;
@@ -1806,6 +1860,9 @@ export default {
                 }
                 @include breakpoint(820px) {
                     width: 7vw;
+                }
+                @include breakpoint(399px) {
+                    width: 10vw;
                 }
             }
             .fish_cake2 {
@@ -1823,6 +1880,9 @@ export default {
                     width: 9vw;
                     left: 45%;
                 }
+                @include breakpoint(399px) {
+                    width: 12vw;
+                }
             }
             .utensil2 {
                 width: 2vw;
@@ -1839,13 +1899,20 @@ export default {
                     width: 3.5vw;
                     right: 33%;
                 }
+                @include breakpoint(399px) {
+                    width: 4.5vw;
+                }
             }
         }
         .home_table_multiCards {
             text-align: center;
             width: 30vw;
             @include breakpoint(820px) {
-                width: 40vw;
+                width: 50vw;
+            }
+            @include breakpoint(399px) {
+                height: 70vw;
+                width: 80vw;
             }
             .home_card_info {
                 position: fixed;
@@ -1900,6 +1967,9 @@ export default {
                 @include breakpoint(820px) {
                     width: 100%;
                 }
+                @include breakpoint(399px) {
+                    height: 65vw;
+                }
                 .table_card {
                     background-color: $OffWhite;
                     border: 3px solid $DarkBrown;
@@ -1918,13 +1988,19 @@ export default {
                         margin: 24px auto 16px;
                         border-radius: 10px;
                         text-align: center;
-                        
+                        @include breakpoint(399px) {
+                            margin: 2vw auto;
+                        }
+
                         h3 {
                             color: $OffWhite;
                             line-height: 143%;
                             font-size: 1.7vw;
                             @include breakpoint(820px) {
                                 font-size: 2.5vw;
+                            }
+                            @include breakpoint(399px) {
+                                font-size: 16px;
                             }
                         }
                     }
@@ -1933,6 +2009,9 @@ export default {
                         border-radius: 20px;
                         @include breakpoint(820px) {
                             width: 30vw;
+                        }
+                        @include breakpoint(399px) {
+                            width: 40vw;
                         }
                     }
                     h5 {
@@ -1947,6 +2026,11 @@ export default {
                         }
                         @include breakpoint(820px) {
                             font-size: 1.7vw;
+                            width: 90%;
+                        }
+                        @include breakpoint(399px) {
+                            margin: 2vw auto;
+                            font-size: 12px;
                         }
                     }
                 }
@@ -1957,25 +2041,51 @@ export default {
 
 .home_links {
     width: 100vw;
-    height: 100vw;
+    height: 100%;
     .home_food_link {
         text-decoration: none;
         width: 60vw;
         display: block;
         margin: 0 auto;
         cursor: pointer;
+        @include breakpoint(820px) {
+            width: 70vw;
+        }
         .home_food {
             width: 60vw;
             margin: 7.1vw auto;
             display: flex;
             justify-content: space-between;
+            @include breakpoint(820px) {
+                width: 70vw;
+                height: 31vw;
+            }
+            @include breakpoint(399px) {
+                height: 50vw;
+                margin: 15vw auto;
+            }
             .home_food_banner {
                 position: relative;
                 width: 15vw;
                 height: 26vw;
+                @include breakpoint(820px) {
+                    width: 20vw;
+                }
+                @include breakpoint(399px) {
+                    height: 50vw;
+                }
                 .home_food_bannerimg {
                     width: 15vw;
                     height: 26vw;
+                    @include breakpoint(820px) {
+                        width: 20vw;
+                        height: 31vw;
+                    }
+                    @include breakpoint(399px) {
+                        width: 30vw;
+                        height: 50vw;
+                        opacity: 0.3;
+                    }
                 }
                 .home_subTitle {
                     width: 15vw;
@@ -1987,41 +2097,80 @@ export default {
                         rgba(51, 51, 51, 0.9),
                         rgba(51, 51, 51, 0)
                     );
+                    @include breakpoint(820px) {
+                        width: 20vw;
+                        height: 7.5vw;
+                        top: 91%;
+                    }
+                    @include breakpoint(399px) {
+                        width: 30vw;
+                        height: 19vw;
+                        top: 62%;
+                    }
                     span {
                         display: block;
                         width: 20%;
                         background-color: $OffWhite;
                         border-radius: 20px;
                         margin: 0.3vw auto 1vw;
+                        @include breakpoint(399px) {
+                            width: 10vw;
+                        }
                         h6 {
                             color: $DarkBrown;
                             text-align: center;
                             font-size: 0.9vw;
+                            @include breakpoint(820px) {
+                                font-size: 1.2vw;
+                            }
+                            @include breakpoint(399px) {
+                                font-size: 3vw;
+                            }
                         }
                     }
                     h4 {
                         text-align: center;
                         color: $OffWhite;
                         font-size: 1.2vw;
+                        @include breakpoint(820px) {
+                            font-size: 1.5vw;
+                        }
+                        @include breakpoint(399px) {
+                            font-size: 4vw;
+                        }
                     }
                 }
             }
             .home_food_words {
                 width: 70%;
+                @include breakpoint(820px) {
+                    width: 65%;
+                }
                 h2 {
                     color: $Black;
                     font-weight: lighter;
                     line-height: 150%;
                     font-size: 2.1vw;
+                    @include breakpoint(399px) {
+                        font-size: 4vw;
+                        margin-top: 5%;
+                        margin-left: 10%;
+                    }
                 }
                 h1 {
                     font-size: 7.6vw;
                     color: $Black;
                     line-height: 1;
+                    @include breakpoint(399px) {
+                        font-size: 10vw;
+                    }
                 }
                 .firsth1 {
                     padding-left: 6%;
                     margin: 1.4vw 0 2.5vw 0;
+                    @include breakpoint(399px) {
+                        margin: 2vw 0 4vw 0;
+                    }
                 }
                 .sech1 {
                     display: inline-block;
@@ -2030,15 +2179,25 @@ export default {
                 .home_hotdog {
                     width: 22%;
                     margin-left: 5%;
+                    @include breakpoint(399px) {
+                        width: 35%;
+                        margin-left: 30%;
+                        margin-top: 5%;
+                    }
                 }
                 span {
-                    width: fit-content;
                     color: $Black;
                     display: flex;
                     margin-top: 32px;
+                    @include breakpoint(399px) {
+                        display: none;
+                    }
                     h4 {
                         font-weight: lighter;
                         font-size: 1.2vw;
+                        @include breakpoint(820px) {
+                            font-size: 1.6vw;
+                        }
                     }
                     img {
                         width: 1.4vw;
@@ -2054,29 +2213,59 @@ export default {
         width: 60vw;
         display: block;
         margin: 0 auto;
+        @include breakpoint(820px) {
+            width: 70vw;
+        }
         .home_map {
             width: 60vw;
             margin: 7.1vw auto;
             display: flex;
-            justify-content: space-between;
+            @include breakpoint(820px) {
+                gap: 36px;
+                width: 70vw;
+                height: 31vw;
+            }
+            @include breakpoint(399px) {
+                height: 50vw;
+                gap: 0;
+                margin: 15vw auto;
+            }
             .home_map_words {
                 width: 70%;
+                @include breakpoint(820px) {
+                    width: 65%;
+                }
+                @include breakpoint(399px) {
+                    display: flex;
+                    flex-direction: column;
+                }
                 h2 {
                     color: $Black;
                     font-weight: lighter;
                     font-size: 2.1vw;
                     text-align: right;
                     line-height: 150%;
+                    @include breakpoint(399px) {
+                        font-size: 4vw;
+                        margin-top: 5%;
+                        margin-right: 10%;
+                    }
                 }
                 h1 {
                     font-size: 7.6vw;
                     color: $Black;
                     line-height: 1;
+                    @include breakpoint(399px) {
+                        font-size: 10vw;
+                    }
                 }
                 .firsth1 {
                     text-align: right;
                     padding-right: 6%;
                     margin: 1.4vw 0 0 0;
+                    @include breakpoint(399px) {
+                        margin: 2vw 0 4vw 0;
+                    }
                 }
                 .sech1 {
                     display: inline-block;
@@ -2085,6 +2274,12 @@ export default {
                 .home_fishcake {
                     width: 21.5%;
                     margin-right: 5%;
+                    @include breakpoint(399px) {
+                        width: 35%;
+                        margin-left: 30%;
+                        margin-top: 5%;
+                        order: 3;
+                    }
                 }
                 span {
                     width: fit-content;
@@ -2093,9 +2288,15 @@ export default {
                     display: flex;
                     margin-top: 32px;
                     margin-left: auto;
+                    @include breakpoint(399px) {
+                        display: none;
+                    }
                     h4 {
                         font-weight: lighter;
                         font-size: 1.2vw;
+                        @include breakpoint(820px) {
+                            font-size: 1.6vw;
+                        }
                     }
                     img {
                         width: 1.4vw;
@@ -2108,9 +2309,23 @@ export default {
                 position: relative;
                 width: 15vw;
                 height: 26vw;
+                @include breakpoint(399px) {
+                    height: 50vw;
+                    right: 9%;
+                }
                 .home_map_bannerimg {
                     width: 15vw;
                     height: 26vw;
+                    @include breakpoint(820px) {
+                        width: 20vw;
+                        height: 31vw;
+                    }
+                    @include breakpoint(399px) {
+                        width: 30vw;
+                        height: 50vw;
+                        opacity: 0.3;
+                        perspective-origin: right;
+                    }
                 }
                 .home_subTitle {
                     width: 15vw;
@@ -2122,22 +2337,47 @@ export default {
                         rgba(51, 51, 51, 0.9),
                         rgba(51, 51, 51, 0)
                     );
+                    @include breakpoint(820px) {
+                        width: 20vw;
+                        height: 7.5vw;
+                        top: 91%;
+                    }
+                    @include breakpoint(399px) {
+                        width: 30vw;
+                        height: 19vw;
+                        top: 62%;
+                    }
                     span {
                         display: block;
                         width: 20%;
                         background-color: $OffWhite;
                         border-radius: 20px;
                         margin: 0.3vw auto 1vw;
+                        @include breakpoint(399px) {
+                            width: 10vw;
+                        }
                         h6 {
                             color: $DarkBrown;
                             text-align: center;
                             font-size: 0.9vw;
+                            @include breakpoint(820px) {
+                                font-size: 1.2vw;
+                            }
+                            @include breakpoint(399px) {
+                                font-size: 3vw;
+                            }
                         }
                     }
                     h4 {
                         text-align: center;
                         color: $OffWhite;
                         font-size: 1.2vw;
+                        @include breakpoint(820px) {
+                            font-size: 1.5vw;
+                        }
+                        @include breakpoint(399px) {
+                            font-size: 4vw;
+                        }
                     }
                 }
             }
@@ -2148,18 +2388,41 @@ export default {
         width: 60vw;
         display: block;
         margin: 0 auto;
+        @include breakpoint(820px) {
+            width: 70vw;
+        }
         .home_product {
             width: 60vw;
             margin: 7.1vw auto;
             display: flex;
             justify-content: space-between;
+            @include breakpoint(820px) {
+                width: 70vw;
+                height: 31vw;
+            }
+            @include breakpoint(399px) {
+                height: 50vw;
+                margin: 15vw auto;
+            }
             .home_product_banner {
                 position: relative;
                 width: 15vw;
                 height: 26vw;
+                @include breakpoint(399px) {
+                    height: 50vw;
+                }
                 .home_product_bannerimg {
                     width: 15vw;
                     height: 26vw;
+                    @include breakpoint(820px) {
+                        width: 20vw;
+                        height: 31vw;
+                    }
+                    @include breakpoint(399px) {
+                        width: 30vw;
+                        height: 50vw;
+                        opacity: 0.3;
+                    }
                 }
                 .home_subTitle {
                     width: 15vw;
@@ -2171,41 +2434,80 @@ export default {
                         rgba(51, 51, 51, 0.9),
                         rgba(51, 51, 51, 0)
                     );
+                    @include breakpoint(820px) {
+                        width: 20vw;
+                        height: 7.5vw;
+                        top: 91%;
+                    }
+                    @include breakpoint(399px) {
+                        width: 30vw;
+                        height: 19vw;
+                        top: 62%;
+                    }
                     span {
                         display: block;
                         width: 20%;
                         background-color: $OffWhite;
                         border-radius: 20px;
                         margin: 0.3vw auto 1vw;
+                        @include breakpoint(399px) {
+                            width: 10vw;
+                        }
                         h6 {
                             color: $DarkBrown;
                             text-align: center;
                             font-size: 0.9vw;
+                            @include breakpoint(820px) {
+                                font-size: 1.2vw;
+                            }
+                            @include breakpoint(399px) {
+                                font-size: 3vw;
+                            }
                         }
                     }
                     h4 {
                         text-align: center;
                         color: $OffWhite;
                         font-size: 1.2vw;
+                        @include breakpoint(820px) {
+                            font-size: 1.5vw;
+                        }
+                        @include breakpoint(399px) {
+                            font-size: 4vw;
+                        }
                     }
                 }
             }
             .home_product_words {
                 width: 70%;
+                @include breakpoint(820px) {
+                    width: 65%;
+                }
                 h2 {
                     color: $Black;
                     font-weight: lighter;
                     line-height: 150%;
                     font-size: 2.1vw;
+                    @include breakpoint(399px) {
+                        font-size: 4vw;
+                        margin-top: 5%;
+                        margin-left: 10%;
+                    }
                 }
                 h1 {
                     font-size: 7.6vw;
                     color: $Black;
                     line-height: 1;
+                    @include breakpoint(399px) {
+                        font-size: 10vw;
+                    }
                 }
                 .firsth1 {
                     padding-left: 6%;
                     margin: 1.4vw 0 2.5vw 0;
+                    @include breakpoint(399px) {
+                        margin: 2vw 0 4vw 0;
+                    }
                 }
                 .sech1 {
                     display: inline-block;
@@ -2214,16 +2516,26 @@ export default {
                 .home_kimbap {
                     width: 22%;
                     margin-left: 5%;
+                    @include breakpoint(399px) {
+                        width: 35%;
+                        margin-left: 30%;
+                        margin-top: 5%;
+                    }
                 }
                 span {
-                    width: fit-content;
                     color: $Black;
                     text-decoration: none;
                     display: flex;
                     margin-top: 5.4vw;
+                    @include breakpoint(399px) {
+                        display: none;
+                    }
                     h4 {
                         font-weight: lighter;
                         font-size: 1.2vw;
+                        @include breakpoint(820px) {
+                            font-size: 1.6vw;
+                        }
                     }
                     img {
                         width: 1.4vw;
@@ -2238,7 +2550,8 @@ export default {
 
 .home_about {
     width: 100vw;
-    height: 53vw;
+    height: 100%;
+    margin-bottom: 3vh;
     .home_about_bg {
         width: 84vw;
         height: 52vw;
@@ -2247,11 +2560,24 @@ export default {
         background-size: cover;
         position: relative;
         margin: 0 auto;
+        @include breakpoint(399px) {
+            background-image: unset;
+            background-color: $Blue;
+            border: 8px solid $Gold;
+            border-radius: 20px;
+            height: 180vw;
+        }
         .home_about_deco {
             position: absolute;
             top: -8%;
             right: 9.5%;
             width: 7.83vw;
+            @include breakpoint(399px) {
+                right: 50%;
+                transform: translateX(50%);
+                width: 10vw;
+                top: -3.3%;
+            }
         }
         .home_about_title {
             position: absolute;
@@ -2261,11 +2587,25 @@ export default {
             display: flex;
             justify-content: space-around;
             align-items: flex-end;
+            @include breakpoint(820px) {
+                width: 65vw;
+            }
+            @include breakpoint(399px) {
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                top: 3%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
             h1 {
                 font-size: 5.7vw;
                 background: $LightGoldGrad;
                 background-clip: text;
                 -webkit-text-fill-color: transparent;
+                @include breakpoint(399px) {
+                    font-size: 10vw;
+                }
             }
             .korean {
                 width: 4.6vw;
@@ -2274,6 +2614,11 @@ export default {
                 background: $LightGoldGrad;
                 background-clip: text;
                 -webkit-text-stroke: 2px transparent;
+                @include breakpoint(399px) {
+                    font-size: 5vw;
+                    width: 10vw;
+                    margin-left: 5vw;
+                }
             }
             .subtitle {
                 letter-spacing: 5px;
@@ -2281,6 +2626,10 @@ export default {
                 background-clip: text;
                 -webkit-text-fill-color: transparent;
                 font-size: 2.15vw;
+                @include breakpoint(399px) {
+                    font-size: 4vw;
+                    margin-top: 3vw;
+                }
             }
         }
         .home_about_content {
@@ -2291,21 +2640,46 @@ export default {
             width: 63vw;
             display: flex;
             justify-content: space-between;
+            @include breakpoint(820px) {
+                width: 70vw;
+                top: 23%;
+            }
+            @include breakpoint(399px) {
+                flex-direction: column;
+                align-items: center;
+                top: 19%;
+            }
             .home_about_left {
                 box-sizing: border-box;
                 width: 48%;
                 background-color: $OffWhite;
                 border-radius: 40px;
+                @include breakpoint(399px) {
+                    width: 80%;
+                    border-radius: 20px 20px 0 0;
+                    display: flex;
+                    flex-direction: column;
+                }
                 img {
                     margin: 3vw auto 2vw;
                     width: 80%;
                     display: block;
                     border-radius: 10px;
+                    @include breakpoint(399px) {
+                        margin: 5vw auto 2.5vw;
+                    }
                 }
                 h4 {
                     margin: 2vw auto 3vw;
                     width: 80%;
                     font-size: 1.2vw;
+                    @include breakpoint(820px) {
+                        font-size: 1.5vw;
+                    }
+                    @include breakpoint(399px) {
+                        font-size: 12px;
+                        margin: 2.5vw auto;
+                    }
                 }
             }
             .home_about_right {
@@ -2313,16 +2687,33 @@ export default {
                 width: 48%;
                 background-color: $OffWhite;
                 border-radius: 40px;
+                @include breakpoint(399px) {
+                    width: 80%;
+                    border-radius: 0 0 20px 20px;
+                    display: flex;
+                    flex-direction: column-reverse;
+                }
                 h4 {
                     margin: 3vw auto 2vw;
                     width: 80%;
                     font-size: 1.2vw;
+                    @include breakpoint(820px) {
+                        font-size: 1.5vw;
+                        margin-top: 4vw;
+                    }
+                    @include breakpoint(399px) {
+                        font-size: 12px;
+                        margin: 2.5vw auto 5vw;
+                    }
                 }
                 img {
                     margin: 2vh auto 3vw;
                     width: 80%;
                     display: block;
                     border-radius: 10px;
+                    @include breakpoint(399px) {
+                        margin: 2.5vw auto;
+                    }
                 }
             }
         }

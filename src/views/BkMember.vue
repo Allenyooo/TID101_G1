@@ -6,9 +6,35 @@
       <div class="BkContent">
         <p>{{ manage[page - 1].manageName }}</p>
         <div class="Bkline"></div>
-        <BS :dropdown="dropdown" :search="search" :newButton="newButton"></BS>
+        <!-- <BS :dropdown="dropdown" :search="search" :newButton="newButton"></BS> -->
+
+        <div class="Bksearchbody">
+          <select @change="sIdchange($event.target.value)">
+            <option
+              v-for="s in searchdrop"
+              :key="s.id"
+              class="search"
+              :value="s.id"
+            >
+              <h4>{{ s.name }}</h4>
+            </option>
+          </select>
+
+          <div class="inputSearch">
+            <input type="text" :placeholder="placeholder[sId].name" />
+          </div>
+          <div class="searchButton">
+            <button><h5>搜尋</h5></button>
+          </div>
+          <div class="newButton">
+            <button>
+              <h5>匯出資料</h5>
+            </button>
+          </div>
+        </div>
+
         <BDate></BDate>
-        <BSort :dropdown="dropdown"></BSort>
+        <BSort :sortDrop="sortDrop"></BSort>
         <BD
           :bd="bd"
           :title="title"
@@ -82,13 +108,20 @@ export default {
           border: 2,
         },
       ],
-      dropdown: [
-        {
-          編號: "管理員編號",
-        },
-        {
-          狀態: "狀態",
-        },
+      sortDrop: [
+        { id: 1, name: "編號:由小到大" },
+        { id: 2, name: "編號:由大到小" },
+      ],
+
+      searchdrop: [
+        { id: 0, name: "會員編號" },
+        { id: 1, name: "會員姓名" },
+      ],
+      sId: 0,
+
+      placeholder: [
+        { id: 1, name: "會員編號" },
+        { id: 2, name: "會員姓名" },
       ],
       bd: [
         {
@@ -142,6 +175,13 @@ export default {
       BCHref: 2,
     };
   },
+
+  methods: {
+    sIdchange(e) {
+      console.log("Selected value:", e);
+      this.sId = e;
+    },
+  },
 };
 </script>
 
@@ -168,6 +208,34 @@ export default {
 
         background-color: $Black;
         margin-bottom: 24px;
+      }
+
+      .Bksearchbody {
+        display: flex;
+        margin-bottom: 12px;
+
+        select {
+          font-family: $fontFamily;
+          background-color: $LightBrown;
+          color: $White;
+
+          .search {
+            background-color: $White;
+            color: $Black;
+          }
+        }
+
+        .inputSearch {
+          margin-left: 8px;
+        }
+
+        .searchButton {
+          margin-left: 8px;
+        }
+
+        .newButton {
+          margin-left: auto;
+        }
       }
     }
   }

@@ -112,10 +112,18 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
+    @include breakpoint(820px) {
+        width: 13vw;
+    }
+    @include breakpoint(430px) {
+        display: none;
+    }
 }
 h2 {
     margin: 2vw;
     color: $Black;
+    position: relative;
+    z-index: 1;
 }
 
 .error {
@@ -137,9 +145,25 @@ h2 {
         background-color: transparent;
         border: none;
         border-bottom: 1px solid $Black;
+        @include breakpoint(1024px) {
+            width: 25vw;
+        }
+        @include breakpoint(820px) {
+            width: 33vw;
+        }
+        @include breakpoint(430px) {
+            width: 66vw;
+        }
     }
     p {
         color: $Gray;
+        
+        @include breakpoint(430px) {
+            width: 66vw;
+        }
+    }
+    span{
+        margin-bottom: 32px;
     }
 }
 
@@ -158,6 +182,20 @@ h2 {
         background-color: transparent;
         border: none;
         border-bottom: 1px solid $Black;
+        position: relative;
+        z-index: 1;
+        @include breakpoint(1024px) {
+            width: 25vw;
+        }
+        @include breakpoint(820px) {
+            width: 33vw;
+        }
+        @include breakpoint(430px) {
+            width: 66vw;
+        }
+    }
+    span{
+        margin-bottom: 32px;
     }
 }
 
@@ -165,7 +203,7 @@ h2 {
     background-image: $GoldGrad;
     border: 1px solid $Gold;
     border-radius: 15px;
-    margin: 2vw auto 2vw;
+    margin: 5vw auto 2vw;
     &:active {
         background-image: $RevGoldGrad;
     }
@@ -190,5 +228,11 @@ h2 {
     position: absolute;
     bottom: 3%;
     left: 0;
+    @include breakpoint(820px) {
+        height: 20vw;
+    }
+    @include breakpoint(430px) {
+        display: none;
+    }
 }
 </style>

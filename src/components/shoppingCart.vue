@@ -33,12 +33,17 @@
         </li>
       </ul>
     </div>
+
+    <div class="spBottom">
+      <p>總計： NT${{ total }}</p>
+      <a href="">前往結帳</a>
+    </div>
   </div>
 
-  <div class="spBottom" :class="{ pmOn: sp == true }">
+  <!-- <div class="spBottom pmOn" :class="{ pmOn: sp == true }">
     <p>總計： NT${{ total }}</p>
     <a href="">前往結帳</a>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -48,19 +53,19 @@ export default {
   data() {
     return {
       move: false,
+      move2: false,
+      productTasks: [],
+      total: 0,
     };
   },
   methods: {
     pmColse(e) {
       e.target.closest("div.productMove").classList.toggle("pmOn");
-      this.move = false;
+      // this.move = false;
+      this.pmColse2(e);
     },
-    pmColse2() {
-      if (this.move == false) {
-        return (this.move = true);
-      } else if (this.move == true) {
-        return (this.move = false);
-      }
+    pmColse2(e) {
+      e.target.closest("div.spBottom").classList.toggle("pmOn");
     },
     pmcD(i) {
       if (this.productTasks[i].tCount > 1) {
@@ -85,6 +90,22 @@ export default {
       localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
     },
   },
+
+  created() {
+    // 從 localStorage 中檢索資料
+    const storedData = localStorage.getItem("productTasks");
+
+    // 檢查 localStorage 中是否有資料
+    if (storedData) {
+      // 解析 JSON 資料
+      this.productTasks = JSON.parse(storedData);
+
+      // 計算總計
+      this.total = this.productTasks.reduce((acc, curr) => {
+        return acc + curr.tPrice * curr.tDiscount * curr.tCount;
+      }, 0);
+    }
+  },
 };
 </script>
 
@@ -94,13 +115,15 @@ export default {
 .spBottom {
   position: fixed;
   right: 0;
-  bottom: 0;
+  bottom: 52.5%;
   z-index: 20;
+  width: 520px;
 
-  transform: translate(100%);
-  transition: transform 1s ease-in-out;
+  // transform: translate(100%);
+  // transition: transform 1s ease-in-out;
 
   a {
+    display: block;
     font-size: 24px;
     font-weight: bold;
     height: 60px;
@@ -116,11 +139,12 @@ export default {
     font-weight: bold;
     color: #000000;
     text-align: center;
+    background-color: $OffWhite;
   }
 }
 
 .productMove {
-  height: 100vw;
+  height: 100vh;
   width: 520px;
   background-color: $OffWhite;
   position: fixed;
@@ -165,11 +189,12 @@ export default {
 
   .pmCount {
     margin-left: 52px;
-
+    height: 67vh;
+    overflow-y: scroll;
     ul {
       .pmcImg {
         margin-right: 32px;
-        margin-bottom: 40px;
+        margin-bottom: 24px;
       }
       li {
         width: 416px;

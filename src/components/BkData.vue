@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody class="tableBody">
-        <tr v-for="j in bd" @mouseover="hovertd">
+        <tr v-for="(j, index) in bd" @mouseover="hovertd">
           <td
             v-for="(i, index) in j"
             :key="i.id"
@@ -33,7 +33,7 @@
           </td>
           <td v-if="dataTd == 1">
             <!-- <button></button> -->
-            <BR></BR>
+            <BR :revisePage="page" :reviseId="j.id"></BR>
           </td>
 
           <td v-if="dataTd == 2">
@@ -83,7 +83,7 @@ import BC from "/src/components/BkCheck.vue";
 export default {
   components: { BR, BState, BC },
 
-  props: ["bd", "title", "dataTd", "stateTd", "BCHref"],
+  props: ["bd", "title", "dataTd", "stateTd", "BCHref", "page"],
 
   data() {
     return {
