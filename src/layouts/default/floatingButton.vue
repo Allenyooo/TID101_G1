@@ -78,7 +78,8 @@ export default {
         transition: background-color 0.3s;
 
         &:hover {
-            // background-color: #0056b3;
+            // background-color: $DarkBrown;
+            transform: translateY(-2px);
         }
     }
 
@@ -87,7 +88,6 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-
         animation: fadeIn 0.3s ease-in-out;
 
         .additional-button {
@@ -108,7 +108,7 @@ export default {
                 max-height: 100%;
             }
             &:hover {
-                background-color: $WarmNude;
+                // background-color: $DarkBrown;
                 transform: translateY(-2px);
             }
         }
@@ -122,7 +122,7 @@ export default {
     width: 60px;
     height: 60px;
 
-    background-color: $Nude;
+    // background-color: $Nude;
     border: none;
     color: $Gold;
     padding: 10px;
@@ -136,7 +136,8 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     &:hover {
-        // background-color: $Gold;
+        // background-color: $DarkBrown;
+        transform: translateY(-2px);
     }
 }
 

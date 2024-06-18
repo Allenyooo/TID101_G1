@@ -93,6 +93,7 @@
                 <img :src="currentItemMain.image" id="food-img-front" />
             </div>
         </div>
+
         <div class="food-category-middle">
             <div class="food-category-middle-text">
                 <h1>{{ currentItemMain.title }}</h1>
@@ -534,10 +535,9 @@ import tofuSoup from "../assets/Image/food/food_tofu_soup.jpg";
 import kimchiSoup from "../assets/Image/food/food_kimchi_soup.jpeg";
 import beefTailSoup from "../assets/Image/food/food_beeftail_soup.jpg";
 import seafoodSoup from "../assets/Image/food/food_ShinRamyun.jpeg";
-
+//測試用
 import leftArrow from "../assets/Image/food/food_left_arrow.png";
 import rightArrow from "../assets/Image/food/food_right_arrow.png";
-//測試用
 //--------滾動視差
 import { onMounted } from "vue";
 import { gsap } from "gsap";
@@ -1031,11 +1031,23 @@ export default {
     height: 809px;
     background-color: $OffWhite;
     display: flex;
+    //RWD
+    @include breakpoint(1280px) {
+        display: block;
+    }
     .food-category-left {
         flex: 2;
         position: relative;
+        //RWD
+        @include breakpoint(1280px) {
+            margin: 0 auto;
+        }
         .food-img-back {
             z-index: 1;
+            //RWD
+            @include breakpoint(1280px) {
+                transform: rotate(90deg);
+            }
         }
         .img-circle-big {
             z-index: 2;
@@ -1043,11 +1055,12 @@ export default {
             left: 119px;
             width: 300px;
             height: 300px;
-            background-color: $Red;
+            // background-color: $Red;
             overflow: hidden;
             border-radius: 50%;
             display: flex;
             position: absolute;
+
             img {
                 max-width: 100%;
                 max-height: 100%;
@@ -1056,115 +1069,116 @@ export default {
             }
         }
     }
-}
-.food-category-middle {
-    margin-top: 107px;
-    flex: 3;
-    text-align: center;
-    .food-category-middle-text {
-        max-width: 100%;
-        h1 {
-            color: $Red;
-            margin-bottom: 72px;
+
+    .food-category-middle {
+        margin-top: 107px;
+        flex: 3;
+        text-align: center;
+        .food-category-middle-text {
+            max-width: 100%;
+            h1 {
+                color: $Red;
+                margin-bottom: 72px;
+            }
+            h4 {
+                margin-bottom: 72px;
+            }
         }
-        h4 {
-            margin-bottom: 72px;
+        .category-detail {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            button {
+                background: none; /* 移除背景 */
+                border: none;
+                cursor: pointer;
+                &:hover {
+                    filter: drop-shadow(0 0 30px $Gold);
+                }
+                img {
+                    max-height: 45px;
+                }
+            }
+            ul {
+                display: flex;
+                flex-direction: row;
+                li {
+                    margin: 0 15px;
+                    width: 136px;
+                    height: 214px;
+                    background-color: $Nude;
+                    border-radius: 30px;
+                    text-align: center;
+                    a {
+                        text-decoration: none;
+                        &:hover {
+                            filter: drop-shadow(0 0 30px $Gold);
+                        }
+                    }
+                    .img-circle-small {
+                        margin-top: 28px;
+                        width: 96px;
+                        height: 96px;
+                        overflow: hidden;
+                        border-radius: 50%;
+                        margin: 0 auto;
+                        margin-bottom: 32px;
+                        margin-top: 28px;
+                        display: flex;
+                        img {
+                            max-width: 100%;
+                            max-height: 100%;
+                            width: auto;
+                            height: auto;
+                        }
+                    }
+                    p {
+                        font-size: 24px;
+                        color: $DarkBrown;
+                        line-height: 1.5;
+                    }
+                }
+            }
         }
     }
-    .category-detail {
+    .food-category-right {
+        flex: 1;
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        button {
-            background: none; /* 移除背景 */
-            border: none;
-            cursor: pointer;
+        flex-direction: column;
+        max-width: 100%;
+        font-size: 24px;
+        color: $Gray;
+        text-align: center;
+        line-height: 150%;
+        padding-top: 281px;
+        padding-left: 36px;
+        .category-item {
+            display: flex;
+            margin-bottom: 16px;
+        }
+        .category-icon {
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            margin-right: 8px;
+        }
+        .primary-color {
+            background-color: var(--Primary-Trello-Red, $Red);
+        }
+        .gold-color {
+            background-color: var(--Primary-Gold, $Gold);
+        }
+        .category-text {
+            margin: auto 0;
+            font-size: 24px;
+            color: $Gold;
+        }
+        a {
+            text-decoration: none;
             &:hover {
                 filter: drop-shadow(0 0 30px $Gold);
             }
-            img {
-                max-height: 45px;
-            }
-        }
-        ul {
-            display: flex;
-            flex-direction: row;
-            li {
-                margin: 0 15px;
-                width: 136px;
-                height: 214px;
-                background-color: $Nude;
-                border-radius: 30px;
-                text-align: center;
-                a {
-                    text-decoration: none;
-                    &:hover {
-                        filter: drop-shadow(0 0 30px $Gold);
-                    }
-                }
-                .img-circle-small {
-                    margin-top: 28px;
-                    width: 96px;
-                    height: 96px;
-                    overflow: hidden;
-                    border-radius: 50%;
-                    margin: 0 auto;
-                    margin-bottom: 32px;
-                    margin-top: 28px;
-                    display: flex;
-                    img {
-                        max-width: 100%;
-                        max-height: 100%;
-                        width: auto;
-                        height: auto;
-                    }
-                }
-                p {
-                    font-size: 24px;
-                    color: $DarkBrown;
-                    line-height: 1.5;
-                }
-            }
-        }
-    }
-}
-.food-category-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
-    font-size: 24px;
-    color: $Gray;
-    text-align: center;
-    line-height: 150%;
-    padding-top: 281px;
-    padding-left: 36px;
-    .category-item {
-        display: flex;
-        margin-bottom: 16px;
-    }
-    .category-icon {
-        border-radius: 50%;
-        width: 36px;
-        height: 36px;
-        margin-right: 8px;
-    }
-    .primary-color {
-        background-color: var(--Primary-Trello-Red, $Red);
-    }
-    .gold-color {
-        background-color: var(--Primary-Gold, $Gold);
-    }
-    .category-text {
-        margin: auto 0;
-        font-size: 24px;
-        color: $Gold;
-    }
-    a {
-        text-decoration: none;
-        &:hover {
-            filter: drop-shadow(0 0 30px $Gold);
         }
     }
 }
