@@ -31,6 +31,16 @@
     <swiper-slide>
       <h3>$1000 梨饗券</h3>
       <img src="../assets/Image/receipt/QRcode.png" alt="">
+      <!-- <ul class="coupon_info">
+          <li>
+              <h5>序號</h5>
+              <h5>24KK2988EFIJ</h5>
+          </li>
+          <li>
+              <h5>使用期限</h5>
+              <h5>2025/12/31</h5>
+          </li>
+      </ul> -->
     </swiper-slide>
     
   </swiper>
@@ -132,6 +142,22 @@
     opacity: var(--swiper-pagination-bullet-opacity, 1);
 }
 
+
+.coupon_info {
+  width: 168px;
+  height: 60px;
+  margin: 12px auto 0;
+  color: #fff;
+}
+
+.coupon_info li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.coupon_info li:first-child {
+    margin-bottom: 8px;
+}
 
 </style>
   

@@ -21,7 +21,7 @@
                 class="standup"
             />
             <img
-                src="../assets/Image/enter/hand.png"
+                src="../assets/Image/enter/long_hand.png"
                 alt="touch"
                 class="hand"
             />
@@ -109,31 +109,27 @@ export default {
                 ".cut1_door_R",
                 {
                     // x: 45,
-                    x: "99%",
+                    x: "98%",
                     duration: 1,
-                },
-                0
-            )
+                },0)
 
             .to(
                 ".enter_cut1_open",
                 {
                     scale: 3,
                     duration: 1.5,
-                    transformOrigin: "center 68%",
-                },
-                1
-            )
+                    // transformOrigin: "center 68%",
+                    transformOrigin: "center 72%",
+                },2)
 
             .to(
                 ".enter_cut1_open",
                 {
                     scale: 10,
                     duration: 1.5,
-                    transformOrigin: "center 68%",
-                },
-                2
-            )
+                    // transformOrigin: "center 68%",   
+                    transformOrigin: "center 72%",
+                },3)
 
             .to(
                 ".enter_cut1_open",
@@ -141,9 +137,8 @@ export default {
                     scale: 20,
                     duration: 1.5,
                     // transformOrigin: "center 68%",
-                },
-                3
-            )
+                    transformOrigin: "center 72%",
+                },4)
 
             .to(
                 ".enter_cut1_open",
@@ -151,9 +146,7 @@ export default {
                     autoAlpha: 0,
                     ease: "none",
                     duration: 0.000001,
-                },
-                4
-            )
+                },5)
 
             .to(
                 ".enter_cut1",
@@ -161,9 +154,7 @@ export default {
                     autoAlpha: 0,
                     ease: "none",
                     duration: 0.000001,
-                },
-                4
-            );
+                },5);
 
         let cut2 = gsap.timeline({
             scrollTrigger: {
@@ -180,14 +171,16 @@ export default {
             scale: 1.01,
             y: "-100vh",
             // ease: "none",
-            duration: 20,
+            // duration: 65,
+            duration: 35,
             ease: "power2.in",
         })
             .to(".enter_emperor", {
                 scale: 35,
                 transformOrigin: "49.6% 12.1%",
                 // ease: "none",
-                duration: 9,
+                // duration: 35,
+                duration: 15,
                 ease: "power2.in",
                 // ease: "sine.out",
                 // ease: "power1.in",
@@ -359,7 +352,7 @@ export default {
                 scale: 10,
                 y: "200",
                 // transformOrigin: "49.6% 12%",
-                duration: 5.5,
+                duration: 8,
                 // ease: "power2.in",
                 // opacity: 0
             })
@@ -377,7 +370,7 @@ export default {
             .to(
                 ".hand",
                 {
-                    duration: 5,
+                    duration: 10,
                     ease: "power2.in",
                     opacity: 1,
                     y: -62,
@@ -388,7 +381,7 @@ export default {
             )
 
             .to(".hand", {
-                duration: 5,
+                duration: 10,
                 ease: "power2.in",
                 opacity: 1,
                 y: -70,
@@ -409,19 +402,19 @@ export default {
             .to(
                 ".enter_water",
                 {
-                    // duration: 5,
+                    duration: 3,
                     // ease: "power2.in",
                     opacity: 1,
                 },
-                "+=0"
+                "<+=4"
             )
 
-            .to(".enter_emperor", {
-                onComplete: () => {
-                    window.location.href = import.meta.env.BASE_URL + "home";
-                    // this.$router.push('/home');
-                },
-            });
+            // .to(".enter_emperor", {
+            //     onComplete: () => {
+            //         window.location.href = import.meta.env.BASE_URL + "home";
+            //         // this.$router.push('/home');
+            //     },
+            // });
     },
 };
 </script>
@@ -433,19 +426,71 @@ export default {
     max-width: 100vw;
     height: 100vh;
     position: relative;
+    
     .enter_cut1 {
         // width: 98vw;
         // height: 100vh;
         width: 100%;
-        height: 110%;
+        // height: 110%;
+        height: 100%;
         background-image: url(../assets/Image/enter/cut1_bg.png);
         // background: #ECE6D9;
         background-repeat: no-repeat;
-        background-size: contain;
-        padding-top: 1%;
+        // background-size: contain;
+        background-size: cover;
+        // padding-top: 1%;
         overflow: hidden;
         position: relative;
         z-index: 49;
+        ::before{
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid $Black;
+            width: 50px;
+            height: 90px;
+            border-radius: 90px;
+            background-color: rgba($color: $Black, $alpha: 0.6);
+            animation: scrolldown 1.2s 1s linear 2;
+        }
+
+        @keyframes scrolldown {
+            0%{
+                opacity: 1;
+            }
+
+            100%{
+                opacity: 1;
+            }
+        }
+
+        ::after{
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            animation: scrollDown 1.2s 1s linear 2;
+            opacity: 0;
+        }
+
+        @keyframes scrollDown {
+            0%{
+                top: 46%;
+                opacity: 1;
+            }
+
+            100%{
+                top: 54%;
+                opacity: 0;
+            }
+        }
         .enter_cut1_open {
             // width: 95vw;
             // height: 95vh;
@@ -454,14 +499,16 @@ export default {
             background-image: url(../assets/Image/enter/palace_open.png);
             background-repeat: no-repeat;
             background-size: contain;
-            background-position: center top;
+            // background-position: center top;
+            background-position: center 70%;
             margin: 0 auto;
             z-index: 50;
             // opacity: 0;
             position: relative;
             .cut1_door {
                 // padding: 33.24% 0 0 0.42%;
-                padding: 32.05% 0 0 0.4%;
+                // padding: 32.05% 0 0 0.4%;
+                padding: 32.60% 0 0 0.4%;
                 display: flex;
                 justify-content: center;
                 img {
@@ -492,10 +539,12 @@ export default {
         opacity: 0;
     }
     .hand {
-        width: 2%;
+        // width: 2%;
+        width: 5%;
         position: absolute;
-        top: 15%;
-        left: 50%;
+        top: 14.5%;
+        // left: 50%;
+        left: 48.8%;
         z-index: 45;
         opacity: 0;
     }
@@ -543,11 +592,10 @@ export default {
                     // left: 42%;
                 }
                 &:nth-child(4) {
-                    // width: 4%;
                     // top: 66%;
-                    // left: 49%;
                     top: 64%;
-                    left: 48%;
+                    left: 49%;
+                    width: 4%;
                 }
                 &:nth-child(5) {
                     top: 32%;

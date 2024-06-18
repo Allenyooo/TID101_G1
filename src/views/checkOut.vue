@@ -4,7 +4,6 @@
 
         methods: {
             nextStep(){
-                // this.$emit('nextStep');
                 this.$router.push('/receipt');
             }
         },
@@ -32,6 +31,7 @@
                                 <li class="checkOut_purchase_item1"></li>
                                 <li class="checkOut_purchase_item2"></li>
                                 <li class="checkOut_purchase_item3"></li>
+                                <!-- <li class="checkOut_purchase_item3"></li> -->
                             </ul>
                         </div>
                     </div>
@@ -68,10 +68,14 @@
                         <form action="" class="checkOut_pay">
                             <h4>選擇付款方式</h4>
                             <div class="checkOut_pay_method">
-                                <input type="radio" name="pay" id="checkOut_creditCard">
-                                <label for="checkOut_creditCard"><span>信用卡</span></label>
-                                <input type="radio" name="pay" id="checkOut_linePay">
-                                <label for="checkOut_linePay"><span>LINE Pay</span></label>
+                                <div class="creditCard">
+                                    <input type="radio" name="pay" id="checkOut_creditCard">
+                                    <label for="checkOut_creditCard"><span>信用卡</span></label>
+                                </div>
+                                <div class="linePay">
+                                    <input type="radio" name="pay" id="checkOut_linePay">
+                                    <label for="checkOut_linePay"><span>LINE Pay</span></label>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -95,6 +99,12 @@
         max-width: 100vw;
         height: 95vh;
         padding-top: 1%;
+        @include breakpoint(760px){
+            height: unset;
+        }
+        @include breakpoint(460px){
+            padding-top: 5%;
+        }
     }
 
     .checkOut_wrapper{
@@ -106,6 +116,12 @@
         background-position: bottom;
         background-size: contain;
         position: relative;
+        @include breakpoint(1072px){
+            width: 88%;
+        }
+        @include breakpoint(760px){
+            width: 90%;
+        }
         .checkOut_confirm_order{
             width: 85%;
             height: 95%;
@@ -114,6 +130,9 @@
             border: 1px solid $Gold;
             margin: 0 auto;
             border-radius: 20px;
+            @include breakpoint(1072px){
+                width: 90%;
+            }
             h2{
                 color: $Gold;
                 margin-top: 28px;
@@ -134,6 +153,10 @@
     }
 
     .checkOut_order{
+        @include breakpoint(760px){
+            margin: 0 auto;
+            padding: 0 14% 22%;
+        }
         .checkOut_left_zone{
             display: inline-block;
             vertical-align: top;
@@ -141,6 +164,16 @@
             margin-left: 7%;
             width: 50%;
             margin-bottom: 10px;
+            @include breakpoint(1280px){
+                margin-left: 6%;
+            }
+            @include breakpoint(820px){
+                width: 44%;
+                margin-left: 10%;
+            }
+            @include breakpoint(760px){
+                display: unset;
+            }
             .checkOut_purchase_title{
                 border-bottom: 1px solid $Gold;
                 width: 100%;
@@ -158,13 +191,24 @@
             }
             .checkOut_purchase_list{
                 padding: 28px 0;
+                @include breakpoint(980px){
+                    padding: 28px 0 0;
+                }
                 .checkOut_purchase_item{
-                    width: 90%;
-                    height: 332px;
+                    width: 94%;
+                    // height: 332px    ;
+                    height: 43vh;
                     overflow-y: scroll;
                     margin-left: 4px;
                     // margin-bottom: 36px;
                     padding-right: 20px;
+                    @include breakpoint(980px){
+                        height: 48vh;
+                    }
+                    @include breakpoint(760px){
+                        overflow-y: unset;
+                        height: unset;
+                    }
                     li{
                         margin: 0 auto;
                         width: 90%;
@@ -206,6 +250,16 @@
             // margin-left: 56px;
             margin-left: 6%;
             width: 30%;
+            @include breakpoint(1280px){
+                margin-left: 5%;
+                width: 34%;
+            }
+            @include breakpoint(820px){
+                margin-left: 6%;
+            }
+            @include breakpoint(760px){
+                display: unset;
+            }
             .checkOut_order_details{
                 border: 1px solid $Gold;
                 border-radius: 20px;
@@ -224,6 +278,9 @@
                 .checkOut_use_coupon{
                     margin: 20px 24px 20px;
                     font-weight: bold;
+                    @include breakpoint(820px){
+                        margin: 0% 12%;
+                    }
                     .checkOut_coupon_text{
                         display: flex;
                         align-items: center;
@@ -241,15 +298,32 @@
                         display: flex;
                         align-items: center;
                         margin-bottom: 20px;
+                        justify-content: space-between;
+                        @include breakpoint(980px){
+                            flex-wrap: wrap;
+                        }
                         #checkOut_enterCode{
                             border: 1px solid $Gold;
                             border-radius: 20px;
                             padding: 5px 10px;
                             font-size: $fontSize * 0.875;
                             font-family: $fontFamily;
-                            margin-right: 20px;
-                            width: 60%;
+                            // margin-right: 20px;
+                            // margin-right: 8%;
+                            width: 70%;
                             line-height: 150%;
+                            @include breakpoint(980px){
+                                width: 100%;
+                                margin-bottom: 8px;
+                            }
+                            @include breakpoint(760px){
+                                width: 70%;
+                                margin-bottom: 0;
+                            }
+                            @include breakpoint(460px){
+                                width: 100%;
+                                margin-bottom: 8px;
+                            }
                         }
                         #checkOut_submitCode{
                             font-family: $fontFamily;
@@ -257,11 +331,11 @@
                             font-weight: bold;
                             background-color: $OffWhite;
                             border-radius: 20px;
-                            padding: 6px 10px;
+                            padding: 8px 12px;
                             border: 1px solid $Gold;
                             // line-height: 150%;
                             cursor: pointer;
-                            margin: auto;
+                            // margin: auto;
                         }
                     }
                     .checkOut_amount{
@@ -293,7 +367,7 @@
     }
 
     .checkOut_pay{
-        width: 95%;
+        width: 100%;
         display: inline-block;
         border: 1px solid $Gold;
         margin-top: 20px;
@@ -311,26 +385,57 @@
             display: flex;
             align-items: center;
             margin-bottom: 20px;
-            #checkOut_creditCard{
-                margin: 0 8px;
-                width: 16px;
-                height: 16px;
-                // background-color: $Gold;
-                border: 1px solid $Gold;
+            @include breakpoint(980px){
+                flex-wrap: wrap;
+                margin-left: 10%;
+            }
+            @include breakpoint(460px){
+                flex-wrap: wrap;
+            }
+            .creditCard{
+                display: flex;
+                align-items: center;
+                @include breakpoint(980px){
+                    margin-right: 20px;
+                    margin-bottom: 8px;
+                }
+                @include breakpoint(760px){
+                    margin: 0;
+                }
+                @include breakpoint(460px){
+                    margin-right: 20px;
+                    margin-bottom: 8px;
+                }
+                #checkOut_creditCard{
+                    margin: 0 8px -1px;
+                    width: 16px;
+                    height: 16px;
+                    // background-color: $Gold;
+                    border: 1px solid $Gold;
+                }
             }
             span:first-child{
                 margin-right: 20px;
             }
-            #checkOut_linePay{
-                margin: 0 8px;
-                width: 16px;
-                height: 16px;
+
+            .linePay{
+                display: flex;
+                align-items: center;
+                #checkOut_linePay{
+                    // margin: 0 8px;
+                    margin: 0 8px -1px;
+                    width: 16px;
+                    height: 16px;
+                }
             }
         }
     }
 
     .checkOut_nextStep{
         position: relative;
+        @include breakpoint(760px){
+            position: unset;
+        }
         #checkOut_next{
             position: absolute;
             z-index: 2;
@@ -347,6 +452,24 @@
             margin: auto;
             margin-bottom: 20px;
             width: 150px;
+            @include breakpoint(980px){
+                margin-top: 20px;
+            }
+            @include breakpoint(760px){
+                position: relative;
+                margin: 0;
+                left: 50%;
+                bottom: 80px;
+                transform: translate(-50%);
+            }
+            @include breakpoint(560px){
+                bottom: 66px;
+                padding: 8px 20px;
+                width: unset;
+            }
+            @include breakpoint(460px){
+                bottom: 56px;
+            }
         }
     }
 
