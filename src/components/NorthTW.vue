@@ -2,129 +2,123 @@
 import shopcard from "../components/Shopcard.vue";
 
 export default {
-  components: { shopcard },
+    components: { shopcard },
 
-  beforeMount(){
-    // const filter = document.querySelector('.filter');
-    // filter.style.top = '0';
-  },
+    mounted() {
+        this.fetchShops();
+    },
 
-  data() {
-    return {
-        // marker1Src : "/src/assets/Image/map/unmarker.png",
-        // marker2Src : "/src/assets/Image/map/unmarker.png",
-        // marker3Src : "/src/assets/Image/map/unmarker.png",
-        marker1Src: new URL(
-            "@/assets/Image/map/unmarker.png",
-            import.meta.url
-        ).href,
-        marker2Src: new URL(
-            "@/assets/Image/map/unmarker.png",
-            import.meta.url
-        ).href,
-        marker3Src: new URL(
-            "@/assets/Image/map/unmarker.png",
-            import.meta.url
-        ).href,
-    };
-  },
+    data() {
+        return {
+            unmarker: new URL(
+                "@/assets/Image/map/unmarker.png",
+                import.meta.url
+            ).href,
+            marker: new URL("@/assets/Image/map/marker.png", import.meta.url)
+                .href,
 
-  methods: {
-    backToIsland(event) {
-      event.stopPropagation(); //停止冒泡事件
-      const img = document.querySelector('.northIsland');
-      img.style.opacity = '1';
-      img.style.transform = 'translate(0px, 0px)';
-      img.style.transition = 'all 0.5s ease';
-      img.style.width = '256px';
-      img.style.height = '199px';
-      this.$router.push('/map');
-      console.log('backToIsland is called');
-      img.style.transform = '';
+            hoverIndex: -1,
+
+            shops: [
+                // {
+                //   ID:1,
+                //   name:'高麗味',
+                //   imgSrc: new URL(
+                //   "@/assets/Image/map/koreawaybgi.png",
+                //   import.meta.url
+                //   ).href,
+                //   region: '北'
+                // },
+                // {
+                //   ID:4,
+                //   name:'看啥韓密達',
+                //   imgSrc: new URL(
+                //   "@/assets/Image/map/hanmida.png",
+                //   import.meta.url
+                //   ).href,
+                //   region: '北'
+                // },
+                // {
+                //   ID:9,
+                //   name:'韓宮',
+                //   imgSrc: new URL(
+                //   "@/assets/Image/map/hangon.png",
+                //   import.meta.url
+                //   ).href,
+                //   region: '北'
+                // }
+            ],
+        };
     },
-    markLight1() {
-        //this.marker1Src = "/src/assets/Image/map/marker.png";
-        this.marker1Src = new URL(
-            "@/assets/Image/map/marker.png",
-            import.meta.url
-        ).href;
+
+    methods: {
+        async fetchShops() {
+            try {
+                const response = await fetch(
+                    "http://localhost/tid101_g1/public/php/map/shop.php"
+                );
+                const shopsData = await response.json();
+                this.shops = shopsData;
+                console.log(shopData);
+            } catch (error) {
+                console.error("Error fetching shops:", error);
+            }
+        },
+
+        backToIsland(event) {
+            event.stopPropagation(); //停止冒泡事件
+            const img = document.querySelector(".northIsland");
+            img.style.opacity = "1";
+            img.style.transform = "translate(0px, 0px)";
+            img.style.transition = "all 0.5s ease";
+            img.style.width = "256px";
+            img.style.height = "199px";
+            this.$router.push("/map");
+            console.log("backToIsland is called");
+            img.style.transform = "";
+        },
+        markLight(index) {
+            this.hoverIndex = index;
+        },
+        unmarker() {
+            this.hoverIndex = -1;
+        },
+        getMarkerSrc(index) {
+            return this.hoverIndex === index ? this.marker : this.unmarker;
+        },
     },
-    unmarker1() {
-        //this.marker1Src = "/src/assets/Image/map/unmarker.png";
-        this.marker1Src = new URL(
-            "@/assets/Image/map/unmarker.png",
-            import.meta.url
-        ).href;
-    },
-    markLight2() {
-        //this.marker2Src = "/src/assets/Image/map/marker.png";
-        this.marker2Src = new URL(
-            "@/assets/Image/map/marker.png",
-            import.meta.url
-        ).href;
-    },
-    unmarker2() {
-        //this.marker2Src = "/src/assets/Image/map/unmarker.png";
-        this.marker2Src = new URL(
-            "@/assets/Image/map/unmarker.png",
-            import.meta.url
-        ).href;
-    },
-    markLight3() {
-        //this.marker3Src = "/src/assets/Image/map/marker.png";
-        this.marker3Src = new URL(
-            "@/assets/Image/map/marker.png",
-            import.meta.url
-        ).href;
-    },
-    unmarker3() {
-        //this.marker3Src = "/src/assets/Image/map/unmarker.png";
-        this.marker3Src = new URL(
-            "@/assets/Image/map/unmarker.png",
-            import.meta.url
-        ).href;
-    },
-  },
 };
-
 </script>
 
 <template>
-    <section >
+    <section>
         <div class="filter" @click="backToIsland"></div>
         <div class="sidemap">
             <div class="nmap">
                 <span>
-                    <img :src="marker1Src" alt="">
+                    <img :src="getMarkerSrc(0)" alt="" />
                 </span>
                 <span>
-                    <img :src="marker2Src" alt="">
+                    <img :src="getMarkerSrc(1)" alt="" />
                 </span>
                 <span>
-                    <img :src="marker3Src" alt="">
+                    <img :src="getMarkerSrc(2)" alt="" />
                 </span>
             </div>
         </div>
 
         <div class="map_shoptitle">
-              <h1>精 選 店 家</h1>
-          </div>
+            <h1>精 選 店 家</h1>
+        </div>
 
         <ul class="shops">
-
-          <router-link to="/restaurant" class="marker">
-              <shopcard @mouseenter.native="markLight1" @mouseleave.native="unmarker1"></shopcard>
-          </router-link>
-
-          <router-link to="/restaurant" class="marker">
-              <shopcard @mouseenter.native="markLight2" @mouseleave.native="unmarker2"></shopcard>
-          </router-link>
-
-          <router-link to="/restaurant" class="marker">
-              <shopcard @mouseenter.native="markLight3" @mouseleave.native="unmarker3"></shopcard>
-          </router-link>
-
-
+            <shopcard
+                @mouseenter.native="markLight(index)"
+                @mouseleave.native="unmarker()"
+                v-for="(shop, index) in shops"
+                :key="shop.ID"
+                :shop="shop"
+            />
         </ul>
     </section>
 </template>
@@ -132,109 +126,108 @@ export default {
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
 
-.marker{
+.marker {
     text-decoration: none;
     color: #333;
     margin-bottom: 24px;
 }
 
 section {
-  // display: none;
+    // display: none;
 
-  .filter{
-    width: 100vw;
-    height: 100vh;
-    background-color: #333333;
-    opacity: 0.8;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 15; 
-    transition: 0.3s;
-  }
-  .cards {
-    margin-bottom: 24px;
-  }
-
-  .sidemap {
-    // outline: 1px blue solid;
-    position: fixed;
-    top: 10vh;
-    left: 5.5vw;
-    z-index: 20;
-    .nmap {
-      background-image: url("../assets/Image/map/northsideOpen2.png");
-      background-size: cover;
-      // outline: 1px red solid;
-      // width: 592px;
-      width: 39vw;
-      // height: 484px;
-      height: 31.88484vw;
-      opacity: 1;
-      position: relative;
-      // object-fit: cover;
-      & span:nth-child(1){
-        position: absolute;
-        top: 25%;
-        right: 35%;
-      }
-      & span:nth-child(2){
-        position: absolute;
-        top: 40%;
-        right: 40%;
-      }
-      & span:nth-child(3){
-        position: absolute;
-        top: 70%;
-        right: 70%;
-      }
+    .filter {
+        width: 100vw;
+        height: 100vh;
+        background-color: #333333;
+        opacity: 0.8;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 15;
+        transition: 0.3s;
+    }
+    .cards {
+        margin-bottom: 24px;
     }
 
-    & h1 {
-      font-size: $fontSize * 32;
-      display: inline-block;
+    .sidemap {
+        // outline: 1px blue solid;
+        position: fixed;
+        top: 10vh;
+        left: 5.5vw;
+        z-index: 20;
+        .nmap {
+            background-image: url("../assets/Image/map/northsideOpen2.png");
+            background-size: cover;
+            // outline: 1px red solid;
+            // width: 592px;
+            width: 39vw;
+            // height: 484px;
+            height: 31.88484vw;
+            opacity: 1;
+            position: relative;
+            // object-fit: cover;
+            & span:nth-child(1) {
+                position: absolute;
+                top: 25%;
+                right: 35%;
+            }
+            & span:nth-child(2) {
+                position: absolute;
+                top: 40%;
+                right: 40%;
+            }
+            & span:nth-child(3) {
+                position: absolute;
+                top: 70%;
+                right: 70%;
+            }
+        }
+
+        & h1 {
+            font-size: $fontSize * 32;
+            display: inline-block;
+        }
     }
-  }
 
-  .shops {
-    // outline: 2px solid red;
-    position: fixed;
-    top: 20vh;
-    right: 10vw;
-    z-index: 20;
-    width: 725px;
-    height: 79vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-    overflow-x: hidden;
+    .shops {
+        // outline: 2px solid red;
+        position: fixed;
+        top: 20vh;
+        right: 10vw;
+        z-index: 20;
+        width: 725px;
+        height: 79vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+        overflow-x: hidden;
 
-    &::-webkit-scrollbar {
-        width: 12px; /* 滾動條寬度 */
+        &::-webkit-scrollbar {
+            width: 12px; /* 滾動條寬度 */
+        }
     }
+    .map_shoptitle {
+        // outline: 1px red solid;
+        // width: 312px;
+        width: 720px;
+        height: 88px;
+        background-image: url(/src/assets/Image/map/bannerBGI.png);
+        background-repeat: no-repeat;
+        background-position: center center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 5vh;
+        position: fixed;
+        top: 8vh;
+        right: 10vw;
+        z-index: 16;
 
-  }
-  .map_shoptitle {
-      // outline: 1px red solid;
-      // width: 312px;
-      width: 720px;
-      height: 88px;
-      background-image: url(/src/assets/Image/map/bannerBGI.png);
-      background-repeat: no-repeat;
-      background-position: center center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 5vh;
-      position: fixed;
-      top: 8vh;
-      right: 10vw;
-      z-index: 16;
-
-      h1 {
-        font-size: $fontSize * 2;
-      }
+        h1 {
+            font-size: $fontSize * 2;
+        }
     }
 }
 </style>
