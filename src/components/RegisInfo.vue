@@ -25,70 +25,92 @@
         <div class="line"></div>
     </div>
 
-    <div class="register_emailadd">
-        <label for="register_email">電子信箱</label>
-        <input
-            type="text"
-            id="register_email"
-            placeholder="example@account.com"
-            v-model="email"
-            @blur="validateEmail"
-            required
-        />
-        <span v-if="!isValidEmail" class="error-message">
-            {{ errorMessage }}
-        </span>
-    </div>
+    <form
+        @submit.prevent="handleRegistration"
+        method="post"
+        action="../../public/php/register/register.php"
+    >
+        <div class="register_emailadd">
+            <label for="register_email">電子信箱</label>
+            <input
+                type="text"
+                id="register_email"
+                name="register_email"
+                placeholder="example@account.com"
+                v-model="email"
+                @blur="validateEmail"
+                required
+            />
+            <span v-if="!isValidEmail" class="error-message">
+                {{ errorMessage }}
+            </span>
+        </div>
 
-    <div class="register_password">
-        <label for="register_pw">設定密碼</label>
-        <input
-            type="password"
-            id="register_pw"
-            placeholder="* * * * * * * * * *"
-            v-model="password"
-            @input="validatePassword"
-            required
-        />
-        <p>8 ~ 10個字符，必須至少一個數字跟英文字母</p>
-        <span v-if="isPasswordEmpty" class="error-message">請輸入密碼</span>
-        <span v-else-if="isPasswordInvalid" class="error-message">{{
-            passwordErrorMessage
-        }}</span>
-    </div>
+        <div class="register_password">
+            <label for="register_pw">設定密碼</label>
+            <input
+                type="password"
+                id="register_pw"
+                name="register_pw"
+                placeholder="* * * * * * * * * *"
+                v-model="password"
+                @input="validatePassword"
+                required
+            />
+            <p>8 ~ 10個字符，必須至少一個數字跟英文字母</p>
+            <span v-if="isPasswordEmpty" class="error-message">請輸入密碼</span>
+            <span v-else-if="isPasswordInvalid" class="error-message">{{
+                passwordErrorMessage
+            }}</span>
+        </div>
 
-    <div class="register_confirmPassword">
-        <label for="register_Cpw">確認密碼</label>
-        <input
-            type="password"
-            id="register_Cpw"
-            placeholder="* * * * * * * * * *"
-            v-model="confirmPassword"
-            @input="validateConfirmPassword"
-            required
-        />
-        <span v-if="!isConfirmPasswordMatch" class="error-message"
-            >密碼不匹配</span
-        >
-    </div>
+        <div class="register_confirmPassword">
+            <label for="register_Cpw">確認密碼</label>
+            <input
+                type="password"
+                id="register_Cpw"
+                name="register_Cpw"
+                placeholder="* * * * * * * * * *"
+                v-model="confirmPassword"
+                @input="validateConfirmPassword"
+                required
+            />
+            <span v-if="!isConfirmPasswordMatch" class="error-message"
+                >密碼不匹配</span
+            >
+        </div>
 
-    <div class="register_realname">
-        <label for="register_name">會員姓名</label>
-        <input type="text" id="register_name" placeholder="王小明" required />
-    </div>
+        <div class="register_realname">
+            <label for="register_name">會員姓名</label>
+            <input
+                type="text"
+                id="register_name"
+                name="register_name"
+                placeholder="王小明"
+                v-model="name"
+                required
+            />
+        </div>
 
-    <div class="register_acceptCondition">
-        <input type="checkbox" id="register_accept" required />
-        <label for="register_accept">
-            請在此處勾選以表明您接受我們用於線上或行動服務的用途。
-        </label>
-    </div>
+        <div class="register_acceptCondition">
+            <input
+                type="checkbox"
+                id="register_accept"
+                name="register_accept"
+                v-model="accept"
+                required
+            />
+            <label for="register_accept">
+                請在此處勾選以表明您接受我們用於線上或行動服務的用途。
+            </label>
+        </div>
 
-    <div class="register_in">
-        <button @click.prevent="handleSubmit">
-            <h3>註冊</h3>
-        </button>
-    </div>
+        <div class="register_in">
+            <button @click.prevent="handleSubmit">
+                <h3>註冊</h3>
+            </button>
+        </div>
+    </form>
 
     <div class="register_login">
         <h5>已經有帳號了?<router-link to="/login"> 立即登入!</router-link></h5>
@@ -103,6 +125,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     data() {
         return {
@@ -111,7 +135,9 @@ export default {
             isValidEmail: true,
             password: "",
             confirmPassword: "",
+            name: "",
             passwordErrorMessage: "",
+            accept: false,
             isValidPassword: true,
             isConfirmPasswordMatch: true,
         };
@@ -166,9 +192,31 @@ export default {
             }
         },
         handleSubmit() {
-            if (this.isValidForm) {
-                // navigate to the next page
-                this.$router.push("/register/regisuccess");
+            if (this.formIsValid) {
+                axios
+                    .post(
+                        "http://localhost:5173/tid101/g1/public/php/register/register.php",
+                        {
+                            email: this.email,
+                            password: this.password,
+                            confirmPassword: this.confirmPassword,
+                            name: this.name,
+                            accept: this.accept,
+                        }
+                    )
+                    .then((response) => {
+                        if (response.data.success) {
+                            console.log(response.data);
+                            this.$router.push("/register/regisuccess");
+                        } else {
+                            this.errorMessage = response.data.error_message;
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error caught:", error);
+                        this.errorMessage =
+                            "Registration failed. Please try again.";
+                    });
             }
         },
         isValidForm() {
@@ -182,11 +230,6 @@ export default {
                 document.getElementById("register_accept").checked &&
                 document.getElementById("register_name").value !== ""
             );
-        },
-        handleSubmit() {
-            if (this.formIsValid) {
-                this.$router.push("/register/regisuccess");
-            }
         },
     },
     computed: {
@@ -211,9 +254,6 @@ export default {
                 !/[a-zA-Z]/.test(this.password) ||
                 !/\d/.test(this.password)
             );
-        },
-        isValidPassword() {
-            return !this.isPasswordEmpty && !this.isPasswordInvalid;
         },
     },
     watch: {
@@ -306,6 +346,8 @@ h2 {
 .register_emailadd {
     display: flex;
     flex-direction: column;
+    width: fit-content;
+    margin: 0 auto;
     label {
         font-size: 20px;
         margin-top: 24px;
@@ -337,6 +379,8 @@ h2 {
 .register_password {
     display: flex;
     flex-direction: column;
+    width: fit-content;
+    margin: 0 auto;
     label {
         font-size: 20px;
         margin-top: 24px;
@@ -368,6 +412,8 @@ h2 {
 .register_confirmPassword {
     display: flex;
     flex-direction: column;
+    width: fit-content;
+    margin: 0 auto;
     label {
         font-size: 20px;
         margin-top: 24px;
@@ -395,6 +441,8 @@ h2 {
 .register_realname {
     display: flex;
     flex-direction: column;
+    width: fit-content;
+    margin: 0 auto;
     label {
         font-size: 20px;
         margin-top: 24px;
@@ -443,6 +491,7 @@ h2 {
     border: 1px solid $Gold;
     border-radius: 15px;
     margin: 16px auto 32px;
+    width: fit-content;
     &:active {
         background-image: $RevGoldGrad;
     }
