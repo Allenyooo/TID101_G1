@@ -1,5 +1,11 @@
 <?php
 
+    header('Access-Control-Allow-Origin: *');
+
+    header('Access-Control-Allow-Methods: GET, POST');
+
+    header("Access-Control-Allow-Headers: X-Requested-With");
+    
     //MySQL相關資訊
     $db_host = "127.0.0.1";
     $db_user = "root";
