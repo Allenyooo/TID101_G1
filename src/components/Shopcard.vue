@@ -4,7 +4,11 @@ export default {
         isHoverEnabled: {
             type: Boolean,
             default: true
-        }
+        },
+        shop: {
+            type: Object,
+            required: true
+        },
     },
 
     data() {
@@ -22,17 +26,18 @@ export default {
 </script>
 
 <template>
+    <router-link to="/restaurant" class="marker">
     <!-- <li :class="{ map_open : hovered }" @mouseover="cardOpen" @mouseleave="cardOpen"> -->
     <li @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')" :class="{ 'no-hover': !isHoverEnabled }">
 
         <div class="normal">
-            <img src="/src/assets/Image/map/koreawaybgi.png" alt="" />
+            <img :src="shop.BANNERPIC" alt="" />
             <div class="shopinfo">
-                <h3>高麗味</h3>
+                <h3>{{ shop.NAME }}</h3>
                 <div class="content">
                     <div class="address">
                         <img src="/src/assets/Image/map/addressLogo.png" alt="" />
-                        <h5>台北市，天母區</h5>
+                        <h5>{{ shop.REGION }}部地區</h5>
                     </div>
                     <div class="star">
                         <img src="/src/assets/Image/map/star.png" alt="" />
@@ -45,10 +50,10 @@ export default {
             <div class="card_header"></div>
             <div class="card_main">
                 <div class="maininfo">
-                    <img src="/src/assets/Image/map/koreawaybgi.png" class="shopImg" />
+                    <img :src="shop.BANNERPIC" class="shopImg" />
                     <div class="maincontent">
                         <div class="name_collect">
-                            <h2>高麗味</h2>
+                            <h2>{{ shop.NAME }}</h2>
                             <div class="collect"></div>
                         </div>
                         <div class="star_price">
@@ -65,7 +70,7 @@ export default {
                         </div>
                         <div class="shop_address">
                             <img src="/src/assets/Image/map/addressLogo.png" alt="" />
-                            <h4>台北市士林區忠誠路二段152號</h4>
+                            <h4>台{{ shop.REGION }}市士林區忠誠路二段152號</h4>
                         </div>
                     </div>
                 </div>
@@ -82,6 +87,7 @@ export default {
             </div>
         </div>
     </li>
+    </router-link>
 </template>
 
 <style lang="scss" scoped>
