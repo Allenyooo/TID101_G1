@@ -6,21 +6,46 @@ export default {
 
   data() {
     return {
-        // marker1Src : "/src/assets/Image/map/unmarker.png",
-        // marker2Src : "/src/assets/Image/map/unmarker.png",
-        // marker3Src : "/src/assets/Image/map/unmarker.png",
-        marker1Src: new URL(
+        unmarker: new URL(
             "@/assets/Image/map/unmarker.png",
             import.meta.url
         ).href,
-        marker2Src: new URL(
-            "@/assets/Image/map/unmarker.png",
+        marker: new URL(
+            "@/assets/Image/map/marker.png",
             import.meta.url
         ).href,
-        marker3Src: new URL(
-            "@/assets/Image/map/unmarker.png",
-            import.meta.url
-        ).href,
+
+        hoverIndex: -1,
+
+        shops:[
+          {
+              ID:7,
+              name:'大盜韓不住',
+              imgSrc: new URL(
+                    "@/assets/Image/map/hanbuzu.webp",
+                    import.meta.url
+                    ).href,
+              region: '東'
+          },
+          {
+              ID:8,
+              name:'韓食館',
+              imgSrc: new URL(
+                    "@/assets/Image/map/hanfoodguan.jpg",
+                    import.meta.url
+                    ).href,
+              region: '東'
+          },
+          {
+              ID:12,
+              name:'東輝韓食',
+              imgSrc: new URL(
+                    "@/assets/Image/map/donhuy.jpg",
+                    import.meta.url
+                    ).href,
+              region: '東'
+          }
+        ],
     };
   },
 
@@ -39,48 +64,15 @@ export default {
         console.log('backToIsland is called');
         img.style.transform = '';
     },
-    markLight1() {
-        //this.marker1Src = "/src/assets/Image/map/marker.png";
-        this.marker1Src = new URL(
-            "@/assets/Image/map/marker.png",
-            import.meta.url
-        ).href;
+    markLight(index) {
+      this.hoverIndex = index;
     },
-    unmarker1() {
-        //this.marker1Src = "/src/assets/Image/map/unmarker.png";
-        this.marker1Src = new URL(
-            "@/assets/Image/map/unmarker.png",
-            import.meta.url
-        ).href;
+    unmarker() {
+      this.hoverIndex = -1;
     },
-    markLight2() {
-        //this.marker2Src = "/src/assets/Image/map/marker.png";
-        this.marker2Src = new URL(
-            "@/assets/Image/map/marker.png",
-            import.meta.url
-        ).href;
-    },
-    unmarker2() {
-        //this.marker2Src = "/src/assets/Image/map/unmarker.png";
-        this.marker2Src = new URL(
-            "@/assets/Image/map/unmarker.png",
-            import.meta.url
-        ).href;
-    },
-    markLight3() {
-        //this.marker3Src = "/src/assets/Image/map/marker.png";
-        this.marker3Src = new URL(
-            "@/assets/Image/map/marker.png",
-            import.meta.url
-        ).href;
-    },
-    unmarker3() {
-        //this.marker3Src = "/src/assets/Image/map/unmarker.png";
-        this.marker3Src = new URL(
-            "@/assets/Image/map/unmarker.png",
-            import.meta.url
-        ).href;
-    },
+    getMarkerSrc(index) {
+      return this.hoverIndex === index ? this.marker : this.unmarker;
+    }
   },
 };
 
@@ -92,14 +84,14 @@ export default {
         <div class="filter" @click="backToIsland"></div>
         <div class="sidemap">
             <div class="nmap">
-                <span>
-                    <img :src="marker1Src" alt="">
+              <span>
+                    <img :src="getMarkerSrc(0)" alt="">
                 </span>
                 <span>
-                    <img :src="marker2Src" alt="">
+                    <img :src="getMarkerSrc(1)" alt="">
                 </span>
                 <span>
-                    <img :src="marker3Src" alt="">
+                    <img :src="getMarkerSrc(2)" alt="">
                 </span>
             </div>
         </div>
@@ -110,17 +102,8 @@ export default {
 
         <ul class="shops">
 
-        <router-link to="/restaurant" class="marker">
-            <shopcard can_hover="true" @mouseenter.native="markLight1" @mouseleave.native="unmarker1"></shopcard>
-        </router-link>
-
-        <router-link to="/restaurant" class="marker">
-            <shopcard can_hover="true" @mouseenter.native="markLight2" @mouseleave.native="unmarker2"></shopcard>
-        </router-link>
-
-        <router-link to="/restaurant" class="marker">
-            <shopcard can_hover="true" @mouseenter.native="markLight3" @mouseleave.native="unmarker3"></shopcard>
-        </router-link>
+          <shopcard @mouseenter.native="markLight(index)" @mouseleave.native="unmarker()"
+          v-for="(shop, index) in shops" :key="shop.ID" :shop="shop"/>
 
         </ul>
     </section>
