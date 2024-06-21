@@ -25,44 +25,48 @@
         <div class="line"></div>
     </div>
 
-    <div class="login_account">
-        <label for="login_acc">會員帳號</label>
-        <input
-            type="text"
-            id="login_acc"
-            v-model.trim="account"
-            placeholder="example@account.com"
-        />
-        <p v-if="errors.account" class="error">{{ errors.account }}</p>
-    </div>
+    <form @submit.prevent="login" method="post" action="login.php">
+        <div class="login_account">
+            <label for="login_acc">會員帳號</label>
+            <input
+                type="text"
+                id="login_acc"
+                name="login_account"
+                v-model.trim="account"
+                placeholder="example@account.com"
+            />
+            <p v-if="errors.account" class="error">{{ errors.account }}</p>
+        </div>
 
-    <div class="login_password">
-        <label for="login_pw">會員密碼</label>
-        <input
-            type="password"
-            id="login_pw"
-            v-model.trim="password"
-            placeholder="* * * * * * * * *"
-        />
-        <p v-if="errors.password" class="error">{{ errors.password }}</p>
-    </div>
+        <div class="login_password">
+            <label for="login_pw">會員密碼</label>
+            <input
+                type="password"
+                id="login_pw"
+                name="login_password"
+                v-model.trim="password"
+                placeholder="* * * * * * * * *"
+            />
+            <p v-if="errors.password" class="error">{{ errors.password }}</p>
+        </div>
 
-    <div class="login_forgotPW">
-        <router-link to="/login/forgotpw">
-            <h6>忘記密碼?</h6>
-        </router-link>
-    </div>
+        <div class="login_forgotPW">
+            <router-link to="/login/forgotpw">
+                <h6>忘記密碼?</h6>
+            </router-link>
+        </div>
 
-    <div class="login_rmb">
-        <input type="checkbox" id="login_check" />
-        <label for="login_check">記住我的登入資訊</label>
-    </div>
+        <div class="login_rmb">
+            <input type="checkbox" id="login_check" name="login_remember" />
+            <label for="login_check">記住我的登入資訊</label>
+        </div>
 
-    <div class="login_in">
-        <button :disabled="!isValid" @click="login">
-            <h3>登入</h3>
-        </button>
-    </div>
+        <div class="login_in">
+            <button :disabled="!isValid" @click="login">
+                <h3>登入</h3>
+            </button>
+        </div>
+    </form>
 
     <div class="login_register">
         <h5>
@@ -80,6 +84,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     data() {
         return {
@@ -98,22 +104,37 @@ export default {
     },
     methods: {
         login() {
-            console.log("Login button clicked!");
             const trimmedAccount = this.account.trim();
             const trimmedPassword = this.password.trim();
-            if (trimmedAccount === "" || trimmedPassword === "") {
-                if (trimmedAccount === "") {
-                    this.errors.account = "請輸入帳號";
-                }
-                if (trimmedPassword === "") {
-                    this.errors.password = "請輸入密碼";
-                }
-                console.log("Error messages set:", this.errors);
-            } else {
-                // Assume the account and password are valid, log in the user
-                this.$router.push("/member");
-                this.errors.account = "";
-                this.errors.password = "";
+            if (trimmedAccount === "") {
+                this.errors.account = "請輸入帳號";
+            }
+            if (trimmedPassword === "") {
+                this.errors.password = "請輸入密碼";
+            }
+            if (trimmedAccount !== "" && trimmedPassword !== "") {
+                axios
+                    .post(
+                        "http://localhost:5173/tid101/g1/public/php/login/login.php",
+                        {
+                            account: trimmedAccount,
+                            password: trimmedPassword,
+                        }
+                    )
+                    .then((response) => {
+                        if (response.data.success) {
+                            // Assume the account and password are valid, log in the user
+                            this.$router.push("/member");
+                            this.errors.account = "";
+                            this.errors.password = "";
+                        } else {
+                            this.errors.account = "帳號或密碼錯誤";
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error logging in:", error);
+                        this.errors.account = "發生錯誤，請重試";
+                    });
             }
         },
     },
@@ -286,6 +307,7 @@ h2 {
     border: 1px solid $Gold;
     border-radius: 15px;
     margin: 16px auto 32px;
+    width: fit-content;
     &:active {
         background-image: $RevGoldGrad;
     }

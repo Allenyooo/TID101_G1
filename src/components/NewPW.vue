@@ -8,44 +8,48 @@
 
     <h2>設定新密碼</h2>
 
-    <div class="newPW_password">
-        <label for="newPW_PW">輸入新密碼</label>
-        <input
-            type="password"
-            id="newPW_PW"
-            v-model="newPassword"
-            placeholder="* * * * * * * * * *"
-        />
-        <p>8 ~ 10個字符，必須至少一個數字跟英文字母</p>
-        <span v-if="newPasswordError" class="error">{{
-            newPasswordError
-        }}</span>
-        <span v-if="!newPassword && !newPasswordError" class="error"
-            >請輸入新密碼</span
-        >
-    </div>
+    <form @submit.prevent="updatePassword">
+        <div class="newPW_password">
+            <label for="newPW_PW">輸入新密碼</label>
+            <input
+                type="password"
+                id="newPW_PW"
+                name="newPW_PW"
+                v-model="newPassword"
+                placeholder="* * * * * * * * * *"
+            />
+            <p>8 ~ 10個字符，必須至少一個數字跟英文字母</p>
+            <span v-if="newPasswordError" class="error">{{
+                newPasswordError
+            }}</span>
+            <span v-if="!newPassword && !newPasswordError" class="error"
+                >請輸入新密碼</span
+            >
+        </div>
 
-    <div class="newPW_confirmPW">
-        <label for="newPW_confirm">確認新密碼</label>
-        <input
-            type="password"
-            id="newPW_confirm"
-            v-model="confirmPassword"
-            placeholder="* * * * * * * * * *"
-        />
-        <span v-if="confirmPasswordError" class="error">{{
-            confirmPasswordError
-        }}</span>
-        <span v-if="!confirmPassword && !confirmPasswordError" class="error"
-            >請輸入相同密碼</span
-        >
-    </div>
+        <div class="newPW_confirmPW">
+            <label for="newPW_confirm">確認新密碼</label>
+            <input
+                type="password"
+                id="newPW_confirm"
+                name="newPW_confirm"
+                v-model="confirmPassword"
+                placeholder="* * * * * * * * * *"
+            />
+            <span v-if="confirmPasswordError" class="error">{{
+                confirmPasswordError
+            }}</span>
+            <span v-if="!confirmPassword && !confirmPasswordError" class="error"
+                >請輸入相同密碼</span
+            >
+        </div>
 
-    <div class="newPW_in">
-        <button @click="handleSubmit">
-            <h3>修改密碼</h3>
-        </button>
-    </div>
+        <div class="newPW_in">
+            <button @click="handleSubmit">
+                <h3>修改密碼</h3>
+            </button>
+        </div>
+    </form>
 
     <img
         src="../assets/Image/login/decoBottom.svg"
@@ -157,12 +161,12 @@ h2 {
     }
     p {
         color: $Gray;
-        
+
         @include breakpoint(430px) {
             width: 66vw;
         }
     }
-    span{
+    span {
         margin-bottom: 32px;
     }
 }
@@ -194,7 +198,7 @@ h2 {
             width: 66vw;
         }
     }
-    span{
+    span {
         margin-bottom: 32px;
     }
 }
@@ -204,6 +208,7 @@ h2 {
     border: 1px solid $Gold;
     border-radius: 15px;
     margin: 5vw auto 2vw;
+    width: fit-content;
     &:active {
         background-image: $RevGoldGrad;
     }

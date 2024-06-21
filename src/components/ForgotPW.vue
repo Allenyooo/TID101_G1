@@ -8,30 +8,37 @@
 
     <h2>忘記密碼</h2>
 
-    <div class="forgot_email">
-        <label for="forgot_acc">
-            <h4>密碼重設驗證信</h4>
-            <h6>請輸入您的電子信箱</h6>
-        </label>
-        <input type="text" id="login_acc" placeholder="example@account.com" />
-    </div>
+    <form @submit.prevent="submitForgotPWForm">
+        <div class="forgot_email">
+            <label for="forgot_acc">
+                <h4>密碼重設驗證信</h4>
+                <h6>請輸入您的電子信箱</h6>
+            </label>
+            <input
+                type="text"
+                id="forgot_acc"
+                name="forgot_account"
+                placeholder="example@account.com"
+            />
+        </div>
 
-    <div class="forgot_getcode">
-        <button>
-            <h4>寄送驗證碼</h4>
-        </button>
-    </div>
+        <div class="forgot_getcode">
+            <button>
+                <h4>寄送驗證碼</h4>
+            </button>
+        </div>
 
-    <div class="forgot_code">
-        <label for="forgot_int">輸入驗證碼</label>
-        <input type="text" id="forgot_int" placeholder="* * * * * *" />
-    </div>
+        <div class="forgot_code">
+            <label for="forgot_int">輸入驗證碼</label>
+            <input type="text" id="forgot_int" name="forgot_code" placeholder="* * * * * *" />
+        </div>
 
-    <div class="forgot_in">
-        <router-link to="/login/newpw">
-            <h3>送出</h3>
-        </router-link>
-    </div>
+        <div class="forgot_in">
+            <router-link to="/login/newpw">
+                <h3>送出</h3>
+            </router-link>
+        </div>
+    </form>
 
     <img
         src="../assets/Image/login/decoBottom.svg"
@@ -75,6 +82,7 @@ h2 {
         margin-top: 24px;
         margin-bottom: 8px;
         h4 {
+            width: fit-content;
             font-weight: bold;
         }
         h6 {
@@ -102,6 +110,7 @@ h2 {
     border: 4px solid $Gold;
     border-radius: 20px;
     margin: 16px auto;
+    width: fit-content;
     &:active {
         background-image: $GoldGrad;
         h4 {
@@ -155,6 +164,7 @@ h2 {
     border: 1px solid $Gold;
     border-radius: 15px;
     margin: 32px auto;
+    width: fit-content;
     &:active {
         background-image: $RevGoldGrad;
     }
