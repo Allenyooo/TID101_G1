@@ -21,12 +21,36 @@
           </select>
 
           <div class="inputSearch">
-            <input type="text" :placeholder="placeholder[sId].name" />
+            <input
+              type="text"
+              :placeholder="placeholder[sId].name"
+              v-model="input"
+            />
           </div>
         </div>
 
-        <BDate></BDate>
-        <BSort :sortDrop="sortDrop"></BSort>
+        <div class="BkDatebody">
+          <div class="BkDate">
+            <input
+              type="date"
+              name=""
+              id=""
+              placeholder="請輸入日期"
+              v-model="startDate"
+            />
+            ~
+            <input
+              type="date"
+              name=""
+              id=""
+              placeholder="請輸入日期"
+              v-model="endDate"
+            />
+          </div>
+          <button @click="searchButton(sId)">搜尋</button>
+        </div>
+
+        <BSort :sortDrop="sortDrop" @sortEvent="sortByID"></BSort>
         <BD
           :bd="bd"
           :title="title"
@@ -112,35 +136,38 @@ export default {
       sId: 0,
 
       placeholder: [
-        { id: 1, name: "訂單編號" },
-        { id: 2, name: "訂購人會員帳號" },
+        { id: 1, name: "訂單編號", search: "ID" },
+        { id: 2, name: "訂購人會員帳號", search: "MAIL" },
       ],
-      bd: [
-        {
-          id: 1,
-          email: "123@gmail.com",
-          name: "xxx",
-          date: "2000-01-01",
-          sum: 1000,
-          pay: "信用卡",
-        },
-        {
-          id: 2,
-          email: "123@gmail.com",
-          name: "xxx",
-          date: "2000-01-01",
-          sum: 1000,
-          pay: "信用卡",
-        },
-        {
-          id: 3,
-          email: "123@gmail.com",
-          name: "xxx",
-          date: "2000-01-01",
-          sum: 1000,
-          pay: "信用卡",
-        },
-      ],
+      input: "",
+      // bd: [
+      //   {
+      //     id: 1,
+      //     email: "123@gmail.com",
+      //     name: "xxx",
+      //     date: "2000-01-01",
+      //     sum: 1000,
+      //     pay: "信用卡",
+      //   },
+      //   {
+      //     id: 2,
+      //     email: "123@gmail.com",
+      //     name: "xxx",
+      //     date: "2000-01-01",
+      //     sum: 1000,
+      //     pay: "信用卡",
+      //   },
+      //   {
+      //     id: 3,
+      //     email: "123@gmail.com",
+      //     name: "xxx",
+      //     date: "2000-01-01",
+      //     sum: 1000,
+      //     pay: "信用卡",
+      //   },
+      // ],
+
+      bd: [],
       title: [
         { 訂單編號: "管理員編號" },
         { 訂購人會員帳號: "信箱" },
@@ -155,6 +182,11 @@ export default {
       stateTd: 0,
       dataTd: 2,
       BCHref: 1,
+
+      startDate: "",
+      endDate: "",
+
+      sortid: 1,
     };
   },
   methods: {
@@ -162,6 +194,76 @@ export default {
       console.log("Selected value:", e);
       this.sId = e;
     },
+
+    searchButton(id) {
+      fetch(
+        "http://localhost/vite/tid101_g1/public/php/Bk/BkOrder/orderSearch.php",
+        {
+          mode: "cors", // 请求模式
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Search: this.placeholder[id].search,
+            Input: this.input,
+            Start: this.startDate,
+            End: this.endDate,
+          }),
+        }
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          this.bd = data;
+          // this.bd2 = data.data2;
+          // this.price = data[0].PRICE;
+          // this.discount = data[0].PERCENT;
+        });
+    },
+
+    sortByID(id) {
+      this.sortid = id;
+
+      if (this.sortid == 1) {
+        this.bd.sort((a, b) => {
+          return a.ID - b.ID;
+        }); // 按照 ID 属性升序排列
+      } else if (this.sortid == 2) {
+        this.bd.sort((a, b) => {
+          return b.ID - a.ID;
+        }); // 按照 ID 属性升序排列
+      }
+    },
+  },
+
+  mounted() {
+    // this.fetchData();
+    fetch(
+      "http://localhost/vite/tid101_g1/public/php/Bk/BkOrder/orderData.php",
+      {
+        mode: "cors", // 请求模式
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.bd = data;
+        // this.bd2 = data.data2;
+        // this.price = data[0].PRICE;
+        // this.discount = data[0].PERCENT;
+      });
+    // .catch((error) => {
+    //   console.error("Error fetching data:", error);
+    // });
   },
 };
 </script>
@@ -215,6 +317,27 @@ export default {
 
         .newButton {
           margin-left: auto;
+        }
+      }
+
+      .BkDatebody {
+        display: flex;
+
+        .BkDate {
+          margin-bottom: 12px;
+
+          input {
+            height: 32px;
+          }
+          button {
+            height: 32px;
+            margin-left: 8px;
+          }
+        }
+
+        button {
+          height: 32px;
+          margin-left: 12px;
         }
       }
     }

@@ -11,8 +11,8 @@
   </div> -->
 
   <div class="BkSortbody">
-    <select class="BkSortSelect">
-      <option v-for="s in sortDrop" :key="s.id" class="sort">
+    <select class="BkSortSelect" @change="sortChange">
+      <option v-for="s in sortDrop" :key="s.id" class="sort" :value="s.id">
         <h4>{{ s.name }}</h4>
       </option>
     </select>
@@ -22,24 +22,18 @@
 <script>
 export default {
   props: ["sortDrop"],
+  emits: ["sortEvent"],
 
   data() {
     return {
-      sDown: false,
+      sId: 1,
     };
   },
   methods: {
-    dD() {
-      if (this.sDown == false) {
-        return (this.sDown = true);
-      } else if (this.sDown == true) {
-        return (this.sDown = false);
-      }
-    },
-    dropValue(t) {
-      for (let v in t) {
-        return v;
-      }
+    sortChange(e) {
+      this.sId = e.target.value;
+      console.log(this.sId);
+      this.$emit("sortEvent", this.sId);
     },
   },
 };

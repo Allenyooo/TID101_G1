@@ -1,15 +1,31 @@
 <template>
   <div class="BkDate">
-    <input type="date" name="" id="" placeholder="請輸入日期" />
+    <input
+      type="date"
+      name=""
+      id=""
+      placeholder="請輸入日期"
+      v-model="startDate"
+    />
     ~
-    <input type="date" name="" id="" placeholder="請輸入日期" />
-    <button>搜尋</button>
+    <input
+      type="date"
+      name=""
+      id=""
+      placeholder="請輸入日期"
+      v-model="endDate"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  data() {},
+  data() {
+    return {
+      startDate: "",
+      endDate: "",
+    };
+  },
   methods: {},
 };
 </script>

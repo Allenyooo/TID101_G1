@@ -5,16 +5,20 @@
         class="form-check-input"
         type="checkbox"
         id="flexSwitchCheckChecked"
-        checked
+        v-model="isChecked"
       />
-      <span>啟用</span>
+      <span>{{ isChecked ? "啟用" : "停用" }}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {},
+  data() {
+    return {
+      isChecked: true, // 初始設置為啟用
+    };
+  },
   methods: {},
 };
 </script>
@@ -35,7 +39,10 @@ export default {
       margin: auto;
       width: 66px;
       height: 24px;
-      background-color: #2852ab;
+      background-color: #919191;
+      &:checked {
+        background-color: #2852ab; /* 設置選中時的背景顏色 */
+      }
     }
 
     span {

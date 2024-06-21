@@ -11,19 +11,19 @@
     </div>
     <div class="pmCount">
       <ul>
-        <li v-for="(j, index) in productTasks" :key="index" class="pmcLi">
+        <li v-for="(j, index) in shoppingCartTasks" :key="j.ID" class="pmcLi">
           <ul>
             <li class="pmcImg">
-              <img :src="j.tPicture" />
+              <img :src="j.PIC" />
             </li>
             <li>
               <ul>
                 <li class="pmcName">
-                  <h4>${{ j.tPrice }}梨饗券</h4>
+                  <h4>${{ j.PRICE }}梨饗券</h4>
                 </li>
                 <li class="pmcButton">
                   <button class="pmcDown" @click="pmcD(index)"></button>
-                  <p>{{ j.tCount }}</p>
+                  <p>{{ j.COUNT }}</p>
                   <button class="pmcUp" @click="pmcU(index)"></button>
                   <button class="pmcClear" @click="pmcC(index)"></button>
                 </li>
@@ -56,6 +56,8 @@ export default {
       move2: false,
       productTasks: [],
       total: 0,
+      test: [],
+      shoppingCartTasks: [],
     };
   },
   methods: {
@@ -67,44 +69,181 @@ export default {
     pmColse2(e) {
       e.target.closest("div.spBottom").classList.toggle("pmOn");
     },
+    // pmcD(i) {
+    //   if (this.productTasks[i].tCount > 1) {
+    //     this.productTasks[i].tCount -= 1;
+
+    //     this.total -=
+    //       this.productTasks[i].tPrice * this.productTasks[i].tDiscount;
+    //   }
+    // },
+    // pmcU(i) {
+    //   this.productTasks[i].tCount += 1;
+    //   this.total +=
+    //     this.productTasks[i].tPrice * this.productTasks[i].tDiscount;
+    // },
+    // pmcC(i) {
+    //   this.total -=
+    //     this.productTasks[i].tPrice *
+    //     this.productTasks[i].tDiscount *
+    //     this.productTasks[i].tCount;
+
+    //   this.productTasks.splice(i, 1);
+    //   localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
+    // },
+
     pmcD(i) {
-      if (this.productTasks[i].tCount > 1) {
-        this.productTasks[i].tCount -= 1;
+      if (this.shoppingCartTasks[i].COUNT > 1) {
+        this.shoppingCartTasks[i].COUNT -= 1;
 
         this.total -=
-          this.productTasks[i].tPrice * this.productTasks[i].tDiscount;
+          this.shoppingCartTasks[i].PRICE * this.shoppingCartTasks[i].PERCENT;
+
+        // -------------------fetch部分-----------------
+        // fetch(
+        //   "http://localhost/vite/tid101_g1/public/php/shoppingCart/shoppingCount.php",
+        //   {
+        //     method: "PUT",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //       count: this.shoppingCartTasks[i].COUNT,
+        //     }),
+        //   }
+        // )
+        //   .then((response) => {
+        //     if (!response.ok) {
+        //       throw new Error("Network response was not ok");
+        //     }
+        //     return response.json();
+        //   })
+        //   .then((data) => {
+        //     this.shoppingCartTasks = data; // 将获取的数据存储到组件的data中的products属性中
+        //   });
+        // .catch((error) => {
+        //   console.error("Error fetching data:", error);
+        // });
       }
     },
     pmcU(i) {
-      this.productTasks[i].tCount += 1;
+      this.shoppingCartTasks[i].COUNT += 1;
       this.total +=
-        this.productTasks[i].tPrice * this.productTasks[i].tDiscount;
+        this.shoppingCartTasks[i].PRICE * this.shoppingCartTasks[i].PERCENT;
     },
     pmcC(i) {
       this.total -=
-        this.productTasks[i].tPrice *
-        this.productTasks[i].tDiscount *
-        this.productTasks[i].tCount;
+        this.shoppingCartTasks[i].PRICE *
+        this.shoppingCartTasks[i].PERCENT *
+        this.shoppingCartTasks[i].COUNT;
 
-      this.productTasks.splice(i, 1);
-      localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
+      this.shoppingCartTasks.splice(i, 1);
+      // localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
+    },
+
+    // fetchData() {
+    //   fetch("http://localhost/vite/tid101_g1/public/php/product/test.php")
+    //     .then((response) => {
+    //       if (!response.ok) {
+    //         throw new Error("Network response was not ok");
+    //       }
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       this.test = data; // 将获取的数据存储到组件的data中的products属性中
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error fetching data:", error);
+    //     });
+    // },
+
+    sumtotal() {
+      let alltotal = 0;
+      for (let i = 0; i < this.shoppingCartTasks.length; i++) {
+        alltotal +=
+          this.shoppingCartTasks[i].PRICE *
+          this.shoppingCartTasks[i].COUNT *
+          this.shoppingCartTasks[i].PERCENT;
+      }
+      this.total = alltotal;
+    },
+
+    // shoppingCount() {
+    //   fetch(
+    //     "http://localhost/vite/tid101_g1/public/php/shoppingCart/shoppingCart.php",
+    //     {
+    //       method: "PUT",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({
+    //         username: username.value,
+    //         password: password.value,
+    //       }),
+    //     }
+    //   )
+    //     .then((response) => {
+    //       if (!response.ok) {
+    //         throw new Error("Network response was not ok");
+    //       }
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       this.test = data; // 将获取的数据存储到组件的data中的products属性中
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error fetching data:", error);
+    //     });
+    // },
+
+    localstorageDAta() {
+      // 從 localStorage 中讀取已有的 productTasks，如果不存在則初始化為空陣列
+      let storedTasks = localStorage.getItem("productTasks");
+      this.productTasks = storedTasks ? JSON.parse(storedTasks) : [];
     },
   },
 
-  created() {
-    // 從 localStorage 中檢索資料
-    const storedData = localStorage.getItem("productTasks");
+  //----------------- 這邊是抓lolocalStorage
+  // created() {
+  //   // 從 localStorage 中檢索資料
+  //   const storedData = localStorage.getItem("productTasks");
 
-    // 檢查 localStorage 中是否有資料
-    if (storedData) {
-      // 解析 JSON 資料
-      this.productTasks = JSON.parse(storedData);
+  //   // 檢查 localStorage 中是否有資料
+  //   if (storedData) {
+  //     // 解析 JSON 資料
+  //     this.productTasks = JSON.parse(storedData);
 
-      // 計算總計
-      this.total = this.productTasks.reduce((acc, curr) => {
-        return acc + curr.tPrice * curr.tDiscount * curr.tCount;
-      }, 0);
-    }
+  //     // 計算總計
+  //     this.total = this.productTasks.reduce((acc, curr) => {
+  //       return acc + curr.tPrice * curr.tDiscount * curr.tCount;
+  //     }, 0);
+  //   }
+  // },
+  //----------------- 這邊是抓lolocalStorage
+
+  mounted() {
+    // this.fetchData();
+    fetch(
+      "http://localhost/vite/tid101_g1/public/php/shoppingCart/shoppingCart.php",
+      {
+        mode: "cors", // 请求模式
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.shoppingCartTasks = data;
+        this.sumtotal();
+        this.localstorageDAta();
+        this.shoppingCartTasks = this.shoppingCartTasks.concat();
+      });
+    // .catch((error) => {
+    //   console.error("Error fetching data:", error);
+    // });
   },
 };
 </script>
@@ -127,7 +266,8 @@ export default {
     font-size: 24px;
     font-weight: bold;
     height: 60px;
-    width: 520px;
+    width: 519px;
+    margin-left: auto;
     background-color: $LightBrown;
     text-align: center;
     line-height: 60px;
@@ -140,6 +280,8 @@ export default {
     color: #000000;
     text-align: center;
     background-color: $OffWhite;
+    width: 519px;
+    margin-left: auto;
   }
 }
 
@@ -189,8 +331,10 @@ export default {
 
   .pmCount {
     margin-left: 52px;
-    height: 67vh;
+    height: 30vw;
     overflow-y: scroll;
+    overflow-x: hidden; // 强制隐藏水平軸
+
     ul {
       .pmcImg {
         margin-right: 32px;

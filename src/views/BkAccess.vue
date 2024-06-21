@@ -22,10 +22,14 @@
           </select>
 
           <div class="inputSearch">
-            <input type="text" :placeholder="placeholder[sId].name" />
+            <input
+              type="text"
+              :placeholder="placeholder[sId].name"
+              v-model="input"
+            />
           </div>
           <div class="searchButton">
-            <button><h5>搜尋</h5></button>
+            <button @click="searchButton(sId)"><h5>搜尋</h5></button>
           </div>
           <div class="newButton">
             <button>
@@ -40,7 +44,31 @@
           :dataTd="dataTd"
           :stateTd="stateTd"
           :page="page"
+          :bd2="bd2"
         ></BD>
+
+        <table class="table">
+          <thead class="tableHead1">
+            <tr>
+              <th>
+                <p>測試</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="tableBody1">
+            <tr v-for="(j, index) in bd" @mouseover="hovertd">
+              <td>
+                <!-- <button></button> -->
+                <!-- <BR :revisePage="page" :reviseId="j.ID" :reviseBd="bd2"></BR> -->
+                <BR
+                  :revisePage="page"
+                  :reviseId="j.ID"
+                  :reviseBd="bd2[index]"
+                ></BR>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -56,9 +84,10 @@ import BD from "/src/components/BkData.vue";
 import BDate from "/src/components/BkDate.vue";
 import BSort from "/src/components/BkSort.vue";
 import BRS from "/src/components/BkReviseSweet.vue";
+import BR from "/src/components/BkRevise.vue";
 
 export default {
-  components: { BH, BM, BS, BD, BDate, BSort, BRS },
+  components: { BH, BM, BS, BD, BDate, BSort, BRS, BR },
 
   data() {
     return {
@@ -122,29 +151,32 @@ export default {
       sId: 0,
 
       placeholder: [
-        { id: 1, name: "管理員編號" },
-        { id: 2, name: "管理員姓名" },
+        { id: 1, name: "管理員編號", search: "ID" },
+        { id: 2, name: "管理員姓名", search: "NAME" },
       ],
-      bd: [
-        {
-          id: 1,
-          name: "xxx",
-          email: "123@gmail.com",
-          access: "操作人員",
-        },
-        {
-          id: 2,
-          name: "xxx",
-          email: "123@gmail.com",
-          access: "操作人員",
-        },
-        {
-          id: 3,
-          name: "xxx",
-          email: "123@gmail.com",
-          access: "操作人員",
-        },
-      ],
+      input: "",
+      // bd: [
+      //   {
+      //     id: 1,
+      //     name: "xxx",
+      //     email: "123@gmail.com",
+      //     access: "操作人員",
+      //   },
+      //   {
+      //     id: 2,
+      //     name: "xxx",
+      //     email: "123@gmail.com",
+      //     access: "操作人員",
+      //   },
+      //   {
+      //     id: 3,
+      //     name: "xxx",
+      //     email: "123@gmail.com",
+      //     access: "操作人員",
+      //   },
+      // ],
+      bd: [],
+      bd2: [],
       title: [
         { 管理員編號: "管理員編號" },
         { 姓名: "姓名" },
@@ -154,7 +186,7 @@ export default {
         { 修改: "修改" },
       ],
       newButton: 1,
-      search: "新增操作人員帳號",
+
       stateTd: 1,
       dataTd: 1,
     };
@@ -165,6 +197,64 @@ export default {
       console.log("Selected value:", e);
       this.sId = e;
     },
+
+    searchButton(id) {
+      fetch(
+        "http://localhost/vite/tid101_g1/public/php/Bk/BkAccess/accessSearch.php",
+        {
+          mode: "cors", // 请求模式
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Search: this.placeholder[id].search,
+            Input: this.input,
+            // Start: this.startDate,
+            // End: this.endDate,
+          }),
+        }
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          this.bd = data;
+
+          // this.bd2 = data.data2;
+          // this.price = data[0].PRICE;
+          // this.discount = data[0].PERCENT;
+        });
+    },
+  },
+
+  mounted() {
+    // this.fetchData();
+    fetch(
+      "http://localhost/vite/tid101_g1/public/php/Bk/BkAccess/accessData.php",
+      {
+        mode: "cors", // 请求模式
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.bd = data.data;
+        this.bd2 = data.data2;
+        // this.bd2 = data.data2;
+        // this.price = data[0].PRICE;
+        // this.discount = data[0].PERCENT;
+      });
+    // .catch((error) => {
+    //   console.error("Error fetching data:", error);
+    // });
   },
 };
 </script>
