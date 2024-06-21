@@ -9,6 +9,7 @@
         <!-- <BS :dropdown="dropdown" :search="search" :newButton="newButton"></BS> -->
 
         <div class="Bksearchbody">
+          <p>1</p>
           <select @change="sIdchange($event.target.value)">
             <option
               v-for="s in searchdrop"
