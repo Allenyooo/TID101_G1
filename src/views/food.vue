@@ -84,6 +84,11 @@
     </div>
     <!-- 主食内容 -->
     <div class="food-category">
+        <!-- RWD才會出現 -->
+        <!-- <div class="food-category-top">
+                <img :src="currentItemMain.image" id="food-img-front" />
+        </div> -->
+
         <div class="food-category-left">
             <img
                 src="../assets/Image/food/food_half_circle.png"
@@ -954,7 +959,7 @@ export default {
 @import "/src/sass/style.scss";
 /* top-banner */
 .food-top-banner {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background-image: url(/src/assets/Image/food/food_banner.jpeg);
     background-size: cover;
@@ -967,7 +972,6 @@ export default {
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.3);
-
         display: flex;
         align-items: center;
         justify-content: center;
@@ -977,16 +981,31 @@ export default {
             justify-content: center;
             flex-direction: column;
             background-image: url(/src/assets/Image/food/food_banner_small.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-repeat: no-repeat;
             width: 674px;
             height: 413px;
+            @include breakpoint(680px) {
+                width: 370.7px;
+                height: 227.15px;
+            }
+
             h2 {
                 text-align: center;
                 color: $WarmNude;
+                @include breakpoint(680px) {
+                    font-size: $smallTitle;
+                }
             }
             h1 {
                 text-align: center;
                 color: $WarmNude;
                 font-size: $bigTitle;
+                @include breakpoint(680px) {
+                    font-size: $smallTitle;
+                }
             }
         }
     }
@@ -997,6 +1016,10 @@ export default {
     background-color: $Blue;
     justify-content: center;
     padding: 56px 268px 40px;
+    @include breakpoint(1200px) {
+        padding: 56px 40px;
+    }
+
     h1 {
         text-align: center;
         color: $WarmNude;
@@ -1014,6 +1037,9 @@ export default {
     background-color: $Red;
     justify-content: center;
     padding: 56px 268px 40px;
+    @include breakpoint(1200px) {
+        padding: 56px 40px;
+    }
     h1 {
         text-align: center;
         color: $WarmNude;
@@ -1031,22 +1057,21 @@ export default {
     height: 809px;
     background-color: $OffWhite;
     display: flex;
-    //RWD
-    @include breakpoint(1280px) {
+    @include breakpoint(1200px) {
         display: block;
+        height: 100%;
     }
     .food-category-left {
         flex: 2;
         position: relative;
-        //RWD
-        @include breakpoint(1280px) {
-            margin: 0 auto;
+        @include breakpoint(1200px) {
+            display: none;
         }
         .food-img-back {
             z-index: 1;
             //RWD
-            @include breakpoint(1280px) {
-                transform: rotate(90deg);
+            @include breakpoint(1440px) {
+                display: none;
             }
         }
         .img-circle-big {
@@ -1060,6 +1085,18 @@ export default {
             border-radius: 50%;
             display: flex;
             position: absolute;
+            @include breakpoint(1440px) {
+                top: 180px;
+                left: 20px;
+                width: 300px;
+                height: 300px;
+            }
+            @include breakpoint(1280px) {
+                top: 180px;
+                left: 20px;
+                width: 250px;
+                height: 250px;
+            }
 
             img {
                 max-width: 100%;
@@ -1069,19 +1106,38 @@ export default {
             }
         }
     }
-
+    //1160px出現
+    .food-category-top {
+        display: none;
+        width: 100vw;
+        display: flex;
+        position: relative;
+        @include breakpoint(1160px) {
+            display: block;
+        }
+    }
     .food-category-middle {
         margin-top: 107px;
         flex: 3;
         text-align: center;
+        @include breakpoint(1200px) {
+            margin: 50px;
+        }
+
         .food-category-middle-text {
             max-width: 100%;
             h1 {
                 color: $Red;
                 margin-bottom: 72px;
+                @include breakpoint(790px) {
+                    margin-bottom: 25px;
+                }
             }
             h4 {
                 margin-bottom: 72px;
+                @include breakpoint(790px) {
+                    margin-bottom: 25px;
+                }
             }
         }
         .category-detail {
@@ -1093,11 +1149,18 @@ export default {
                 background: none; /* 移除背景 */
                 border: none;
                 cursor: pointer;
+
                 &:hover {
                     filter: drop-shadow(0 0 30px $Gold);
                 }
                 img {
                     max-height: 45px;
+                    @include breakpoint(640px) {
+                        max-height: 15px;
+                    }
+                    @include breakpoint(490px) {
+                        max-height: 10px;
+                    }
                 }
             }
             ul {
@@ -1110,6 +1173,22 @@ export default {
                     background-color: $Nude;
                     border-radius: 30px;
                     text-align: center;
+                    @include breakpoint(790px) {
+                        width: 120px;
+                        height: 200px;
+                        margin: 0 5px;
+                    }
+                    @include breakpoint(640px) {
+                        margin: 0 5px;
+                        width: 100px;
+                        height: 170px;
+                    }
+                    @include breakpoint(490px) {
+                        margin: 0 1px;
+                        width: 85px;
+                        height: 140px;
+                    }
+
                     a {
                         text-decoration: none;
                         &:hover {
@@ -1126,6 +1205,11 @@ export default {
                         margin-bottom: 32px;
                         margin-top: 28px;
                         display: flex;
+                        @include breakpoint(640px) {
+                            margin-bottom: 16px;
+                            width: 70px;
+                            height: 70px;
+                        }
                         img {
                             max-width: 100%;
                             max-height: 100%;
@@ -1137,6 +1221,9 @@ export default {
                         font-size: 24px;
                         color: $DarkBrown;
                         line-height: 1.5;
+                        @include breakpoint(790px) {
+                            font-size: $fontSize;
+                        }
                     }
                 }
             }
@@ -1153,6 +1240,25 @@ export default {
         line-height: 150%;
         padding-top: 281px;
         padding-left: 36px;
+        @include breakpoint(1200px) {
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            //margin-top: 50px;
+            justify-content: center; /* 水平置中 */
+            align-items: center; /* 垂直置中 */
+            .category-item {
+                display: flex;
+                flex-direction: column;
+                margin-right: 16px;
+            }
+            .category-icon {
+                border-radius: 50%;
+                width: 18px;
+                height: 18px;
+                margin: 0 auto;
+            }
+        }
         .category-item {
             display: flex;
             margin-bottom: 16px;
@@ -1236,6 +1342,9 @@ export default {
         align-items: center;
         justify-content: center;
         margin: 0 auto;
+        @include breakpoint(680px) {
+            width: 390px;
+        }
         .food_1st_scroll {
             display: flex;
             align-items: center;
@@ -1304,7 +1413,7 @@ export default {
     //------------------------------------
 
     section {
-        margin-top: 100px;
+        margin-top: 50px;
         &.horizontal {
             overflow-x: hidden;
 
@@ -1313,7 +1422,7 @@ export default {
                 display: flex;
                 position: relative;
                 z-index: 1;
-                // height: 100vh;
+                height: 90vh;
             }
             .item {
                 position: relative;
@@ -1330,6 +1439,7 @@ export default {
                 //以下開始新增樣式
                 width: 444px;
                 height: 704px;
+
                 &:before {
                     position: absolute;
                     // font-size: 100px;
