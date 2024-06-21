@@ -21,8 +21,8 @@
                 <div class="user_photo">
                     <div class="box1">
                         <img ref="preview" :src="imageSrc" alt="" />
-                        <img src="../assets/Image/member/lets-icons_img-box.svg" alt="">
-                        <input type="file" @change="fileChange" id="user___input" accept="image/*" />
+                        <!-- <img src="../assets/Image/member/lets-icons_img-box.svg" alt=""> -->
+                        <input v-if="!imageSrc" type="file" @change="fileChange" id="user___input" accept="image/*" />
                     </div>
                 </div>
                 <h2>陳小明</h2>
@@ -216,12 +216,9 @@
         <section class="member_collection">
             <h4>我的收藏</h4>
             <ul class="card_container">
-                <ShopCard class="card" />
-                <ShopCard class="card" />
-                <ShopCard class="card" />
-                <ShopCard class="card" />
-                <ShopCard class="card" />
-                <ShopCard class="card" />
+
+                <ShopCard class="card" v-for="shop in shops" :key="shop.ID" :shop="shop" />
+
             </ul>
         </section>
 
@@ -330,6 +327,34 @@ export default {
             passwordSuccess: false,
 
             imageSrc: '',
+
+            shops: [
+                {
+                    id: 1,
+                    name: '高麗味'
+                },
+                {
+                    id: 2,
+                    name: '朝鮮味'
+                },
+                {
+                    id: 1,
+                    name: '高麗味'
+                },
+                {
+                    id: 1,
+                    name: '高麗味'
+                },
+                {
+                    id: 1,
+                    name: '高麗味'
+                },
+                {
+                    id: 1,
+                    name: '高麗味'
+                },
+                
+            ]
         };
     },
     methods: {
@@ -350,18 +375,19 @@ export default {
         },
         closeiPhoneSuccessModal() { //修改電話號碼
             this.showniPhoneSuccess = false;
-            this.showniPhone = false; 
+            this.showniPhone = false;
         },
         closePhoneErrorModal() {
             this.showniPhone = false;
             this.phoneError = '';
         },
-        closeSuccessModal(){
+        closeSuccessModal() {
             this.showniPhoneSuccess = false;
+            this.passwordSuccess = false;
         },
         submitPhone() {
             if (this.newPhone === '') {
-                this.phoneError = '您尚未输入信息';
+                this.phoneError = '您尚未输入訊息';
 
             } else {
                 this.updatePhone().then(() => {
@@ -394,7 +420,7 @@ export default {
         cancelUpdate() {
             this.shownickname = false; // 取消修改，關閉修改暱稱彈窗
         },
-        
+
         updatePhone() {
             const phonePattern = /^[0-9]{4}-[0-9]{3}-[0-9]{3}$/;
             if (phonePattern.test(this.newiPhone)) {
@@ -402,8 +428,8 @@ export default {
                 this.showniPhone = false;
                 this.phoneError = '';
             } else {
-                this.phoneError = '電話號碼格式不正確。'; 
-                
+                this.phoneError = '電話號碼格式不正確。';
+
             }
         },
         //照片類型
@@ -421,12 +447,7 @@ export default {
             reader.onload = (e) => {
                 const image = new Image();
                 image.onload = () => {
-                    if (image.width <= 300 && image.height <= 300) {
-                        this.imageSrc = e.target.result;
-                    } else {
-                        // 超出尺寸限制，跳出錯誤訊息
-                        alert("該圖片尺寸超出限制，請選擇小於或等於300px長寬的圖片。");
-                    }
+                    this.imageSrc = e.target.result;
                 };
                 image.src = e.target.result;
             };
@@ -620,8 +641,10 @@ export default {
             }
         }
     }
-    :deep(h3) {  //card
-        font-size: 24px; 
+
+    :deep(h3) {
+        //card
+        font-size: 24px;
         margin-top: 5px;
     }
 
@@ -779,6 +802,7 @@ export default {
                     left: 50%;
                     transform: translate(-50%, -50%);
                     z-index: 1;
+                    width: 120px;
                 }
 
                 & input {
@@ -863,7 +887,7 @@ export default {
                 display: flex;
                 flex-direction: column;
 
-                @include breakpoint(390px){
+                @include breakpoint(390px) {
                     margin-left: 5vw;
                 }
 
