@@ -27,7 +27,7 @@
 
       <div class="Bklogin_in">
         <button :disabled="!isValid" @click="login">
-          <h3>登入</h3>
+          <h4>登入</h4>
         </button>
       </div>
     </div>
@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  components: { BH, BM, BS, BD, BDate, BSort, BRS },
+  // components: { BH, BM, BS, BD, BDate, BSort, BRS },
 
   data() {
     return {
@@ -47,6 +47,11 @@ export default {
         password: "",
       },
     };
+  },
+  computed: {
+    isValid() {
+      return this.account !== "" && this.password !== "";
+    },
   },
 
   methods: {
@@ -77,18 +82,28 @@ export default {
 @import "/src/sass/style.scss";
 .BkBody {
   background-color: $OffWhite;
+  height: calc(100vh - 81px);
+  padding-top: 60px;
 
   .BkLogin {
-    width: 500px;
-    height: 800px;
-    border: 1px solid $Black;
-    background-color: $OffWhite;
+    width: 480px;
+    height: 35vw;
+    border: 1px solid $DarkBrown;
+    background-color: $WarmNude;
+    margin: 0 auto;
 
     h3 {
       text-align: center;
+      margin-top: 30px;
     }
 
     .BkLogin_account {
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      width: 330px;
+      margin-top: 50px;
+
       label {
         font-size: 20px;
         margin-top: 24px;
@@ -106,6 +121,12 @@ export default {
     }
 
     .Bklogin_password {
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      width: 330px;
+      margin-bottom: 80px;
+
       label {
         font-size: 20px;
         margin-top: 24px;
@@ -124,24 +145,43 @@ export default {
 
     .Bklogin_in {
       background-image: $White;
-      border: 1px solid $Gold;
+      border: 3px solid $Gold;
       border-radius: 15px;
       margin: 16px auto 32px;
+      width: 327px;
+      &:hover {
+        background-color: $Gold;
+        color: $White;
+      }
 
       button {
         background-color: transparent;
         border: none;
         text-decoration: none;
         text-align: center;
-        line-height: 52px;
+        line-height: 42px;
         user-select: none;
         cursor: pointer;
-        h3 {
-          width: 165px;
-          height: 52px;
+        width: 321px;
+        background-color: $White;
+        border-radius: 15px;
+        &:hover {
+          background-color: $Gold;
+          color: $White;
+        }
+
+        h4 {
+          width: 314px;
+          height: 42px;
+          line-height: 42px;
           color: $DarkBrown;
           font-weight: 600;
           font-size: 24px;
+          margin: 0 auto;
+          &:hover {
+            background-color: $Gold;
+            color: $White;
+          }
         }
       }
     }

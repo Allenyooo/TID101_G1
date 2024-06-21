@@ -18,26 +18,17 @@
     
         //建立PDO物件，並放入指定的相關資料
         $pdo = new PDO($dsn, $db_user, $db_pass);
-    
-    
-
 
      
-    // $sql = "SELECT * FROM member where Account =? and PWD =?";
-    $sql = "SELECT PRODUCT.ID ,PRODUCT.PRICE ,PRODUCT.PIC,DISCOUNT.PERCENT
-        from PRODUCT  join DISCOUNT  on PRODUCT.DISCOUNT_ID = DISCOUNT.ID";
+    
+    $sql = "SELECT ID,MAIL,NAME,NICKNAME,PHONE,BIRTHDAY,JOINDATE,LASTLOGIN
+            from  MEMBER";
 
     $statement = $pdo->prepare($sql);
-
-  
-    // $statement->bindValue(1 ,$mail);
-    // $statement->bindValue(2 ,$password);
-    // 丟給資料庫執行
     $statement->execute();
+    $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-
-
-    $data = $statement->fetchAll();
+    
 
     if(count($data) > 0){
       

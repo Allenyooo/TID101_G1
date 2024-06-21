@@ -1,6 +1,7 @@
 <?php
     header("Access-Control-Allow-Origin: *");
     // header("Content-Type: application/json; charset=UTF-8");
+    header('Content-Type: application/json; charset=UTF-8');
     
 
 // include('/php/conn.php');
@@ -18,35 +19,46 @@
     
         //建立PDO物件，並放入指定的相關資料
         $pdo = new PDO($dsn, $db_user, $db_pass);
-    
-    
-
 
      
-    // $sql = "SELECT * FROM member where Account =? and PWD =?";
-    $sql = "SELECT PRODUCT.ID ,PRODUCT.PRICE ,PRODUCT.PIC,DISCOUNT.PERCENT
-        from PRODUCT  join DISCOUNT  on PRODUCT.DISCOUNT_ID = DISCOUNT.ID";
+    
+        $sql = "SELECT MANAGER.ID , NAME , MAIL ,ROLE.PERMISSION
+                from  MANAGER
+                join ROLE on MANAGER.PERMISSIONS_ID = ROLE.ID";
 
     $statement = $pdo->prepare($sql);
-
-  
-    // $statement->bindValue(1 ,$mail);
-    // $statement->bindValue(2 ,$password);
-    // 丟給資料庫執行
     $statement->execute();
+    $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $sql2 = "SELECT MANAGER.ID , NAME , MAIL ,PASSWORD
+                 from  MANAGER";
+
+    $statement2 = $pdo->prepare($sql2);
+    $statement2->execute();
+    $data2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
 
 
 
-    $data = $statement->fetchAll();
 
-    if(count($data) > 0){
+
+    $allData = array(
+        "data" => $data,
+        "data2" => $data2
+    );
+    
+
+    // if(count($data) > 0){
       
     
-        echo json_encode($data);
-    }else{
-        echo echojson_encode(["message" => "抓取失败"]);
+    //     echo json_encode($data);
+    // }else{
+    //     echo echojson_encode(["message" => "抓取失败"]);
 
-    }
+    // }
+
+    echo json_encode($allData);
+
 
 
     // foreach($data as $index => $row){

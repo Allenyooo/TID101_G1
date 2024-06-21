@@ -1,5 +1,7 @@
 <?php
     header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: PUT");
+    header("Access-Control-Allow-Headers: Content-Type");
     // header("Content-Type: application/json; charset=UTF-8");
     
 
@@ -19,34 +21,47 @@
         //建立PDO物件，並放入指定的相關資料
         $pdo = new PDO($dsn, $db_user, $db_pass);
     
-    
+        // $mail = $_POST['mail'];
+
+        $memberId = 1;
+        $productId = 1;
+        $count = json_decode(file_get_contents("php://input"), true);
 
 
-     
+        // if (isset($count['count'])) {
+        //     echo $count['count'];
+        //     
+        // } else {
+        //     
+        //     echo "No valid data received";
+        // }
+        
     // $sql = "SELECT * FROM member where Account =? and PWD =?";
-    $sql = "SELECT PRODUCT.ID ,PRODUCT.PRICE ,PRODUCT.PIC,DISCOUNT.PERCENT
-        from PRODUCT  join DISCOUNT  on PRODUCT.DISCOUNT_ID = DISCOUNT.ID";
+    $sql = "UPDATE CART 
+            set count =?
+            where MEMBER_ID =? and PRODUCT_ID =?";
 
     $statement = $pdo->prepare($sql);
 
   
-    // $statement->bindValue(1 ,$mail);
-    // $statement->bindValue(2 ,$password);
+    $statement->bindValue(1 , $count['count']);
+    $statement->bindValue(2 ,$memberId);
+    $statement->bindValue(3 , $productId);
     // 丟給資料庫執行
     $statement->execute();
 
 
 
-    $data = $statement->fetchAll();
+    // $data = $statement->fetchAll();
 
-    if(count($data) > 0){
+    // if(count($data) > 0){
       
     
-        echo json_encode($data);
-    }else{
-        echo echojson_encode(["message" => "抓取失败"]);
+    //     echo json_encode($data);
+    // }else{
+    //     echo echojson_encode(["message" => "抓取失败"]);
 
-    }
+    // }
 
 
     // foreach($data as $index => $row){

@@ -22,7 +22,7 @@
         <tr v-for="(j, index) in bd" @mouseover="hovertd">
           <td
             v-for="(i, index) in j"
-            :key="i.id"
+            :key="j.ID"
             :class="{ td: hover == true }"
           >
             <h5>{{ i }}</h5>
@@ -31,10 +31,10 @@
           <td v-if="stateTd == 1">
             <BState></BState>
           </td>
-          <td v-if="dataTd == 1">
-            <!-- <button></button> -->
-            <BR :revisePage="page" :reviseId="j.id"></BR>
-          </td>
+          <!-- <td v-if="dataTd == 1">
+           
+            <BR :revisePage="page" :reviseId="j.ID" :reviseBd="bd2"></BR>
+          </td> -->
 
           <td v-if="dataTd == 2">
             <!-- <button></button> -->
@@ -83,11 +83,10 @@ import BC from "/src/components/BkCheck.vue";
 export default {
   components: { BR, BState, BC },
 
-  props: ["bd", "title", "dataTd", "stateTd", "BCHref", "page"],
+  props: ["bd", "title", "dataTd", "stateTd", "BCHref", "page", "bd2"],
 
   data() {
     return {
-      i: 6,
       hover: false,
     };
   },

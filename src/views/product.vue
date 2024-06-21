@@ -10,6 +10,10 @@
 
     <button @click="scToggle()">購物車</button>
 
+    <!-- 嘗試 -->
+
+    <!-- 嘗試 -->
+
     <!-- <div class="left"></div> -->
 
     <shopping :sp="move"></shopping>
@@ -79,17 +83,17 @@
                     <button
                       type="button"
                       v-for="i in buttons"
-                      :key="i.id"
-                      :class="{ pcnon: currentButton == i.id }"
+                      :key="i.ID"
+                      :class="{ pcnon: currentButton == i.ID }"
                       @click="
-                        (currentButton = i.id),
-                          (price = i.price),
-                          (img = i.picture),
-                          (discount = i.discount),
+                        (currentButton = i.ID),
+                          (price = i.PRICE),
+                          (img = i.PIC),
+                          (discount = i.PERCENT),
                           countReturn()
                       "
                     >
-                      {{ i.price }}
+                      {{ i.PRICE }}
                     </button>
                   </div>
                 </li>
@@ -207,7 +211,7 @@
       </div>
 
       <!-- ----- -->
-
+      <!-- <img src="/public/php/product/test.php" alt=""> -->
       <footer></footer>
     </div>
   </div>
@@ -222,58 +226,59 @@ export default {
 
   data() {
     return {
-      price: 100,
+      price: 0,
       discount: 0.9,
       img: new URL("@/assets/Image/product/TICKET100.png", import.meta.url)
         .href,
-      currentButton: "b1",
-      buttons: [
-        {
-          id: "b1",
-          price: 100,
-          picture: new URL(
-            "@/assets/Image/product/TICKET100.png",
-            import.meta.url
-          ).href,
-          discount: 0.9,
-        },
-        {
-          id: "b2",
-          price: 300,
-          picture: new URL(
-            "@/assets/Image/product/TICKET300.png",
-            import.meta.url
-          ).href,
-          discount: 0.8,
-        },
-        {
-          id: "b3",
-          price: 500,
-          picture: new URL(
-            "@/assets/Image/product/TICKET500.png",
-            import.meta.url
-          ).href,
-          discount: 0.7,
-        },
-        {
-          id: "b4",
-          price: 800,
-          picture: new URL(
-            "@/assets/Image/product/TICKET800.png",
-            import.meta.url
-          ).href,
-          discount: 0.9,
-        },
-        {
-          id: "b5",
-          price: 1000,
-          picture: new URL(
-            "@/assets/Image/product/TICKET1000.png",
-            import.meta.url
-          ).href,
-          discount: 0.9,
-        },
-      ],
+      currentButton: "1",
+      // buttons: [
+      //   {
+      //     id: "b1",
+      //     price: 100,
+      //     picture: new URL(
+      //       "@/assets/Image/product/TICKET100.png",
+      //       import.meta.url
+      //     ).href,
+      //     discount: 0.9,
+      //   },
+      //   {
+      //     id: "b2",
+      //     price: 300,
+      //     picture: new URL(
+      //       "@/assets/Image/product/TICKET300.png",
+      //       import.meta.url
+      //     ).href,
+      //     discount: 0.8,
+      //   },
+      //   {
+      //     id: "b3",
+      //     price: 500,
+      //     picture: new URL(
+      //       "@/assets/Image/product/TICKET500.png",
+      //       import.meta.url
+      //     ).href,
+      //     discount: 0.7,
+      //   },
+      //   {
+      //     id: "b4",
+      //     price: 800,
+      //     picture: new URL(
+      //       "@/assets/Image/product/TICKET800.png",
+      //       import.meta.url
+      //     ).href,
+      //     discount: 0.9,
+      //   },
+      //   {
+      //     id: "b5",
+      //     price: 1000,
+      //     picture: new URL(
+      //       "@/assets/Image/product/TICKET1000.png",
+      //       import.meta.url
+      //     ).href,
+      //     discount: 0.9,
+      //   },
+      // ],
+      buttons: [],
       count: 1,
       total: 0,
       move: false,
@@ -305,6 +310,10 @@ export default {
     },
 
     taskAdd() {
+      // 從 localStorage 中讀取已有的 productTasks，如果不存在則初始化為空陣列
+      let storedTasks = localStorage.getItem("productTasks");
+      this.productTasks = storedTasks ? JSON.parse(storedTasks) : [];
+
       let price = this.price;
       let picture = this.img;
       let count = this.count;
@@ -350,12 +359,43 @@ export default {
       this.productTasks.splice(i, 1);
       localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
     },
+
+    // fetchData() {
+    //   fetch("http://localhost/vite/tid101_g1/public/php/product/test.php")
+    //     .then((response) => {
+    //       if (!response.ok) {
+    //         throw new Error("Network response was not ok");
+    //       }
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       this.test = data; // 将获取的数据存储到组件的data中的products属性中
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error fetching data:", error);
+    //     });
+    // },
   },
 
   mounted() {
-    fetch("/public/php/product/test.php")
-      .then((res) => res.json())
-      .then((jsonData) => (this.test = jsonData));
+    // this.fetchData();
+    fetch("http://localhost/vite/tid101_g1/public/php/product/test.php", {
+      mode: "cors", // 请求模式
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.buttons = data;
+        this.price = data[0].PRICE;
+        this.discount = data[0].PERCENT;
+      });
+    // .catch((error) => {
+    //   console.error("Error fetching data:", error);
+    // });
   },
 };
 </script>

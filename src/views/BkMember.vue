@@ -21,11 +21,13 @@
           </select>
 
           <div class="inputSearch">
-            <input type="text" :placeholder="placeholder[sId].name" />
+            <input
+              type="text"
+              :placeholder="placeholder[sId].name"
+              v-model="input"
+            />
           </div>
-          <div class="searchButton">
-            <button><h5>搜尋</h5></button>
-          </div>
+          <!-- <div class="searchButton"></div> -->
           <div class="newButton">
             <button>
               <h5>匯出資料</h5>
@@ -33,8 +35,29 @@
           </div>
         </div>
 
-        <BDate></BDate>
-        <BSort :sortDrop="sortDrop"></BSort>
+        <div class="BkDatebody">
+          <div class="BkDate">
+            <input
+              type="date"
+              name=""
+              id=""
+              placeholder="請輸入日期"
+              v-model="startDate"
+            />
+            ~
+            <input
+              type="date"
+              name=""
+              id=""
+              placeholder="請輸入日期"
+              v-model="endDate"
+            />
+          </div>
+          <button @click="searchButton(sId)">搜尋</button>
+        </div>
+
+        <BSort :sortDrop="sortDrop" @sortEvent="sortByID"></BSort>
+        <!-- <button @click="sortByID">排序</button> -->
         <BD
           :bd="bd"
           :title="title"
@@ -120,41 +143,44 @@ export default {
       sId: 0,
 
       placeholder: [
-        { id: 1, name: "會員編號" },
-        { id: 2, name: "會員姓名" },
+        { id: 1, name: "會員編號", search: "ID" },
+        { id: 2, name: "會員姓名", search: "NAME" },
       ],
-      bd: [
-        {
-          id: 1,
-          email: "123@gmail.com",
-          name: "xxx",
-          nickname: "xxx",
-          phone: "0000-111-222",
-          birthday: "2000-01-01",
-          addDate: "2010-01-01",
-          lastDate: "2010-02-02",
-        },
-        {
-          id: 2,
-          email: "123@gmail.com",
-          name: "xxx",
-          nickname: "xxx",
-          phone: "0000-111-222",
-          birthday: "2000-01-01",
-          addDate: "2010-01-01",
-          lastDate: "2010-02-02",
-        },
-        {
-          id: 3,
-          email: "123@gmail.com",
-          name: "xxx",
-          nickname: "xxx",
-          phone: "0000-111-222",
-          birthday: "2000-01-01",
-          addDate: "2010-01-01",
-          lastDate: "2010-02-02",
-        },
-      ],
+      input: "",
+      // bd: [
+      //   {
+      //     id: 1,
+      //     email: "123@gmail.com",
+      //     name: "xxx",
+      //     nickname: "xxx",
+      //     phone: "0000-111-222",
+      //     birthday: "2000-01-01",
+      //     addDate: "2010-01-01",
+      //     lastDate: "2010-02-02",
+      //   },
+      //   {
+      //     id: 2,
+      //     email: "123@gmail.com",
+      //     name: "xxx",
+      //     nickname: "xxx",
+      //     phone: "0000-111-222",
+      //     birthday: "2000-01-01",
+      //     addDate: "2010-01-01",
+      //     lastDate: "2010-02-02",
+      //   },
+      //   {
+      //     id: 3,
+      //     email: "123@gmail.com",
+      //     name: "xxx",
+      //     nickname: "xxx",
+      //     phone: "0000-111-222",
+      //     birthday: "2000-01-01",
+      //     addDate: "2010-01-01",
+      //     lastDate: "2010-02-02",
+      //   },
+      // ],
+      bd: [],
+      bd2: [],
       title: [
         { 會員編號: "管理員編號" },
 
@@ -169,10 +195,15 @@ export default {
         { 詳細資料: "修改" },
       ],
       newButton: 1,
-      search: "匯出資料",
+
       stateTd: 1,
       dataTd: 2,
       BCHref: 2,
+
+      startDate: "",
+      endDate: "",
+
+      sortid: 1,
     };
   },
 
@@ -181,6 +212,75 @@ export default {
       console.log("Selected value:", e);
       this.sId = e;
     },
+
+    searchButton(id) {
+      fetch("http://localhost/vite/tid101_g1/public/php/Bk/BkSearch.php", {
+        mode: "cors", // 请求模式
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Search: this.placeholder[id].search,
+          Input: this.input,
+          Start: this.startDate,
+          End: this.endDate,
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          this.bd = data;
+          // this.bd2 = data.data2;
+          // this.price = data[0].PRICE;
+          // this.discount = data[0].PERCENT;
+        });
+    },
+
+    // sortChange(id) {
+    //   this.sortid = id;
+    //   this.sortByID(this.sortid);
+    // },
+
+    sortByID(id) {
+      this.sortid = id;
+
+      if (this.sortid == 1) {
+        this.bd.sort((a, b) => {
+          return a.ID - b.ID;
+        }); // 按照 ID 属性升序排列
+      } else if (this.sortid == 2) {
+        this.bd.sort((a, b) => {
+          return b.ID - a.ID;
+        }); // 按照 ID 属性升序排列
+      }
+    },
+  },
+
+  mounted() {
+    // this.fetchData();
+    fetch("http://localhost/vite/tid101_g1/public/php/Bk/BkData.php", {
+      mode: "cors", // 请求模式
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.bd = data;
+        // this.bd2 = data.data2;
+        // this.price = data[0].PRICE;
+        // this.discount = data[0].PERCENT;
+      });
+    // .catch((error) => {
+    //   console.error("Error fetching data:", error);
+    // });
   },
 };
 </script>
@@ -235,6 +335,27 @@ export default {
 
         .newButton {
           margin-left: auto;
+        }
+      }
+
+      .BkDatebody {
+        display: flex;
+
+        .BkDate {
+          margin-bottom: 12px;
+
+          input {
+            height: 32px;
+          }
+          button {
+            height: 32px;
+            margin-left: 8px;
+          }
+        }
+
+        button {
+          height: 32px;
+          margin-left: 12px;
         }
       }
     }
