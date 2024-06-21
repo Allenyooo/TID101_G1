@@ -37,10 +37,13 @@
                         <a href="#">高麗味</a>
                     </li>
                 </ol>
+
+                <!--收藏按鈕-->
                 <ol class="restaurant_btns">
-                    <button>
-                        <li class="collect">
-                            <img src="../assets/Image/restaurant/north/collect.svg" alt="collect" />
+                    <button @click="handleCollect"
+                        :class="['collect', { collected: isCollected, 'prompt-active': showPrompt }]">
+                        <li>
+                            <img class="collect_img" src="../assets/Image/restaurant/north/collect.svg" alt="collect" />
                         </li>
                     </button>
 
@@ -66,6 +69,12 @@
             </div>
 
 
+            <!-- 提示框 -->
+            <div v-if="showPrompt" class="collect-prompt">
+                <p class="collect-prompt_p">請先登入會員</p>
+                <button class="collect-prompt_button" @click="redirectToLogin">確認</button>
+                <button class="collect-prompt_button" @click="browseAsGuest">以訪客身分瀏覽</button>
+            </div>
 
             <header class="restaurant_header">
                 <h2 class="restaurant_slogan">
@@ -125,7 +134,6 @@
                     </div>
                 </div>
             </section>
-
             <main class="restaurant_mainContent">
                 <div class="restaurant_content1">
                     <h4>
@@ -333,16 +341,6 @@
 
                             <!---彈跳視窗-->
                             <div class="star">
-                                <!-- <div id="stars" class="left">
-                                    <img src="./pentagram.png" alt="">
-                                    <img src="./pentagram.png" alt="">
-                                    <img src="./pentagram.png" alt="">
-                                    <img src="./pentagram.png" alt="">
-                                    <img src="./pentagram.png" alt="">
-                                </div> -->
-                                <!-- <div id="comment" class="left">
-                                </div> -->
-
                                 <span class="starbar">
                                     <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
                                     <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
@@ -371,32 +369,9 @@
             </section>
         </div>
     </div>
-
-
-
-
-
-
-
 </template>
 
 <script>
-// const btn = document.querySelector('#share-btn');
-
-// btn.addEventListener('click', async () => {
-//     try {
-//         if (!navigator.share) {
-//             return;
-//         }
-//         await navigator.share({
-//             title: '分享梨花殿',
-//             text: 'Share Content',
-//             url: 'https://www.apple.com/tw/macbook-air/specs/'
-//         })
-//     } catch (err) {
-//         console.log(err.message);
-//     }
-// });
 
 //星級評論
 export default {
@@ -406,9 +381,70 @@ export default {
             popup_open: false,
             rating_text: ["", "1級星", "2級星", "3級星", "4級星", "5級星"],
             // photoArray: [],
+            isCollected: false, //控制按鈕是否被收藏
+            showPrompt: false,  //控制提示框顯示與否
         };
     },
     methods: {
+        handleCollect() {
+            this.checkMembership()
+                .then(isLoggedIn => {  //假設cookie收到會員的value是isLoggedIn
+                    if (!isLoggedIn) {
+                        this.showPrompt = true; // 顯示提示框
+                        return;
+                    }
+                    this.updateCollectStatus(!this.isCollected)
+                        .then(() => {
+                            this.isCollected = !this.isCollected; // 切換收藏按鈕狀態
+                        }) 
+                        .catch(error => {
+                            console.error('Failed to update collect status:', error);
+                            this.isCollected = !this.isCollected;
+                        });
+                })
+                .catch(() => {
+                    this.showPrompt = true; // 點擊該按鈕後顯示提示窗
+                });
+        },
+        checkMembership() { //連接checkMembership.php
+            return fetch('../../public/php/restaurant/checkMembership.php',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: this.userEmail }),
+            })
+            .then(response => response.json())
+            .then(data => data.isMember)
+            .catch(() => false); // 如錯誤用戶未登錄
+        },
+        updateCollectStatus(isCollected) {
+            return fetch('your-backend-url.php?action=updateCollectStatus', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ collected: isCollected }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message !== 'Success') {
+                    throw new Error('Failed to update collect status');
+                }
+            });
+        },
+        redirectToLogin() {
+            this.$router.push({ path: '/login' });
+        },
+        browseAsGuest() {
+            //關閉提示窗繼續瀏覽
+            this.showPrompt = false;
+            // this.isCollected = true;
+        },
+        closePrompt() {
+            this.showPrompt = false; // 跳轉過去同時關閉提示框
+        },
+
         // 照片新增
         change_rating(value) {
             this.rating = value;
@@ -448,8 +484,8 @@ export default {
                 box.innerHTML = "";
                 box.appendChild(image);
             });
-        }
-    }
+        },
+    },
 }
 
 </script>
@@ -469,7 +505,7 @@ export default {
 }
 
 #share-btn {
-    //測試按鈕
+
     #share-btn {
         width: 90px;
         height: 30px;
@@ -522,7 +558,7 @@ button {
         margin-bottom: 4px;
         padding-left: 1px;
     }
-    
+
     @include breakpoint(390px) {
         margin-bottom: 0px;
     }
@@ -748,10 +784,11 @@ button {
         }
 
         img {
-            margin-left: 0.5vw;
+            margin-left: 0.6vw;
 
             @include breakpoint(430px) {
                 margin-left: 2.0vw;
+                margin-right: 2.0vw;
             }
         }
     }
@@ -795,19 +832,39 @@ button {
     }
 
     .collect {
-        width: 44px;
-        height: 44px;
+        width: 46px;
+        height: 46px;
         background-color: #c8ac96;
         border-radius: 50px;
-        margin-right: 8px;
+        margin-right: 12px;
 
         &:hover {
             transform: translateY(-5px);
             filter: drop-shadow(3px 3px 2px rgba(97, 97, 97, 0.7));
         }
 
-        @include breakpoint(1024px) {
+        //收藏後按鈕變色
+        &.collected {
+            background-color: #cb4847;
+        }
 
+        // 提示框弹出时按钮变色
+        &.prompt-active {
+            background-color: #cb4847;
+        }
+
+        .restaurant_btns .collect_img {
+            width: 44px;
+            height: 44px;
+        }
+
+        .restaurant_btns .collect {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        @include breakpoint(1024px) {
             margin-right: 8px;
         }
 
@@ -823,19 +880,19 @@ button {
             margin: 0px 8px 2px 8px;
             position: relative;
         }
+    }
 
-        img {
-            width: 13px;
-            height: 16px;
-            margin: 14px 12px 12px 12px;
+    img {
+        width: 13px;
+        height: 16px;
+        margin: 14px 6px 12px 12px;
 
-            @include breakpoint(430px) {
-                margin: 0;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
+        @include breakpoint(430px) {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     }
 
@@ -888,7 +945,6 @@ button {
         height: 44px;
         background-color: #c8ac96;
         border-radius: 50px;
-        // margin-right: 8px;
 
         &:hover {
             transform: translateY(-5px);
@@ -927,12 +983,64 @@ button {
     }
 }
 
+//訊息彈窗
+// .collect-prompt {
+//         /* 提示框样式 */
+//         background-color: #fff;
+//         border: 1px solid #ccc;
+//         padding: 10px;
+//         position: fixed;
+//         top: 50%;
+//         left: 50%;
+//         transform: translate(-50%, -50%);
+//         z-index: 1000;
+//     }
+
+//     .collect-prompt_p {
+//         margin-bottom: 10px;
+//     }
+
+//     .collect-prompt_button {
+//         background-color: #cb4847;
+//         color: #fff;
+//         border: none;
+//         padding: 5px 10px;
+//         cursor: pointer;
+//     }
+.collect-prompt {
+    position: fixed;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 50;
+    width: 17vw;
+    border-radius: 3px;
+}
+
+.collect-prompt_p {
+    // margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.collect-prompt_button {
+    background-color: #F6F1ED;
+    padding: 6px 15px;
+    cursor: pointer;
+    margin: 1vw 1vw 0vw 2.5vw;
+    color: #7a625b;
+    border: 1px solid #F6F1ED;
+    width: 9VW;
+}
 
 .restaurant_header {
     display: flex;
     width: 78vw;
     margin: 0 auto;
-    // text-align: center;
     justify-content: center;
 
     @include breakpoint(820px) {
@@ -1381,6 +1489,7 @@ button {
             @include breakpoint(1440px) {
                 padding-left: 0px;
             }
+
             @include breakpoint(1280px) {
                 padding-left: 0px;
                 padding-right: 3vw;
@@ -1427,7 +1536,7 @@ button {
                     margin-top: -4vw;
                 }
 
-                @include breakpoint(430px){
+                @include breakpoint(430px) {
                     #google_map {
                         margin-left: -3vw;
                         margin-top: -2vw;
@@ -1501,7 +1610,7 @@ button {
     @include breakpoint(430px) {
         width: 100vw;
     }
-    
+
     @include breakpoint(390px) {
         width: 90vw;
     }
@@ -1782,8 +1891,8 @@ button {
                     align-items: center;
 
                     @include breakpoint(390px) {
-                            padding-top: 4vw;
-                        }
+                        padding-top: 4vw;
+                    }
 
                     .restaurantstarimg {
                         width: 20px;
@@ -1926,8 +2035,8 @@ button {
                 width: 24vw;
                 height: 24vh;
             }
-            
-            
+
+
             @include breakpoint(820px) {
                 margin: auto;
                 width: 48vw;
@@ -2273,7 +2382,7 @@ button {
             @include breakpoint(1024px) {
                 width: 34vw;
                 margin-left: 3vw;
-                
+
             }
 
             @include breakpoint(820px) {
@@ -2322,7 +2431,7 @@ button {
                     width: 329px;
                 }
 
-                
+
             }
 
             &::placeholder {
