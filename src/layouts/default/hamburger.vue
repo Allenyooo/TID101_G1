@@ -54,11 +54,11 @@
                     </li>
                     <li class="menu_list_box">
                         <div class="menu_list_user">
-                            <router-link v-if="!isMember" to="/member" @click="closeMenu">
+                            <router-link v-if="!isMember" to="/register" @click="closeMenu">
                                 <h3>會員登錄</h3>
                                 <p>회원 등록</p>
                             </router-link>
-                            <router-link v-else to="/user-center" @click="closeMenu">
+                            <router-link v-else to="/member" @click="closeMenu">
                                 <h3>會員中心</h3>
                                 <p>회원 센터</p>
                             </router-link>
@@ -66,26 +66,33 @@
                     </li>
                     <li class="menu_list_box">
                         <div class="menu_list_shoppingcart">
-                            <router-link to="/shopping-cart" @click="closeMenu">
+                            <a style="cursor: pointer" @click="scToggle">
                                 <h3>購物車</h3>
                                 <p>쇼핑카트</p>
-                            </router-link>
+                            </a>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <shopping :sp="move" @Close="scToggle"></shopping>
 </template>
 
 <script>
 // import $ from 'jquery'
+import shopping from "/src/components/shoppingCart.vue";
+
 export default {
+    components: { shopping },
     data() {
         return {
             show: false,
             hidden: true,
             isMember: false, //判斷是否為會員
+            move: false, //購物車開關
+            sp: true, //購物車開關
         };
     },
     methods: {
@@ -96,33 +103,27 @@ export default {
         closeMenu() {
             this.show = false;
             this.hidden = true;
-        },
-        async checkMembership() {
-            // try {
-            //     const response = await fetch('./check_membership.php'); // 路徑確認後修改
-            //     const data = await response.json();
-            //     this.isMember = data.isMember;
-            // } catch (error) {
-            //     console.error('Error checking membership:', error);
-
-
-            const is_member = false
-
-
-            if (is_member === true) {
-                // LOGIN
-
-                this.isMember = true
-
-            }
-
-            // (拿到會員id)  = >> 用會員 ID 叫出該會員資料 (透過會員 ID 跟新改的數據改變該會員的資料)
         }
     },
-    created() {
-        this.checkMembership();
-    }
-};
+    //會員登入及會員主頁選單做切換
+    async mounted() {
+        try {
+            const response = await axios.get('api.php');
+            this.isMember = response.data.isMember;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    },
+    scToggle() {
+        if (this.move == false) {
+            this.closeMenu();
+            return (this.move = true);
+        } else if (this.move == true) {
+            this.closeMenu();
+            return (this.move = false);
+        }
+    },
+}
 </script>
 
 <style lang="css" scoped>

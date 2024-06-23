@@ -93,7 +93,9 @@
                 <div class="modal" v-if="showniPhoneSuccess">
                     <div class="pop_container">
                         <h4>成功訊息</h4>
+                        <img src="../assets/Image/member/success.svg" alt="">
                         <p>成功修改電話號碼為：{{ newiPhone }}</p>
+                        
                         <button class="modal__confirm" @click="closeSuccessModal">確認</button>
                     </div>
                 </div>
@@ -338,15 +340,15 @@ export default {
                     name: '朝鮮味'
                 },
                 {
-                    id: 1,
+                    id: 3,
                     name: '高麗味'
                 },
                 {
-                    id: 1,
+                    id: 4,
                     name: '高麗味'
                 },
                 {
-                    id: 1,
+                    id: 5,
                     name: '高麗味'
                 },
                 {
@@ -529,7 +531,7 @@ export default {
 
     @include breakpoint(820px) {
         display: block;
-        margin-left: 7vw;
+        margin-left: 3vw;
     }
 
     @include breakpoint(430px) {
@@ -547,7 +549,7 @@ export default {
 
 .card {
     width: 100%;
-
+    
     @include breakpoint(430px) {
         background-color: #fff;
     }
@@ -654,13 +656,13 @@ export default {
 
     @include breakpoint(820px) {
         font-size: 20px;
-        margin-top: 5%;
-        height: 45vh;
+        margin-left: 7vw;
+        height: 33vh;
         width: 60vw;
     }
 
     @include breakpoint(700px) {
-        height: 28vh;
+        height: 33vh;
     }
 
     @include breakpoint(430px) {
@@ -1131,7 +1133,7 @@ export default {
         border-radius: 20px;
         width: 83vw;
         margin: 0 auto 6vh;
-        height: 56vw;
+        height: 54vw;
         cursor: pointer;
 
         @include breakpoint(1280px) {
@@ -1143,7 +1145,7 @@ export default {
         }
 
         @include breakpoint(820px) {
-            height: 196vw;
+            height: 178vw;
             width: 75vw;
         }
 
@@ -1241,7 +1243,7 @@ export default {
                 }
 
                 @include breakpoint(820px) {
-                    width: 84%;
+                    width: 83%;
                 }
 
                 @include breakpoint(430px) {
