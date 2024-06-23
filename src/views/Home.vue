@@ -1436,7 +1436,6 @@ export default {
     position: relative;
     width: 100vw;
     min-height: 100vh;
-    flex: 0 1 auto;
     // height: 100%;
     .home_cloud1 {
         width: 235px;
