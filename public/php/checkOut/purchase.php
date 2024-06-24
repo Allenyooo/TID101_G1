@@ -24,15 +24,7 @@
 
     $data = $statement->fetchAll();
     
-
     // print_r($data);
-
-    // foreach($data as $index => $row){
-    //     for($i=0 ; $i < 8 ;$i++){
-    //         echo $row[$i]."/";
-    //     }
-    //     echo "<br>";
-    // }
 
     echo json_encode($data);
 

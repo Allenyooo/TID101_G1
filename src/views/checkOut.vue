@@ -1,5 +1,7 @@
 <script>
 
+    // const creditCard = document.getElementById('checkOut_creditCard');
+
     export default{
 
         mounted(){
@@ -56,7 +58,7 @@
                     // },
                 ],
                 promoCode: "",
-                hint: false,
+                // hint: false,
                 hintMsg: "",
                 voucher_discount: null,
             }
@@ -71,10 +73,6 @@
                         }
                     )
                     .catch(wrong => console.log(wrong))
-            },
-
-            nextStep(){
-                this.$router.push('/receipt');
             },
             minusOne(ticket , index){
                 if(ticket.qty > 1){
@@ -94,7 +92,6 @@
             //     // return salePrice;
             //     return ticket.price * ticket.discount
             // }
-            
             submitCode(){
                 fetch("http://localhost/tid101_g1/public/php/checkOut/voucher.php",{
                     method: "POST",
@@ -102,27 +99,43 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        checkOut_enterCode: this.promoCode
+                        enterCode: this.promoCode   // enterCode 為自定義變數名稱
                     })
                 })
                     .then(resp => resp.json())
-                    .then(data => {
-                    if (data.error) {
-                        this.hint = true;
-                        this.hintMsg = '找不到此優惠碼！';
-                        this.voucher_discount = null;
-                    } else {
-                        this.voucher_discount = data.voucher_discount;
-                        this.hint = false;
-                        this.hintMsg = '';
-                    }
-                })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        this.hintMsg = '發生錯誤，請稍後重試。';
-                        this.voucher_discount = null;
+                    .then(voucherDB => {
+                        if (voucherDB.error) {
+                            this.hintMsg = voucherDB.error;
+                            this.voucher_discount = null;
+                        } else {
+                            this.voucher_discount = voucherDB.voucher_discount;
+                            this.hintMsg = '';
+                        }
                     })
+                    .catch(error => {
+                        console.error('Error:', error);        // 印出錯誤原因
+                        this.hintMsg = '發生錯誤，請稍後再試';
+                        this.voucher_discount = null
+                    });
+
+            },
+            async nextStep(){
+                fetch("http://localhost/tid101_g1/public/php/checkOut/submitOrder.php",{
+                    method: "POST",
+                    headers: {
+                        'Content-Type' : 'application/json'
+                    },
+                    body: JSON.stringify({
+                        // payment: 
+                    })
+                })
+                this.$router.push('/receipt');
             }
+            // enter(e){
+            //     if(e.keyCode === 13){
+            //         submitCode();
+            //     }
+            // }
         },
 
         computed: {
@@ -216,7 +229,7 @@
                             <div class="checkOut_use_coupon">
                                 <div class="checkOut_coupon_text">
                                     <h5>使用優惠券</h5>
-                                    <p v-if="hint">{{ hintMsg }}</p>
+                                    <p v-if="hintMsg">{{ hintMsg }}</p>
                                     <!-- <p v-if="hintMsg">找不到此優惠碼！</p> -->
                                     <!-- <p v-else="expiredMsg">優惠代碼已過期！</p> -->
                                 </div>
@@ -255,8 +268,8 @@
                         </form>
                     </div>
                 </div>
-                <form action="" class="checkOut_nextStep">
-                    <input type="button" id="checkOut_next" value="下一步" @click.native="nextStep">
+                <form action="http://localhost/tid101_g1/public/php/checkOut/submitOrder.php" method="post" class="checkOut_nextStep">
+                    <input type="button" id="checkOut_next" value="下一步" @click="nextStep">
                 </form>
                 <!-- <button id="checkOut_next">下一步</button> -->
                 <img src="../assets/Image/checkOut/envelope_forward.png" alt="" class="envelope_forward">
