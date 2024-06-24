@@ -25,13 +25,12 @@
         <div class="line"></div>
     </div>
 
-    <form @submit.prevent="login" method="post" action="login.php">
+    <form @submit.prevent="makeLoginRequest" method="post" action="login.php">
         <div class="login_account">
-            <label for="login_acc">會員帳號</label>
+            <label for="account">會員帳號</label>
             <input
-                type="text"
-                id="login_acc"
-                name="login_account"
+                type="email"
+                id="account"
                 v-model.trim="account"
                 placeholder="example@account.com"
             />
@@ -39,11 +38,10 @@
         </div>
 
         <div class="login_password">
-            <label for="login_pw">會員密碼</label>
+            <label for="password">會員密碼</label>
             <input
                 type="password"
-                id="login_pw"
-                name="login_password"
+                id="password"
                 v-model.trim="password"
                 placeholder="* * * * * * * * *"
             />
@@ -57,8 +55,8 @@
         </div>
 
         <div class="login_rmb">
-            <input type="checkbox" id="login_check" name="login_remember" />
-            <label for="login_check">記住我的登入資訊</label>
+            <input type="checkbox" id="remember" name="remember" />
+            <label for="remember">記住我的登入資訊</label>
         </div>
 
         <div class="login_in">
@@ -103,39 +101,80 @@ export default {
         },
     },
     methods: {
-        login() {
+        validateAccount() {
             const trimmedAccount = this.account.trim();
-            const trimmedPassword = this.password.trim();
-            if (trimmedAccount === "") {
-                this.errors.account = "請輸入帳號";
+            if (trimmedAccount.includes(" ")) {
+                this.errors.account = "帳號中不能有空格";
+                return false;
             }
+            const emailRegex =
+                /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(trimmedAccount)) {
+                this.errors.account = "帳號無效";
+                return false;
+            }
+            return true;
+        },
+        validatePassword() {
+            const trimmedPassword = this.password.trim();
             if (trimmedPassword === "") {
                 this.errors.password = "請輸入密碼";
+                return false;
             }
-            if (trimmedAccount !== "" && trimmedPassword !== "") {
-                axios
-                    .post(
-                        "http://localhost:5173/tid101/g1/public/php/login/login.php",
-                        {
-                            account: trimmedAccount,
-                            password: trimmedPassword,
-                        }
-                    )
-                    .then((response) => {
-                        if (response.data.success) {
-                            // Assume the account and password are valid, log in the user
-                            this.$router.push("/member");
-                            this.errors.account = "";
-                            this.errors.password = "";
-                        } else {
-                            this.errors.account = "帳號或密碼錯誤";
-                        }
-                    })
-                    .catch((error) => {
-                        console.error("Error logging in:", error);
-                        this.errors.account = "發生錯誤，請重試";
-                    });
+            return true;
+        },
+        makeLoginRequest() {
+            axios
+                .post("http://localhost/tid101_g1/public/php/login/login.php", {
+                    account: this.account,
+                    password: this.password,
+                })
+                .then(this.handleLoginResponse)
+                .catch((error) => {
+                    console.error("Error logging in:", error);
+                    console.error("Error message:", error.message);
+                    console.error("Error response:", error.response);
+                    console.error("Error request:", error.request);
+                    this.errors.account = "An unknown error occurred";
+                });
+        },
+        handleLoginResponse(response) {
+            if (response.data.success) {
+                const token = response.data.token;
+                const memberId = response.data.memberId;
+                this.storeToken(token, memberId);
+                this.navigateToMemberRoute();
+            } else {
+                this.errors.account = "帳號或密碼不正確";
             }
+        },
+        handleError(error) {
+            console.error("Error logging in:", error);
+            console.error("Error message:", error.message);
+            console.error("Error response:", error.response);
+            console.error("Error request:", error.request);
+            this.errors.account = "An unknown error occurred";
+        },
+        storeToken(token, memberId) {
+            this.setCookie("token", token, 30);
+            this.setCookie("memberId", memberId, 30);
+            sessionStorage.setItem("token", token);
+            sessionStorage.setItem("memberId", memberId);
+        },
+        navigateToMemberRoute() {
+            this.$router.push('/member');
+        },
+        isLoggedIn() {
+            return this.getCookie("token") !== null;
+        },
+        setCookie(name, value, days) {
+            const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000);
+            document.cookie = `${name}=${value}; expires=${expires.toUTCString()}; path=/`;
+        },
+        getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(";").shift();
         },
     },
 };

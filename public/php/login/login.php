@@ -1,27 +1,47 @@
 <?php
 
-include("conn.php");
+include("../conn.php");
 
-$account = htmlspecialchars($_POST["account"]);
-$pw = htmlspecialchars($_POST["password"]);
+$loginData = json_decode(file_get_contents("php://input"), true);
 
-$sql = "SELECT * FROM member WHERE Account=? AND PWD=?";
+$account = trim($loginData["account"]);
+$password = trim($loginData["password"]);
 
-$statement = $pdo->prepare($sql);
+try {
+    $sql = "SELECT * FROM MEMBER WHERE MAIL = :account AND PASSWORD = :password";
+    $statement = $pdo->prepare($sql);
+    $statement->bindParam(":account", $account);
+    $statement->bindParam(":password", $password);
 
-$statement->bindValue(1, $account);
-$statement->bindValue(2, $pw);
+    $statement->execute();
 
-$statement->execute();
+    $data = $statement->fetchAll();
+    if (count($data) > 0) {
+        session_start();
+        $token = bin2hex(random_bytes(16)); // Generate a random token
+        $_SESSION["token"] = $token;
 
-$data = $statement->fetchAll();
+        $memberId = "";
+        foreach($data as $index => $row){
+            $memberId = $row["ID"];
+        }
 
-if(count($data) > 0){
-    session_start();
-    $_SESSION["account"] = $account;
-    exit; // Ensure the script exits after the redirect
-}else{
-    // echo "帳號或密碼錯誤！";
+        $response = array('success' => true, 'token' => $token, 'memberId' => $memberId);
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    } else {
+        http_response_code(401);
+        $response = array('success' => false, 'message' => 'Invalid account or password');
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+} catch (Exception $e) {
+    error_log("Error: ". $e->getMessage()); // Log the error
+    http_response_code(500);
+    $response = array('success' => false, 'message' => 'An error occurred');
+    header('Content-Type: application/json');
+    echo json_encode($response);
 }
 
 ?>

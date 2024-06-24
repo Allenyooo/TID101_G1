@@ -1,12 +1,8 @@
 <?php
 
-include("conn.php");
+include("../conn.php");
 
-$mail = filter_var($_POST["email"], FILTER_VALIDATE_EMAIL);
-$pw = substr(htmlspecialchars($_POST["password"]), 0, 45);
-$Cpw = htmlspecialchars($_POST["confirmPassword"]);
-$name = htmlspecialchars($_POST["name"]);
-$accept = htmlspecialchars($_POST["accept"]);
+$member = json_decode(file_get_contents("php://input"), true);
 
 try {
     $sql = "SELECT MAX(ID) AS latest_id FROM MEMBER";
@@ -22,21 +18,26 @@ try {
     $sql = "INSERT INTO MEMBER (ID, NAME, MAIL, PASSWORD, JOINDATE, LASTLOGIN, STATUS) VALUES (:id, :name, :mail, :pw, NOW(), NOW(), '正常')";
     $statement = $pdo->prepare($sql);
     $statement->bindParam(":id", $newId);
-    $statement->bindParam(":name", $name);
-    $statement->bindParam(":mail", $mail);
-    $statement->bindParam(":pw", $pw);
+    $statement->bindParam(":name", $member["name"]);
+    $statement->bindParam(":mail", $member["email"]);
+    $statement->bindParam(":pw", $member["password"]);
 
-    // Execute the INSERT statement
-    $affectedRow = $statement->execute();
-    if ($affectedRow) {
-        echo "Query executed successfully<br>";
+    if (!$statement->execute()) {
+        $errorInfo = $statement->errorInfo();
+        $response = array('success' => false, 'message' => 'Error executing query: ' . $errorInfo[2]);
     } else {
-        echo "Error executing query<br>";
+        $response = array('success' => true, 'message' => 'Registration successful!');
     }
-} catch (PDOException $e) {
+} catch (Exception $e) {
+    $errorMessage = "Error executing query: " . $e->getMessage() . "\n";
+    $errorMessage .= "SQL Query: " . $sql . "\n";
+    $errorMessage .= "Input Data: " . json_encode($member) . "\n";
+    $errorMessage .= "User IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
+    error_log($errorMessage, 3, "./error.log");
     http_response_code(500);
-    echo json_encode(array('error' => 'Error executing query', 'essage' => $e->getMessage()));
-    exit;
+    $response = array('success' => false, 'message' => 'Error executing query');
 }
+
+echo json_encode($response);
 
 ?>

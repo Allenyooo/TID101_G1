@@ -28,14 +28,13 @@
     <form
         @submit.prevent="handleRegistration"
         method="post"
-        action="../../public/php/register/register.php"
+        action="register.php"
     >
         <div class="register_emailadd">
-            <label for="register_email">電子信箱</label>
+            <label for="email">電子信箱</label>
             <input
                 type="text"
-                id="register_email"
-                name="register_email"
+                id="email"
                 placeholder="example@account.com"
                 v-model="email"
                 @blur="validateEmail"
@@ -47,11 +46,10 @@
         </div>
 
         <div class="register_password">
-            <label for="register_pw">設定密碼</label>
+            <label for="password">設定密碼</label>
             <input
                 type="password"
-                id="register_pw"
-                name="register_pw"
+                id="password"
                 placeholder="* * * * * * * * * *"
                 v-model="password"
                 @input="validatePassword"
@@ -65,11 +63,10 @@
         </div>
 
         <div class="register_confirmPassword">
-            <label for="register_Cpw">確認密碼</label>
+            <label for="confirmPassword">確認密碼</label>
             <input
                 type="password"
-                id="register_Cpw"
-                name="register_Cpw"
+                id="confirmPassword"
                 placeholder="* * * * * * * * * *"
                 v-model="confirmPassword"
                 @input="validateConfirmPassword"
@@ -81,11 +78,10 @@
         </div>
 
         <div class="register_realname">
-            <label for="register_name">會員姓名</label>
+            <label for="name">會員姓名</label>
             <input
                 type="text"
-                id="register_name"
-                name="register_name"
+                id="name"
                 placeholder="王小明"
                 v-model="name"
                 required
@@ -93,14 +89,8 @@
         </div>
 
         <div class="register_acceptCondition">
-            <input
-                type="checkbox"
-                id="register_accept"
-                name="register_accept"
-                v-model="accept"
-                required
-            />
-            <label for="register_accept">
+            <input type="checkbox" id="accept" v-model="accept" required />
+            <label for="accept">
                 請在此處勾選以表明您接受我們用於線上或行動服務的用途。
             </label>
         </div>
@@ -192,10 +182,12 @@ export default {
             }
         },
         handleSubmit() {
+            console.log("Form submitted!");
             if (this.formIsValid) {
+                console.log("Form is valid, sending request...");
                 axios
                     .post(
-                        "http://localhost:5173/tid101/g1/public/php/register/register.php",
+                        "http://localhost/tid101_g1/public/php/register/register.php",
                         {
                             email: this.email,
                             password: this.password,
@@ -205,18 +197,21 @@ export default {
                         }
                     )
                     .then((response) => {
-                        if (response.data.success) {
-                            console.log(response.data);
+                        const responseData = response.data;
+                        if (responseData.success) {
+                            console.log("Registration successful!");
                             this.$router.push("/register/regisuccess");
                         } else {
-                            this.errorMessage = response.data.error_message;
+                            console.error("Error:", responseData.message);
+                            this.errorMessage =
+                                "Registration failed. Please try again.";
                         }
                     })
                     .catch((error) => {
                         console.error("Error caught:", error);
-                        this.errorMessage =
-                            "Registration failed. Please try again.";
                     });
+            } else {
+                console.log("Form is invalid, not sending request.");
             }
         },
         isValidForm() {
@@ -227,8 +222,8 @@ export default {
                 this.email !== "" &&
                 this.password !== "" &&
                 this.confirmPassword !== "" &&
-                document.getElementById("register_accept").checked &&
-                document.getElementById("register_name").value !== ""
+                document.getElementById("accept").checked &&
+                document.getElementById("name").value !== ""
             );
         },
     },
@@ -241,8 +236,8 @@ export default {
                 this.email !== "" &&
                 this.password !== "" &&
                 this.confirmPassword !== "" &&
-                document.getElementById("register_accept").checked &&
-                document.getElementById("register_name").value !== ""
+                document.getElementById("accept").checked &&
+                document.getElementById("name").value !== ""
             );
         },
         isPasswordEmpty() {

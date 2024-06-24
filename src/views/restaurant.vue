@@ -40,12 +40,12 @@
 
                 <!--收藏按鈕-->
                 <ol class="restaurant_btns">
-                    <button @click="handleCollect"
-                        :class="['collect', { collected: isCollected, 'prompt-active': showPrompt }]">
-                        <li>
+                    <li>
+                        <button @click="handleCollect"
+                            :class="['collect', { collected: isCollected, 'prompt-active': showPrompt }]">
                             <img class="collect_img" src="../assets/Image/restaurant/north/collect.svg" alt="collect" />
-                        </li>
-                    </button>
+                        </button>
+                    </li>
 
                     <button>
                         <li class="share"> <!--分享 連接fb訊息-->
@@ -67,7 +67,6 @@
                     </li>
                 </ol>
             </div>
-
 
             <!-- 提示框 -->
             <div v-if="showPrompt" class="collect-prompt">
@@ -214,7 +213,8 @@
                                 <div class="line"></div>
                                 <h4 class="experience">體驗心得</h4>
                                 <h5 class="text_1">
-                                    <textarea class="text_concent" placeholder="大家都想聽聽你的感想，給還沒去過的人一個參考吧！"></textarea>
+                                    <textarea class="text_concent" name="text_concent"
+                                        placeholder="大家都想聽聽你的感想，給還沒去過的人一個參考吧！"></textarea>
                                 </h5>
                                 <p class="text_words">字元數限制 0/100 字</p>
                             </div>
@@ -372,80 +372,124 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 //星級評論
 export default {
     data() {
         return {
+            email: '',
             rating: 0,
             popup_open: false,
             rating_text: ["", "1級星", "2級星", "3級星", "4級星", "5級星"],
-            // photoArray: [],
             isCollected: false, //控制按鈕是否被收藏
             showPrompt: false,  //控制提示框顯示與否
+            content: '', // php: 評論內容功能
+            files: [], //php: 上傳照片功能
+            memberId: '', // 從 cookie 中取得的會員 ID
         };
     },
     methods: {
+        //
+        //collection.PHP ->收藏
+        collectStore(storeId, memberId) {
+            const data = {
+                storeId,
+                memberId
+            };
+            axios.post('http://localhost:5173/tid101/g1/public/php/restaurant/collection.php', data)
+                .then(response => {
+                    console.log(response.data);
+                    // Handle success response
+                })
+                .catch(error => {
+                    console.error(error);
+                    // Handle error response
+                });
+        },
+
+        //review.PHP ->給星級、評論、照片新增:送出
+        submit() {
+            const memberId = this.getMemberIdFromCookie(); // Get member ID from cookie
+            const storeId = 1; // default store ID
+            const rating = this.rating;
+            const content = this.content; // get the review content from the data object
+
+            axios.post('http://localhost:5173/tid101/g1/public/php/restaurant/review.php', {
+                storeId,
+                memberId,
+                rating,
+                content,
+            })
+                .then(response => {
+                    console.log(response.data);
+                    // Handle success response
+                })
+                .catch(error => {
+                    console.error(error);
+                    // Handle error response
+                });
+
+            this.popup_close(); // close the popup after submitting the form
+        },
+
+        //collection.PHP ->收藏:按鈕變色
         handleCollect() {
             this.checkMembership()
                 .then(isLoggedIn => {  //假設cookie收到會員的value是isLoggedIn
                     if (!isLoggedIn) {
-                        this.showPrompt = true; // 顯示提示框
+                        this.showPrompt = true; //顯示提示框
                         return;
                     }
+                    const memberId = this.getMemberIdFromCookie();
+                    this.collectStore(this.storeId, memberId);
                     this.updateCollectStatus(!this.isCollected)
                         .then(() => {
-                            this.isCollected = !this.isCollected; // 切換收藏按鈕狀態
-                        }) 
+                            this.isCollected = !this.isCollected; // collection.PHP ->收藏:切換收藏按鈕狀態
+                        })
                         .catch(error => {
                             console.error('Failed to update collect status:', error);
                             this.isCollected = !this.isCollected;
                         });
                 })
                 .catch(() => {
-                    this.showPrompt = true; // 點擊該按鈕後顯示提示窗
+                    this.showPrompt = true; // collection.PHP ->收藏:點擊該按鈕後顯示提示窗
                 });
         },
-        checkMembership() { //連接checkMembership.php
-            return fetch('../../public/php/restaurant/checkMembership.php',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: this.userEmail }),
-            })
-            .then(response => response.json())
-            .then(data => data.isMember)
-            .catch(() => false); // 如錯誤用戶未登錄
-        },
-        updateCollectStatus(isCollected) {
-            return fetch('your-backend-url.php?action=updateCollectStatus', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ collected: isCollected }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message !== 'Success') {
-                    throw new Error('Failed to update collect status');
-                }
-            });
-        },
-        redirectToLogin() {
-            this.$router.push({ path: '/login' });
-        },
-        browseAsGuest() {
-            //關閉提示窗繼續瀏覽
-            this.showPrompt = false;
-            // this.isCollected = true;
-        },
-        closePrompt() {
-            this.showPrompt = false; // 跳轉過去同時關閉提示框
+        //collection.PHP ->收藏:抓取cookie資料
+        getMemberIdFromCookie() {
+            const cookieValue = document.cookie.split(';').find(cookie => cookie.includes('member_id='));
+            return cookieValue ? cookieValue.split('=')[1] : null;
         },
 
-        // 照片新增
+        //collection.PHP ->收藏:會員或訪客的彈窗
+        checkMembership() {
+            return fetch('http://localhost:5173/tid101/g1/public/php/restaurant/review.php', { //打包後網址要改
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: this.email }),
+            })
+                .then(response => response.json())
+                .then(data => data.isMember)
+                .catch(() => false);
+        },
+        //collection.PHP ->收藏:帶user到會員登入頁面
+        redirectToLogin() {
+
+            this.$router.push({ path: '/login' });
+        },
+        //collection.PHP ->收藏:關閉提示窗繼續瀏覽
+        browseAsGuest() {
+            this.showPrompt = false;
+        },
+        //collection.PHP ->收藏:跳轉過去同時關閉提示框
+        closePrompt() {
+            this.showPrompt = false;
+        },
+
+        //review.PHP ->給星級、評論、照片新增
         change_rating(value) {
             this.rating = value;
         },
@@ -456,7 +500,6 @@ export default {
             this.popup_open = false
         },
         submit() {
-
             this.popup_close()
 
             // $.ajax({
@@ -527,24 +570,6 @@ export default {
         position: relative;
         width: 100vw;
     }
-
-    // @include breakpoint(1280px) {
-
-    // }
-
-    // @include breakpoint(1024px) {
-
-    // }
-
-    @include breakpoint(820px) {}
-
-    // @include breakpoint(430px) {
-
-    // }
-
-    // @include breakpoint(375px) {
-
-    // }
 }
 
 button {
@@ -731,11 +756,13 @@ button {
         justify-content: space-between;
 
         @include breakpoint(1024px) {
-            width: 67vw;
+            width: 64vw;
+            margin-left: 0.9vw;
         }
 
         @include breakpoint(820px) {
-            width: 66vw;
+            width: 64vw;
+            margin-left: 0.8vw;
         }
 
         @include breakpoint(430px) {
@@ -775,7 +802,7 @@ button {
 
             a {
                 color: #333333;
-                // margin-left: 1vw;
+                margin-left: 8px;
 
                 &:hover {
                     color: #999999;
@@ -784,21 +811,31 @@ button {
         }
 
         img {
-            margin-left: 0.6vw;
+            margin-left: 1.0vw;
+
+            @include breakpoint(1024px) {
+                margin-left: 1.0vw;
+            }
 
             @include breakpoint(430px) {
-                margin-left: 2.0vw;
-                margin-right: 2.0vw;
+                margin-left: 0vw;
+                margin-right: 0vw;
+            }
+
+            @include breakpoint(390px) {
+                margin-left: 0vw;
+                margin-right: 0vw;
             }
         }
     }
 
     .crumb3 {
         margin-left: 143px;
-        margin-top: -19px;
+        margin-top: -18px;
 
         a {
             color: #333333;
+            margin-left: 15px;
 
             &:hover {
                 color: #999999;
@@ -865,7 +902,8 @@ button {
         }
 
         @include breakpoint(1024px) {
-            margin-right: 8px;
+            // margin-right: 22px;
+            padding-left: 7px;
         }
 
         @include breakpoint(820px) {
@@ -886,6 +924,11 @@ button {
         width: 13px;
         height: 16px;
         margin: 14px 6px 12px 12px;
+
+        @include breakpoint(820px) {
+            margin-left: 6px;
+            // padding-left: 14px;
+        }
 
         @include breakpoint(430px) {
             margin: 0;
@@ -915,7 +958,7 @@ button {
         @include breakpoint(820px) {
             width: 40px;
             height: 40px;
-            margin-right: 0px;
+            margin-left: 10px;
         }
 
         @include breakpoint(430px) {
@@ -923,6 +966,11 @@ button {
             height: 28px;
             position: relative;
             margin-left: -1vw;
+            margin-right: 1px;
+        }
+
+        @include breakpoint(390px) {
+            margin-left: 0vw;
         }
 
         img {
@@ -1019,6 +1067,15 @@ button {
     z-index: 50;
     width: 17vw;
     border-radius: 3px;
+
+    @include breakpoint(1024px) {
+        width: 23vw;
+    }
+
+    @include breakpoint(820px) {
+        width: 25vw;
+    }
+
 }
 
 .collect-prompt_p {
@@ -1031,10 +1088,18 @@ button {
     background-color: #F6F1ED;
     padding: 6px 15px;
     cursor: pointer;
-    margin: 1vw 1vw 0vw 2.5vw;
+    margin: 1vw 1vw 0vw 1.5vw;
     color: #7a625b;
     border: 1px solid #F6F1ED;
-    width: 9VW;
+    width: 11VW;
+
+    @include breakpoint(1024px) {
+        width: 16vw;
+    }
+
+    @include breakpoint(820px) {
+        width: 18vw;
+    }
 }
 
 .restaurant_header {
@@ -1067,16 +1132,15 @@ button {
         }
 
         @include breakpoint(1024px) {
-            margin-left: 23px;
             width: 52vw;
             margin-top: 17%;
         }
 
         @include breakpoint(820px) {
-            font-size: 30px;
-            margin-left: 10px;
-            width: 73vw;
-            margin-top: 21%;
+            font-size: 27px;
+            width: 52vw;
+            margin-left: 0vw;
+            margin-top: 19%;
         }
 
         @include breakpoint(430px) {
@@ -1103,13 +1167,11 @@ button {
 
         @include breakpoint(1024px) {
             width: 423px;
-            margin-left: 20px;
-            // font-size: 18px;
+            // margin-left: 20px;
         }
 
         @include breakpoint(820px) {
             font-size: 17px;
-            width: 459px;
         }
 
         @include breakpoint(430px) {
@@ -1339,6 +1401,14 @@ button {
                 .restaurant_fb {
                     display: flex;
 
+                    @include breakpoint(430px) {
+                        margin-left: 8vw;
+                    }
+
+                    @include breakpoint(390px) {
+                        margin-left: 8vw;
+                    }
+
                     img {
                         margin-right: 12px;
                         flex-direction: row-reverse;
@@ -1419,12 +1489,10 @@ button {
 
                         @include breakpoint(1200px) {
                             margin-left: 28px;
-                            // padding-bottom: 5px;
                         }
 
                         @include breakpoint(1024px) {
                             margin-left: 48px;
-                            // padding-bottom: 5px;
                         }
 
                         @include breakpoint(430px) {
@@ -1467,7 +1535,7 @@ button {
                     @include breakpoint(820px) {
                         width: 70vw;
                         margin-bottom: -2vw;
-                        margin-left: -65vw;
+                        margin-left: -62vw;
                     }
 
                     @include breakpoint(430px) {
@@ -1565,7 +1633,7 @@ button {
         img {
             display: block;
             text-align: right;
-            margin-left: 78px;
+            margin-left: 50px;
         }
     }
 
@@ -1828,7 +1896,7 @@ button {
         margin: 0 auto;
 
         @include breakpoint(820px) {
-            height: 90vh;
+            height: 114vh;
             width: 71vw;
         }
 
@@ -2036,11 +2104,10 @@ button {
                 height: 24vh;
             }
 
-
             @include breakpoint(820px) {
                 margin: auto;
                 width: 48vw;
-                height: 20vh;
+                height: 26vh;
                 margin-bottom: 3vw;
             }
 
@@ -2250,7 +2317,7 @@ button {
                 padding-left: 30px;
 
                 @include breakpoint(1024px) {
-                    margin-left: 18px;
+                    // margin-left: 18px;
                     font-size: 18px;
                     padding-left: 2px;
                 }
@@ -2282,8 +2349,8 @@ button {
     }
 
     @include breakpoint(820px) {
-        margin-left: 26vw;
-        margin-top: 50vw;
+        margin-left: 24vw;
+        margin-top: 52vw;
     }
 
     @include breakpoint(430px) {
@@ -2519,7 +2586,7 @@ button {
     justify-content: space-between;
     align-items: center;
     margin: auto;
-    margin-left: 8vw;
+    margin-left: 7vw;
     margin-top: 2.5vw;
 
     @include breakpoint(820px) {
