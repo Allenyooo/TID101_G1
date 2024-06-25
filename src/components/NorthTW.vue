@@ -10,44 +10,13 @@ export default {
 
     data() {
         return {
-            unmarker: new URL(
-                "@/assets/Image/map/unmarker.png",
-                import.meta.url
-            ).href,
-            marker: new URL("@/assets/Image/map/marker.png", import.meta.url)
-                .href,
+            unmarker: new URL("@/assets/Image/map/unmarker.png", import.meta.url).href,
+            marker: new URL("@/assets/Image/map/marker.png", import.meta.url).href,
 
             hoverIndex: -1,
 
-            shops: [
-                // {
-                //   ID:1,
-                //   name:'高麗味',
-                //   imgSrc: new URL(
-                //   "@/assets/Image/map/koreawaybgi.png",
-                //   import.meta.url
-                //   ).href,
-                //   region: '北'
-                // },
-                // {
-                //   ID:4,
-                //   name:'看啥韓密達',
-                //   imgSrc: new URL(
-                //   "@/assets/Image/map/hanmida.png",
-                //   import.meta.url
-                //   ).href,
-                //   region: '北'
-                // },
-                // {
-                //   ID:9,
-                //   name:'韓宮',
-                //   imgSrc: new URL(
-                //   "@/assets/Image/map/hangon.png",
-                //   import.meta.url
-                //   ).href,
-                //   region: '北'
-                // }
-            ],
+            shops: [],
+
         };
     },
 
@@ -55,7 +24,7 @@ export default {
         async fetchShops() {
             try {
                 const response = await fetch(
-                    "http://localhost/tid101_g1/public/php/map/shop.php"
+                    "http://localhost/tid101_g1/public/php/map/shop.php?REGION=北"
                 );
                 const shopsData = await response.json();
                 this.shops = shopsData;

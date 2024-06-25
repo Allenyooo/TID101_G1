@@ -4,6 +4,10 @@ import shopcard from "../components/Shopcard.vue";
 export default {
   components: { shopcard },
 
+  mounted() {
+        this.fetchShops();
+    },
+
   data() {
     return {
         unmarker: new URL(
@@ -17,41 +21,26 @@ export default {
 
         hoverIndex: -1,
 
-        shops:[
-          {
-              ID:7,
-              name:'大盜韓不住',
-              imgSrc: new URL(
-                    "@/assets/Image/map/hanbuzu.webp",
-                    import.meta.url
-                    ).href,
-              region: '東'
-          },
-          {
-              ID:8,
-              name:'韓食館',
-              imgSrc: new URL(
-                    "@/assets/Image/map/hanfoodguan.jpg",
-                    import.meta.url
-                    ).href,
-              region: '東'
-          },
-          {
-              ID:12,
-              name:'東輝韓食',
-              imgSrc: new URL(
-                    "@/assets/Image/map/donhuy.jpg",
-                    import.meta.url
-                    ).href,
-              region: '東'
-          }
-        ],
+        shops:[],
     };
   },
 
 
 
   methods: {
+    async fetchShops() {
+            try {
+                const response = await fetch(
+                    "http://localhost/tid101_g1/public/php/map/shop.php?REGION=東"
+                );
+                const shopsData = await response.json();
+                this.shops = shopsData;
+                console.log(shopData);
+            } catch (error) {
+                console.error("Error fetching shops:", error);
+            }
+        },
+
     backToIsland(event) {
         event.stopPropagation(); //停止冒泡事件
         const img = document.querySelector('.eastIsland');

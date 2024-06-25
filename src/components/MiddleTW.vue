@@ -4,52 +4,35 @@ import shopcard from "../components/Shopcard.vue";
 export default {
     components: { shopcard },
 
+    mounted() {
+        this.fetchShops();
+    },
+
     data() {
         return {
-            unmarker: new URL(
-            "@/assets/Image/map/unmarker.png",
-            import.meta.url
-            ).href,
-            marker: new URL(
-                "@/assets/Image/map/marker.png",
-                import.meta.url
-            ).href,
+            unmarker: new URL("@/assets/Image/map/unmarker.png", import.meta.url).href,
+            marker: new URL("@/assets/Image/map/marker.png", import.meta.url).href,
 
             hoverIndex: -1,
 
-            shops:[
-                {
-                    ID:2,
-                    name:'韓味辣雞',
-                    imgSrc: new URL(
-                    "@/assets/Image/map/lagi.png",
-                    import.meta.url
-                    ).href,
-                    region: '中'
-                },
-                {
-                    ID:5,
-                    name:'朝鮮味',
-                    imgSrc: new URL(
-                    "@/assets/Image/map/chaociaway.png",
-                    import.meta.url
-                    ).href,
-                    region: '中'
-                },
-                {
-                    ID:10,
-                    name:'北蒼洞',
-                    imgSrc: new URL(
-                    "@/assets/Image/map/baichondon.jpg",
-                    import.meta.url
-                    ).href,
-                    region: '中'
-                }
-            ],
+            shops:[],
         };
     },
 
     methods: {
+        async fetchShops() {
+            try {
+                const response = await fetch(
+                    "http://localhost/tid101_g1/public/php/map/shop.php?REGION=中"
+                );
+                const shopsData = await response.json();
+                this.shops = shopsData;
+                console.log(shopData);
+            } catch (error) {
+                console.error("Error fetching shops:", error);
+            }
+        },
+
         backToIsland(event) {
             event.stopPropagation(); //停止冒泡事件
             const img = document.querySelector(".middleIsland");
