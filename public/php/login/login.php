@@ -26,6 +26,11 @@ try {
             $memberId = $row["ID"];
         }
 
+        $updateSql = "UPDATE MEMBER SET LASTLOGIN = NOW() WHERE ID = :memberId";
+        $updateStatement = $pdo->prepare($updateSql);
+        $updateStatement->bindParam(":memberId", $memberId);
+        $updateStatement->execute();
+
         $response = array('success' => true, 'token' => $token, 'memberId' => $memberId);
         header('Content-Type: application/json');
         echo json_encode($response);

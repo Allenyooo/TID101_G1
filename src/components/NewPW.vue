@@ -60,6 +60,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
@@ -102,7 +104,24 @@ export default {
                 this.confirmPasswordError = "密碼不匹配";
                 return;
             }
-            this.$router.push({ path: "/login/pwsuccess" });
+            const forgotAccount = this.getCookie("forgot_account");
+            axios
+                .post("http://localhost/tid101_g1/public/php/login/newpw.php", {
+                    newPassword: this.newPassword,
+                    forgotAccount: forgotAccount,
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    this.$router.push({ path: "/login/pwsuccess" });
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        },
+        getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(";").shift();
         },
     },
 };
