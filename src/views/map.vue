@@ -175,6 +175,7 @@ export default {
     height: 90.96vh;
     background-image: url(/src/assets/Image/map/pointpoint.png);
     transition: 0.3s;
+    overflow: hidden;
     // .islandOpen{
     //     position: fixed;
     //     z-index: 20;
@@ -283,6 +284,9 @@ export default {
         height: 100%;
 
         & img:nth-child(1) {
+            display: block;
+            width: 12vw;
+            height: 4.314vw;
             z-index: 12;
             position: absolute;
             top: 20%;
@@ -310,6 +314,9 @@ export default {
             }
         }
         & img:nth-child(2) {
+            display: block;
+            width: 6vw;
+            height: 2.21vw;
             position: absolute;
             top: 15%;
             left: -40%;
@@ -317,6 +324,7 @@ export default {
             z-index: 12;
             @keyframes cloudNW{
                 0%{
+                    left: 60%;
                     opacity: 0;
                 }
 
@@ -344,6 +352,9 @@ export default {
             }
         }
         & img:nth-child(3) {
+            display: block;
+            width: 12vw;
+            height: 4.314vw;
             position: absolute;
             bottom: 40%;
             right: -100%;
@@ -372,6 +383,9 @@ export default {
 
         }
         & img:nth-child(4) {
+            display: block;
+            width: 8vw;
+            height: 2.9367vw;
             position: absolute;
             bottom: 30%;
             left: -80%;
@@ -400,6 +414,9 @@ export default {
 
         }
         & img:nth-child(5) {
+            display: block;
+            width: 4vw;
+            height: 1.27vw;
             position: absolute;
             top: 50%;
             left: -100%;
@@ -433,6 +450,9 @@ export default {
         }
 
         & img:nth-child(6) {
+            display: block;
+            width: 6vw;
+            height: 2.8vw;
             position: absolute;
             top: 40%;
             right: -90%;
@@ -460,6 +480,9 @@ export default {
             }
         }
         & img:nth-child(7) {
+            display: block;
+            width: 6vw;
+            height: 2.8vw;
             position: absolute;
             bottom: 20%;
             right: -10%;
@@ -550,12 +573,12 @@ export default {
             animation: waveSE 13s linear infinite;
             @keyframes waveSE{
                 0%{
-                    right: -150%;
+                    right: -138%;
                     opacity: 0;
                 }
 
                 2%{
-                    right: -149%;
+                    right: -135%;
                     opacity: 1;
                 }
 
@@ -564,7 +587,7 @@ export default {
                 }
 
                 100%{
-                    right: -120%;
+                    right: -110%;
                     opacity: 0;
                 }
             }  
@@ -603,12 +626,12 @@ export default {
             animation: waveW 13s linear infinite;
             @keyframes waveW{
                 0%{
-                    left: -150%;
+                    left: -136%;
                     opacity: 0;
                 }
 
                 2%{
-                    left: -145%;
+                    left: -135%;
                     opacity: 1;
                 }
 
