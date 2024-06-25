@@ -1,42 +1,49 @@
 <?php
-// collection.php //功能:會員收藏;資料庫名稱MEMBER <->連接restaurant.vue
-
-// include("../conn.php");
+// collection.php 會員收藏進資料庫
+// 連線SQL
 $db_host = "127.0.0.1";
 $db_user = "root";
-// $db_pass = "passwordpassword";
-$db_pass = "password";
+$db_pass = "passwordpassword";
+// $db_pass = "password";
 $db_select = "TID101_G1";
 
+// 建立資料庫連線物件
 $dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
-$pdo = new PDO($dsn, $db_user, $db_pass);
 
-// Check if the memberId cookie is set
-if (isset($_COOKIE['memberId'])) {
-    $memberId = $_COOKIE['memberId'];
+try {
+    // 建立PDO物件，並放入指定的相關資料
+    $pdo = new PDO($dsn, $db_user, $db_pass);
+    // 设置 PDO 错误模式为异常
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Retrieve the maximum ID value from the COLLECT_DETAIL table
-    $query = "SELECT MAX(ID) AS max_id FROM COLLECT_DETAIL";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
-    $maxId = $stmt->fetchColumn() + 1; // increment by 1 for the new record
+    // 讀取 JSON 數據並解析
+    $data = json_decode(file_get_contents("php://input"), true);
 
-    // Insert a new record into the COLLECT_DETAIL table
-    $query = "INSERT INTO COLLECT_DETAIL (ID, STORE_ID, MEMBER_ID) VALUES (:id, 1, :memberId)";
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':id', $maxId, PDO::PARAM_INT);
-    $stmt->bindParam(':memberId', $memberId, PDO::PARAM_INT);
-    if (!$stmt->execute()) {
-        $errorInfo = $stmt->errorInfo();
-        $response = array('success' => false, 'message' => 'Error executing query: '. $errorInfo[2]);
+    // 讀取 POST 數據
+    $storeId = $data['storeId'];
+    $memberId = $data['memberId'];
+
+    // 取最大 ID 值
+    $sql = "SELECT MAX(ID) as maxId FROM COLLECT_DETAIL";
+    $stmt = $pdo->query($sql);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($row && $row['maxId'] !== null) {
+        $newId = $row['maxId'] + 1;
     } else {
-        $response = array('success' => true, 'message' => 'Registration successful!');
+        $newId = 1; // 如果表中没有记录，设置新ID为1
     }
-} else {
-    // User is not logged in, deny access to collect store
-    $response = array('success' => false, 'message' => 'Please log in to collect stores.');
+
+    // 插入資料庫
+    $sql = "INSERT INTO COLLECT_DETAIL (ID, STORE_ID, MEMBER_ID) VALUES (?, ?, ?)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$newId, $storeId, $memberId]);
+
+    echo json_encode(["message" => "收藏成功"]);
+} catch (PDOException $e) {
+    echo json_encode(["error" => $e->getMessage()]);
 }
 
-// Output the response
-echo json_encode($response);
+// 關閉連接
+$pdo = null;
 ?>

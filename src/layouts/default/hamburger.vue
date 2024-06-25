@@ -54,11 +54,11 @@
                     </li>
                     <li class="menu_list_box">
                         <div class="menu_list_user">
-                            <router-link v-if="!isMember" to="/register" @click="closeMenu">
+                            <router-link v-if="!isMember" to="/login" @click="closeMenu">
                                 <h3>會員登錄</h3>
                                 <p>회원 등록</p>
                             </router-link>
-                            <router-link v-else to="/member" @click="closeMenu">
+                            <router-link v-else="isMember" to="/member" @click="closeMenu">
                                 <h3>會員中心</h3>
                                 <p>회원 센터</p>
                             </router-link>
@@ -77,15 +77,16 @@
         </div>
     </nav>
 
-    <shopping :sp="move" @Close="scToggle"></shopping>
+    <shopping :sp="move" :allTotal="allTotal" :shoppingCartData="shoppingdata" @close="scToggle"></shopping>
+
 </template>
 
 <script>
-// import $ from 'jquery'
-import shopping from "/src/components/shoppingCart.vue";
+import axios from "axios";
+// import shopping from "/src/components/shoppingCart.vue";
 
 export default {
-    components: { shopping },
+    // components: { shopping },
     data() {
         return {
             show: false,
@@ -93,7 +94,12 @@ export default {
             isMember: false, //判斷是否為會員
             move: false, //購物車開關
             sp: true, //購物車開關
+            allTotal: 0,
+            shoppingdata: [],
         };
+    },
+    mounted() {
+        this.checkMemberStatus();
     },
     methods: {
         toggleMenu() {
@@ -103,27 +109,62 @@ export default {
         closeMenu() {
             this.show = false;
             this.hidden = true;
-        }
+        },
+        getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(";").shift();
+        },
+        checkMemberStatus() {
+            const memberId = this.getCookie("memberId");
+            this.isMember = !!memberId;
+        },
+
+        scToggle() {
+            if (this.move == false) {
+                this.shoppingcartData();
+                this.closeMenu();
+                return (this.move = true);
+            } else if (this.move == true) {
+                this.closeMenu();
+                return (this.move = false);
+            }
+        },
+
+        sumtotal() {
+            let alltotal = 0;
+            for (let i = 0; i < this.shoppingdata.length; i++) {
+                alltotal +=
+                    this.shoppingdata[i].PRICE *
+                    this.shoppingdata[i].COUNT *
+                    this.shoppingdata[i].PERCENT;
+            }
+            this.allTotal = alltotal;
+        },
+
+        shoppingcartData() {
+            fetch(
+                "http://localhost/tid101_g1/public/php/shoppingCart/shoppingCart.php",
+                {
+                    mode: "cors",
+                }
+            )
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    this.shoppingdata = data;
+                    this.sumtotal();
+                    // this.localstorageDAta();
+                    // this.shoppingCartTasks = this.shoppingCartTasks.concat();
+                });
+        },
     },
-    //會員登入及會員主頁選單做切換
-    async mounted() {
-        try {
-            const response = await axios.get('api.php');
-            this.isMember = response.data.isMember;
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    },
-    scToggle() {
-        if (this.move == false) {
-            this.closeMenu();
-            return (this.move = true);
-        } else if (this.move == true) {
-            this.closeMenu();
-            return (this.move = false);
-        }
-    },
-}
+
+};
 </script>
 
 <style lang="css" scoped>
