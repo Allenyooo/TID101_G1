@@ -1,69 +1,58 @@
 <?php
-// review.php 同一個from表單內的功能(評論、星級+新增照片
+header('Content-Type: application/json; charset=utf-8');
+include("../conn.php");
 
-// Establish database connection
-$db_host = "127.0.0.1";
-$db_user = "root";
-// $db_pass = "passwordpassword";
-$db_pass = "password";
-$db_select = "TID101_G1";
+try {
+    // 获取最新的 REVIEW ID
+    $sql = "SELECT MAX(ID) AS latest_id FROM REVIEW";
+    $id = $pdo->prepare($sql);
+    $id->execute();
+    $result = $id->fetch();
+    $latestId = $result['latest_id'];
 
-// 建立資料庫連線物件
-$dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
-$pdo = new PDO($dsn, $db_user, $db_pass);
+    // Generate a new ID by incrementing the latest ID
+    $newId = $latestId + 1;
 
-// Check connection
-if ($pdo) {
-  echo "Connected to the database successfully!";
-} else {
-  echo "Failed to connect to the database!";
-}
+    $storeId = $_POST['storeId']; // 从 FormData 获取 storeId
+    $memberId = $_POST['memberId']; // 从 FormData 获取 memberId
+    $rating = $_POST['rating']; // 从 FormData 获取 rating
+    $content = $_POST['content']; // 从 FormData 获取 content
 
-// Check if required data is set
-if (!isset($_COOKIE['memberId']) ||!isset($_POST['rating']) ||!isset($_POST['content'])) {
-    echo "Error: Missing required data";
-    exit;
-}
+    // 插入 REVIEW 表
+    $sqlReview = "INSERT INTO REVIEW (ID, MEMBER_ID, STORE_ID, STAR, CONTENT) VALUES (?, ?, ?, ?, ?)";
+    $stmtReview = $pdo->prepare($sqlReview);
+    $stmtReview->bindParam(1, $newId, PDO::PARAM_INT);
+    $stmtReview->bindParam(2, $memberId, PDO::PARAM_INT);
+    $stmtReview->bindParam(3, $storeId, PDO::PARAM_INT);
+    $stmtReview->bindParam(4, $rating, PDO::PARAM_INT);
+    $stmtReview->bindParam(5, $content, PDO::PARAM_STR);
+    $stmtReview->execute();
 
-// Get the member ID from the cookie
-$memberId = $_COOKIE['memberId'];
+    // 插入 PHOTO 表
+    $sqlPhoto = "INSERT INTO PHOTO (ID, ADDRESS, REVIEW_ID, PHOTO) VALUES (?, NULL, ?, ?)";
+    $stmtPhoto = $pdo->prepare($sqlPhoto);
+    foreach ($_FILES['imageData']['tmp_name'] as $index => $tmpName) {
+        // 生成新的 PHOTO ID
+        $sql = "SELECT MAX(ID) AS latest_photo_id FROM PHOTO";
+        $id = $pdo->prepare($sql);
+        $id->execute();
+        $result = $id->fetch();
+        $latestPhotoId = $result['latest_photo_id'];
+        $newPhotoId = $latestPhotoId + 1;
 
-// Set the store ID to 1 by default
-$storeId = 1;
+        // 获取文件内容
+        $binaryData = file_get_contents($tmpName);
 
-// Get the form data from the request
-$rating = $_POST['rating'];
-$content = $_POST['content'];
-
-// Insert the review into the database
-$stmt = $pdo->prepare("INSERT INTO REVIEW (STORE_ID, MEMBER_ID, RATING, CONTENT) VALUES (:storeId, :memberId, :rating, :content)");
-$stmt->bindParam(':storeId', $storeId);
-$stmt->bindParam(':memberId', $memberId);
-$stmt->bindParam(':rating', $rating);
-$stmt->bindParam(':content', $content);
-$stmt->execute();
-
-// Get the review ID from the last inserted review
-$reviewId = $pdo->lastInsertId();
-
-// Loop through the files sent in the request
-for ($i = 1; $i <= 6; $i++) {
-    $fileKey = "photo_$i";
-    if (isset($_FILES[$fileKey])) {
-      $file = $_FILES[$fileKey];
-      // Get the file contents
-      $photo = file_get_contents($file['tmp_name']);
-  
-      // Insert the photo data into the PHOTO table
-      $stmt = $pdo->prepare("INSERT INTO PHOTO (ID, ADDRESS, REVIEW_ID, PHOTO) VALUES (:id, :address, :reviewId, :photo)");
-      $stmt->bindParam(':id', null, PDO::PARAM_INT);
-      $stmt->bindParam(':address', $storeId); // assume the store ID is the address
-      $stmt->bindParam(':reviewId', $reviewId);
-      $stmt->bindParam(':photo', $photo, PDO::PARAM_LOB);
-      $stmt->execute();
+        // 插入照片数据
+        $stmtPhoto->bindParam(1, $newPhotoId, PDO::PARAM_INT);
+        $stmtPhoto->bindParam(2, $newId, PDO::PARAM_INT); // 使用 newId 作为 REVIEW_ID
+        $stmtPhoto->bindParam(3, $binaryData, PDO::PARAM_LOB); // 使用 PARAM_LOB 存储 mediumblob
+        $stmtPhoto->execute();
     }
-  }
 
-// Close the database connection
-$pdo = null;
+    echo json_encode(["message" => "評價成功提交"]);
+
+} catch (PDOException $e) {
+    echo json_encode(["error" => "錯誤訊息: " . $e->getMessage()]);
+}
 ?>

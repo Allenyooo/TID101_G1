@@ -41,27 +41,33 @@
                 <!--收藏按鈕-->
                 <ol class="restaurant_btns">
                     <li>
-                        <button @click="handleCollect"
-                            :class="['collect', { collected: isCollected, 'prompt-active': showPrompt }]">
+                        <button @click="handleCollect" :class="[
+                            'collect',
+                            {
+                                collected: isCollected,
+                                'prompt-active': showPrompt,
+                            },
+                        ]">
                             <img class="collect_img" src="../assets/Image/restaurant/north/collect.svg" alt="collect" />
                         </button>
                     </li>
 
                     <button>
-                        <li class="share"> <!--分享 連接fb訊息-->
-                            <a href='javascript: void(window.open(&apos;https://lineit.line.me/share/ui?url=&apos; .concat(encodeURIComponent(location.href)) ));'
-                                title='分享給 LINE 好友'>
-                                <img alt='分享梨花殿給LINE好友 !' height='44' src='../assets/Image/restaurant/north/share.svg'
-                                    width='44' />
+                        <li class="share">
+                            <!--分享 連接fb訊息-->
+                            <a href="javascript: void(window.open('https://lineit.line.me/share/ui?url=' .concat(encodeURIComponent(location.href)) ));"
+                                title="分享給 LINE 好友">
+                                <img alt="分享梨花殿給LINE好友 !" height="44" src="../assets/Image/restaurant/north/share.svg"
+                                    width="44" />
                             </a>
                         </li>
                     </button>
                     <!--寫留言按鈕-->
                     <li class="message">
                         <button @click="pop()">
-                            <div class="icon_bg" @click=" popup_open = true">
+                            <div class="icon_bg" @click="popup_open = true">
                                 <img class="restaurantstarimg" src="../assets/Image/restaurant/north/message.svg"
-                                    alt="message">
+                                    alt="message" />
                             </div>
                         </button>
                     </li>
@@ -71,8 +77,12 @@
             <!-- 提示框 -->
             <div v-if="showPrompt" class="collect-prompt">
                 <p class="collect-prompt_p">請先登入會員</p>
-                <button class="collect-prompt_button" @click="redirectToLogin">確認</button>
-                <button class="collect-prompt_button" @click="browseAsGuest">以訪客身分瀏覽</button>
+                <button class="collect-prompt_button" @click="redirectToLogin">
+                    確認
+                </button>
+                <button class="collect-prompt_button" @click="browseAsGuest">
+                    以訪客身分瀏覽
+                </button>
             </div>
 
             <header class="restaurant_header">
@@ -214,7 +224,7 @@
                                 <h4 class="experience">體驗心得</h4>
                                 <h5 class="text_1">
                                     <textarea class="text_concent" name="text_concent"
-                                        placeholder="大家都想聽聽你的感想，給還沒去過的人一個參考吧！"></textarea>
+                                        placeholder="大家都想聽聽你的感想，給還沒去過的人一個參考吧！" v-model="content"></textarea>
                                 </h5>
                                 <p class="text_words">字元數限制 0/100 字</p>
                             </div>
@@ -251,10 +261,10 @@
                                 </div>
                             </div>
                             <div class="buttons">
-                                <button class="cancel" @click=" popup_close()">
+                                <button class="cancel" @click="popup_close()">
                                     <h4>取消</h4>
                                 </button>
-                                <button class="sendout" @click=" submit()">
+                                <button class="sendout" @click="submitFile()">
                                     <h4>送出</h4>
                                 </button>
                             </div>
@@ -372,121 +382,144 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 //星級評論
 export default {
     data() {
         return {
-            email: '',
             rating: 0,
             popup_open: false,
             rating_text: ["", "1級星", "2級星", "3級星", "4級星", "5級星"],
+            isMember: false,
             isCollected: false, //控制按鈕是否被收藏
-            showPrompt: false,  //控制提示框顯示與否
-            content: '', // php: 評論內容功能
+            showPrompt: false, //控制提示框顯示與否
+            content: "", // php: 評論內容功能
             files: [], //php: 上傳照片功能
-            memberId: '', // 從 cookie 中取得的會員 ID
+            imageData: [],
+            storeId: 1,
+            memberId: "", // 從 cookie 中取得的會員 ID        
         };
     },
     methods: {
-        //
-        //collection.PHP ->收藏
+        //從cookie抓memberId值
+        getMemberIdFromCookie() {
+            const cookieValue = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("memberId="));
+            console.log(cookieValue);
+            return cookieValue ? cookieValue.split("=")[1] : null;
+        },
+
+        //會員收藏
+        handleCollect() {
+            const memberId = this.getMemberIdFromCookie();
+            if (memberId) {
+                // 已登录，切换收藏状态并发送请求
+                const storeId = 1; // 默认的 storeId
+                this.isCollected = !this.isCollected;
+                this.collectStore(storeId, memberId);
+            } else {
+                // 未登录，显示提示对话框
+                this.showPrompt = true;
+            }
+        },
+
+        //收藏並將資料送到php
         collectStore(storeId, memberId) {
             const data = {
                 storeId,
-                memberId
-            };
-            axios.post('http://localhost:5173/tid101/g1/public/php/restaurant/collection.php', data)
-                .then(response => {
-                    console.log(response.data);
-                    // Handle success response
-                })
-                .catch(error => {
-                    console.error(error);
-                    // Handle error response
-                });
-        },
-
-        //review.PHP ->給星級、評論、照片新增:送出
-        submit() {
-            const memberId = this.getMemberIdFromCookie(); // Get member ID from cookie
-            const storeId = 1; // default store ID
-            const rating = this.rating;
-            const content = this.content; // get the review content from the data object
-
-            axios.post('http://localhost:5173/tid101/g1/public/php/restaurant/review.php', {
-                storeId,
                 memberId,
-                rating,
-                content,
-            })
-                .then(response => {
+            };
+            axios
+                .post(
+                    "http://localhost/tid101_g1/public/php/restaurant/collection.php",
+                    data
+                )
+                .then((response) => {
                     console.log(response.data);
                     // Handle success response
                 })
-                .catch(error => {
-                    console.error(error);
+                .catch((error) => {
+                    console.error("Error collecting store:", error);
                     // Handle error response
-                });
-
-            this.popup_close(); // close the popup after submitting the form
-        },
-
-        //collection.PHP ->收藏:按鈕變色
-        handleCollect() {
-            this.checkMembership()
-                .then(isLoggedIn => {  //假設cookie收到會員的value是isLoggedIn
-                    if (!isLoggedIn) {
-                        this.showPrompt = true; //顯示提示框
-                        return;
+                    let errorMessage = "提交失败，请稍后重试";
+                    if (error.response) {
+                        errorMessage = error.response.data.message || errorMessage;
                     }
-                    const memberId = this.getMemberIdFromCookie();
-                    this.collectStore(this.storeId, memberId);
-                    this.updateCollectStatus(!this.isCollected)
-                        .then(() => {
-                            this.isCollected = !this.isCollected; // collection.PHP ->收藏:切換收藏按鈕狀態
-                        })
-                        .catch(error => {
-                            console.error('Failed to update collect status:', error);
-                            this.isCollected = !this.isCollected;
-                        });
-                })
-                .catch(() => {
-                    this.showPrompt = true; // collection.PHP ->收藏:點擊該按鈕後顯示提示窗
+                    alert(errorMessage);
                 });
         },
-        //collection.PHP ->收藏:抓取cookie資料
-        getMemberIdFromCookie() {
-            const cookieValue = document.cookie.split(';').find(cookie => cookie.includes('member_id='));
-            return cookieValue ? cookieValue.split('=')[1] : null;
-        },
 
-        //collection.PHP ->收藏:會員或訪客的彈窗
-        checkMembership() {
-            return fetch('http://localhost:5173/tid101/g1/public/php/restaurant/review.php', { //打包後網址要改
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: this.email }),
-            })
-                .then(response => response.json())
-                .then(data => data.isMember)
-                .catch(() => false);
-        },
         //collection.PHP ->收藏:帶user到會員登入頁面
         redirectToLogin() {
-
-            this.$router.push({ path: '/login' });
+            this.$router.push({ path: "/login" });
         },
+
         //collection.PHP ->收藏:關閉提示窗繼續瀏覽
         browseAsGuest() {
             this.showPrompt = false;
         },
+
         //collection.PHP ->收藏:跳轉過去同時關閉提示框
         closePrompt() {
             this.showPrompt = false;
+        },
+
+        //review.PHP ->給星級、評論、照片新增:送出
+        submitFile() {
+            const memberId = this.getMemberIdFromCookie(); // Get member ID from cookie
+            const storeId = 1; // Default store ID
+            const rating = this.rating;
+            const content = this.content; // Get the review content from the data object
+            
+            // 檢查必要的字段是否存在且不為空
+            if (!memberId) {
+                alert("未能獲取會員ID，請重新登錄");
+                return;
+            }
+            if (rating === 0) {
+                alert("請給予星級評分");
+                return;
+            }
+            if (!content.trim()) {
+                alert("評論內容不能為空");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("storeId", storeId);
+            formData.append("memberId", memberId);
+            formData.append("rating", rating);
+            formData.append("content", content);
+            this.files.forEach((file, index) => { // 追加文件数据
+                formData.append(`imageData[]`, file);
+            });
+
+            axios
+                .post("http://localhost/tid101_g1/public/php/restaurant/review.php", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    alert("評論已送出"); // Display the message returned by PHP
+                    this.content = "";
+                    this.rating = 0;
+                    this.files = []; // Clear the file input
+                })
+
+                .catch((error) => {
+                    console.error("Error submitting review:", error);
+                    let errorMessage = "提交失敗，請稍後再試";
+                    if (error.response) {
+                        errorMessage = error.response.data.message || errorMessage;
+                    }
+                    alert(errorMessage);
+                });
+
+            this.popup_close(); // close the popup after submitting the form
         },
 
         //review.PHP ->給星級、評論、照片新增
@@ -497,21 +530,9 @@ export default {
             //alert()
         },
         popup_close() {
-            this.popup_open = false
+            this.popup_open = false;
         },
-        submit() {
-            this.popup_close()
 
-            // $.ajax({
-            //     type: "method",
-            //     url: "url",
-            //     data: "data",
-            //     dataType: "dataType",
-            //     success: function (response) {
-
-            //     }
-            // });
-        },
         fileChange(e, index) {
             let file = e.target.files[0];
             let readFile = new FileReader();
@@ -526,11 +547,13 @@ export default {
                 let box = document.querySelector(`.box${index}`);
                 box.innerHTML = "";
                 box.appendChild(image);
+
+                this.imageData[index - 1] = readFile.result;
+                this.files[index - 1] = file;
             });
         },
     },
-}
-
+};
 </script>
 
 <style lang="scss" scoped>
@@ -548,7 +571,6 @@ export default {
 }
 
 #share-btn {
-
     #share-btn {
         width: 90px;
         height: 30px;
@@ -587,7 +609,6 @@ button {
     @include breakpoint(390px) {
         margin-bottom: 0px;
     }
-
 }
 
 .restaurant_sidebar {
@@ -811,10 +832,10 @@ button {
         }
 
         img {
-            margin-left: 1.0vw;
+            margin-left: 1vw;
 
             @include breakpoint(1024px) {
-                margin-left: 1.0vw;
+                margin-left: 1vw;
             }
 
             @include breakpoint(430px) {
@@ -843,7 +864,6 @@ button {
         }
     }
 }
-
 
 .restaurant_btns {
     display: flex;
@@ -1075,7 +1095,6 @@ button {
     @include breakpoint(820px) {
         width: 25vw;
     }
-
 }
 
 .collect-prompt_p {
@@ -1085,13 +1104,13 @@ button {
 }
 
 .collect-prompt_button {
-    background-color: #F6F1ED;
+    background-color: #f6f1ed;
     padding: 6px 15px;
     cursor: pointer;
     margin: 1vw 1vw 0vw 1.5vw;
     color: #7a625b;
-    border: 1px solid #F6F1ED;
-    width: 11VW;
+    border: 1px solid #f6f1ed;
+    width: 11vw;
 
     @include breakpoint(1024px) {
         width: 16vw;
@@ -1181,7 +1200,6 @@ button {
         }
     }
 }
-
 
 .restaurant_section {
     background-color: #f6f1ed;
@@ -1356,7 +1374,6 @@ button {
                             font-size: 17px;
                             width: 76px;
                         }
-
                     }
 
                     td {
@@ -1622,7 +1639,6 @@ button {
             }
 
             @include breakpoint(390px) {
-
                 #google_map {
                     width: 350px;
                     height: 250px;
@@ -1782,7 +1798,7 @@ button {
             }
 
             @include breakpoint(390px) {
-                margin-left: 4.0vw;
+                margin-left: 4vw;
             }
         }
 
@@ -1847,7 +1863,7 @@ button {
             }
 
             @include breakpoint(390px) {
-                margin-left: 4.0vw;
+                margin-left: 4vw;
             }
         }
 
@@ -2123,7 +2139,6 @@ button {
                 margin-left: -8vw;
             }
 
-
             div {
                 display: flex;
 
@@ -2334,7 +2349,6 @@ button {
     }
 }
 
-
 .readmord {
     width: 144px;
     height: 52px;
@@ -2449,7 +2463,6 @@ button {
             @include breakpoint(1024px) {
                 width: 34vw;
                 margin-left: 3vw;
-
             }
 
             @include breakpoint(820px) {
@@ -2465,7 +2478,6 @@ button {
                 margin-left: 6vw;
                 width: 76vw;
             }
-
         }
 
         .masg {
@@ -2497,12 +2509,10 @@ button {
                 @include breakpoint(390px) {
                     width: 329px;
                 }
-
-
             }
 
             &::placeholder {
-                color: #C3A988;
+                color: #c3a988;
                 font-size: 12px;
             }
         }
@@ -2619,7 +2629,6 @@ button {
         margin-left: 24px;
     }
 }
-
 
 .test {
 
