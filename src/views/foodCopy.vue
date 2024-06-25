@@ -36,17 +36,19 @@
         <section class="horizontal">
             <div class="pin-wrap">
                 <div class="animation-wrap to-right">
-                    <div class="item" @click="scrollToText">
-                        <img
-                            src="/src/assets/Image/food/horizontal_main.png"
-                            alt=""
-                        />
+                    <div class="item">
+                        <a href="#article1"
+                            ><img
+                                src="/src/assets/Image/food/horizontal_main.png"
+                                alt=""
+                        /></a>
                     </div>
-                    <div class="item" @click="scrollToTextMeat">
-                        <img
-                            src="/src/assets/Image/food/horizontal_meat.png"
-                            alt=""
-                        />
+                    <div class="item">
+                        <a href="#article2"
+                            ><img
+                                src="/src/assets/Image/food/horizontal_meat.png"
+                                alt=""
+                        /></a>
                     </div>
                     <div class="item">
                         <a href="#article3"
@@ -74,7 +76,7 @@
         </section>
     </div>
     <!-- food-main-description -->
-    <div class="food-description-blue" ref="textSection">
+    <div class="food-description-blue" id="article1">
         <h1>主食 밥면</h1>
         <h4>
             韓國的主食文化以米飯為主，米飯是餐桌上的核心，也會加入糯米、紅豆等增加風味。韓國人也喜愛各類麵食，如冷麵和拌麵。冷麵清爽的口感適合夏季食用，而拌麵則辛辣和多樣的配料深受大眾喜愛。白米飯和麵食共同構成了韓國主食文化的重要部分，反映了韓國人對健康主食的追求。
@@ -130,12 +132,16 @@
         </div>
         <!--右邊錨定欄位-->
         <div class="food-category-right">
-            <div class="category-item" @click="scrollToText">
-                <div class="category-icon primary-color"></div>
+            <div class="category-item">
+                <a href="#article1">
+                    <div class="category-icon primary-color"></div>
+                </a>
                 <p class="category-text">主食</p>
             </div>
-            <div class="category-item" @click="scrollToTextMeat">
-                <div class="category-icon gold-color"></div>
+            <div class="category-item">
+                <a href="#article2">
+                    <div class="category-icon gold-color"></div>
+                </a>
                 <p class="category-text">肉類</p>
             </div>
             <div class="category-item">
@@ -158,7 +164,7 @@
             </div>
         </div>
     </div>
-    <div class="food-description-red" ref="textSectionMeat">
+    <div class="food-description-red" id="article2">
         <h1>肉類 고기</h1>
         <h4>
             韓國的肉類飲食文化豐富多樣，以烤肉為代表。烤肉是一種社交活動，家人或朋友聚在一起在炭火上烤製各種肉類，如牛肉、豬肉和雞肉。除了烤肉，還有燉牛肉和韓式炸雞。韓國肉類飲食重視品質和調味，常搭配各種小菜和醬料一起享用，展現了韓國人對美食和社交的熱愛。
@@ -208,18 +214,22 @@
         </div>
         <!--右邊錨定欄位-->
         <div class="food-category-right">
-            <div class="category-item" @click="scrollToText">
-                <div class="category-icon gold-color"></div>
+            <div class="category-item">
+                <a href="#article1">
+                    <div class="category-icon gold-color"></div>
+                </a>
                 <p class="category-text">主食</p>
             </div>
-            <div class="category-item" @click="scrollToTextMeat">
-                <div class="category-icon primary-color"></div>
-
+            <div class="category-item">
+                <a href="#article2">
+                    <div class="category-icon primary-color"></div>
+                </a>
                 <p class="category-text">肉類</p>
             </div>
-            <div class="category-item" @click="scrollToTextSeafood">
-                <div class="category-icon gold-color"></div>
-
+            <div class="category-item">
+                <a href="#article3">
+                    <div class="category-icon gold-color"></div>
+                </a>
                 <p class="category-text">海鮮</p>
             </div>
             <div class="category-item">
@@ -287,14 +297,16 @@
         </div>
         <!--右邊錨定欄位-->
         <div class="food-category-right">
-            <div class="category-item" @click="scrollToText">
-                <div class="category-icon gold-color"></div>
-
+            <div class="category-item">
+                <a href="#article1">
+                    <div class="category-icon gold-color"></div>
+                </a>
                 <p class="category-text">主食</p>
             </div>
-            <div class="category-item" @click="scrollToTextMeat">
-                <div class="category-icon gold-color"></div>
-
+            <div class="category-item">
+                <a href="#article2">
+                    <div class="category-icon gold-color"></div>
+                </a>
                 <p class="category-text">肉類</p>
             </div>
             <div class="category-item">
@@ -368,14 +380,16 @@
         </div>
         <!--右邊錨定欄位-->
         <div class="food-category-right">
-            <div class="category-item" @click="scrollToText">
-                <div class="category-icon gold-color"></div>
-
+            <div class="category-item">
+                <a href="#article1">
+                    <div class="category-icon gold-color"></div>
+                </a>
                 <p class="category-text">主食</p>
             </div>
-            <div class="category-item" @click="scrollToTextMeat">
-                <div class="category-icon gold-color"></div>
-
+            <div class="category-item">
+                <a href="#article2">
+                    <div class="category-icon gold-color"></div>
+                </a>
                 <p class="category-text">肉類</p>
             </div>
             <div class="category-item">
@@ -449,13 +463,16 @@
         </div>
         <!--右邊錨定欄位-->
         <div class="food-category-right">
-            <div class="category-item" @click="scrollToText">
-                <div class="category-icon gold-color"></div>
+            <div class="category-item">
+                <a href="#article1">
+                    <div class="category-icon gold-color"></div>
+                </a>
                 <p class="category-text">主食</p>
             </div>
-            <div class="category-item" @click="scrollToTextMeat">
-                <div class="category-icon gold-color"></div>
-
+            <div class="category-item">
+                <a href="#article2">
+                    <div class="category-icon gold-color"></div>
+                </a>
                 <p class="category-text">肉類</p>
             </div>
             <div class="category-item">
@@ -837,10 +854,6 @@ export default {
             this.currentItemMain =
                 this.items[(this.currentSlide + index) % this.items.length];
         },
-        scrollToText() {
-            const textSection = this.$refs.textSection;
-            textSection.scrollIntoView({ behavior: "smooth", block: "start" });
-        },
         //肉類-------
         nextSlide2() {
             this.currentSlide2 = (this.currentSlide2 + 1) % this.items2.length;
@@ -854,13 +867,6 @@ export default {
             this.currentItemMain2 =
                 this.items2[(this.currentSlide2 + index) % this.items2.length];
         },
-        scrollToTextMeat() {
-            const textSectionMeat = this.$refs.textSectionMeat;
-            textSectionMeat.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
-        },
         //海鮮-------
         nextSlide3() {
             this.currentSlide3 = (this.currentSlide3 + 1) % this.items3.length;
@@ -873,15 +879,7 @@ export default {
         updateItem3(index) {
             this.currentItemMain3 =
                 this.items3[(this.currentSlide3 + index) % this.items3.length];
-        },
-        scrollToTextSeafood() {
-            const textSectionSeafood = this.$refs.textSectionSeafood;
-            textSectionSeafood.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
-        },
-        //小菜-------
+        }, //小菜-------
         nextSlide4() {
             this.currentSlide4 = (this.currentSlide4 + 1) % this.items4.length;
         },
@@ -893,13 +891,6 @@ export default {
         updateItem4(index) {
             this.currentItemMain4 =
                 this.items4[(this.currentSlide4 + index) % this.items4.length];
-        },
-        scrollToTextSide() {
-            const textSectionSide = this.$refs.textSectionSide;
-            textSectionSide.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
         },
         //湯品-------
         nextSlide5() {
@@ -914,15 +905,7 @@ export default {
             this.currentItemMain5 =
                 this.items5[(this.currentSlide5 + index) % this.items5.length];
         },
-        scrollToTextSoup() {
-            const textSectionSoup = this.$refs.textSectionSoup;
-            textSectionSoup.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
-        },
-    },
-    //---------視差滾動----------
+    }, //---------視差滾動----------
     mounted() {
         const horizontalSections = gsap.utils.toArray("section.horizontal");
 
