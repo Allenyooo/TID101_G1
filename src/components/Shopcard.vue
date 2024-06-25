@@ -8,12 +8,21 @@ export default {
         shop: {
             type: Object,
             required: true
+            // {
+            //     ID: 1,
+            //     SNAME: '高麗味',
+            //     REGION: '北',
+            //     MNAME: 'Allen',
+            //     CONTENT: '超級好吃blablablabla...',
+            //     TIME: '2024-06-22'
+            // }
         },
     },
 
     data() {
         return {
             hovered: false,
+            pics:'',
         };
     },
 
@@ -21,7 +30,35 @@ export default {
         cardOpen() {
             this.hovered = !this.hovered;
         },
+        formatDate(datetime) {
+            const date = new Date(datetime);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份從0開始,所以+1
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        },
+        async fetchPic() {
+            console.log('djsnkfkalnfkalnfkjasdnxsmdsnalkfna');
+
+                const response = await fetch(
+                    `http://localhost/tid101_g1/public/php/map/pics.php?storeId=${this.shop.ID}`
+                );
+                const picData = await response.text();
+                this.pics = picData;
+                console.log(picData);
+        },
     },
+    
+    mounted() {
+        this.fetchPic();
+    },
+    computed: {
+        lowerString() {
+            const length = 15;
+            if (!this.shop.CONTENT) return '';
+                return this.shop.CONTENT.length > length ? this.shop.CONTENT.substring(0, length) + '...' : this.shop.CONTENT;
+        }
+  }
 };
 </script>
 
@@ -31,9 +68,9 @@ export default {
     <li @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')" :class="{ 'no-hover': !isHoverEnabled }">
 
         <div class="normal">
-            <img :src="shop.BANNERPIC" alt="" />
+            <img :src="this.pics" alt="" />
             <div class="shopinfo">
-                <h3>{{ shop.NAME }}</h3>
+                <h3>{{ shop.SNAME }}</h3>
                 <div class="content">
                     <div class="address">
                         <img src="/src/assets/Image/map/addressLogo.png" alt="" />
@@ -50,10 +87,10 @@ export default {
             <div class="card_header"></div>
             <div class="card_main">
                 <div class="maininfo">
-                    <img :src="shop.BANNERPIC" class="shopImg" />
+                    <img :src="this.pics" class="shopImg" />
                     <div class="maincontent">
                         <div class="name_collect">
-                            <h2>{{ shop.NAME }}</h2>
+                            <h2>{{ shop.SNAME }}</h2>
                             <div class="collect"></div>
                         </div>
                         <div class="star_price">
@@ -78,8 +115,8 @@ export default {
                     <div>
                         <h4>最佳<br />評論</h4>
                         <div class="reviewcontent">
-                            <h4>上次聚餐同事一致好評!好想再二訪</h4>
-                            <h5>來自火星的阿霈 於 2024/03/12 的評論</h5>
+                            <h4>{{ lowerString }}</h4>
+                            <h5>來自{{ shop.MNAME }} 於 {{ formatDate(shop.TIME) }} 的評論</h5>
                         </div>
                     </div>
                     <img src="/src/assets/Image/map/koreawaybgi.png" alt="" />
