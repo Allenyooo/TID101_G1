@@ -8,18 +8,18 @@
 
     <h2>忘記密碼</h2>
 
-    <form @submit.prevent="submitForgotPWForm">
         <div class="forgot_email">
-            <label for="forgot_acc">
+            <label for="forgotAccount">
                 <h4>密碼重設驗證信</h4>
                 <h6>請輸入您的電子信箱</h6>
             </label>
             <input
-                type="text"
-                id="forgot_acc"
-                name="forgot_account"
-                placeholder="example@account.com"
+                type="email"
+                id="forgotAccount"
+                v-model="forgotAccount"
+                placeholder="account@example.com"
             />
+            <span v-if="emailError" style="color: red">{{ emailError }}</span>
         </div>
 
         <div class="forgot_getcode">
@@ -29,16 +29,20 @@
         </div>
 
         <div class="forgot_code">
-            <label for="forgot_int">輸入驗證碼</label>
-            <input type="text" id="forgot_int" name="forgot_code" placeholder="* * * * * *" />
+            <label for="forgotCode">輸入驗證碼</label>
+            <input
+                type="text"
+                id="forgotCode"
+                v-model="forgotCode"
+                placeholder="請輸入驗證碼"
+            />
         </div>
 
         <div class="forgot_in">
-            <router-link to="/login/newpw">
+            <button @click="submitForgotPWForm">
                 <h3>送出</h3>
-            </router-link>
+            </button>
         </div>
-    </form>
 
     <img
         src="../assets/Image/login/decoBottom.svg"
@@ -49,7 +53,48 @@
 </template>
 
 <script>
-export default {};
+import axios from 'axios';
+
+export default {
+    data() {
+        return {
+            forgotAccount: "",
+            emailError: "",
+        };
+    },
+    methods: {
+        submitForgotPWForm(event) {
+            event.preventDefault();
+
+            // Validate the email address here
+            if (!this.validateEmail(this.forgotAccount)) {
+                this.emailError = "電子信箱錯誤";
+                return;
+            }
+
+            // Send a request to the server to verify the account
+            axios
+                .post("http://localhost/tid101_g1/public/php/login/fotgotpw.php", {
+                    forgotAccount: this.forgotAccount,
+                })
+                .then((response) => {
+                    // If the response is successful, store the account in session cookies
+                    document.cookie = `forgot_account=${this.forgotAccount}; path=/`;
+
+                    // Redirect to the new password page
+                    this.$router.push("/login/newpw");
+                })
+                .catch((error) => {
+                    // Handle errors here
+                    console.error(error);
+                });
+        },
+        validateEmail(email) {
+            const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return re.test(email);
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -102,6 +147,10 @@ h2 {
         @include breakpoint(430px) {
             width: 66vw;
         }
+    }
+    span {
+        font-size: 12px;
+        margin-top: 4px;
     }
 }
 
@@ -168,7 +217,7 @@ h2 {
     &:active {
         background-image: $RevGoldGrad;
     }
-    a {
+    button {
         background-color: transparent;
         border: none;
         text-align: center;

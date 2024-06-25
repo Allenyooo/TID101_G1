@@ -55,7 +55,7 @@
         </div>
 
         <div class="login_rmb">
-            <input type="checkbox" id="remember" name="remember" />
+            <input type="checkbox" id="remember" v-model="remember" />
             <label for="remember">記住我的登入資訊</label>
         </div>
 
@@ -93,6 +93,7 @@ export default {
                 account: "",
                 password: "",
             },
+            remember: false,
         };
     },
     computed: {
@@ -100,7 +101,20 @@ export default {
             return this.account !== "" && this.password !== "";
         },
     },
+    mounted() {
+        this.checkCookies();
+    },
     methods: {
+        checkCookies() {
+            const accountCookie = this.getCookie("account");
+            const passwordCookie = this.getCookie("password");
+
+            if (accountCookie && passwordCookie) {
+                this.account = accountCookie;
+                this.password = passwordCookie;
+                this.remember = true;
+            }
+        },
         validateAccount() {
             const trimmedAccount = this.account.trim();
             if (trimmedAccount.includes(" ")) {
@@ -156,20 +170,40 @@ export default {
             this.errors.account = "An unknown error occurred";
         },
         storeToken(token, memberId) {
-            this.setCookie("token", token, 30);
-            this.setCookie("memberId", memberId, 30);
+            this.setCookie("token", token);
+            this.setCookie("memberId", memberId);
             sessionStorage.setItem("token", token);
             sessionStorage.setItem("memberId", memberId);
+
+            if (this.remember) {
+                this.setCookie("account", this.account, 30);
+                this.setCookie("password", this.password, 30);
+                this.remember = true;
+            } else {
+                this.removeCookie("account");
+                this.removeCookie("password");
+            }
+        },
+        removeCookie(name) {
+            document.cookie = `${name}=; path=/; max-age=0`;
         },
         navigateToMemberRoute() {
-            this.$router.push('/member');
+            this.$router.push("/member");
         },
         isLoggedIn() {
             return this.getCookie("token") !== null;
         },
-        setCookie(name, value, days) {
-            const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000);
-            document.cookie = `${name}=${value}; expires=${expires.toUTCString()}; path=/`;
+        setCookie(name, value, days = null) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+                expires = `; expires=${date.toUTCString()}`;
+            }
+            document.cookie = `${name}=${value}; path=/${expires}`;
+        },
+        removeCookie(name) {
+            document.cookie = `${name}=; path=/; max-age=0`;
         },
         getCookie(name) {
             const value = `; ${document.cookie}`;
