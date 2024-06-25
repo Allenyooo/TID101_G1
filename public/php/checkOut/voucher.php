@@ -1,22 +1,5 @@
 <?php
 
-    // 允許來自任何來源的請求
-    header("Access-Control-Allow-Origin: *");
-
-    // 允許的方法
-    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-
-    // 允許的頭信息
-    header("Access-Control-Allow-Headers: Content-Type");
-
-    // 處理 OPTIONS 請求
-    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-        http_response_code(204);
-        exit;
-    }
-
-    // -----------------------------------------------------
-
     include("../conn.php");
 
     $promoCode = json_decode(file_get_contents("php://input"),true);
