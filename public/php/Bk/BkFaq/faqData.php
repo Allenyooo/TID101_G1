@@ -22,17 +22,16 @@
 
      
     
-        $sql = "SELECT MANAGER.ID , NAME , MAIL ,ROLE.PERMISSION
-                from  MANAGER
-                join ROLE on MANAGER.PERMISSIONS_ID = ROLE.ID";
+        $sql = "SELECT ID,TYPE,QUSETION,ANSWER
+                from  FAQ;";
 
     $statement = $pdo->prepare($sql);
     $statement->execute();
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
-        $sql2 = "SELECT MANAGER.ID as 編號 , NAME as 姓名, MAIL as 信箱,PASSWORD as 密碼
-                 from  MANAGER";
+        $sql2 = "SELECT ID as 編號 ,TYPE as 分類,QUSETION as 問題標題,ANSWER as 回答內容
+                 from  FAQ;";
 
     $statement2 = $pdo->prepare($sql2);
     $statement2->execute();

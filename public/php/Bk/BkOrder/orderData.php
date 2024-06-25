@@ -22,7 +22,7 @@
      
     
     $sql = "SELECT O.ID , M.MAIL , M.NAME , O.ORDERDATE , sum(OD.UNIT_PRICE) - V.PRICE as TOTAL, PAYMENT 
-            from TID101_G1.ORDER as O
+            from `ORDER` as O
                 join ORDERDETAIL as OD on O.ID = OD.ORDER_ID
                 join MEMBER as M on O.MEMBER_ID = M.ID
                 join VOUCHER as V on O.VOUCHER_ID = V.ID

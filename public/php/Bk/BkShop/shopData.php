@@ -1,6 +1,6 @@
 <?php
     header("Access-Control-Allow-Origin: *");
-    // header("Content-Type: application/json; charset=UTF-8");
+
     header('Content-Type: application/json; charset=UTF-8');
     
 
@@ -22,17 +22,19 @@
 
      
     
-        $sql = "SELECT MANAGER.ID , NAME , MAIL ,ROLE.PERMISSION
-                from  MANAGER
-                join ROLE on MANAGER.PERMISSIONS_ID = ROLE.ID";
+        $sql = "SELECT STORE.ID , NAME ,REGION ,count(*)
+                from  COLLECT_DETAIL
+                join STORE
+                on  STORE_ID= STORE.ID
+                group by STORE.ID";
 
     $statement = $pdo->prepare($sql);
     $statement->execute();
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
-        $sql2 = "SELECT MANAGER.ID as 編號 , NAME as 姓名, MAIL as 信箱,PASSWORD as 密碼
-                 from  MANAGER";
+        $sql2 = "SELECT ID as 編號 ,NAME as 店家名稱 ,REGION as 地區
+                from  STORE";
 
     $statement2 = $pdo->prepare($sql2);
     $statement2->execute();

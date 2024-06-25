@@ -31,10 +31,13 @@
           <td v-if="stateTd == 1">
             <BState></BState>
           </td>
-          <!-- <td v-if="dataTd == 1">
-           
-            <BR :revisePage="page" :reviseId="j.ID" :reviseBd="bd2"></BR>
-          </td> -->
+          <td v-if="dataTd == 1">
+            <BR
+              :revisePage="page"
+              :reviseId="j.ID"
+              :reviseBd="bd2[j.ID - 1]"
+            ></BR>
+          </td>
 
           <td v-if="dataTd == 2">
             <!-- <button></button> -->

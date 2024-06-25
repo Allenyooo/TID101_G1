@@ -22,25 +22,22 @@
 
      
     
-        $sql = "SELECT MANAGER.ID , NAME , MAIL ,ROLE.PERMISSION
-                from  MANAGER
-                join ROLE on MANAGER.PERMISSIONS_ID = ROLE.ID";
+        $sql = "SELECT PRODUCT.ID , PIC ,PRICE, PERCENT,round(PRICE * PERCENT) as DP ,STARTDATE,ENDDATE 
+                from  PRODUCT
+                join DISCOUNT on PRODUCT.DISCOUNT_ID = DISCOUNT.ID";
 
     $statement = $pdo->prepare($sql);
     $statement->execute();
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
-        $sql2 = "SELECT MANAGER.ID as 編號 , NAME as 姓名, MAIL as 信箱,PASSWORD as 密碼
-                 from  MANAGER";
+        $sql2 = "SELECT PRODUCT.ID as 編號,PRICE as 價格, PERCENT as 折扣,round(PRICE * PERCENT) as 折扣後價格 ,STARTDATE as 折扣開始日期,ENDDATE as 折扣結束日期,PIC as 商品圖片
+                 from  PRODUCT
+                 join DISCOUNT on PRODUCT.DISCOUNT_ID = DISCOUNT.ID";
 
     $statement2 = $pdo->prepare($sql2);
     $statement2->execute();
     $data2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-
 
     $allData = array(
         "data" => $data,
@@ -53,7 +50,7 @@
     
     //     echo json_encode($data);
     // }else{
-    //     echo echojson_encode(["message" => "抓取失败"]);
+    //     echo echojson_encode(["message" => "抓取失敗"]);
 
     // }
 

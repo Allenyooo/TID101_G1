@@ -8,15 +8,11 @@
       <router-link to="/Product"><h5>梨饗券</h5></router-link>
     </div>
 
-    <button @click="scToggle()">購物車</button>
-
-    <!-- 嘗試 -->
-
-    <!-- 嘗試 -->
+    <!-- <button @click="scToggle()">購物車</button> -->
 
     <!-- <div class="left"></div> -->
 
-    <shopping :sp="move"></shopping>
+    <!-- <shopping :sp="move"></shopping> -->
 
     <!-- 
     <div class="productMove" :class="{ pmOn: move == true }">
@@ -284,8 +280,10 @@ export default {
       move: false,
       productTasks: [],
       sp: true,
-
+      cart: [],
       test: [],
+      memberId: 1,
+      cartId: 0,
     };
   },
 
@@ -310,28 +308,47 @@ export default {
     },
 
     taskAdd() {
-      // 從 localStorage 中讀取已有的 productTasks，如果不存在則初始化為空陣列
-      let storedTasks = localStorage.getItem("productTasks");
-      this.productTasks = storedTasks ? JSON.parse(storedTasks) : [];
+      //---------------存到localStorage的部分
+      // let storedTasks = localStorage.getItem("productTasks");
+      // this.productTasks = storedTasks ? JSON.parse(storedTasks) : [];
 
-      let price = this.price;
-      let picture = this.img;
-      let count = this.count;
-      let discount = this.discount;
+      // let price = this.price;
+      // let picture = this.img;
+      // let count = this.count;
+      // let discount = this.discount;
 
-      this.total += this.price * this.count * this.discount;
+      // this.total += this.price * this.count * this.discount;
 
-      this.productTasks.unshift({
-        tPrice: price,
-        tPicture: picture,
-        tCount: count,
-        tDiscount: discount,
+      // this.productTasks.unshift({
+      //   tPrice: price,
+      //   tPicture: picture,
+      //   tCount: count,
+      //   tDiscount: discount,
 
-        tTotal: price * count * discount,
+      //   tTotal: price * count * discount,
+      // });
+
+      // localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
+
+      //----------------------存到資料庫的部分
+
+      fetch("http://localhost/tid101_g1/public/php/product/shoppingAdd.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // Search: this.placeholder[id].search,
+          // Input: this.input,
+          // reviseBd: this.reviseBd,
+          memberID: this.memberId,
+          cartID: (this.cartId += 1),
+          cartCount: this.count,
+          productID: this.currentButton,
+          // Start: this.startDate,
+          // End: this.endDate,
+        }),
       });
-
-      // 都會存到productTasks
-      localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
     },
     pmColse(e) {
       e.target.closest("div.productMove").classList.toggle("pmOn");
@@ -360,6 +377,22 @@ export default {
       localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
     },
 
+    shoppingAdd() {
+      fetch("http://localhost/tid101_g1/public/php/product/test.php")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          this.test = data; // 将获取的数据存储到组件的data中的products属性中
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    },
+
     // fetchData() {
     //   fetch("http://localhost/vite/tid101_g1/public/php/product/test.php")
     //     .then((response) => {
@@ -379,8 +412,8 @@ export default {
 
   mounted() {
     // this.fetchData();
-    fetch("http://localhost/vite/tid101_g1/public/php/product/test.php", {
-      mode: "cors", // 请求模式
+    fetch("http://localhost/tid101_g1/public/php/product/test.php", {
+      mode: "cors",
     })
       .then((response) => {
         if (!response.ok) {
@@ -389,9 +422,11 @@ export default {
         return response.json();
       })
       .then((data) => {
-        this.buttons = data;
-        this.price = data[0].PRICE;
-        this.discount = data[0].PERCENT;
+        this.buttons = data.data;
+        this.price = data.data[0].PRICE;
+        this.discount = data.data[0].PERCENT;
+        this.cart = data.data2;
+        this.cartId = data.data2[data.data2.length - 1].ID;
       });
     // .catch((error) => {
     //   console.error("Error fetching data:", error);
@@ -404,18 +439,17 @@ export default {
 @import "/src/sass/style.scss";
 
 @mixin breakpoint($point) {
-  // 检查传入的断点类型是否为移动设备
+  // 桌機
   @if $point == mobile {
-    // 当浏览器宽度小于等于 390px 时，应用下面的样式
     @media (max-width: 391px) {
-      @content; // 插入传入 mixin 的样式
+      @content;
     }
   }
 
+  // 手機
   @if $point == table {
-    // 当浏览器宽度小于等于 390px 时，应用下面的样式
     @media (max-width: 801px) {
-      @content; // 插入传入 mixin 的样式
+      @content;
     }
   }
 }
@@ -464,140 +498,137 @@ export default {
   //   background-color: rgba($color: #333333, $alpha: 0.85);
   // }
 
-  .spBottom {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    z-index: 20;
+  // .spBottom {
+  //   position: fixed;
+  //   right: 0;
+  //   bottom: 0;
+  //   z-index: 20;
 
-    transform: translate(100%);
-    transition: transform 1s ease-in-out;
+  //   transform: translate(100%);
+  //   transition: transform 1s ease-in-out;
 
-    a {
-      font-size: 24px;
-      font-weight: bold;
-      height: 60px;
-      width: 520px;
-      background-color: $LightBrown;
-      text-align: center;
-      line-height: 60px;
-      color: $White;
-    }
+  //   a {
+  //     font-size: 24px;
+  //     font-weight: bold;
+  //     height: 60px;
+  //     width: 520px;
+  //     background-color: $LightBrown;
+  //     text-align: center;
+  //     line-height: 60px;
+  //     color: $White;
+  //   }
 
-    p {
-      font-size: 32px;
-      font-weight: bold;
-      color: #000000;
-      text-align: center;
-    }
-  }
+  //   p {
+  //     font-size: 32px;
+  //     font-weight: bold;
+  //     color: #000000;
+  //     text-align: center;
+  //   }
+  // }
 
-  .productMove {
-    height: 100vw;
-    width: 520px;
-    background-color: $OffWhite;
-    position: fixed;
-    z-index: 3;
-    top: 0;
-    right: 0;
-    transform: translate(100%);
-    transition: transform 1s ease-in-out;
-    border-left: 1px solid $Black;
+  // .productMove {
+  //   height: 100vw;
+  //   width: 520px;
+  //   background-color: $OffWhite;
+  //   position: fixed;
+  //   z-index: 3;
+  //   top: 0;
+  //   right: 0;
+  //   transform: translate(100%);
+  //   transition: transform 1s ease-in-out;
+  //   border-left: 1px solid $Black;
 
-    // display: flex;
-    // flex-direction: column;
+  //   .spTop {
+  //     margin-top: 35px;
+  //     margin-bottom: 24px;
+  //     padding: 0 36px;
 
-    .spTop {
-      margin-top: 35px;
-      margin-bottom: 24px;
-      padding: 0 36px;
+  //     ul {
+  //       li {
+  //         button {
+  //           background-image: url("/src/assets/Image/product/close.svg");
+  //           height: 23px;
+  //           width: 24px;
+  //           background-position: center center;
+  //           border: none;
+  //           margin-left: 19px;
+  //           margin-bottom: 14px;
+  //         }
 
-      ul {
-        li {
-          button {
-            background-image: url("/src/assets/Image/product/close.svg");
-            height: 23px;
-            width: 24px;
-            background-position: center center;
-            border: none;
-            margin-left: 19px;
-            margin-bottom: 14px;
-          }
+  //         p {
+  //           font-size: 20px;
+  //           margin-left: 164px;
+  //           margin-bottom: 24px;
+  //         }
+  //       }
+  //       .scBorder {
+  //         border-bottom: 1px solid $Gray;
+  //       }
+  //     }
+  //   }
 
-          p {
-            font-size: 20px;
-            margin-left: 164px;
-            margin-bottom: 24px;
-          }
-        }
-        .scBorder {
-          border-bottom: 1px solid $Gray;
-        }
-      }
-    }
+  //   .pmCount {
+  //     margin-left: 52px;
 
-    .pmCount {
-      margin-left: 52px;
+  //     ul {
+  //       .pmcImg {
+  //         margin-right: 32px;
+  //         margin-bottom: 40px;
+  //       }
+  //       li {
+  //         width: 416px;
 
-      ul {
-        .pmcImg {
-          margin-right: 32px;
-          margin-bottom: 40px;
-        }
-        li {
-          width: 416px;
+  //         ul {
+  //           display: flex;
+  //           li {
+  //             img {
+  //               width: 200px;
+  //               height: 90px;
+  //             }
 
-          ul {
-            display: flex;
-            li {
-              img {
-                width: 200px;
-                height: 90px;
-              }
+  //             ul {
+  //               flex-direction: column;
+  //               .pmcName {
+  //                 margin-top: 4px;
+  //               }
 
-              ul {
-                flex-direction: column;
-                .pmcName {
-                  margin-top: 4px;
-                }
+  //               .pmcButton {
+  //                 display: flex;
+  //                 margin-top: 24px;
 
-                .pmcButton {
-                  display: flex;
-                  margin-top: 24px;
+  //                 button {
+  //                   width: 28px;
+  //                   height: 28px;
+  //                   border: none;
+  //                 }
+  //                 .pmcDown {
+  //                   background-image: url("/src/assets/Image/product/drown.svg");
+  //                   background-size: 100%;
+  //                 }
+  //                 .pmcUp {
+  //                   background-image: url("/src/assets/Image/product/up.svg");
+  //                   background-size: 100%;
+  //                 }
+  //                 .pmcClear {
+  //                   width: 20px;
+  //                   height: 25px;
+  //                   background-image: url("/src/assets/Image/product/clear.svg");
+  //                   margin-left: 42px;
+  //                   margin-top: 1.5px;
+  //                 }
 
-                  button {
-                    width: 28px;
-                    height: 28px;
-                    border: none;
-                  }
-                  .pmcDown {
-                    background-image: url("/src/assets/Image/product/drown.svg");
-                    background-size: 100%;
-                  }
-                  .pmcUp {
-                    background-image: url("/src/assets/Image/product/up.svg");
-                    background-size: 100%;
-                  }
-                  .pmcClear {
-                    width: 20px;
-                    height: 25px;
-                    background-image: url("/src/assets/Image/product/clear.svg");
-                    margin-left: 42px;
-                    margin-top: 1.5px;
-                  }
-
-                  p {
-                    font-size: 20px;
-                    margin: 0 27px;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+  //                 p {
+  //                   font-size: 20px;
+  //                   margin: 0 27px;
+  //                 }
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   .pmOn {
     transform: translate(0%);

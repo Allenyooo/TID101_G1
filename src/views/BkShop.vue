@@ -21,10 +21,14 @@
           </select>
 
           <div class="inputSearch">
-            <input type="text" :placeholder="placeholder[sId].name" />
+            <input
+              type="text"
+              :placeholder="placeholder[sId].name"
+              v-model="input"
+            />
           </div>
           <div class="searchButton">
-            <button><h5>搜尋</h5></button>
+            <button @click="searchButton(sId)"><h5>搜尋</h5></button>
           </div>
           <div class="newButton">
             <button>
@@ -33,13 +37,14 @@
           </div>
         </div>
 
-        <BSort :sortDrop="sortDrop"></BSort>
+        <BSort :sortDrop="sortDrop" @sortEvent="sortByID"></BSort>
         <BD
           :bd="bd"
           :title="title"
           :dataTd="dataTd"
           :stateTd="stateTd"
           :page="page"
+          :bd2="bd2"
         ></BD>
       </div>
     </div>
@@ -108,8 +113,8 @@ export default {
         },
       ],
       sortDrop: [
-        { id: 0, name: "編號:由小到大" },
-        { id: 1, name: "編號:由大到小" },
+        { id: 1, name: "編號:由小到大" },
+        { id: 2, name: "編號:由大到小" },
       ],
       searchdrop: [
         { id: 0, name: "店家編號" },
@@ -118,46 +123,49 @@ export default {
       sId: 0,
 
       placeholder: [
-        { id: 1, name: "店家編號" },
-        { id: 2, name: "店家名稱" },
+        { id: 1, name: "店家編號", search: "ID" },
+        { id: 2, name: "店家名稱", search: "NAME" },
       ],
-      bd: [
-        {
-          id: 1,
-          name: "高麗味",
-          area: "北部",
-          Clicks: 123,
-          collect: 123,
-        },
-        {
-          id: 2,
-          name: "高麗味",
-          area: "北部",
-          Clicks: 123,
-          collect: 123,
-        },
-        {
-          id: 3,
-          name: "高麗味",
-          area: "北部",
-          Clicks: 123,
-          collect: 123,
-        },
-      ],
+      input: "",
+      // bd: [
+      //   {
+      //     id: 1,
+      //     name: "高麗味",
+      //     area: "北部",
+      //     Clicks: 123,
+      //     collect: 123,
+      //   },
+      //   {
+      //     id: 2,
+      //     name: "高麗味",
+      //     area: "北部",
+      //     Clicks: 123,
+      //     collect: 123,
+      //   },
+      //   {
+      //     id: 3,
+      //     name: "高麗味",
+      //     area: "北部",
+      //     Clicks: 123,
+      //     collect: 123,
+      //   },
+      // ],
+      bd: [],
+      bd2: [],
       title: [
         { 店家編號: "管理員編號" },
-
         { 店家名稱: "信箱" },
         { 地區: "會員名稱" },
-        { 點擊數: "狀態" },
         { 收藏數: "修改" },
         { 狀態: "修改" },
         { 修改: "修改" },
       ],
       newButton: 1,
-      search: "新增店家",
+
       stateTd: 1,
       dataTd: 1,
+
+      sortid: 1,
     };
   },
 
@@ -166,6 +174,76 @@ export default {
       console.log("Selected value:", e);
       this.sId = e;
     },
+
+    searchButton(id) {
+      fetch("http://localhost/tid101_g1/public/php/Bk/BkShop/shopSearch.php", {
+        mode: "cors",
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Search: this.placeholder[id].search,
+          Input: this.input,
+          // Start: this.startDate,
+          // End: this.endDate,
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          this.bd = data;
+
+          // this.bd2 = data.data2;
+          // this.price = data[0].PRICE;
+          // this.discount = data[0].PERCENT;
+        });
+
+      this.input = "";
+    },
+
+    sortByID(id) {
+      this.sortid = id;
+
+      if (this.sortid == 1) {
+        this.bd.sort((a, b) => {
+          console.log("排序1");
+          return a.ID - b.ID;
+        }); // 按照 ID 属性升序排列
+      } else if (this.sortid == 2) {
+        this.bd.sort((a, b) => {
+          console.log("排序2");
+          return b.ID - a.ID;
+        }); // 按照 ID 属性升序排列
+      }
+    },
+  },
+
+  mounted() {
+    // this.fetchData();
+    fetch("http://localhost/tid101_g1/public/php/Bk/BkShop/shopData.php", {
+      mode: "cors",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.bd = data.data;
+        this.bd2 = data.data2;
+        // this.bd2 = data.data2;
+        // this.price = data[0].PRICE;
+        // this.discount = data[0].PERCENT;
+      });
+    // .catch((error) => {
+    //   console.error("Error fetching data:", error);
+    // });
   },
 };
 </script>

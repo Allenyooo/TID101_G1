@@ -31,11 +31,14 @@
           <div class="searchButton">
             <button @click="searchButton(sId)"><h5>搜尋</h5></button>
           </div>
-          <div class="newButton">
+          <!-- <div class="newButton">
             <button>
-              <h5>新增操作人員帳號</h5>
+            
+              
             </button>
-          </div>
+          </div> -->
+
+          <BN :revisePage="page"></BN>
         </div>
 
         <BD
@@ -47,7 +50,7 @@
           :bd2="bd2"
         ></BD>
 
-        <table class="table">
+        <!-- <table class="table">
           <thead class="tableHead1">
             <tr>
               <th>
@@ -57,10 +60,10 @@
           </thead>
           <tbody class="tableBody1">
             <tr v-for="(j, index) in bd" @mouseover="hovertd">
-              <td>
-                <!-- <button></button> -->
-                <!-- <BR :revisePage="page" :reviseId="j.ID" :reviseBd="bd2"></BR> -->
-                <BR
+              <td> -->
+        <!-- <button></button> -->
+        <!-- <BR :revisePage="page" :reviseId="j.ID" :reviseBd="bd2"></BR> -->
+        <!-- <BR
                   :revisePage="page"
                   :reviseId="j.ID"
                   :reviseBd="bd2[index]"
@@ -68,7 +71,7 @@
               </td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
       </div>
     </div>
 
@@ -84,10 +87,11 @@ import BD from "/src/components/BkData.vue";
 import BDate from "/src/components/BkDate.vue";
 import BSort from "/src/components/BkSort.vue";
 import BRS from "/src/components/BkReviseSweet.vue";
-import BR from "/src/components/BkRevise.vue";
+import BN from "/src/components/BkNew.vue";
+// import BR from "/src/components/BkRevise.vue";
 
 export default {
-  components: { BH, BM, BS, BD, BDate, BSort, BRS, BR },
+  components: { BH, BM, BS, BD, BDate, BSort, BRS, BN },
 
   data() {
     return {
@@ -189,6 +193,8 @@ export default {
 
       stateTd: 1,
       dataTd: 1,
+
+      lastId: 0,
     };
   },
 
@@ -200,9 +206,9 @@ export default {
 
     searchButton(id) {
       fetch(
-        "http://localhost/vite/tid101_g1/public/php/Bk/BkAccess/accessSearch.php",
+        "http://localhost/tid101_g1/public/php/Bk/BkAccess/accessSearch.php",
         {
-          mode: "cors", // 请求模式
+          mode: "cors",
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -228,17 +234,16 @@ export default {
           // this.price = data[0].PRICE;
           // this.discount = data[0].PERCENT;
         });
+
+      this.input = "";
     },
   },
 
   mounted() {
     // this.fetchData();
-    fetch(
-      "http://localhost/vite/tid101_g1/public/php/Bk/BkAccess/accessData.php",
-      {
-        mode: "cors", // 请求模式
-      }
-    )
+    fetch("http://localhost/tid101_g1/public/php/Bk/BkAccess/accessData.php", {
+      mode: "cors",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -248,6 +253,7 @@ export default {
       .then((data) => {
         this.bd = data.data;
         this.bd2 = data.data2;
+        this.lastId = data.data[data.data2.length - 1].ID;
         // this.bd2 = data.data2;
         // this.price = data[0].PRICE;
         // this.discount = data[0].PERCENT;

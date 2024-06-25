@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="a">
-      <!-- 點擊這裡彈出視窗的按鈕 -->
-      <button class="btn btn-primary" @click="showPopup = true">
-        點我彈出視窗
-      </button>
+    <div class="reviseButton">
+      <button
+        class="btn btn-primary brevise"
+        @click="showPopup = true"
+      ></button>
     </div>
 
     <!-- 彈出視窗 -->
@@ -13,255 +13,34 @@
         <!-- 右上角關閉按鈕 -->
         <button class="close-btn" @click="closePopup">&times;</button>
         <!-- 彈出視窗內容 -->
-        <h2>這裡是彈出視窗</h2>
-        <div>{{ reviseBd.ID }}</div>
+
+        <ul>
+          <li v-for="(i, index) in reviseBd">
+            <h4>{{ index }}:</h4>
+            <input
+              type="text"
+              v-model="reviseBd[index]"
+              :readonly="index == '編號'"
+              :class="{ idBg: index == '編號' }"
+            />
+          </li>
+        </ul>
+        <!-- <div>{{ reviseBd.ID }}</div>
         <div>{{ reviseBd.NAME }}</div>
         <div>{{ reviseBd.MAIL }}</div>
-        <div>{{ reviseBd.PASSWORD }}</div>
+        <div>{{ reviseBd.PASSWORD }}</div> -->
         <!-- 底部按鈕 -->
         <div class="buttons">
-          <button class="btn btn-primary" @click="saveChanges">儲存</button>
-          <button class="btn btn-secondary" @click="cancelPopup">取消</button>
+          <button class="btn btn-primary" @click="showConfirmationDialog">
+            儲存
+          </button>
+          <button class="btn btn-secondary" @click="cancelPopup">刪除</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ---- -->
-  <div>{{ reviseBd.ID }}</div>
-  <div>{{ reviseBd.NAME }}</div>
-  <div>{{ reviseBd.MAIL }}</div>
-  <div>{{ reviseBd.PASSWORD }}</div>
-  <div class="BkRevise">
-    <!-- Button trigger modal -->
-    <button
-      type="button"
-      class="btn btn-primary bRevise"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
-    ></button>
-
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content modal-dialog-centered">
-          <div class="modal-header">
-            <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
-            <!-- <p></p> -->
-            <button
-              type="button"
-              class="btn-close rClose"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <!------------------BkAccesd------------------------->
-          <div class="modal-body" v-if="revisePage == 1">
-            <ul>
-              <li>
-                <h4 class="reviseTitle">編號:</h4>
-                <input type="text" v-model="inputValue" />
-                {{ revisedId }}
-              </li>
-              <li>
-                <h4 class="reviseTitle">姓名:</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">信箱:</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">密碼:</h4>
-                <input type="text" />
-              </li>
-            </ul>
-          </div>
-          <!--------------------BkMember----------------------->
-          <!-- <div class="modal-body" v-if="revisePage == 2">
-            <ul>
-              <li>
-                <h4 class="reviseTitle">編號:{{ reviseId }}</h4>
-                <input type="text" />
-              </li>
-              <li>
-                <h4 class="reviseTitle">編號:{{ reviseId }}</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">編號:{{ reviseId }}</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">編號:{{ reviseId }}</h4>
-                <input type="text" />
-              </li>
-            </ul>
-          </div> -->
-          <!-------------------BkShop------------------------>
-          <div class="modal-body" v-if="revisePage == 3">
-            <ul>
-              <li>
-                <h4 class="reviseTitle">編號:</h4>
-                <input type="text" />
-              </li>
-              <li>
-                <h4 class="reviseTitle">名稱:</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">地區:</h4>
-                <input type="text" />
-              </li>
-            </ul>
-          </div>
-          <!--------------------BkOrder----------------------->
-          <!-- <div class="modal-body" v-if="revisePage == 1">
-            <ul>
-              <li>
-                <h4 class="reviseTitle">編號:</h4>
-                <input type="text" />
-              </li>
-              <li>
-                <h4 class="reviseTitle">編號:</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">編號:</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">編號:</h4>
-                <input type="text" />
-              </li>
-            </ul>
-          </div> -->
-          <!--------------------BkProduct----------------------->
-          <div class="modal-body" v-if="revisePage == 5">
-            <ul>
-              <li>
-                <h4 class="reviseTitle">編號:</h4>
-                <input type="text" />
-              </li>
-              <li>
-                <h4 class="reviseTitle">價格:</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">折扣(%):</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">折扣後價格:</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">折扣開始日期:</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">折扣結束日期:</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">商品圖片:</h4>
-                <input type="file" />
-              </li>
-            </ul>
-          </div>
-          <!-------------------BkDiscount------------------------>
-          <div class="modal-body" v-if="revisePage == 6">
-            <ul>
-              <li>
-                <h4 class="reviseTitle">編號:</h4>
-                <input type="text" />
-              </li>
-              <li>
-                <h4 class="reviseTitle">名稱:</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">折價券序號:</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">開始日期 :</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">結束日期 :</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">使用次數 :</h4>
-                <input type="text" />
-              </li>
-            </ul>
-          </div>
-          <!--------------------BkFaq----------------------->
-          <div class="modal-body" v-if="revisePage == 7">
-            <ul>
-              <li>
-                <h4 class="reviseTitle">分類:</h4>
-                <!-- <input type="text" /> -->
-                <select name="" id="">
-                  <option value="">分類1</option>
-                  <option value="">分類2</option>
-                  <option value="">分類3</option>
-                  <option value="">分類4</option>
-                </select>
-              </li>
-              <li>
-                <h4 class="reviseTitle">問答題目:</h4>
-                <input type="text" />
-              </li>
-
-              <li>
-                <h4 class="reviseTitle">回答內容:</h4>
-                <input type="text" />
-              </li>
-            </ul>
-          </div>
-
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-              @click="showConfirmationDialog"
-            >
-              存檔
-            </button>
-            <button type="button" class="btn btn-primary" @click="deleteButton">
-              刪除
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -274,10 +53,11 @@ export default {
     return {
       bd: [],
       Id: 0,
-      inputValue: this.reviseBd.ID,
+      // inputValue: this.reviseBd.ID,
       showPopup: false,
     };
   },
+
   methods: {
     showConfirmationDialog() {
       Swal.fire({
@@ -291,42 +71,39 @@ export default {
         cancelButtonText: "取消",
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire({
-            title: "修改成功",
-            // text: "Your file has been deleted.",
-            icon: "success",
-          });
+          if (this.revisePage == 1) {
+            Swal.fire({
+              title: "修改成功",
+              icon: "success",
+            });
+            this.saveChanges();
+            this.closePopup();
+          }
+        } else {
+          console.log("取消了操作");
+          this.closePopup();
         }
       });
     },
 
     deleteButton() {
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: "btn btn-success",
-          cancelButton: "btn btn-danger",
-        },
-        buttonsStyling: false,
+      Swal.fire({
+        title: "確定要刪除資料嗎?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "刪除",
+        cancelButtonText: "取消",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "刪除成功",
+            icon: "success",
+          });
+          this.saveChangeDelete();
+        }
       });
-      swalWithBootstrapButtons
-        .fire({
-          title: "確定要刪除資料嗎?",
-          // text: "You won't be able to revert this!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "刪除",
-          cancelButtonText: "取消",
-          reverseButtons: true,
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            swalWithBootstrapButtons.fire({
-              title: "刪除成功",
-              // text: "Your file has been deleted.",
-              icon: "success",
-            });
-          }
-        });
     },
 
     closePopup() {
@@ -334,11 +111,55 @@ export default {
     },
     cancelPopup() {
       this.showPopup = false;
+      this.deleteButton();
     },
+
+    // saveChanges() {
+
+    //   this.showPopup = false;
+
+    //   console.log(this.reviseBd);
+    //   this.showConfirmationDialog();
+    // },
+
     saveChanges() {
-      // 執行儲存動作
-      this.showPopup = false;
-      // 可以在這裡執行其他相關的保存操作
+      fetch(
+        "http://localhost/tid101_g1/public/php/Bk/BkAccess/accessRevise.php",
+        {
+          // mode: "cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // Search: this.placeholder[id].search,
+            // Input: this.input,
+            reviseBd: this.reviseBd,
+            // Start: this.startDate,
+            // End: this.endDate,
+          }),
+        }
+      );
+    },
+
+    saveChangeDelete() {
+      fetch(
+        "http://localhost/tid101_g1/public/php/Bk/BkAccess/accessDelete.php",
+        {
+          // mode: "cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // Search: this.placeholder[id].search,
+            // Input: this.input,
+            deleteId: this.reviseId,
+            // Start: this.startDate,
+            // End: this.endDate,
+          }),
+        }
+      );
     },
   },
 
@@ -346,6 +167,14 @@ export default {
     revisedId() {
       return this.reviseBd.ID;
     },
+    // getPropertyByIndex() {
+    //   let aa = 0;
+
+    //   let an = this.riviseNames[aa];
+    //   i += 1;
+    //   console.log(an);
+    //   return an;
+    // },
   },
 
   mounted() {
@@ -358,6 +187,21 @@ export default {
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
 
+.reviseButton {
+  button {
+    background-image: url("/src/assets/Image/BK/revise.svg");
+    width: 32px;
+    height: 31px;
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}
+
+.idBg {
+  background-color: #e6e6e6;
+}
+
 .popup {
   position: fixed;
   top: 0;
@@ -368,15 +212,39 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
 
 .popup-content {
-  background-color: white;
+  background-color: $OffWhite;
   padding: 20px;
+  padding-top: 46px;
+  padding-right: 40px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  position: relative; /* 讓 close-btn 以絕對位置依據彈窗進行定位 */
+  position: relative;
+
+  ul {
+    li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+
+      h4 {
+        height: 30px;
+        text-align: left;
+        background-color: $DarkBrown;
+        color: $White;
+        padding: 0 12px;
+        padding-left: 6px;
+      }
+
+      input {
+        // margin-left: 16px;
+      }
+    }
+  }
 }
 
 .close-btn {
@@ -407,6 +275,10 @@ export default {
 
 .btn-secondary {
   background-color: #6c757d;
+}
+
+.brevise {
+  background-color: white;
 }
 
 // ----------------

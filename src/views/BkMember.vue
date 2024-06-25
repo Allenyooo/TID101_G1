@@ -214,7 +214,7 @@ export default {
     },
 
     searchButton(id) {
-      fetch("http://localhost/vite/tid101_g1/public/php/Bk/BkSearch.php", {
+      fetch("http://localhost/tid101_g1/public/php/Bk/BkSearch.php", {
         mode: "cors", // 请求模式
         method: "PUT",
         headers: {
@@ -239,6 +239,8 @@ export default {
           // this.price = data[0].PRICE;
           // this.discount = data[0].PERCENT;
         });
+
+      this.input = "";
     },
 
     // sortChange(id) {
@@ -263,7 +265,7 @@ export default {
 
   mounted() {
     // this.fetchData();
-    fetch("http://localhost/vite/tid101_g1/public/php/Bk/BkData.php", {
+    fetch("http://localhost/tid101_g1/public/php/Bk/BkData.php", {
       mode: "cors", // 请求模式
     })
       .then((response) => {

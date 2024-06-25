@@ -36,7 +36,7 @@
 
     <div class="spBottom">
       <p>總計： NT${{ total }}</p>
-      <a href="">前往結帳</a>
+      <router-link to="/CheckOut">前往結帳</router-link>
     </div>
   </div>
 
@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  props: ["sp"],
+  props: ["sp", "allTotal", "shoppingCartData"],
 
   data() {
     return {
@@ -61,10 +61,8 @@ export default {
     };
   },
   methods: {
-    pmColse(e) {
-      e.target.closest("div.productMove").classList.toggle("pmOn");
-      // this.move = false;
-      this.pmColse2(e);
+    pmColse() {
+      this.$emit("close");
     },
     pmColse2(e) {
       e.target.closest("div.spBottom").classList.toggle("pmOn");
@@ -99,6 +97,8 @@ export default {
         this.total -=
           this.shoppingCartTasks[i].PRICE * this.shoppingCartTasks[i].PERCENT;
 
+        this.changeD(i);
+
         // -------------------fetch部分-----------------
         // fetch(
         //   "http://localhost/vite/tid101_g1/public/php/shoppingCart/shoppingCount.php",
@@ -130,6 +130,7 @@ export default {
       this.shoppingCartTasks[i].COUNT += 1;
       this.total +=
         this.shoppingCartTasks[i].PRICE * this.shoppingCartTasks[i].PERCENT;
+      this.changeU(i);
     },
     pmcC(i) {
       this.total -=
@@ -137,7 +138,10 @@ export default {
         this.shoppingCartTasks[i].PERCENT *
         this.shoppingCartTasks[i].COUNT;
 
+      this.changeC(i);
+
       this.shoppingCartTasks.splice(i, 1);
+
       // localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
     },
 
@@ -157,16 +161,16 @@ export default {
     //     });
     // },
 
-    sumtotal() {
-      let alltotal = 0;
-      for (let i = 0; i < this.shoppingCartTasks.length; i++) {
-        alltotal +=
-          this.shoppingCartTasks[i].PRICE *
-          this.shoppingCartTasks[i].COUNT *
-          this.shoppingCartTasks[i].PERCENT;
-      }
-      this.total = alltotal;
-    },
+    // sumtotal() {
+    //   let alltotal = 0;
+    //   for (let i = 0; i <script this.shoppingCartTasks.length; i++) {
+    //     alltotal +=
+    //       this.shoppingCartTasks[i].PRICE *
+    //       this.shoppingCartTasks[i].COUNT *
+    //       this.shoppingCartTasks[i].PERCENT;
+    //   }
+    //   this.total = alltotal;
+    // },
 
     // shoppingCount() {
     //   fetch(
@@ -201,6 +205,57 @@ export default {
       let storedTasks = localStorage.getItem("productTasks");
       this.productTasks = storedTasks ? JSON.parse(storedTasks) : [];
     },
+
+    changeD(i) {
+      fetch(
+        "http://localhost/tid101_g1/public/php/shoppingCart/shoppingCartUpdate.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // Search: this.placeholder[id].search,
+            // Input: this.input,
+            changeD: this.shoppingCartTasks[i].ID,
+          }),
+        }
+      );
+    },
+
+    changeU(i) {
+      fetch(
+        "http://localhost/tid101_g1/public/php/shoppingCart/shoppingCartUpdateUp.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // Search: this.placeholder[id].search,
+            // Input: this.input,
+            changeD: this.shoppingCartTasks[i].ID,
+          }),
+        }
+      );
+    },
+
+    changeC(i) {
+      fetch(
+        "http://localhost/tid101_g1/public/php/shoppingCart/shoppingCartUpdateClear.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // Search: this.placeholder[id].search,
+            // Input: this.input,
+            changeD: this.shoppingCartTasks[i].ID,
+          }),
+        }
+      );
+    },
   },
 
   //----------------- 這邊是抓lolocalStorage
@@ -222,28 +277,36 @@ export default {
   //----------------- 這邊是抓lolocalStorage
 
   mounted() {
-    // this.fetchData();
-    fetch(
-      "http://localhost/vite/tid101_g1/public/php/shoppingCart/shoppingCart.php",
-      {
-        mode: "cors", // 请求模式
+    // fetch(
+    //   "http://localhost/vite/tid101_g1/public/php/shoppingCart/shoppingCart.php",
+    //   {
+    //     mode: "cors",
+    //   }
+    // )
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error("Network response was not ok");
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     this.shoppingCartTasks = data;
+    //     this.sumtotal();
+    //     this.localstorageDAta();
+    //     this.shoppingCartTasks = this.shoppingCartTasks.concat();
+    //   });
+  },
+  watch: {
+    shoppingCartData(newvalue, oldvalue) {
+      if (newvalue !== oldvalue) {
+        this.shoppingCartTasks = newvalue;
       }
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        this.shoppingCartTasks = data;
-        this.sumtotal();
-        this.localstorageDAta();
-        this.shoppingCartTasks = this.shoppingCartTasks.concat();
-      });
-    // .catch((error) => {
-    //   console.error("Error fetching data:", error);
-    // });
+    },
+    allTotal(newvalue, oldvalue) {
+      if (newvalue !== oldvalue) {
+        this.total = newvalue;
+      }
+    },
   },
 };
 </script>
@@ -251,12 +314,28 @@ export default {
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
 
+@mixin breakpoint($point) {
+  // 桌機
+  @if $point == mobile {
+    @media (max-width: 391px) {
+      @content;
+    }
+  }
+
+  // 手機
+  @if $point == table {
+    @media (max-width: 801px) {
+      @content;
+    }
+  }
+}
+
 .spBottom {
   position: fixed;
   right: 0;
-  bottom: 52.5%;
+  bottom: 0;
   z-index: 20;
-  width: 520px;
+  width: 100%;
 
   // transform: translate(100%);
   // transition: transform 1s ease-in-out;
@@ -272,6 +351,17 @@ export default {
     text-align: center;
     line-height: 60px;
     color: $White;
+    text-decoration: none;
+    display: block;
+
+    @include breakpoint(mobile) {
+      font-size: 18px;
+      font-weight: bold;
+      height: 40px;
+      width: calc(100% - 1px);
+      line-height: 40px;
+      margin-left: 0;
+    }
   }
 
   p {
@@ -282,6 +372,12 @@ export default {
     background-color: $OffWhite;
     width: 519px;
     margin-left: auto;
+
+    @include breakpoint(mobile) {
+      font-size: 22px;
+      width: 100%;
+      margin-left: 0;
+    }
   }
 }
 
@@ -297,13 +393,22 @@ export default {
   transition: transform 1s ease-in-out;
   border-left: 1px solid $Black;
 
-  // display: flex;
-  // flex-direction: column;
+  @include breakpoint(mobile) {
+    width: 100vw;
+    right: auto;
+    left: 0;
+  }
 
   .spTop {
     margin-top: 35px;
     margin-bottom: 24px;
     padding: 0 36px;
+
+    @include breakpoint(mobile) {
+      margin-top: 100px;
+      margin-bottom: 24px;
+      padding: 0 12px;
+    }
 
     ul {
       li {
@@ -321,27 +426,49 @@ export default {
           font-size: 20px;
           margin-left: 164px;
           margin-bottom: 24px;
+
+          @include breakpoint(mobile) {
+            width: 100px;
+            margin: 0 auto;
+            margin-bottom: 14px;
+          }
         }
       }
       .scBorder {
         border-bottom: 1px solid $Gray;
+
+        @include breakpoint(mobile) {
+          width: 90vw;
+        }
       }
     }
   }
 
   .pmCount {
     margin-left: 52px;
-    height: 30vw;
+    height: 54vh;
     overflow-y: scroll;
-    overflow-x: hidden; // 强制隐藏水平軸
+    overflow-x: hidden;
+
+    @include breakpoint(mobile) {
+      margin-left: 10vw;
+    }
 
     ul {
       .pmcImg {
         margin-right: 32px;
         margin-bottom: 24px;
+
+        @include breakpoint(mobile) {
+          margin-right: 5vw;
+        }
       }
       li {
         width: 416px;
+
+        @include breakpoint(mobile) {
+          width: auto;
+        }
 
         ul {
           display: flex;
@@ -349,22 +476,40 @@ export default {
             img {
               width: 200px;
               height: 90px;
+
+              @include breakpoint(mobile) {
+                width: 140px;
+                height: 70px;
+              }
             }
 
             ul {
               flex-direction: column;
               .pmcName {
                 margin-top: 4px;
+
+                @include breakpoint(mobile) {
+                  margin-top: 0;
+                }
               }
 
               .pmcButton {
                 display: flex;
                 margin-top: 24px;
 
+                @include breakpoint(mobile) {
+                  margin-top: 12px;
+                }
+
                 button {
                   width: 28px;
                   height: 28px;
                   border: none;
+
+                  @include breakpoint(mobile) {
+                    width: 24px;
+                    height: 24px;
+                  }
                 }
                 .pmcDown {
                   background-image: url("/src/assets/Image/product/drown.svg");
@@ -380,11 +525,21 @@ export default {
                   background-image: url("/src/assets/Image/product/clear.svg");
                   margin-left: 42px;
                   margin-top: 1.5px;
+
+                  @include breakpoint(mobile) {
+                    margin-left: 30px;
+                    margin-top: 0;
+                  }
                 }
 
                 p {
                   font-size: 20px;
                   margin: 0 27px;
+
+                  @include breakpoint(mobile) {
+                    font-size: 16px;
+                    margin: 0 18px;
+                  }
                 }
               }
             }

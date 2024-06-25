@@ -6,45 +6,51 @@
 
 // include('/php/conn.php');
        //---------------------------------------------------
+     //MySQL相關資訊
+     $db_host = "127.0.0.1";
+     $db_user = "root";
+     $db_pass = "password";
+     $db_select = "TID101_G1";
+ 
+     //建立資料庫連線物件
+     $dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
+ 
+     //建立PDO物件，並放入指定的相關資料
+     $pdo = new PDO($dsn, $db_user, $db_pass);
 
+  
 
-        //MySQL相關資訊
-        $db_host = "127.0.0.1";
-        $db_user = "root";
-        $db_pass = "password";
-        $db_select = "TID101_G1";
+   
     
-        //建立資料庫連線物件
-        $dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
-    
-        //建立PDO物件，並放入指定的相關資料
-        $pdo = new PDO($dsn, $db_user, $db_pass);
-
-     
-    
-        $sql = "SELECT MANAGER.ID , NAME , MAIL ,ROLE.PERMISSION
-                from  MANAGER
-                join ROLE on MANAGER.PERMISSIONS_ID = ROLE.ID";
+        $sql = "SELECT ID,NAME,PRICE,CODE,STARTDATE,ENDDATE,USEDTIMES
+                from  VOUCHER";
 
     $statement = $pdo->prepare($sql);
     $statement->execute();
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
-        $sql2 = "SELECT MANAGER.ID as 編號 , NAME as 姓名, MAIL as 信箱,PASSWORD as 密碼
-                 from  MANAGER";
+        $sql2 = "SELECT ID as 編號 ,NAME as 名稱,PRICE as 折抵金額 ,CODE as 序號,STARTDATE as 開始日期,ENDDATE as 結束日期,USEDTIMES as 使用次數
+                from  VOUCHER";
 
     $statement2 = $pdo->prepare($sql2);
     $statement2->execute();
     $data2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
 
 
+        $sql3 = "SELECT ID,NAME,PRICE,CODE,STARTDATE,ENDDATE,USEDTIMES
+        from  VOUCHER";
+
+    $statement3 = $pdo->prepare($sql3);
+    $statement3->execute();
+    $data3 = $statement3->fetchAll(PDO::FETCH_ASSOC);
 
 
 
     $allData = array(
         "data" => $data,
-        "data2" => $data2
+        "data2" => $data2,
+        "data3" => $data3,
     );
     
 

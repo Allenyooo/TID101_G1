@@ -21,10 +21,14 @@
           </select>
 
           <div class="inputSearch">
-            <input type="text" :placeholder="placeholder[sId].name" />
+            <input
+              type="text"
+              :placeholder="placeholder[sId].name"
+              v-model="input"
+            />
           </div>
           <div class="searchButton">
-            <button><h5>搜尋</h5></button>
+            <button @click="searchButton(sId)"><h5>搜尋</h5></button>
           </div>
           <div class="newButton">
             <button>
@@ -33,7 +37,7 @@
           </div>
         </div>
 
-        <BSort :sortDrop="sortDrop"></BSort>
+        <BSort :sortDrop="sortDrop" @sortEvent="sortByID"></BSort>
 
         <button
           class="discountButton1"
@@ -50,14 +54,16 @@
           :dataTd="dataTd"
           :stateTd="stateTd"
           :page="page"
+          :bd2="bd2"
           v-if="bdState == 1"
         ></BD>
 
         <BD
-          :bd="bd2"
+          :bd="bdOff"
           :title="title"
           :dataTd="dataTd"
           :stateTd="stateTd"
+          :bd2="bd2"
           v-if="bdState == 2"
         ></BD>
       </div>
@@ -132,73 +138,76 @@ export default {
 
       searchdrop: [
         { id: 0, name: "折價券編號" },
-        { id: 1, name: "折價券姓名" },
+        { id: 1, name: "折價券名稱" },
       ],
       sId: 0,
 
       placeholder: [
-        { id: 1, name: "折價券編號" },
-        { id: 2, name: "折價券名稱" },
+        { id: 1, name: "折價券編號", search: "ID" },
+        { id: 2, name: "折價券名稱", search: "NAME" },
       ],
-      bd: [
-        {
-          id: 1,
-          name: "100折價券",
-          discountPrice: 100,
-          number: " 123abc",
-          start: "2024-06-01",
-          end: "2025-06-01",
-          use: 100,
-        },
-        {
-          id: 2,
-          name: "300折價券",
-          discountPrice: 300,
-          number: " 123abc",
-          start: "2024-06-01",
-          end: "2025-06-01",
-          use: 100,
-        },
-        {
-          id: 3,
-          name: "500折價券",
-          discountPrice: 500,
-          number: " 123abc",
-          start: "2024-06-01",
-          end: "2025-06-01",
-          use: 100,
-        },
-      ],
+      input: "",
+      // bd: [
+      //   {
+      //     id: 1,
+      //     name: "100折價券",
+      //     discountPrice: 100,
+      //     number: " 123abc",
+      //     start: "2024-06-01",
+      //     end: "2025-06-01",
+      //     use: 100,
+      //   },
+      //   {
+      //     id: 2,
+      //     name: "300折價券",
+      //     discountPrice: 300,
+      //     number: " 123abc",
+      //     start: "2024-06-01",
+      //     end: "2025-06-01",
+      //     use: 100,
+      //   },
+      //   {
+      //     id: 3,
+      //     name: "500折價券",
+      //     discountPrice: 500,
+      //     number: " 123abc",
+      //     start: "2024-06-01",
+      //     end: "2025-06-01",
+      //     use: 100,
+      //   },
+      // ],
 
-      bd2: [
-        {
-          id: 4,
-          name: "30折價券",
-          discountPrice: 30,
-          number: " 123abc",
-          start: "2024-06-01",
-          end: "2025-06-01",
-          use: 100,
-        },
-        {
-          id: 5,
-          name: "150折價券",
-          discountPrice: 150,
-          number: " 123abc",
-          start: "2024-06-01",
-          end: "2025-06-01",
-          use: 100,
-        },
-        {
-          id: 6,
-          name: "600折價券",
-          discountPrice: 600,
-          number: " 123abc",
-          start: "2024-06-01",
-          end: "2025-06-01",
-          use: 100,
-        },
-      ],
+      // bdOff: [
+      //   {
+      //     id: 4,
+      //     name: "30折價券",
+      //     discountPrice: 30,
+      //     number: " 123abc",
+      //     start: "2024-06-01",
+      //     end: "2025-06-01",
+      //     use: 100,
+      //   },
+      //   {
+      //     id: 5,
+      //     name: "150折價券",
+      //     discountPrice: 150,
+      //     number: " 123abc",
+      //     start: "2024-06-01",
+      //     end: "2025-06-01",
+      //     use: 100,
+      //   },
+      //   {
+      //     id: 6,
+      //     name: "600折價券",
+      //     discountPrice: 600,
+      //     number: " 123abc",
+      //     start: "2024-06-01",
+      //     end: "2025-06-01",
+      //     use: 100,
+      //   },
+      // ],
+      bd: [],
+      bd2: [],
       title: [
         { 折價券編號: "管理員編號" },
         { 折價券名稱: "信箱" },
@@ -211,9 +220,10 @@ export default {
         { 修改: "修改" },
       ],
       newButton: 1,
-      search: "新增折價券",
+
       stateTd: 1,
       dataTd: 1,
+
       buttonState: 1,
       dButton: [
         {
@@ -227,6 +237,8 @@ export default {
       ],
 
       bdState: 1,
+
+      sortid: 1,
     };
   },
 
@@ -235,6 +247,83 @@ export default {
       console.log("Selected value:", e);
       this.sId = e;
     },
+
+    searchButton(id) {
+      fetch(
+        "http://localhost/tid101_g1/public/php/Bk/BkDiscount/discountSearch.php",
+        {
+          mode: "cors",
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Search: this.placeholder[id].search,
+            Input: this.input,
+            // Start: this.startDate,
+            // End: this.endDate,
+          }),
+        }
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          this.bd = data;
+
+          // this.bd2 = data.data2;
+          // this.price = data[0].PRICE;
+          // this.discount = data[0].PERCENT;
+        });
+
+      this.input = "";
+    },
+
+    sortByID(id) {
+      this.sortid = id;
+
+      if (this.sortid == 1) {
+        this.bd.sort((a, b) => {
+          console.log("排序1");
+          return a.ID - b.ID;
+        }); // 按照 ID 属性升序排列
+      } else if (this.sortid == 2) {
+        this.bd.sort((a, b) => {
+          console.log("排序2");
+          return b.ID - a.ID;
+        }); // 按照 ID 属性升序排列
+      }
+    },
+  },
+
+  mounted() {
+    // this.fetchData();
+    fetch(
+      "http://localhost/tid101_g1/public/php/Bk/BkDiscount/discountData.php",
+      {
+        mode: "cors",
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.bd = data.data;
+        this.bd2 = data.data2;
+        this.bdOff = data.data3;
+        // this.bd2 = data.data2;
+        // this.price = data[0].PRICE;
+        // this.discount = data[0].PERCENT;
+      });
+    // .catch((error) => {
+    //   console.error("Error fetching data:", error);
+    // });
   },
 };
 </script>

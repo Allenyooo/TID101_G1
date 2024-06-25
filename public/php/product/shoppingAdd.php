@@ -1,11 +1,11 @@
 <?php
-
     include("../conn.php");
     header("Access-Control-Allow-Origin: *");
     // header("Content-Type: application/json; charset=UTF-8");
+    header("Access-Control-Allow-Headers: Content-Type");
     
 
-// include('/php/conn.php');
+
        //---------------------------------------------------
 
 
@@ -20,39 +20,32 @@
     
         // //建立PDO物件，並放入指定的相關資料
         // $pdo = new PDO($dsn, $db_user, $db_pass);
-    
-        // $mail = $_POST['mail'];
 
-        $memberId = 1;
+        
+
+        $shoppingCart = json_decode(file_get_contents("php://input"), true);
+
+        $shoppingCartID = $shoppingCart['cartID'];
+        $memberID = $shoppingCart['memberID'];
+        $productID = $shoppingCart['productID'];
+        $count = $shoppingCart['cartCount'];
      
-    // $sql = "SELECT * FROM member where Account =? and PWD =?";
-    $sql = "SELECT  CART.ID,p.PRICE,p.PIC ,CART.COUNT,p.PERCENT
-            from CART join 
-                    (select PRODUCT.ID ,PRODUCT.PRICE ,PRODUCT.PIC,DISCOUNT.PERCENT
-					from PRODUCT  join DISCOUNT  on PRODUCT.DISCOUNT_ID = DISCOUNT.ID) as P 
-		        on CART.PRODUCT_ID = P.ID
-            where MEMBER_ID = ?";
+    
+    $sql = "INSERT into
+            CART
+            values
+            (?,?,?,?)";
 
+    
     $statement = $pdo->prepare($sql);
+    $statement->bindValue(1 , $shoppingCartID);
+    $statement->bindValue(2 , $memberID);
+    $statement->bindValue(3 , $productID);
+    $statement->bindValue(4 , $count);
 
-  
-    $statement->bindValue(1 , $memberId);
-    // $statement->bindValue(2 ,$password);
-    // 丟給資料庫執行
     $statement->execute();
 
-
-
-    $data = $statement->fetchAll();
-
-    if(count($data) > 0){
-      
-    
-        echo json_encode($data);
-    }else{
-        echo echojson_encode(["message" => "抓取失败"]);
-
-    }
+    echo   $shoppingCartID;
 
 
     // foreach($data as $index => $row){

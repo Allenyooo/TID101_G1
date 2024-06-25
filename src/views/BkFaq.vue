@@ -21,10 +21,14 @@
           </select>
 
           <div class="inputSearch">
-            <input type="text" :placeholder="placeholder[sId].name" />
+            <input
+              type="text"
+              :placeholder="placeholder[sId].name"
+              v-model="input"
+            />
           </div>
           <div class="searchButton">
-            <button><h5>搜尋</h5></button>
+            <button @click="searchButton(sId)"><h5>搜尋</h5></button>
           </div>
           <div class="newButton">
             <button>
@@ -33,13 +37,14 @@
           </div>
         </div>
 
-        <BSort :sortDrop="sortDrop"></BSort>
+        <BSort :sortDrop="sortDrop" @sortEvent="sortByID"></BSort>
         <BD
           :bd="bd"
           :title="title"
           :dataTd="dataTd"
           :stateTd="stateTd"
           :page="page"
+          :bd2="bd2"
         ></BD>
       </div>
     </div>
@@ -117,29 +122,32 @@ export default {
       sId: 0,
 
       placeholder: [
-        { id: 1, name: "問題編號" },
-        { id: 2, name: "問題標題" },
+        { id: 1, name: "問題編號", search: "ID" },
+        { id: 2, name: "問題標題", search: "QUESTION" },
       ],
-      bd: [
-        {
-          id: 1,
-          type: "帳號問題",
-          question: "無法登入",
-          answer: " xxxxx",
-        },
-        {
-          id: 2,
-          type: "帳號問題",
-          question: "無法登入",
-          answer: " xxxxx",
-        },
-        {
-          id: 3,
-          type: "帳號問題",
-          question: "無法登入",
-          answer: " xxxxx",
-        },
-      ],
+      input: "",
+      // bd: [
+      //   {
+      //     id: 1,
+      //     type: "帳號問題",
+      //     question: "無法登入",
+      //     answer: " xxxxx",
+      //   },
+      //   {
+      //     id: 2,
+      //     type: "帳號問題",
+      //     question: "無法登入",
+      //     answer: " xxxxx",
+      //   },
+      //   {
+      //     id: 3,
+      //     type: "帳號問題",
+      //     question: "無法登入",
+      //     answer: " xxxxx",
+      //   },
+      // ],
+      bd: [],
+      bd2: [],
       title: [
         { 問題編號: "管理員編號" },
         { 分類: "信箱" },
@@ -149,9 +157,11 @@ export default {
         { 修改: "修改" },
       ],
       newButton: 1,
-      search: "新增問答",
+
       stateTd: 1,
       dataTd: 1,
+
+      sortid: 1,
     };
   },
 
@@ -160,6 +170,76 @@ export default {
       console.log("Selected value:", e);
       this.sId = e;
     },
+
+    searchButton(id) {
+      fetch("http://localhost/tid101_g1/public/php/Bk/BkFaq/faqSearch.php", {
+        mode: "cors",
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Search: this.placeholder[id].search,
+          Input: this.input,
+          // Start: this.startDate,
+          // End: this.endDate,
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          this.bd = data;
+
+          // this.bd2 = data.data2;
+          // this.price = data[0].PRICE;
+          // this.discount = data[0].PERCENT;
+        });
+
+      this.input = "";
+    },
+
+    sortByID(id) {
+      this.sortid = id;
+
+      if (this.sortid == 1) {
+        this.bd.sort((a, b) => {
+          console.log("排序1");
+          return a.ID - b.ID;
+        }); // 按照 ID 属性升序排列
+      } else if (this.sortid == 2) {
+        this.bd.sort((a, b) => {
+          console.log("排序2");
+          return b.ID - a.ID;
+        }); // 按照 ID 属性升序排列
+      }
+    },
+  },
+
+  mounted() {
+    // this.fetchData();
+    fetch("http://localhost/tid101_g1/public/php/Bk/BkFaq/faqData.php", {
+      mode: "cors",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.bd = data.data;
+        this.bd2 = data.data2;
+        // this.bd2 = data.data2;
+        // this.price = data[0].PRICE;
+        // this.discount = data[0].PERCENT;
+      });
+    // .catch((error) => {
+    //   console.error("Error fetching data:", error);
+    // });
   },
 };
 </script>

@@ -13,6 +13,7 @@
           :dataTd="dataTd"
           :stateTd="stateTd"
           :page="page"
+          :bd2="bd2"
         ></BD>
       </div>
     </div>
@@ -79,43 +80,53 @@ export default {
           border: 2,
         },
       ],
-      dropdown: [
-        {
-          id: "管理員編號",
-        },
-        {
-          name: "姓名",
-        },
+      sortDrop: [
+        { id: 1, name: "編號:由小到大" },
+        { id: 2, name: "編號:由大到小" },
       ],
-      bd: [
-        {
-          id: 1,
-          picture: "圖片",
-          price: 100,
-          discount: "90%",
-          discountPrice: 90,
-          start: "2024-06-01",
-          end: "2025-06-01",
-        },
-        {
-          id: 2,
-          picture: "圖片",
-          price: 300,
-          discount: "90%",
-          discountPrice: 270,
-          start: "2024-06-01",
-          end: "2025-06-01",
-        },
-        {
-          id: 3,
-          picture: "圖片",
-          price: 500,
-          discount: "90%",
-          discountPrice: 450,
-          start: "2024-06-01",
-          end: "2025-06-01",
-        },
+      searchdrop: [
+        { id: 0, name: "店家編號" },
+        { id: 1, name: "店家名稱" },
       ],
+      sId: 0,
+
+      placeholder: [
+        { id: 1, name: "店家編號", search: "ID" },
+        { id: 2, name: "店家名稱", search: "NAME" },
+      ],
+
+      input: "",
+      // bd: [
+      //   {
+      //     id: 1,
+      //     picture: "圖片",
+      //     price: 100,
+      //     discount: "90%",
+      //     discountPrice: 90,
+      //     start: "2024-06-01",
+      //     end: "2025-06-01",
+      //   },
+      //   {
+      //     id: 2,
+      //     picture: "圖片",
+      //     price: 300,
+      //     discount: "90%",
+      //     discountPrice: 270,
+      //     start: "2024-06-01",
+      //     end: "2025-06-01",
+      //   },
+      //   {
+      //     id: 3,
+      //     picture: "圖片",
+      //     price: 500,
+      //     discount: "90%",
+      //     discountPrice: 450,
+      //     start: "2024-06-01",
+      //     end: "2025-06-01",
+      //   },
+      // ],
+      bd: [],
+      bd2: [],
       title: [
         { 商品編號: "管理員編號" },
         { 商品圖片: "信箱" },
@@ -127,10 +138,91 @@ export default {
         { 狀態: "修改" },
         { 修改: "修改" },
       ],
-      search: "新增店家",
+      newButton: 1,
+
       stateTd: 1,
       dataTd: 1,
+
+      sortid: 1,
     };
+  },
+
+  methods: {
+    sIdchange(e) {
+      console.log("Selected value:", e);
+      this.sId = e;
+    },
+
+    // searchButton(id) {
+    //   fetch(
+    //     "http://localhost/vite/tid101_g1/public/php/Bk/BkProduct/productSearch.php",
+    //     {
+    //       mode: "cors",
+    //       method: "PUT",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({
+    //         Search: this.placeholder[id].search,
+    //         Input: this.input,
+    //         // Start: this.startDate,
+    //         // End: this.endDate,
+    //       }),
+    //     }
+    //   )
+    //     .then((response) => {
+    //       if (!response.ok) {
+    //         throw new Error("Network response was not ok");
+    //       }
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       this.bd = data;
+
+    //     });
+    // },
+
+    sortByID(id) {
+      this.sortid = id;
+
+      if (this.sortid == 1) {
+        this.bd.sort((a, b) => {
+          console.log("排序1");
+          return a.ID - b.ID;
+        }); // 按照 ID 属性升序排列
+      } else if (this.sortid == 2) {
+        this.bd.sort((a, b) => {
+          console.log("排序2");
+          return b.ID - a.ID;
+        }); // 按照 ID 属性升序排列
+      }
+    },
+  },
+
+  mounted() {
+    // this.fetchData();
+    fetch(
+      "http://localhost/tid101_g1/public/php/Bk/BkProduct/productData.php",
+      {
+        mode: "cors",
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.bd = data.data;
+        this.bd2 = data.data2;
+        // this.bd2 = data.data2;
+        // this.price = data[0].PRICE;
+        // this.discount = data[0].PERCENT;
+      });
+    // .catch((error) => {
+    //   console.error("Error fetching data:", error);
+    // });
   },
 };
 </script>

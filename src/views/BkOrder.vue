@@ -9,7 +9,6 @@
         <!-- <BS :dropdown="dropdown" :search="search" :newButton="newButton"></BS> -->
 
         <div class="Bksearchbody">
-          <p>1</p>
           <select @change="sIdchange($event.target.value)">
             <option
               v-for="s in searchdrop"
@@ -198,9 +197,9 @@ export default {
 
     searchButton(id) {
       fetch(
-        "http://localhost/vite/tid101_g1/public/php/Bk/BkOrder/orderSearch.php",
+        "http://localhost/tid101_g1/public/php/Bk/BkOrder/orderSearch.php",
         {
-          mode: "cors", // 请求模式
+          mode: "cors",
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -225,6 +224,8 @@ export default {
           // this.price = data[0].PRICE;
           // this.discount = data[0].PERCENT;
         });
+
+      this.input = "";
     },
 
     sortByID(id) {
@@ -244,12 +245,9 @@ export default {
 
   mounted() {
     // this.fetchData();
-    fetch(
-      "http://localhost/vite/tid101_g1/public/php/Bk/BkOrder/orderData.php",
-      {
-        mode: "cors", // 请求模式
-      }
-    )
+    fetch("http://localhost/tid101_g1/public/php/Bk/BkOrder/orderData.php", {
+      mode: "cors",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
