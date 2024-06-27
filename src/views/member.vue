@@ -14,18 +14,17 @@
         <!--user photo-->
         <h2 class="member_title">會員資料</h2>
 
-        <section class="member_user">
+        <section class="member_user" v-for="(detail, index) in details" :key="index">
             <div class="user_name">
 
                 <!-- 新增大頭貼 -->
                 <div class="user_photo">
                     <div class="box1">
-                        <img ref="preview" :src="imageSrc" alt="" />
-                        <!-- <img src="../assets/Image/member/lets-icons_img-box.svg" alt=""> -->
+                        <img ref="preview" :src="detail.PHOTO" alt="profile pic" id="profilePic" />
                         <input v-if="!imageSrc" type="file" @change="fileChange" id="user___input" accept="image/*" />
                     </div>
                 </div>
-                <h2>陳小明</h2>
+                <h2>{{ detail.NAME }}</h2>
             </div>
 
             <ul class="member_container">
@@ -33,7 +32,7 @@
 
                 <li>
                     <label for="container_name">會員姓名</label>
-                    <input type="text" id="container_name" value="陳小明" disabled />
+                    <input type="text" id="container_name" :value="detail.NAME" disabled />
                 </li>
 
                 <li>
@@ -43,7 +42,7 @@
                             <img src="/src/assets/Image/member/PencilSquare.svg" alt="edit" />
                         </button>
                     </div>
-                    <input type="text" id="container_nickname" :value="nickname" disabled />
+                    <input type="text" id="container_nickname" :value="detail.NICKNAME" disabled />
                 </li>
 
                 <!--修改暱稱彈窗-->
@@ -53,7 +52,6 @@
                         <label for="newNickname">新的暱稱</label>
                         <input type="text" id="newNickname" v-model="newNickname" placeholder="請輸入新的暱稱" />
                         <button class="modal__confirm" @click="updateNickname">確認</button>
-                        <!-- <button class="modal__cancel" @click="shownickname = false">取消</button> -->
                     </div>
                 </div>
 
@@ -63,7 +61,6 @@
                         <h4>成功訊息</h4>
                         <p>成功修改暱稱為：{{ newNickname }}</p>
                         <button class="modal__confirm" @click="closeNicknameSuccessModal">確認</button>
-                        <button class="modal__cancel" @click="cancelUpdate">取消</button>
                     </div>
                 </div>
 
@@ -74,7 +71,7 @@
                             <img src="/src/assets/Image/member/PencilSquare.svg" alt="edit" />
                         </button>
                     </div>
-                    <input type="tel" id="container_phone" value="0912-345-678" pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}"
+                    <input type="tel" id="container_phone" v-model="detail.PHONE" pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}"
                         disabled />
                 </li>
 
@@ -85,7 +82,6 @@
                         <label for="newPhone">新的電話號碼</label>
                         <input type="text" id="newPhone" v-model="newiPhone" placeholder="0 9 * * - * * * - * * *" />
                         <button class="modal__confirm" @click="updatePhone">確認</button>
-                        <!-- <button class="modal__cancel" @click="showniPhone = false">取消</button>             -->
                     </div>
                 </div>
 
@@ -95,7 +91,6 @@
                         <h4>成功訊息</h4>
                         <img src="../assets/Image/member/success.svg" alt="">
                         <p>成功修改電話號碼為：{{ newiPhone }}</p>
-                        
                         <button class="modal__confirm" @click="closeSuccessModal">確認</button>
                     </div>
                 </div>
@@ -112,14 +107,14 @@
 
                 <li>
                     <label for="container_email">電子信箱</label>
-                    <input type="text" id="container_email" value="abc@email.com" onfocus="(this.type='date')"
+                    <input type="text" id="container_email" :value="detail.MAIL" onfocus="(this.type='date')"
                         disabled />
                 </li>
 
 
                 <li>
                     <div>
-                        <label for="container_password">修改密碼</label>
+                        <label for="container_password">會員密碼</label>
                         <img src="/src/assets/Image/member/PencilSquare.svg" alt="edit" />
                         <button @click="showModal = true; console.log('showModal:', showModal)"></button>
                     </div>
@@ -127,14 +122,15 @@
                     <!--開眼閉眼功能-->
                     <div class="password-input">
 
-                        <input type="password" id="container_password" value="********" disabled v-if="eyeClose" />
+                        <input type="password" id="container_password" :value="detail.PASSWORD" disabled
+                            v-if="eyeClose" />
 
-                        <input type="text" name="password" id="container_password" v-model="password" readonly v-else />
+                        <input type="text" name="password" id="container_password" v-model="detail.PASSWORD" readonly
+                            v-else />
 
                         <img src="../assets/Image/member/eye-closed.svg" alt="eyeClosed" class="eye" v-if="eyeClose" />
 
                         <img src="../assets/Image/member/eye.svg" alt="eyeOpen" class="eye" v-else>
-
 
                         <button class="eye-toggle" @click="eyeClose = !eyeClose">
                         </button>
@@ -179,7 +175,6 @@
                             <button class="eye-toggle" @click="eyeCloseConfirm = !eyeCloseConfirm"></button>
                         </div>
                         <button class="modal__confirm" @click="validatePassword">確認</button>
-                        <!-- <button class="modal__cancel" @click="closeModal">取消</button> -->
                     </div>
                 </div>
                 <!-- 修改密碼end -->
@@ -199,8 +194,9 @@
                 <div class="modal" v-if="passwordSuccess">
                     <div class="pop_container">
                         <h4>成功訊息</h4>
-                        <img src="../assets/Image/member/error.svg" alt="">
+                        <img src="../assets/Image/member/success.svg" alt="">
                         <p>修改密碼成功</p>
+                        <p v-if="updatedPassword">新密码：{{ updatedPassword }}</p>
                         <button class="modal__confirm" @click="closeSuccessModal">確認</button>
                     </div>
                 </div>
@@ -208,7 +204,7 @@
 
                 <li>
                     <label for="container_birthday">生日日期</label>
-                    <input type="text" id="container_birthday" value="1994/12/31" onfocus="(this.type='date')"
+                    <input type="text" id="container_birthday" :value="detail.BIRTHDAY" onfocus="(this.type='date')"
                         disabled />
                 </li>
             </ul>
@@ -219,7 +215,7 @@
             <h4>我的收藏</h4>
             <ul class="card_container">
 
-                <ShopCard class="card" v-for="shop in shops" :key="shop.ID" :shop="shop" />
+                <ShopCard class="card" v-for="(shop, index) in shops" :key="shop.ID" :shop="shop" />
 
             </ul>
         </section>
@@ -228,7 +224,7 @@
         <section class="member_voucher">
             <h4>優惠券</h4>
             <div class="voucher_code">
-                <input type="text" placeholder=" &#127991 輸入優惠碼" class="voucher_number" />
+                <input type="text" placeholder="&#127991 輸入優惠碼" class="voucher_number" />
                 <input type="submit" value="確認" class="voucher_sure">
             </div>
 
@@ -273,7 +269,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <router-link to="/receipt">K9RL9A1</router-link>
+                        <router-link to="/receipt">24EAE33493</router-link>
                     </td>
                     <td>2024/06/11</td>
                     <td>2025/06/11</td>
@@ -281,7 +277,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <router-link to="/receipt">ABRK3A3</router-link>
+                        <router-link to="/receipt">24EAE33432</router-link>
                     </td>
                     <td>2024/07/02</td>
                     <td>2025/07/02</td>
@@ -298,6 +294,7 @@
 
 //掛載shopCard
 import ShopCard from "../components/Shopcard.vue";
+import axios from "axios";
 
 export default {
     name: "Member",
@@ -306,8 +303,10 @@ export default {
     },
     data() {
         return {
+            imageSrc: '',
+
             shownickname: false, //修改暱稱closePhoneErrorModal
-            nickname: '陳小明',
+            nickname: '',
             newNickname: '',
             nicknameSuccess: false,
 
@@ -318,7 +317,7 @@ export default {
 
             showModal: false,
             eyeClose: true,
-            password: '12345678',
+            password: '',
             eyeCloseOld: true,
             eyeCloseNew: true,
             eyeCloseConfirm: true,
@@ -328,38 +327,51 @@ export default {
             passwordError: null,
             passwordSuccess: false,
 
-            imageSrc: '',
+            details: [],
+            shops: [],
 
-            shops: [
-                {
-                    id: 1,
-                    name: '高麗味'
-                },
-                {
-                    id: 2,
-                    name: '朝鮮味'
-                },
-                {
-                    id: 3,
-                    name: '高麗味'
-                },
-                {
-                    id: 4,
-                    name: '高麗味'
-                },
-                {
-                    id: 5,
-                    name: '高麗味'
-                },
-                {
-                    id: 1,
-                    name: '高麗味'
-                },
-                
-            ]
+            updatedPassword: '',
         };
     },
     methods: {
+        getCookie(name) {
+            let value = "; " + document.cookie;
+            let parts = value.split("; " + name + "=");
+            if (parts.length === 2) return parts.pop().split(";").shift();
+            return null;
+        },
+
+        async fetchDetails() {
+            try {
+                const memberId = this.getCookie("memberId");
+                console.log(memberId);
+                const response = await axios.get(`${import.meta.env.VITE_PHP_PATH}member/details.php`, {
+                    params: {
+                        memberId: memberId,
+                    }
+                });
+                this.details = response.data;
+                console.log(response.data);
+            } catch (error) {
+                console.error("Error fetching details:", error);
+            }
+        },
+
+        async fetchShops() {
+            try {
+                const memberId = this.getCookie("memberId");
+                const response = await axios.get(`${import.meta.env.VITE_PHP_PATH}member/card.php`, {
+                    params: {
+                        memberId: memberId,
+                    }
+                });
+                this.shops = response.data;
+                console.log(response.data);
+            } catch (error) {
+                console.error("Error fetching shops:", error);
+            }
+        },
+
         closeModal() { //修改完畢關閉彈窗
             this.showModal = false;
         },
@@ -368,9 +380,8 @@ export default {
         },
         closeSuccessModal() {
             this.passwordSuccess = false;
-            // this.iPhoneSuccessModal = false;  //修改電話成功後彈窗按下確定後關閉彈窗，不能被關閉(問老師)
+            // this.iPhoneSuccessModal = false;  //修改電話成功後彈窗按下確定後關閉彈窗，不能被關閉
         },
-
         closeNicknameSuccessModal() {
             this.nicknameSuccess = false; //修改會員暱稱成功v-if(nicknameSuccess)  = false;
             this.shownickname = false;
@@ -387,19 +398,6 @@ export default {
             this.showniPhoneSuccess = false;
             this.passwordSuccess = false;
         },
-        submitPhone() {
-            if (this.newPhone === '') {
-                this.phoneError = '您尚未输入訊息';
-
-            } else {
-                this.updatePhone().then(() => {
-                    this.showniPhoneSuccess = true;
-                }).catch(() => {
-                    // this.showniPhoneError = true;
-                    this.phoneError = '電話號碼格式不正確';
-                });
-            }
-        },
         //修改密碼眼睛各別控制
         toggleEye(type) {
             if (type === 'old') {
@@ -415,9 +413,13 @@ export default {
                 alert("請輸入新的暱稱");
                 return;
             }
-            this.nickname = this.newNickname;
-            this.nicknameSuccess = true;
-            // this.shownickname = false; // 關閉修改暱稱彈窗 
+            const user = this.details.find(u => u.ID === this.selectedUserId);
+            if (user) {
+                user.NICKNAME = this.newNickname;
+            } else {
+                console.error(`User with ID ${this.selectedUserId} not found`);
+            }
+            this.shownickname = false;
         },
         cancelUpdate() {
             this.shownickname = false; // 取消修改，關閉修改暱稱彈窗
@@ -426,12 +428,17 @@ export default {
         updatePhone() {
             const phonePattern = /^[0-9]{4}-[0-9]{3}-[0-9]{3}$/;
             if (phonePattern.test(this.newiPhone)) {
+                const user = this.details.find(u => u.ID === this.selectedUserId);
+                if (user) {
+                    user.PHONE = this.newiPhone;
+                } else {
+                    console.error(`User with ID ${this.selectedUserId} not found`);
+                }
                 this.showniPhoneSuccess = true;
                 this.showniPhone = false;
                 this.phoneError = '';
             } else {
                 this.phoneError = '電話號碼格式不正確。';
-
             }
         },
         //照片類型
@@ -455,13 +462,22 @@ export default {
             };
             reader.readAsDataURL(file);
         },
+        //修改密碼
         validatePassword() {
             if (this.newPassword !== this.confirmPassword) {
                 this.passwordError = "新密碼和確認密碼不符合";
                 return;
             }
-            this.passwordSuccess = true;
-            this.showModal = false;
+
+            const user = this.details.find(u => u.ID === this.selectedUserId);
+            if (user) {
+                user.PASSWORD = this.newPassword; // Update the user's password
+                this.password = this.newPassword;
+                this.passwordSuccess = true;
+                this.showModal = false;
+            } else {
+                console.error(`User with ID ${this.selectedUserId} not found`);
+            }
         },
         validatePhone() {
             const phonePattern = /^[0-9]{4}-[0-9]{3}-[0-9]{3}$/;
@@ -495,20 +511,24 @@ export default {
             this.passwordSuccess = true;
             this.showModal = false;
         },
-        updateNickname() {
-            if (this.newNickname.trim() === '') {
-                alert("請輸入新的暱稱");
-                return;
-            }
-            this.nickname = this.newNickname;
-            this.nicknameSuccess = true;
-        }
+    },
+    mounted() {
+        this.fetchDetails();
+        this.fetchShops();
     }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
+
+#profilePic {
+    width: 190px;
+
+    @include breakpoint(430px) {
+        width: 95px;
+    }
+}
 
 .card_container {
     display: grid;
@@ -549,7 +569,7 @@ export default {
 
 .card {
     width: 100%;
-    
+
     @include breakpoint(430px) {
         background-color: #fff;
     }
@@ -602,31 +622,31 @@ export default {
                 }
 
                 h5 {
-                    width: 23vw;
+                    // width: 23vw;
                     font-size: 14px;
 
                     @include breakpoint(1024px) {
                         font-size: 14px;
-                        width: 20vw;
+                        // width: 20vw;
                     }
 
                     @include breakpoint(820px) {
                         font-size: 14px;
-                        width: 42vw;
+                        // width: 42vw;
                     }
 
                     @include breakpoint(498px) {
                         font-size: 16px;
-                        width: 27vw;
+                        // width: 27vw;
                     }
 
                     @include breakpoint(420px) {
                         font-size: 16px;
-                        width: 27vw;
+                        // width: 27vw;
                     }
 
                     @include breakpoint(390px) {
-                        width: 29vw;
+                        // width: 29vw;
                     }
                 }
             }
@@ -789,6 +809,7 @@ export default {
                 background-color: $LightGray;
                 position: relative;
                 margin-bottom: 28px;
+                overflow: hidden;
 
                 @include breakpoint(430px) {
                     margin-top: 8vw;
@@ -796,47 +817,38 @@ export default {
                     height: 100px;
                 }
 
-                img {
-                    // background-image: url(../assets/Image/member/lets-icons_img-box.svg);
-                    height: auto;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    z-index: 1;
-                    width: 120px;
-                }
+                .box1 {
+                    width: 100px;
+                    height: 100px;
 
-                & input {
-                    margin: 39px 48px;
-                    padding: 90px 20px;
-                    width: 80px;
-                    height: 200px;
-                    border-radius: 100%;
-                    font-size: 11px;
-
-
-                    @include breakpoint(430px) {
-                        margin: 12px 0px;
-                        width: 89px;
-                        height: 200px;
-                        font-size: 12px;
+                    img {
+                        height: auto;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 1;
+                        width: 120px;
                     }
 
+                    & input {
+                        width: 200px;
+                        height: 200px;
+                        border-radius: 100%;
+                        font-size: 11px;
+                        opacity: 0;
+                        cursor: pointer;
 
+                        @include breakpoint(430px) {
+                            margin: 12px 0px;
+                            width: 89px;
+                            height: 200px;
+                            font-size: 12px;
+                        }
+                    }
                 }
 
-                button {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 200px;
-                    height: 200px;
-                    border-radius: 50%;
-                    cursor: pointer;
-                    border: none;
-                    background-color: transparent;
-                }
+
             }
 
             h2 {
@@ -987,6 +999,20 @@ export default {
                         right: 4px;
                         border: none;
                         background-color: transparent;
+
+                        @include breakpoint(820px) {
+                            right: 10vw;
+                        }
+
+                        @include breakpoint(430px) {
+                            right: 0vw;
+                            width: 14px;
+                            height: 14px;
+                        }
+
+                        @include breakpoint(390px) {
+                            left: 68vw;
+                        }
                     }
 
                 }
@@ -1093,19 +1119,6 @@ export default {
 
                     }
 
-                    .modal__cancel {
-                        font-size: 16px;
-                        width: 20%;
-                        height: 40px;
-                        color: $Gold;
-                        border: 4px solid $Gold;
-                        border-radius: 15px;
-                        background-color: $White;
-                        margin: 2vh;
-                        cursor: pointer;
-
-                    }
-
                     #newPhone {
                         width: 70%;
                         height: 30px;
@@ -1133,28 +1146,13 @@ export default {
         border-radius: 20px;
         width: 83vw;
         margin: 0 auto 6vh;
-        height: 54vw;
-        cursor: pointer;
 
-        @include breakpoint(1280px) {
-            height: 62vw;
-        }
-
-        @include breakpoint(1024px) {
-            height: 75vw;
-        }
 
         @include breakpoint(820px) {
-            height: 178vw;
             width: 75vw;
         }
 
-        @include breakpoint(698px) {
-            height: 228vw;
-        }
-
         @include breakpoint(430px) {
-            height: 105vw;
             border: none;
             background-color: #F6F1ED;
         }

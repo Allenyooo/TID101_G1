@@ -83,10 +83,10 @@
 
 <script>
 import axios from "axios";
-// import shopping from "/src/components/shoppingCart.vue";
+import shopping from "/src/components/shoppingCart.vue";
 
 export default {
-    // components: { shopping },
+    components: { shopping },
     data() {
         return {
             show: false,
@@ -144,7 +144,7 @@ export default {
 
         shoppingcartData() {
             fetch(
-                "http://localhost/tid101_g1/public/php/shoppingCart/shoppingCart.php",
+                `${import.meta.env.VITE_PHP_PATH}shoppingCart/shoppingCart.php`,
                 {
                     mode: "cors",
                 }

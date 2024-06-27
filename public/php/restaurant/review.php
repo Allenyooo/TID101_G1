@@ -19,7 +19,7 @@ try {
     $content = $_POST['content']; // 从 FormData 获取 content
 
     // 插入 REVIEW 表
-    $sqlReview = "INSERT INTO REVIEW (ID, MEMBER_ID, STORE_ID, STAR, CONTENT) VALUES (?, ?, ?, ?, ?)";
+    $sqlReview = "INSERT INTO REVIEW (ID, MEMBER_ID, STORE_ID, STAR, CONTENT, TIME) VALUES (?, ?, ?, ?, ?, NOW())";
     $stmtReview = $pdo->prepare($sqlReview);
     $stmtReview->bindParam(1, $newId, PDO::PARAM_INT);
     $stmtReview->bindParam(2, $memberId, PDO::PARAM_INT);
@@ -29,7 +29,7 @@ try {
     $stmtReview->execute();
 
     // 插入 PHOTO 表
-    $sqlPhoto = "INSERT INTO PHOTO (ID, ADDRESS, REVIEW_ID, PHOTO) VALUES (?, NULL, ?, ?)";
+    $sqlPhoto = "INSERT INTO PHOTO (ID, REVIEW_ID, PHOTO) VALUES (?, ?, ?)";
     $stmtPhoto = $pdo->prepare($sqlPhoto);
     foreach ($_FILES['imageData']['tmp_name'] as $index => $tmpName) {
         // 生成新的 PHOTO ID

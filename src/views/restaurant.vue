@@ -384,23 +384,35 @@
 <script>
 import axios from "axios";
 
-//星級評論
 export default {
+    mounted() {
+        const memberId = this.getMemberIdFromCookie();
+
+        if (memberId) {
+            this.checktStore(this.storeId, memberId)
+        }
+        // this.collectStore();
+        // this.cancelCollectStore();
+    },
+
     data() {
         return {
             rating: 0,
             popup_open: false,
             rating_text: ["", "1級星", "2級星", "3級星", "4級星", "5級星"],
             isMember: false,
+
             isCollected: false, //控制按鈕是否被收藏
+
             showPrompt: false, //控制提示框顯示與否
-            content: "", // php: 評論內容功能
-            files: [], //php: 上傳照片功能
+            content: "", //評論內容功能
+            files: [], //上傳照片功能
             imageData: [],
             storeId: 1,
             memberId: "", // 從 cookie 中取得的會員 ID        
         };
     },
+
     methods: {
         //從cookie抓memberId值
         getMemberIdFromCookie() {
@@ -415,17 +427,22 @@ export default {
         handleCollect() {
             const memberId = this.getMemberIdFromCookie();
             if (memberId) {
-                // 已登录，切换收藏状态并发送请求
-                const storeId = 1; // 默认的 storeId
+                const storeId = 1; // storeId默認值 
+                if (this.isCollected) {
+                    // 取消收藏
+                    this.cancelCollectStore(storeId, memberId);
+                } else {
+                    // 添加收藏
+                    this.collectStore(storeId, memberId);
+                }
                 this.isCollected = !this.isCollected;
-                this.collectStore(storeId, memberId);
             } else {
-                // 未登录，显示提示对话框
+                // 未登錄，顯示提示對話框
                 this.showPrompt = true;
             }
         },
 
-        //收藏並將資料送到php
+        // 收藏並將數據送到PHP
         collectStore(storeId, memberId) {
             const data = {
                 storeId,
@@ -433,17 +450,74 @@ export default {
             };
             axios
                 .post(
-                    "http://localhost/tid101_g1/public/php/restaurant/collection.php",
+                    `${import.meta.env.VITE_PHP_PATH}restaurant/collection.php`,
                     data
                 )
                 .then((response) => {
                     console.log(response.data);
+                    this.isCollected = true;
                     // Handle success response
                 })
                 .catch((error) => {
                     console.error("Error collecting store:", error);
                     // Handle error response
-                    let errorMessage = "提交失败，请稍后重试";
+                    let errorMessage = "提交失敗，請稍後再試";
+                    if (error.response) {
+                        errorMessage = error.response.data.message || errorMessage;
+                    }
+                    alert(errorMessage);
+                });
+        },
+
+        checktStore(storeId, memberId) {
+            const data = {
+                storeId,
+                memberId,
+            };
+            axios
+                .post(
+                    `${import.meta.env.VITE_PHP_PATH}restaurant/check.php`,
+                    data
+                )
+                .then((response) => {
+                    if (response.data && response.data.message && response.data.message === '已收藏') {
+                        this.isCollected = true;
+                    }
+                    // Handle success response
+                })
+                .catch((error) => {
+                    console.error("Error collecting store:", error);
+                    // Handle error response
+                    let errorMessage = "提交失敗，請稍後再試";
+                    if (error.response) {
+                        errorMessage = error.response.data.message || errorMessage;
+                    }
+                    alert(errorMessage);
+                });
+        },
+        //取消收藏並將資料送到php
+        cancelCollectStore(storeId, memberId) {
+            const data = {
+                storeId,
+                memberId,
+            };
+            axios
+                .post(
+                    `${import.meta.env.VITE_PHP_PATH}restaurant/collection_cancel.php`,
+                    data
+                )
+                .then((response) => {
+                    console.log(response.data);
+                    this.isCollected = false;
+                    this.showCancelCollectButton = true; // 顯示取消收藏按鈕
+                    // Handle success response
+                    // this.deleteCollectDetail(storeId, memberId);
+                    alert("您已取消收藏該店家");
+                })
+                .catch((error) => {
+                    console.error("Error collecting store:", error);
+                    // Handle error response
+                    let errorMessage = "無法取消收藏，請稍後再試";
                     if (error.response) {
                         errorMessage = error.response.data.message || errorMessage;
                     }
@@ -472,7 +546,7 @@ export default {
             const storeId = 1; // Default store ID
             const rating = this.rating;
             const content = this.content; // Get the review content from the data object
-            
+
             // 檢查必要的字段是否存在且不為空
             if (!memberId) {
                 alert("未能獲取會員ID，請重新登錄");
@@ -492,12 +566,13 @@ export default {
             formData.append("memberId", memberId);
             formData.append("rating", rating);
             formData.append("content", content);
-            this.files.forEach((file, index) => { // 追加文件数据
+
+            this.files.forEach((file, index) => {
                 formData.append(`imageData[]`, file);
             });
 
             axios
-                .post("http://localhost/tid101_g1/public/php/restaurant/review.php", formData, {
+                .post(`${import.meta.env.VITE_PHP_PATH}restaurant/review.php`, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
@@ -509,7 +584,6 @@ export default {
                     this.rating = 0;
                     this.files = []; // Clear the file input
                 })
-
                 .catch((error) => {
                     console.error("Error submitting review:", error);
                     let errorMessage = "提交失敗，請稍後再試";
@@ -905,7 +979,7 @@ button {
             background-color: #cb4847;
         }
 
-        // 提示框弹出时按钮变色
+        // 提示框彈出時按鈕變色
         &.prompt-active {
             background-color: #cb4847;
         }
@@ -1652,35 +1726,6 @@ button {
             margin-left: 50px;
         }
     }
-
-    // .restaurant_btns {
-    //     display: flex;
-
-    //     .collect {
-    //         background-color: #C8AC96;
-    //         width: 40px;
-    //         height: 40px;
-
-    //         img {
-    //             width: 23px;
-    //             height: 23px;
-    //         }
-    //     }
-
-    //     .share {
-    //         img {
-    //             width: 23px;
-    //             height: 23px;
-    //         }
-    //     }
-
-    //     .message {
-    //         img {
-    //             width: 23px;
-    //             height: 23px;
-    //         }
-    //     }
-    // }
 }
 
 .restaurant_mainContent {

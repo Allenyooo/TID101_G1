@@ -29,24 +29,7 @@ try {
     $collect = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$collect) {
-        // 收藏不存在，執行新增收藏
-        // 取最大 ID 值
-        $sql = "SELECT MAX(ID) as maxId FROM COLLECT_DETAIL";
-        $stmt = $pdo->query($sql);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($row && $row['maxId'] !== null) {
-            $newId = $row['maxId'] + 1;
-        } else {
-            $newId = 1; // 預設值1
-        }
-
-        // 插入資料庫
-        $sql = "INSERT INTO COLLECT_DETAIL (ID, STORE_ID, MEMBER_ID) VALUES (?, ?, ?)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$newId, $storeId, $memberId]);
-
-        echo json_encode(["message" => "收藏成功"]);
+        echo json_encode(["message" => "沒收藏"]);
     } else {
         echo json_encode(["message" => "已收藏"]);
     }
