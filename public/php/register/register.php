@@ -34,7 +34,6 @@ try {
     $errorMessage .= "Input Data: " . json_encode($member) . "\n";
     $errorMessage .= "User IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
     error_log($errorMessage, 3, "./error.log");
-    http_response_code(500);
     $response = array('success' => false, 'message' => 'Error executing query');
 }
 

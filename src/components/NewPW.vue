@@ -106,7 +106,7 @@ export default {
             }
             const forgotAccount = this.getCookie("forgot_account");
             axios
-                .post("http://localhost/tid101_g1/public/php/login/newpw.php", {
+                .post(`${import.meta.env.VITE_PHP_PATH}login/newpw.php`, {
                     newPassword: this.newPassword,
                     forgotAccount: forgotAccount,
                 })

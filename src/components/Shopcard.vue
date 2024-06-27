@@ -3,11 +3,11 @@ export default {
     props: {
         isHoverEnabled: {
             type: Boolean,
-            default: true
+            default: true,
         },
         shop: {
             type: Object,
-            required: true
+            required: true,
             // {
             //     ID: 1,
             //     SNAME: '高麗味',
@@ -22,7 +22,7 @@ export default {
     data() {
         return {
             hovered: false,
-            pics:'',
+            pics: "",
         };
     },
 
@@ -33,97 +33,122 @@ export default {
         formatDate(datetime) {
             const date = new Date(datetime);
             const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份從0開始,所以+1
-            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, "0"); // 月份從0開始,所以+1
+            const day = String(date.getDate()).padStart(2, "0");
             return `${year}-${month}-${day}`;
         },
         async fetchPic() {
-            console.log('djsnkfkalnfkalnfkjasdnxsmdsnalkfna');
-
-                const response = await fetch(
-                    `http://localhost/tid101_g1/public/php/map/pics.php?storeId=${this.shop.ID}`
-                );
-                const picData = await response.text();
-                this.pics = picData;
-                console.log(picData);
+            const response = await fetch(
+                `${import.meta.env.VITE_PHP_PATH}map/pics.php?storeId=${
+                    this.shop.ID
+                }`
+            );
+            const picData = await response.text();
+            this.pics = picData;
+            console.log(picData);
         },
     },
-    
+
     mounted() {
         this.fetchPic();
     },
     computed: {
         lowerString() {
             const length = 15;
-            if (!this.shop.CONTENT) return '';
-                return this.shop.CONTENT.length > length ? this.shop.CONTENT.substring(0, length) + '...' : this.shop.CONTENT;
-        }
-  }
+            if (!this.shop.CONTENT) return "";
+            return this.shop.CONTENT.length > length
+                ? this.shop.CONTENT.substring(0, length) + "..."
+                : this.shop.CONTENT;
+        },
+    },
 };
 </script>
 
 <template>
     <router-link to="/restaurant" class="marker">
-    <!-- <li :class="{ map_open : hovered }" @mouseover="cardOpen" @mouseleave="cardOpen"> -->
-    <li @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')" :class="{ 'no-hover': !isHoverEnabled }">
-
-        <div class="normal">
-            <img :src="this.pics" alt="" />
-            <div class="shopinfo">
-                <h3>{{ shop.SNAME }}</h3>
-                <div class="content">
-                    <div class="address">
-                        <img src="/src/assets/Image/map/addressLogo.png" alt="" />
-                        <h5>{{ shop.REGION }}部地區</h5>
-                    </div>
-                    <div class="star">
-                        <img src="/src/assets/Image/map/star.png" alt="" />
-                        <h5>4.8</h5>
+        <!-- <li :class="{ map_open : hovered }" @mouseover="cardOpen" @mouseleave="cardOpen"> -->
+        <li
+            @mouseenter="$emit('mouseenter')"
+            @mouseleave="$emit('mouseleave')"
+            :class="{ 'no-hover': !isHoverEnabled }"
+        >
+            <div class="normal">
+                <img :src="this.pics" alt="" />
+                <div class="shopinfo">
+                    <h3>{{ shop.SNAME }}</h3>
+                    <div class="content">
+                        <div class="address">
+                            <img
+                                src="/src/assets/Image/map/addressLogo.png"
+                                alt=""
+                            />
+                            <h5>{{ shop.REGION }}部地區</h5>
+                        </div>
+                        <div class="star">
+                            <img src="/src/assets/Image/map/star.png" alt="" />
+                            <h5>4.8</h5>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="opened">
-            <div class="card_header"></div>
-            <div class="card_main">
-                <div class="maininfo">
-                    <img :src="this.pics" class="shopImg" />
-                    <div class="maincontent">
-                        <div class="name_collect">
-                            <h2>{{ shop.SNAME }}</h2>
-                            <div class="collect"></div>
-                        </div>
-                        <div class="star_price">
-                            <div class="score">
-                                <h4>4.8</h4>
-                                <img src="/src/assets/Image/map/star.png" class="scorestar" />
+            <div class="opened">
+                <div class="card_header"></div>
+                <div class="card_main">
+                    <div class="maininfo">
+                        <img :src="this.pics" class="shopImg" />
+                        <div class="maincontent">
+                            <div class="name_collect">
+                                <h2>{{ shop.SNAME }}</h2>
+                                <div class="collect"></div>
                             </div>
-                            <h4>( 100則評論 )</h4>
-                            <h4>．均消 $300</h4>
-                        </div>
-                        <div class="opentime">
-                            <img src="/src/assets/Image/map/clock.png" alt="" />
-                            <h4>營業時間 : 11:00 - 21:00</h4>
-                        </div>
-                        <div class="shop_address">
-                            <img src="/src/assets/Image/map/addressLogo.png" alt="" />
-                            <h4>台{{ shop.REGION }}市士林區忠誠路二段152號</h4>
+                            <div class="star_price">
+                                <div class="score">
+                                    <h4>4.8</h4>
+                                    <img
+                                        src="/src/assets/Image/map/star.png"
+                                        class="scorestar"
+                                    />
+                                </div>
+                                <h4>( 100則評論 )</h4>
+                                <h4>．均消 $300</h4>
+                            </div>
+                            <div class="opentime">
+                                <img
+                                    src="/src/assets/Image/map/clock.png"
+                                    alt=""
+                                />
+                                <h4>營業時間 : 11:00 - 21:00</h4>
+                            </div>
+                            <div class="shop_address">
+                                <img
+                                    src="/src/assets/Image/map/addressLogo.png"
+                                    alt=""
+                                />
+                                <h4>
+                                    台{{ shop.REGION }}市士林區忠誠路二段152號
+                                </h4>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="bestreview">
-                    <div>
-                        <h4>最佳<br />評論</h4>
-                        <div class="reviewcontent">
-                            <h4>{{ lowerString }}</h4>
-                            <h5>來自{{ shop.MNAME }} 於 {{ formatDate(shop.TIME) }} 的評論</h5>
+                    <div class="bestreview">
+                        <div>
+                            <h4>最佳<br />評論</h4>
+                            <div class="reviewcontent">
+                                <h4>{{ lowerString }}</h4>
+                                <h5>
+                                    來自{{ shop.MNAME }} 於
+                                    {{ formatDate(shop.TIME) }} 的評論
+                                </h5>
+                            </div>
                         </div>
+                        <img
+                            src="/src/assets/Image/map/koreawaybgi.png"
+                            alt=""
+                        />
                     </div>
-                    <img src="/src/assets/Image/map/koreawaybgi.png" alt="" />
                 </div>
             </div>
-        </div>
-    </li>
+        </li>
     </router-link>
 </template>
 
@@ -173,8 +198,6 @@ li {
             display: none;
         }
     }
-
-
 }
 
 .normal {
@@ -310,7 +333,7 @@ li {
             }
         }
 
-        &>h4:nth-child(2) {
+        & > h4:nth-child(2) {
             color: #999999;
         }
     }
@@ -348,12 +371,12 @@ li {
     height: 88px;
     border-radius: 15px;
 
-    &>div {
+    & > div {
         display: flex;
         align-items: center;
         justify-content: space-around;
 
-        &>h4 {
+        & > h4 {
             width: 80px;
             height: 64px;
             text-align: center;
@@ -386,18 +409,19 @@ li {
 
 // 不給hover效果
 
-// .member_collection .no-hover:hover {
-//     width: 460px;
-//     height: 202px;
-// }
+.member_collection .no-hover:hover {
+    width: 460px;
+    height: 202px;
+}
 
-// .member_collection .no-hover:hover .normal {
-//     opacity: 1;
-//     transform: scale(1);
-//     display: block;
-// }
+.member_collection .no-hover:hover .normal {
+    opacity: 1;
+    transform: scale(1);
+    display: block;
+}
 
-// .member_collection .no-hover:hover .opened {
-//     opacity: 0;
-//     //   transform: scale(0.8);
-// }</style>
+.member_collection .no-hover:hover .opened {
+    opacity: 0;
+    //   transform: scale(0.8);
+}
+</style>

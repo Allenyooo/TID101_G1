@@ -3,7 +3,9 @@
     export default{
 
         mounted(){
-            this.purchaseItem();
+            // this.purchaseItem();
+            this.getMemberID();
+            this.loginStatus();
         },
 
         data(){
@@ -56,19 +58,48 @@
                 voucher_discount: null,
                 usedtimes: 0,
                 payment: [],
+                memberId: "",
+                totalQty: ""
             }
             
         },
 
         methods: {
+            getMemberID(){
+                let cookies = document.cookie;
+                let match = cookies.match(/memberId=(\d+)/);
+                let memberId = match[1];
+                // console.log(match)
+                console.log(memberId);
+                this.memberId = memberId;
+                return memberId;
+            },
+            loginStatus(){
+                if(this.memberId == null){
+                    alert("請先登入");
+                }else{
+                    this.purchaseItem()
+                }
+            },
             async purchaseItem(){
-                fetch("http://localhost/tid101_g1/public/php/checkOut/purchase.php")
+                fetch(
+                    // "http://localhost/tid101_g1/public/php/checkOut/purchase.php"
+                    `${import.meta.env.VITE_PHP_PATH}checkOut/purchase.php`,{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        memberId: this.memberId
+                    })
+                })
                     .then(resp => resp.json())
                     .then(ticketsDB => {
-                        this.tickets = ticketsDB;
-                        }
-                    )
-                    .catch(wrong => console.log(wrong))
+                        this.tickets = ticketsDB
+                    })
+                    .catch(wrong => {
+                        console.log(wrong)
+                    })
             },
             minusOne(ticket , index){
                 if(ticket.qty > 1){
@@ -89,7 +120,9 @@
             //     return ticket.price * ticket.discount
             // }
             async submitCode(){
-                fetch("http://localhost/tid101_g1/public/php/checkOut/voucher.php",{
+                fetch(
+                    // "http://localhost/tid101_g1/public/php/checkOut/voucher.php"
+                    `${import.meta.env.VITE_PHP_PATH}checkOut/voucher.php`,{
                     method: "POST",
                     headers:  {
                         'Content-Type': 'application/json'
@@ -118,7 +151,9 @@
 
             },
             async nextStep(){
-                fetch("http://localhost/tid101_g1/public/php/checkOut/submitOrder.php",{
+                fetch(
+                    // "http://localhost/tid101_g1/public/php/checkOut/submitOrder.php"
+                    `${import.meta.env.VITE_PHP_PATH}checkOut/submitOrder.php`,{
                     method: "POST",
                     headers: {
                         'Content-Type' : 'application/json'
@@ -127,6 +162,9 @@
                         promoCode: this.promoCode,
                         usedtimes: this.usedtimes,
                         payment: this.payment,
+                        memberId: this.memberId,
+                        tickets: this.tickets,
+                        totalQty: this.totalQty
                     })
                 })
                     .then(resp => resp.json())
@@ -134,10 +172,10 @@
                         console.log(testDB);
                         }
                     )
+                    .then(this.$router.push('/receipt'))
                     .catch(error => {
                         console.error('Error:', error);
                     })
-                    // .then(this.$router.push('/receipt'))
             },
             // nextStep(){
             //     this.$router.push('/receipt')
@@ -154,6 +192,7 @@
                 this.tickets.forEach(ticket => {
                     totalQty += ticket.qty;
                 })
+                this.totalQty = totalQty;
                 return totalQty;
             },
 
@@ -190,7 +229,12 @@
 
             total(){
                 let total = this.subtotal - this.voucher_discount ;
-                return total
+                if(total < 0){
+                    return total = 0;
+                }else{
+                    return total = total;
+                }
+                // return total
             }
         }
     }
@@ -271,11 +315,11 @@
                             <h4>選擇付款方式</h4>
                             <div class="checkOut_pay_method">
                                 <div class="creditCard">
-                                    <input type="radio" name="pay" id="checkOut_creditCard" v-model="payment" value="信用卡">
+                                    <input type="radio" name="pay" id="checkOut_creditCard" v-model="payment" value="信用卡" required="required">
                                     <label for="checkOut_creditCard"><span>信用卡</span></label>
                                 </div>
                                 <div class="linePay">
-                                    <input type="radio" name="pay" id="checkOut_linePay" v-model="payment" value="LINE Pay">
+                                    <input type="radio" name="pay" id="checkOut_linePay" v-model="payment" value="LINE Pay" required="required">
                                     <label for="checkOut_linePay"><span>LINE Pay</span></label>
                                 </div>
                             </div>
@@ -284,8 +328,8 @@
                 </div>
                 <!-- <form @submit.prevent="nextStep" action="http://localhost/tid101_g1/public/php/checkOut/submitOrder.php" method="post" class="checkOut_nextStep"> -->
                 <form class="checkOut_nextStep">
-                    <input type="button" id="checkOut_next" value="下一步" @click="nextStep" v-if="totalQty !== 0">
-                    <input type="button" id="checkOut_cantNext" value="下一步" @click="nextStep" v-else="totalQty == 0" disabled>
+                    <input type="button" id="checkOut_next" value="下一步" @click="nextStep" v-if="totalQty !== 0 && payment.length !== 0">
+                    <input type="button" id="checkOut_cantNext" value="下一步" v-else disabled>
                 </form>
                 <!-- <button id="checkOut_next">下一步</button> -->
                 <img src="../assets/Image/checkOut/envelope_forward.png" alt="" class="envelope_forward">
@@ -772,12 +816,18 @@
                     margin-bottom: 8px;
                 }
                 #checkOut_creditCard{
-                    margin: 0 8px -1px;
+                    margin-left: 8px;
+                    margin-bottom: -1px;
                     width: 16px;
                     height: 16px;
                     // background-color: $Gold;
                     border: 1px solid $Gold;
+                    cursor: pointer;
                 }
+            }
+            span{
+                padding-left: 8px;
+                cursor: pointer;
             }
             span:first-child{
                 margin-right: 20px;
@@ -787,10 +837,11 @@
                 display: flex;
                 align-items: center;
                 #checkOut_linePay{
-                    // margin: 0 8px;
-                    margin: 0 8px -1px;
+                    margin-left: 8px;
+                    margin-bottom: -1px;
                     width: 16px;
                     height: 16px;
+                    cursor: pointer;
                 }
             }
         }

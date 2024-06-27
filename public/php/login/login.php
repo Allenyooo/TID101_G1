@@ -36,14 +36,12 @@ try {
         echo json_encode($response);
         exit;
     } else {
-        http_response_code(401);
-        $response = array('success' => false, 'message' => 'Invalid account or password');
+        $response = array('success' => false, 'message' => '帳號或密碼無效');
         header('Content-Type: application/json');
         echo json_encode($response);
     }
 } catch (Exception $e) {
     error_log("Error: ". $e->getMessage()); // Log the error
-    http_response_code(500);
     $response = array('success' => false, 'message' => 'An error occurred');
     header('Content-Type: application/json');
     echo json_encode($response);

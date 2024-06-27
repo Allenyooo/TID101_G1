@@ -26,7 +26,7 @@
                 </div>
                 <h2>{{ detail.NAME }}</h2>
             </div>
-
+            
             <ul class="member_container">
                 <h4 class="member_labeltwo">會員資訊</h4>
 
@@ -310,10 +310,13 @@ export default {
             newNickname: '',
             nicknameSuccess: false,
 
+            // phone: '',
             showniPhone: false,
             newiPhone: '',
             phoneError: '',
             showniPhoneSuccess: false,
+
+            // mail: '',
 
             showModal: false,
             eyeClose: true,
@@ -410,8 +413,8 @@ export default {
         },
         updateNickname() {
             if (this.newNickname.trim() === '') {
-                alert("請輸入新的暱稱");
-                return;
+            alert("請輸入新的暱稱");
+            return;
             }
             const user = this.details.find(u => u.ID === this.selectedUserId);
             if (user) {
@@ -810,6 +813,7 @@ export default {
                 position: relative;
                 margin-bottom: 28px;
                 overflow: hidden;
+                overflow: hidden;
 
                 @include breakpoint(430px) {
                     margin-top: 8vw;
@@ -817,20 +821,24 @@ export default {
                     height: 100px;
                 }
 
-                .box1 {
-                    width: 100px;
-                    height: 100px;
+                img {
+                    // background-image: url(../assets/Image/member/lets-icons_img-box.svg);
+                    height: auto;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 1;
+                    width: 120px;
+                }
 
-                    img {
-                        height: auto;
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        z-index: 1;
-                        width: 120px;
-                    }
-
+                    & input {
+                        width: 200px;
+                        height: 200px;
+                        border-radius: 100%;
+                        font-size: 11px;
+                        opacity: 0;
+                        cursor: pointer;
                     & input {
                         width: 200px;
                         height: 200px;
@@ -849,6 +857,16 @@ export default {
                 }
 
 
+                        @include breakpoint(430px) {
+                            margin: 12px 0px;
+                            width: 89px;
+                            height: 200px;
+                            font-size: 12px;
+                        }
+                    }
+                }
+
+                
             }
 
             h2 {
@@ -1013,6 +1031,20 @@ export default {
                         @include breakpoint(390px) {
                             left: 68vw;
                         }
+
+                        @include breakpoint(820px) {
+                            right: 10vw;
+                        }
+
+                        @include breakpoint(430px) {
+                            right: 0vw;
+                            width: 14px;
+                            height: 14px;
+                        }
+
+                        @include breakpoint(390px) {
+                            left: 68vw;
+                        }
                     }
 
                 }
@@ -1146,6 +1178,7 @@ export default {
         border-radius: 20px;
         width: 83vw;
         margin: 0 auto 6vh;
+
 
 
         @include breakpoint(820px) {

@@ -59,6 +59,7 @@ export default {
     data() {
         return {
             forgotAccount: "",
+            forgotCode: "",
             emailError: "",
         };
     },
@@ -74,7 +75,7 @@ export default {
 
             // Send a request to the server to verify the account
             axios
-                .post("http://localhost/tid101_g1/public/php/login/fotgotpw.php", {
+                .post(`${import.meta.env.VITE_PHP_PATH}login/forgotpw.php`, {
                     forgotAccount: this.forgotAccount,
                 })
                 .then((response) => {
@@ -86,7 +87,7 @@ export default {
                 })
                 .catch((error) => {
                     // Handle errors here
-                    console.error(error);
+                    // console.error(error);
                 });
         },
         validateEmail(email) {

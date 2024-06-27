@@ -139,7 +139,7 @@ export default {
         },
         makeLoginRequest() {
             axios
-                .post("http://localhost/tid101_g1/public/php/login/login.php", {
+                .post(`${import.meta.env.VITE_PHP_PATH}login/login.php`, {
                     account: this.account,
                     password: this.password,
                 })

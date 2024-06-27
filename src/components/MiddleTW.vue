@@ -23,7 +23,8 @@ export default {
         async fetchShops() {
             try {
                 const response = await fetch(
-                    "http://localhost/tid101_g1/public/php/map/shop.php?REGION=中"
+                    // "http://localhost/tid101_g1/public/php/map/shop.php?REGION=中"
+                    `${import.meta.env.VITE_PHP_PATH}map/shop.php?REGION=中`
                 );
                 const shopsData = await response.json();
                 this.shops = shopsData;
