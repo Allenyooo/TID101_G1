@@ -822,7 +822,6 @@ export default {
                 }
 
                 img {
-                    // background-image: url(../assets/Image/member/lets-icons_img-box.svg);
                     height: auto;
                     position: absolute;
                     top: 50%;
@@ -855,18 +854,6 @@ export default {
                         }
                     }
                 }
-
-
-                        @include breakpoint(430px) {
-                            margin: 12px 0px;
-                            width: 89px;
-                            height: 200px;
-                            font-size: 12px;
-                        }
-                    }
-                }
-
-                
             }
 
             h2 {
