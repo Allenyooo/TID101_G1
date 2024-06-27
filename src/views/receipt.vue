@@ -2,9 +2,65 @@
 import couponSwiper from "../components/receipt_swiper.vue";
 
 export default {
+
+    mounted(){
+        this.getMemberID();
+        this.loginStatus();
+        // this.getOrderDetails();
+    },
+
+    data(){
+        return{
+            orderDetails: {
+                id: "24EAE33493",
+                date: "2024 / 05 / 15",
+                payment: "LINE Pay",
+                amount: "2600"
+            },
+            memberId: "",
+        }
+    },
+
     components: { couponSwiper },
 
     methods: {
+        getMemberID(){
+            let cookies = document.cookie;
+            let match = cookies.match(/memberId=(\d+)/);
+            let memberId = match[1];
+            // console.log(match)
+            console.log(memberId);
+            this.memberId = memberId;
+            return memberId;
+        },
+        loginStatus(){
+            if(this.memberId == null){
+                alert("發生錯誤 請稍後再嘗試");
+            }else{
+                this.getOrderDetails()
+            }
+        },
+        async getOrderDetails(){
+            fetch(
+                // "http://localhost/tid101_g1/public/php/receipt/orderDetails.php"
+            `${import.meta.env.VITE_PHP_PATH}receipt/orderDetails.php`,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    memberId: this.memberId
+                })
+            })
+                .then(resp => resp.json())
+                .then(orderDB => {
+                    this.order = orderDB
+                })
+                .catch(wrong => {
+                    console.log(wrong)
+                })
+        },
+
         member() {
             this.$router.push("/member");
         },
@@ -21,19 +77,19 @@ export default {
                     <ul class="receipt_order_details">
                         <li>
                             <h5>訂單編號</h5>
-                            <h5>24EAE33493</h5>
+                            <h5>{{ orderDetails.id }}</h5>
                         </li>
                         <li>
                             <h5>訂購日期</h5>
-                            <h5>2024 / 05 / 15</h5>
+                            <h5>{{ orderDetails.date }}</h5>
                         </li>
                         <li>
                             <h5>付款方式</h5>
-                            <h5>LINE Pay</h5>
+                            <h5>{{ orderDetails.payment }}</h5>
                         </li>
                         <li>
                             <h5>實付金額</h5>
-                            <h5>NT$ 2600</h5>
+                            <h5>NT$ {{ orderDetails.amount }}</h5>
                         </li>
                     </ul>
                     <div class="receipt_consumer_details">

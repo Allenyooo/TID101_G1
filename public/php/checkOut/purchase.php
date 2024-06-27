@@ -2,6 +2,8 @@
 
     include("../conn.php");
 
+    $purchase = json_decode(file_get_contents("php://input"),true);
+
     $sql = "SELECT 
                 c.MEMBER_ID,
                 p.`NAME` as name, 
@@ -16,10 +18,11 @@
                 join CART as c 
                     on p.ID = c.PRODUCT_ID
                 join DISCOUNT as d
-                    on p.DISCOUNT_ID = d.ID ";
-            // WHERE c.MEMBER_ID = ?";
+                    on p.DISCOUNT_ID = d.ID
+            WHERE c.MEMBER_ID = ?";
     
     $statement = $pdo->prepare($sql);
+    $statement->bindValue(1, $purchase['memberId']);
     $statement->execute();
 
     $data = $statement->fetchAll();
