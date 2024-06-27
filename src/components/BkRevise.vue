@@ -123,43 +123,37 @@ export default {
     // },
 
     saveChanges() {
-      fetch(
-        "http://localhost/tid101_g1/public/php/Bk/BkAccess/accessRevise.php",
-        {
-          // mode: "cors",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            // Search: this.placeholder[id].search,
-            // Input: this.input,
-            reviseBd: this.reviseBd,
-            // Start: this.startDate,
-            // End: this.endDate,
-          }),
-        }
-      );
+      fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkAccess/accessRevise.php`, {
+        // mode: "cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // Search: this.placeholder[id].search,
+          // Input: this.input,
+          reviseBd: this.reviseBd,
+          // Start: this.startDate,
+          // End: this.endDate,
+        }),
+      });
     },
 
     saveChangeDelete() {
-      fetch(
-        "http://localhost/tid101_g1/public/php/Bk/BkAccess/accessDelete.php",
-        {
-          // mode: "cors",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            // Search: this.placeholder[id].search,
-            // Input: this.input,
-            deleteId: this.reviseId,
-            // Start: this.startDate,
-            // End: this.endDate,
-          }),
-        }
-      );
+      fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkAccess/accessDelete.php`, {
+        // mode: "cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // Search: this.placeholder[id].search,
+          // Input: this.input,
+          deleteId: this.reviseId,
+          // Start: this.startDate,
+          // End: this.endDate,
+        }),
+      });
     },
   },
 
@@ -195,6 +189,10 @@ export default {
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center center;
+
+    &:hover {
+      background-image: url("/src/assets/Image/BK/hoverevise.svg");
+    }
   }
 }
 
@@ -267,6 +265,11 @@ export default {
   padding: 8px 16px;
   cursor: pointer;
   border-radius: 4px;
+
+  &:hover {
+    background-color: #2852ab;
+    color: $White;
+  }
 }
 
 .btn-primary {

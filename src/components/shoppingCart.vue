@@ -208,7 +208,7 @@ export default {
 
     changeD(i) {
       fetch(
-        "http://localhost/tid101_g1/public/php/shoppingCart/shoppingCartUpdate.php",
+        `${import.meta.env.VITE_PHP_PATH}shoppingCart/shoppingCartUpdate.php`,
         {
           method: "POST",
           headers: {
@@ -225,7 +225,7 @@ export default {
 
     changeU(i) {
       fetch(
-        "http://localhost/tid101_g1/public/php/shoppingCart/shoppingCartUpdateUp.php",
+        `${import.meta.env.VITE_PHP_PATH}shoppingCart/shoppingCartUpdateUp.php`,
         {
           method: "POST",
           headers: {
@@ -242,7 +242,9 @@ export default {
 
     changeC(i) {
       fetch(
-        "http://localhost/tid101_g1/public/php/shoppingCart/shoppingCartUpdateClear.php",
+        `${
+          import.meta.env.VITE_PHP_PATH
+        }shoppingCart/shoppingCartUpdateClear.php`,
         {
           method: "POST",
           headers: {

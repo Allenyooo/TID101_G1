@@ -196,22 +196,19 @@ export default {
     },
 
     searchButton(id) {
-      fetch(
-        "http://localhost/tid101_g1/public/php/Bk/BkOrder/orderSearch.php",
-        {
-          mode: "cors",
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            Search: this.placeholder[id].search,
-            Input: this.input,
-            Start: this.startDate,
-            End: this.endDate,
-          }),
-        }
-      )
+      fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkOrder/orderSearch.php`, {
+        mode: "cors",
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Search: this.placeholder[id].search,
+          Input: this.input,
+          Start: this.startDate,
+          End: this.endDate,
+        }),
+      })
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -245,7 +242,7 @@ export default {
 
   mounted() {
     // this.fetchData();
-    fetch("http://localhost/tid101_g1/public/php/Bk/BkOrder/orderData.php", {
+    fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkOrder/orderData.php`, {
       mode: "cors",
     })
       .then((response) => {
@@ -280,16 +277,16 @@ export default {
       width: 80vw;
 
       p {
-        font-size: 28px;
+        font-size: 26px;
         font-weight: bold;
-        margin-top: 16px;
+        margin-top: 12px;
       }
 
       .Bkline {
         height: 1px;
 
         background-color: $Black;
-        margin-bottom: 24px;
+        margin-bottom: 12px;
       }
 
       .Bksearchbody {

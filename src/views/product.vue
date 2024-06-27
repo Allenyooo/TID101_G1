@@ -332,7 +332,7 @@ export default {
 
       //----------------------存到資料庫的部分
 
-      fetch("http://localhost/tid101_g1/public/php/product/shoppingAdd.php", {
+      fetch(`${import.meta.env.VITE_PHP_PATH}product/shoppingAdd.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -378,7 +378,7 @@ export default {
     },
 
     shoppingAdd() {
-      fetch("http://localhost/tid101_g1/public/php/product/test.php")
+      fetch(`${import.meta.env.VITE_PHP_PATH}product/test.php`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -412,7 +412,7 @@ export default {
 
   mounted() {
     // this.fetchData();
-    fetch("http://localhost/tid101_g1/public/php/product/test.php", {
+    fetch(`${import.meta.env.VITE_PHP_PATH}product/test.php`, {
       mode: "cors",
     })
       .then((response) => {
@@ -441,7 +441,7 @@ export default {
 @mixin breakpoint($point) {
   // 桌機
   @if $point == mobile {
-    @media (max-width: 391px) {
+    @media (max-width: 431px) {
       @content;
     }
   }

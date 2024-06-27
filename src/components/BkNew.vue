@@ -2,7 +2,7 @@
   <div>
     <div class="reviseButton">
       <button class="btn btn-primary brevise" @click="showPopup = true">
-        新增操作人員帳號
+        <h5>新增操作人員帳號</h5>
       </button>
     </div>
 
@@ -14,14 +14,25 @@
         <!-- 彈出視窗內容 -->
 
         <ul>
-          <li v-for="(i, index) in reviseBd">
-            <h4>{{ index }}:</h4>
-            <input
-              type="text"
-              v-model="reviseBd[index]"
-              :readonly="index == '編號'"
-              :class="{ idBg: index == '編號' }"
-            />
+          <li>
+            <h4>編號:</h4>
+            <input type="text" class="idBg" :Value="newId + 1" readonly />
+          </li>
+          <li>
+            <h4>姓名:</h4>
+            <input type="text" v-model="name" />
+          </li>
+          <li>
+            <h4>信箱:</h4>
+            <input type="text" v-model="mail" />
+          </li>
+          <li>
+            <h4>密碼:</h4>
+            <input type="text" v-model="password" />
+          </li>
+          <li>
+            <h4>權限:</h4>
+            <input type="text" v-model="access" />
           </li>
         </ul>
         <!-- <div>{{ reviseBd.ID }}</div>
@@ -31,9 +42,9 @@
         <!-- 底部按鈕 -->
         <div class="buttons">
           <button class="btn btn-primary" @click="showConfirmationDialog">
-            儲存
+            新增
           </button>
-          <button class="btn btn-secondary" @click="cancelPopup">刪除</button>
+          <button class="btn btn-secondary" @click="cancelPopup">取消</button>
         </div>
       </div>
     </div>
@@ -43,10 +54,11 @@
 </template>
 
 <script>
+import { Value } from "sass";
 import Swal from "sweetalert2";
 
 export default {
-  props: ["reviseId", "revisePage", "reviseBd"],
+  props: ["reviseId", "revisePage", "reviseBd", "newId"],
 
   data() {
     return {
@@ -54,6 +66,10 @@ export default {
       Id: 0,
       // inputValue: this.reviseBd.ID,
       showPopup: false,
+      name: "",
+      mail: "",
+      password: "",
+      access: "",
     };
   },
 
@@ -75,7 +91,7 @@ export default {
               title: "修改成功",
               icon: "success",
             });
-            this.saveChanges();
+            this.newChange();
             this.closePopup();
           }
         } else {
@@ -119,7 +135,7 @@ export default {
     },
     cancelPopup() {
       this.showPopup = false;
-      this.deleteButton();
+      //   this.deleteButton();
     },
 
     // saveChanges() {
@@ -130,24 +146,21 @@ export default {
     //   this.showConfirmationDialog();
     // },
 
-    saveChanges() {
-      fetch(
-        "http://localhost/vite/tid101_g1/public/php/Bk/BkAccess/accessRevise.php",
-        {
-          // mode: "cors",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            // Search: this.placeholder[id].search,
-            // Input: this.input,
-            reviseBd: this.reviseBd,
-            // Start: this.startDate,
-            // End: this.endDate,
-          }),
-        }
-      );
+    newChange() {
+      fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkAccess/accessNew.php`, {
+        // mode: "cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          newId: this.newId + 1,
+          newName: this.name,
+          newMail: this.mail,
+          newPassword: this.password,
+          newAccess: this.access,
+        }),
+      });
     },
   },
 
@@ -179,11 +192,12 @@ export default {
   button {
     // background-image: url("/src/assets/Image/BK/revise.svg");
     // width: 32px;
-    height: 31px;
-    background-size: 60%;
-    background-repeat: no-repeat;
-    background-position: center center;
+
     color: black;
+    // padding: auto;
+
+    h5 {
+    }
   }
 }
 
@@ -233,6 +247,10 @@ export default {
         // margin-left: 16px;
       }
     }
+
+    .idBg {
+      background-color: #e6e6e6;
+    }
   }
 }
 
@@ -253,9 +271,16 @@ export default {
 
 .btn {
   margin: 0 5px;
-  padding: 8px 16px;
+  padding: 1px 6px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 0;
+  border: 1.5px solid black;
+  background-color: $White;
+
+  &:hover {
+    background-color: $Gold;
+    color: $White;
+  }
 }
 
 .btn-primary {

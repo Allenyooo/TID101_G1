@@ -14,6 +14,7 @@
           :stateTd="stateTd"
           :page="page"
           :bd2="bd2"
+          :bd3="bd3"
         ></BD>
       </div>
     </div>
@@ -127,6 +128,7 @@ export default {
       // ],
       bd: [],
       bd2: [],
+      bd3: [],
       title: [
         { 商品編號: "管理員編號" },
         { 商品圖片: "信箱" },
@@ -144,6 +146,8 @@ export default {
       dataTd: 1,
 
       sortid: 1,
+
+      lastId: 0,
     };
   },
 
@@ -201,12 +205,9 @@ export default {
 
   mounted() {
     // this.fetchData();
-    fetch(
-      "http://localhost/tid101_g1/public/php/Bk/BkProduct/productData.php",
-      {
-        mode: "cors",
-      }
-    )
+    fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkProduct/productData.php`, {
+      mode: "cors",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -216,6 +217,8 @@ export default {
       .then((data) => {
         this.bd = data.data;
         this.bd2 = data.data2;
+        this.bd3 = data.data3;
+        this.lastId = data.data[data.data2.length - 1].ID;
         // this.bd2 = data.data2;
         // this.price = data[0].PRICE;
         // this.discount = data[0].PERCENT;
@@ -240,16 +243,16 @@ export default {
       width: 80vw;
 
       p {
-        font-size: 28px;
+        font-size: 26px;
         font-weight: bold;
-        margin-top: 16px;
+        margin-top: 12px;
       }
 
       .Bkline {
         height: 1px;
 
         background-color: $Black;
-        margin-bottom: 24px;
+        margin-bottom: 12px;
       }
     }
   }

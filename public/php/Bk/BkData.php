@@ -28,16 +28,36 @@
     $statement->execute();
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+
+
+    $sql3 = "SELECT ID , status from MEMBER";
+
+    $statement3 = $pdo->prepare($sql3);
+    $statement3->execute();
+    $data3 = $statement3->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
+
+
+    $allData = array(
+        "data" => $data,
+       
+        "data3" => $data3
+    );
     
 
-    if(count($data) > 0){
+      echo json_encode($allData);
+
+    // if(count($data) > 0){
       
     
-        echo json_encode($data);
-    }else{
-        echo echojson_encode(["message" => "抓取失败"]);
+    //     echo json_encode($data);
+    // }else{
+    //     echo echojson_encode(["message" => "抓取失败"]);
 
-    }
+    // }
 
 
     // foreach($data as $index => $row){

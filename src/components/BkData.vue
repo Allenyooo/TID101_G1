@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody class="tableBody">
-        <tr v-for="(j, index) in bd" @mouseover="hovertd">
+        <tr v-for="(j, index) in pageData">
           <td
             v-for="(i, index) in j"
             :key="j.ID"
@@ -29,7 +29,11 @@
           </td>
 
           <td v-if="stateTd == 1">
-            <BState></BState>
+            <BState
+              :statePage="page"
+              :stateId="j.ID"
+              :stateBd="bd3[j.ID - 1]"
+            ></BState>
           </td>
           <td v-if="dataTd == 1">
             <BR
@@ -74,6 +78,29 @@
         </tr>
       </tbody> -->
     </table>
+
+    <div class="pagination">
+      <button
+        @click="prevPage"
+        :disabled="currentPage === 1"
+        class="firstButton"
+      >
+        &lt;
+      </button>
+
+      <li v-for="i in totalPages" :key="i">
+        <button :class="{ pageOn: i == currentPage }" @click="changePage(i)">
+          {{ i }}
+        </button>
+      </li>
+      <button
+        @click="nextPage"
+        :disabled="currentPage === totalPages"
+        class="lastButton"
+      >
+        &gt;
+      </button>
+    </div>
   </div>
 </template>
 
@@ -86,22 +113,47 @@ import BC from "/src/components/BkCheck.vue";
 export default {
   components: { BR, BState, BC },
 
-  props: ["bd", "title", "dataTd", "stateTd", "BCHref", "page", "bd2"],
+  props: ["bd", "title", "dataTd", "stateTd", "BCHref", "page", "bd2", "bd3"],
 
   data() {
     return {
       hover: false,
+      currentPage: 1,
+      itemsPerPage: 10,
     };
   },
 
   methods: {
-    // hovertd() {
-    //   this.hover = true;
-    // },
     tValue(t) {
       for (let v in t) {
         return v;
       }
+    },
+
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage += 1;
+      }
+    },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage -= 1;
+      }
+    },
+
+    changePage(i) {
+      this.currentPage = i;
+    },
+  },
+  computed: {
+    // Calculate the total number of pages
+    totalPages() {
+      return Math.ceil(this.bd.length / this.itemsPerPage);
+    },
+    // Filter and display the data for the current page
+    pageData() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      return this.bd.slice(startIndex, startIndex + this.itemsPerPage);
     },
   },
 };
@@ -124,40 +176,66 @@ export default {
       th {
         background-color: $DarkBrown;
         color: $White;
-        height: 44px;
+        height: 39px;
 
         p {
           font-size: 18px;
           font-weight: bold;
-          line-height: 44px;
+          line-height: 39px;
         }
       }
     }
 
     .tableBody {
-      .td {
-        background-color: red;
-      }
-
-      td {
-        background-color: $White;
-        color: $Black;
-        padding: 4px 0;
-        border-bottom: 1px solid #c4c4c4;
-        border-left: 1px solid #c4c4c4;
-        border-right: 1px solid #c4c4c4;
-        vertical-align: middle;
-
-        overflow: hidden;
-        // text-overflow: ellipsis;
-
-        // button {
-        //   background-image: url("/src/assets/Image/product/revise.svg");
-        //   height: 36px;
-        //   width: 36px;
-        //   border: none;
+      tr {
+        // :hover {
+        //   background-color: coral;
         // }
+        td {
+          background-color: $White;
+          color: $Black;
+          padding: 4px 0;
+          border-bottom: 1px solid #c4c4c4;
+          border-left: 1px solid #c4c4c4;
+          border-right: 1px solid #c4c4c4;
+          vertical-align: middle;
+          overflow: hidden;
+
+          // text-overflow: ellipsis;
+        }
       }
+    }
+  }
+  .pagination {
+    margin-top: 20px;
+    justify-content: center;
+
+    button {
+      background-color: #ffffff;
+      color: #0056b3;
+      border: 1px solid #dee2e6;
+      border-right: 0;
+
+      font-size: 18px;
+      padding: 4px 8px 4px 8px;
+
+      &:hover {
+        background-color: #bad5f3;
+      }
+    }
+
+    .lastButton {
+      border-right: 1px solid #dee2e6;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .firstButton {
+      border-radius: 5px 0 0 5px;
+    }
+
+    .pageOn {
+      background-color: #2852ab;
+      color: $LightGray;
     }
   }
 }

@@ -47,10 +47,18 @@
 
 
 
+        $sql4 = "SELECT ID , status from VOUCHER";
+
+    $statement4 = $pdo->prepare($sql4);
+    $statement4->execute();
+    $data4 = $statement4->fetchAll(PDO::FETCH_ASSOC);
+
+
     $allData = array(
         "data" => $data,
         "data2" => $data2,
         "data3" => $data3,
+        "data4" => $data4,
     );
     
 

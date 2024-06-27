@@ -55,6 +55,7 @@
           :stateTd="stateTd"
           :page="page"
           :bd2="bd2"
+          :bd3="bd3"
           v-if="bdState == 1"
         ></BD>
 
@@ -64,6 +65,7 @@
           :dataTd="dataTd"
           :stateTd="stateTd"
           :bd2="bd2"
+          :bd3="bd3"
           v-if="bdState == 2"
         ></BD>
       </div>
@@ -208,6 +210,8 @@ export default {
       // ],
       bd: [],
       bd2: [],
+      bdOff: [],
+      bd3: [],
       title: [
         { 折價券編號: "管理員編號" },
         { 折價券名稱: "信箱" },
@@ -239,6 +243,8 @@ export default {
       bdState: 1,
 
       sortid: 1,
+
+      lastId: 0,
     };
   },
 
@@ -250,7 +256,7 @@ export default {
 
     searchButton(id) {
       fetch(
-        "http://localhost/tid101_g1/public/php/Bk/BkDiscount/discountSearch.php",
+        `${import.meta.env.VITE_PHP_PATH}Bk/BkDiscount/discountSearch.php`,
         {
           mode: "cors",
           method: "PUT",
@@ -301,12 +307,9 @@ export default {
 
   mounted() {
     // this.fetchData();
-    fetch(
-      "http://localhost/tid101_g1/public/php/Bk/BkDiscount/discountData.php",
-      {
-        mode: "cors",
-      }
-    )
+    fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkDiscount/discountData.php`, {
+      mode: "cors",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -317,6 +320,8 @@ export default {
         this.bd = data.data;
         this.bd2 = data.data2;
         this.bdOff = data.data3;
+        this.bd3 = data.data4;
+        this.lastId = data.data[data.data2.length - 1].ID;
         // this.bd2 = data.data2;
         // this.price = data[0].PRICE;
         // this.discount = data[0].PERCENT;
@@ -341,16 +346,16 @@ export default {
       width: 80vw;
 
       p {
-        font-size: 28px;
+        font-size: 26px;
         font-weight: bold;
-        margin-top: 16px;
+        margin-top: 12px;
       }
 
       .Bkline {
         height: 1px;
 
         background-color: $Black;
-        margin-bottom: 24px;
+        margin-bottom: 12px;
       }
 
       .Bksearchbody {

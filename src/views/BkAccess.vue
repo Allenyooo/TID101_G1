@@ -31,14 +31,9 @@
           <div class="searchButton">
             <button @click="searchButton(sId)"><h5>搜尋</h5></button>
           </div>
-          <!-- <div class="newButton">
-            <button>
-            
-              
-            </button>
-          </div> -->
-
-          <BN :revisePage="page"></BN>
+          <div class="newButton">
+            <BN :revisePage="page" :newId="lastId"></BN>
+          </div>
         </div>
 
         <BD
@@ -48,6 +43,7 @@
           :stateTd="stateTd"
           :page="page"
           :bd2="bd2"
+          :bd3="bd3"
         ></BD>
 
         <!-- <table class="table">
@@ -181,6 +177,7 @@ export default {
       // ],
       bd: [],
       bd2: [],
+      bd3: [],
       title: [
         { 管理員編號: "管理員編號" },
         { 姓名: "姓名" },
@@ -205,22 +202,19 @@ export default {
     },
 
     searchButton(id) {
-      fetch(
-        "http://localhost/tid101_g1/public/php/Bk/BkAccess/accessSearch.php",
-        {
-          mode: "cors",
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            Search: this.placeholder[id].search,
-            Input: this.input,
-            // Start: this.startDate,
-            // End: this.endDate,
-          }),
-        }
-      )
+      fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkAccess/accessSearch.php`, {
+        mode: "cors",
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Search: this.placeholder[id].search,
+          Input: this.input,
+          // Start: this.startDate,
+          // End: this.endDate,
+        }),
+      })
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -241,7 +235,7 @@ export default {
 
   mounted() {
     // this.fetchData();
-    fetch("http://localhost/tid101_g1/public/php/Bk/BkAccess/accessData.php", {
+    fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkAccess/accessData.php`, {
       mode: "cors",
     })
       .then((response) => {
@@ -253,6 +247,7 @@ export default {
       .then((data) => {
         this.bd = data.data;
         this.bd2 = data.data2;
+        this.bd3 = data.data3;
         this.lastId = data.data[data.data2.length - 1].ID;
         // this.bd2 = data.data2;
         // this.price = data[0].PRICE;
@@ -278,16 +273,16 @@ export default {
       width: 80vw;
 
       p {
-        font-size: 28px;
+        font-size: 26px;
         font-weight: bold;
-        margin-top: 16px;
+        margin-top: 12px;
       }
 
       .Bkline {
         height: 1px;
 
         background-color: $Black;
-        margin-bottom: 24px;
+        margin-bottom: 12px;
       }
 
       .Bksearchbody {
@@ -311,6 +306,15 @@ export default {
 
         .searchButton {
           margin-left: 8px;
+
+          button {
+            background-color: $White;
+
+            &:hover {
+              background-color: $Gold;
+              color: $White;
+            }
+          }
         }
 
         .newButton {

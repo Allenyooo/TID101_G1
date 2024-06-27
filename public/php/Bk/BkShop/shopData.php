@@ -40,13 +40,18 @@
     $statement2->execute();
     $data2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
 
+        $sql3 = "SELECT ID , status from STORE";
 
+    $statement3 = $pdo->prepare($sql3);
+    $statement3->execute();
+    $data3 = $statement3->fetchAll(PDO::FETCH_ASSOC);
 
 
 
     $allData = array(
         "data" => $data,
-        "data2" => $data2
+        "data2" => $data2,
+        "data3" => $data3
     );
     
 
