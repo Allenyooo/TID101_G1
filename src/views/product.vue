@@ -110,7 +110,7 @@
             </li>
             <li class="buttonList">
               <button class="shopping" @click="taskAdd()">加入購物車</button>
-              <button href="">
+              <button href="" @click="taskAdd2()">
                 <router-link to="/CheckOut"><h4>立即結帳</h4></router-link>
               </button>
             </li>
@@ -216,6 +216,7 @@
 <script>
 import shopping from "/src/components/shoppingCart.vue";
 import pCard from "/src/components/productCards.vue";
+import Swal from "sweetalert2";
 
 export default {
   components: { pCard, shopping },
@@ -349,7 +350,59 @@ export default {
           // End: this.endDate,
         }),
       });
+
+      Swal.fire({
+        icon: "success",
+        title: "成功加入購物車！",
+        showConfirmButton: false,
+        timer: 1500, // 自動在1.5秒後關閉
+      });
     },
+
+    taskAdd2() {
+      //---------------存到localStorage的部分
+      // let storedTasks = localStorage.getItem("productTasks");
+      // this.productTasks = storedTasks ? JSON.parse(storedTasks) : [];
+
+      // let price = this.price;
+      // let picture = this.img;
+      // let count = this.count;
+      // let discount = this.discount;
+
+      // this.total += this.price * this.count * this.discount;
+
+      // this.productTasks.unshift({
+      //   tPrice: price,
+      //   tPicture: picture,
+      //   tCount: count,
+      //   tDiscount: discount,
+
+      //   tTotal: price * count * discount,
+      // });
+
+      // localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
+
+      //----------------------存到資料庫的部分
+
+      fetch(`${import.meta.env.VITE_PHP_PATH}product/shoppingAdd.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // Search: this.placeholder[id].search,
+          // Input: this.input,
+          // reviseBd: this.reviseBd,
+          memberID: this.memberId,
+          cartID: (this.cartId += 1),
+          cartCount: this.count,
+          productID: this.currentButton,
+          // Start: this.startDate,
+          // End: this.endDate,
+        }),
+      });
+    },
+
     pmColse(e) {
       e.target.closest("div.productMove").classList.toggle("pmOn");
       this.move = false;
@@ -971,6 +1024,11 @@ export default {
               font-weight: bold;
               cursor: pointer;
 
+              &:hover {
+                background-color: #c3a988;
+                color: white;
+              }
+
               @include breakpoint(table) {
                 width: 31vw;
                 height: 7.8vw;
@@ -985,6 +1043,11 @@ export default {
 
               h4 {
                 color: $Gold;
+
+                &:hover {
+                  background-color: #c3a988;
+                  color: white;
+                }
               }
             }
 

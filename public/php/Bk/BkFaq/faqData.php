@@ -22,15 +22,15 @@
 
      
     
-        $sql = "SELECT ID,TYPE,QUSETION,ANSWER
-                from  FAQ;";
+        $sql = "SELECT ID,TYPE,QUESTION,ANSWER
+                from  FAQ";
 
     $statement = $pdo->prepare($sql);
     $statement->execute();
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
-        $sql2 = "SELECT ID as 編號 ,TYPE as 分類,QUSETION as 問題標題,ANSWER as 回答內容
+        $sql2 = "SELECT ID as 編號 ,TYPE as 分類,QUESTION as 問題標題,ANSWER as 回答內容
                  from  FAQ;";
 
     $statement2 = $pdo->prepare($sql2);
