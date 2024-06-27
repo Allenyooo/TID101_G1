@@ -87,7 +87,9 @@ export default {
         fetchFAQs() {
             axios
                 .get(
-                    "http://localhost/TID101-G1/public/php/chatBot/selectFAQs.php"
+                    //"http://localhost/tid101_g1/public/php/chatBot/selectFAQs.php"
+
+                    `${import.meta.env.VITE_PHP_PATH}chatBot/selectFAQs.php`
                 )
                 .then((response) => {
                     this.faqs = response.data.map((faq) => ({
@@ -101,7 +103,9 @@ export default {
         searchFAQs() {
             axios
                 .get(
-                    "http://localhost/TID101-G1/public/php/chatBot/keyWordSearch.php",
+                    //"http://localhost/tid101_g1/public/php/chatBot/keyWordSearch.php",
+                    `${import.meta.env.VITE_PHP_PATH}chatBot/selectFAQs.php`,
+
                     {
                         params: {
                             keyword: this.searchKeyword,
@@ -157,7 +161,7 @@ export default {
     align-items: center;
     z-index: 100;
     @include breakpoint(680px) {
-        bottom: 80px;
+        bottom: 110px;
     }
     .main-button {
         margin-top: 5px;
@@ -173,8 +177,8 @@ export default {
         cursor: pointer;
         transition: background-color 0.3s;
         @include breakpoint(680px) {
-            width: 30px;
-            height: 30px;
+            width: 60px;
+            height: 60px;
         }
         &:hover {
             transform: translateY(-2px);
@@ -198,8 +202,8 @@ export default {
             height: 60px;
             display: flex;
             @include breakpoint(680px) {
-                width: 30px;
-                height: 30px;
+                width: 60px;
+                height: 60px;
                 padding: 0;
             }
             transition: background-color 0.3s, transform 0.3s;
@@ -235,8 +239,8 @@ export default {
         transform: translateY(-2px);
     }
     @include breakpoint(680px) {
-        width: 30px;
-        height: 30px;
+        width: 60px;
+        height: 60px;
         bottom: 45px;
     }
 }

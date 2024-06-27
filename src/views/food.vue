@@ -48,52 +48,53 @@
                             alt=""
                         />
                     </div>
-                    <div class="item">
-                        <a href="#article3"
-                            ><img
-                                src="/src/assets/Image/food/horizontal_seafood.png"
-                                alt=""
-                        /></a>
+                    <div class="item" @click="scrollToTextSeafood">
+                        <img
+                            src="/src/assets/Image/food/horizontal_seafood.png"
+                            alt=""
+                        />
                     </div>
-                    <div class="item">
-                        <a href="#article4"
-                            ><img
-                                src="/src/assets/Image/food/horizontal_sidedish.png"
-                                alt=""
-                        /></a>
+                    <div class="item" @click="scrollToTextSide">
+                        <img
+                            src="/src/assets/Image/food/horizontal_sidedish.png"
+                            alt=""
+                        />
                     </div>
-                    <div class="item">
-                        <a href="#article5"
-                            ><img
-                                src="/src/assets/Image/food/horizontal_soup.png"
-                                alt=""
-                        /></a>
+                    <div class="item" @click="scrollToTextSoup">
+                        <img
+                            src="/src/assets/Image/food/horizontal_soup.png"
+                            alt=""
+                        />
                     </div>
                 </div>
             </div>
         </section>
     </div>
     <!-- food-main-description -->
-    <div class="food-description-blue" ref="textSection">
+    <div
+        class="food-description-blue page-section"
+        ref="textSection"
+        id="section1"
+    >
         <h1>主食 밥면</h1>
         <h4>
             韓國的主食文化以米飯為主，米飯是餐桌上的核心，也會加入糯米、紅豆等增加風味。韓國人也喜愛各類麵食，如冷麵和拌麵。冷麵清爽的口感適合夏季食用，而拌麵則辛辣和多樣的配料深受大眾喜愛。白米飯和麵食共同構成了韓國主食文化的重要部分，反映了韓國人對健康主食的追求。
         </h4>
     </div>
     <!-- 主食内容 -->
-    <div class="food-category">
+    <div class="food-category page-section" id="section2">
         <!-- RWD才會出現 -->
         <!-- <div class="food-category-top">
-                <img :src="currentItemMain.image" id="food-img-front" />
+            <img :src="currentItemMain.image" />
         </div> -->
-
+        <!-- RWD前的版型 -->
         <div class="food-category-left">
             <img
                 src="../assets/Image/food/food_half_circle.png"
                 class="food-img-back"
             />
             <div class="img-circle-big">
-                <img :src="currentItemMain.image" id="food-img-front" />
+                <img :src="currentItemMain.image" />
             </div>
         </div>
 
@@ -138,41 +139,40 @@
                 <div class="category-icon gold-color"></div>
                 <p class="category-text">肉類</p>
             </div>
-            <div class="category-item">
-                <a href="#article3">
-                    <div class="category-icon gold-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSeafood">
+                <div class="category-icon gold-color"></div>
+
                 <p class="category-text">海鮮</p>
             </div>
-            <div class="category-item">
-                <a href="#article4">
-                    <div class="category-icon gold-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSide">
+                <div class="category-icon gold-color"></div>
                 <p class="category-text">小菜</p>
             </div>
-            <div class="category-item">
-                <a href="#article5">
-                    <div class="category-icon gold-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSoup">
+                <div class="category-icon gold-color"></div>
                 <p class="category-text">湯品</p>
             </div>
         </div>
     </div>
-    <div class="food-description-red" ref="textSectionMeat">
+    <div
+        class="food-description-red page-section"
+        id="section3"
+        ref="textSectionMeat"
+    >
         <h1>肉類 고기</h1>
         <h4>
             韓國的肉類飲食文化豐富多樣，以烤肉為代表。烤肉是一種社交活動，家人或朋友聚在一起在炭火上烤製各種肉類，如牛肉、豬肉和雞肉。除了烤肉，還有燉牛肉和韓式炸雞。韓國肉類飲食重視品質和調味，常搭配各種小菜和醬料一起享用，展現了韓國人對美食和社交的熱愛。
         </h4>
     </div>
     <!-- 肉類内容 -->
-    <div class="food-category">
+    <div class="food-category page-section" id="section4">
         <div class="food-category-left">
             <img
                 src="../assets/Image/food/food_half_circle.png"
                 class="food-img-back"
             />
             <div class="img-circle-big">
-                <img :src="currentItemMain2.image" id="food-img-front" />
+                <img :src="currentItemMain2.image" />
             </div>
         </div>
         <div class="food-category-middle">
@@ -222,36 +222,36 @@
 
                 <p class="category-text">海鮮</p>
             </div>
-            <div class="category-item">
-                <a href="#article4">
-                    <div class="category-icon gold-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSide">
+                <div class="category-icon gold-color"></div>
                 <p class="category-text">小菜</p>
             </div>
-            <div class="category-item">
-                <a href="#article5">
-                    <div class="category-icon gold-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSoup">
+                <div class="category-icon gold-color"></div>
                 <p class="category-text">湯品</p>
             </div>
         </div>
     </div>
     <!-- food-category-seafood -->
-    <div class="food-description-blue" id="article3">
+    <div
+        class="food-description-blue page-section"
+        id="section5"
+        ref="textSectionSeafood"
+    >
         <h1>海鮮 해물</h1>
         <h4>
             韓國的海鮮飲食文化擁有豐富多樣的海產品，海鮮在飲食中也佔有重要地位，如生魚片、海鮮湯、海鮮煎餅等。韓國人喜歡將新鮮的海鮮生吃或烹煮，搭配醬料和小菜，味道鮮美。此外，韓國還有豐富的海鮮醃製和發酵食品，如韓國泡菜中的醃製海鮮，展現了海洋資源的多樣性和韓國人對食材的巧妙應用。
         </h4>
     </div>
     <!-- 海鮮内容 -->
-    <div class="food-category">
+    <div class="food-category page-section" id="section6">
         <div class="food-category-left">
             <img
                 src="../assets/Image/food/food_half_circle.png"
                 class="food-img-back"
             />
             <div class="img-circle-big">
-                <img :src="currentItemMain3.image" id="food-img-front" />
+                <img :src="currentItemMain3.image" />
             </div>
         </div>
         <div class="food-category-middle">
@@ -297,42 +297,40 @@
 
                 <p class="category-text">肉類</p>
             </div>
-            <div class="category-item">
-                <a href="#article3">
-                    <div class="category-icon primary-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSeafood">
+                <div class="category-icon primary-color"></div>
                 <p class="category-text">海鮮</p>
             </div>
-            <div class="category-item">
-                <a href="#article4">
-                    <div class="category-icon gold-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSide">
+                <div class="category-icon gold-color"></div>
                 <p class="category-text">小菜</p>
             </div>
-            <div class="category-item">
-                <a href="#article5">
-                    <div class="category-icon gold-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSoup">
+                <div class="category-icon gold-color"></div>
                 <p class="category-text">湯品</p>
             </div>
         </div>
     </div>
     <!-- food-category-sideDish -->
-    <div class="food-description-red" id="article4">
+    <div
+        class="food-description-red page-section"
+        id="section7"
+        ref="textSectionSide"
+    >
         <h1>小菜 반찬</h1>
         <h4>
             韓國的小菜飲食文化獨具特色，被視為餐桌上不可或缺的一部分。小菜種類繁多，包括泡菜、醃製蔬菜、炒菜、煎餅等，提供多樣的風味和營養。這些小菜與主食搭配使用，韓國人重視小菜的製作工藝和味道，認為小菜反映了餐廳或家庭的品質和風格，是韓國飲食文化中不可或缺的一部分。
         </h4>
     </div>
     <!-- 小菜内容 -->
-    <div class="food-category">
+    <div class="food-category page-section" id="section8">
         <div class="food-category-left">
             <img
                 src="../assets/Image/food/food_half_circle.png"
                 class="food-img-back"
             />
             <div class="img-circle-big">
-                <img :src="currentItemMain4.image" id="food-img-front" />
+                <img :src="currentItemMain4.image" />
             </div>
         </div>
         <div class="food-category-middle">
@@ -370,50 +368,46 @@
         <div class="food-category-right">
             <div class="category-item" @click="scrollToText">
                 <div class="category-icon gold-color"></div>
-
                 <p class="category-text">主食</p>
             </div>
             <div class="category-item" @click="scrollToTextMeat">
                 <div class="category-icon gold-color"></div>
-
                 <p class="category-text">肉類</p>
             </div>
-            <div class="category-item">
-                <a href="#article3">
-                    <div class="category-icon gold-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSeafood">
+                <div class="category-icon gold-color"></div>
                 <p class="category-text">海鮮</p>
             </div>
-            <div class="category-item">
-                <a href="#article4">
-                    <div class="category-icon primary-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSide">
+                <div class="category-icon primary-color"></div>
                 <p class="category-text">小菜</p>
             </div>
-            <div class="category-item">
-                <a href="#article5">
-                    <div class="category-icon gold-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSoup">
+                <div class="category-icon gold-color"></div>
                 <p class="category-text">湯品</p>
             </div>
         </div>
     </div>
     <!-- food-category-soup -->
-    <div class="food-description-blue" id="article5">
+    <div
+        class="food-description-blue page-section"
+        id="section9"
+        ref="textSectionSoup"
+    >
         <h1>湯品 국</h1>
         <h4>
             韓國的湯品飲食文化源遠流長，湯在韓國飲食中佔有重要地位，被視為滋補身體、補充營養的重要途徑。韓國湯類繁多，包括清湯、辣湯、醬汁湯等，以及加入各種肉類、海鮮和蔬菜的燉煮湯品。韓國人相信湯能促進健康、保持體力，因此在日常生活中經常享用各種湯品。
         </h4>
     </div>
     <!-- 湯品内容 -->
-    <div class="food-category">
+    <div class="food-category page-section" id="section10">
         <div class="food-category-left">
             <img
                 src="../assets/Image/food/food_half_circle.png"
                 class="food-img-back"
             />
             <div class="img-circle-big">
-                <img :src="currentItemMain5.image" id="food-img-front" />
+                <img :src="currentItemMain5.image" />
             </div>
         </div>
         <div class="food-category-middle">
@@ -455,25 +449,18 @@
             </div>
             <div class="category-item" @click="scrollToTextMeat">
                 <div class="category-icon gold-color"></div>
-
                 <p class="category-text">肉類</p>
             </div>
-            <div class="category-item">
-                <a href="#article3">
-                    <div class="category-icon gold-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSeafood">
+                <div class="category-icon gold-color"></div>
                 <p class="category-text">海鮮</p>
             </div>
-            <div class="category-item">
-                <a href="#article4">
-                    <div class="category-icon gold-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSide">
+                <div class="category-icon gold-color"></div>
                 <p class="category-text">小菜</p>
             </div>
-            <div class="category-item">
-                <a href="#article5">
-                    <div class="category-icon primary-color"></div>
-                </a>
+            <div class="category-item" @click="scrollToTextSoup">
+                <div class="category-icon primary-color"></div>
                 <p class="category-text">湯品</p>
             </div>
         </div>
@@ -535,6 +522,9 @@ gsap.registerPlugin(ScrollTrigger);
 export default {
     data() {
         return {
+            //fullPage
+            isScrolling: false,
+            //小圖換大圖
             currentSlide: 0,
             currentSlide2: 0,
             currentSlide3: 0,
@@ -921,18 +911,55 @@ export default {
                 block: "start",
             });
         },
+        //fullPage
+        handleWheel(event) {
+            if (this.isScrolling) return;
+
+            const delta = Math.sign(event.deltaY);
+            const sections = document.querySelectorAll(".page-section");
+            const currentScrollPosition = window.scrollY;
+
+            let currentSectionIndex = -1;
+            sections.forEach((section, index) => {
+                if (
+                    section.offsetTop <= currentScrollPosition + 10 &&
+                    section.offsetTop + section.clientHeight >
+                        currentScrollPosition + 10
+                ) {
+                    currentSectionIndex = index;
+                }
+            });
+
+            if (currentSectionIndex !== -1) {
+                if (delta > 0 && sections[currentSectionIndex + 1]) {
+                    this.scrollToSection(sections[currentSectionIndex + 1]);
+                } else if (delta < 0 && sections[currentSectionIndex - 1]) {
+                    this.scrollToSection(sections[currentSectionIndex - 1]);
+                }
+            }
+        },
+        scrollToSection(section) {
+            this.isScrolling = true;
+            window.scrollTo({
+                top: section.offsetTop,
+                behavior: "smooth",
+            });
+            setTimeout(() => {
+                this.isScrolling = false;
+            }, 1000); // 確保滾動期間不觸發其他滾動事件
+        },
     },
     //---------視差滾動----------
     mounted() {
+        //fullPage
+        window.addEventListener("wheel", this.handleWheel);
+        // 視差滾動
         const horizontalSections = gsap.utils.toArray("section.horizontal");
-
         horizontalSections.forEach((sec, i) => {
             const pinWrap = sec.querySelector(".pin-wrap");
             const animationWrap = pinWrap.querySelector(".animation-wrap");
-
             const getToValue = () =>
                 -(animationWrap.scrollWidth - window.innerWidth);
-
             gsap.fromTo(
                 animationWrap,
                 {
@@ -961,13 +988,9 @@ export default {
             );
         });
     },
-    created() {
-        let html_el = document.getElementsByTagName("html")[0];
-        html_el.scrollTo({
-            top: 0,
-            // left: 0,
-            behavior: "smooth",
-        });
+    //fullPage
+    beforeDestroy() {
+        window.removeEventListener("wheel", this.handleWheel);
     },
 };
 </script>
@@ -1074,6 +1097,7 @@ export default {
     height: 809px;
     background-color: $OffWhite;
     display: flex;
+
     @include breakpoint(1200px) {
         display: block;
         height: 100%;
@@ -1126,11 +1150,22 @@ export default {
     //1160px出現
     .food-category-top {
         display: none;
-        width: 100vw;
+        width: 300px;
+        height: 300px;
+        overflow: hidden;
+        border-radius: 50%;
         display: flex;
         position: relative;
-        @include breakpoint(1160px) {
-            display: block;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        @include breakpoint(1200px) {
+            //display: block;
         }
     }
     .food-category-middle {
