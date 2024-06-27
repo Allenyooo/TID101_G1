@@ -17,7 +17,6 @@ try {
 
     // Check if the user exists
     if ($statement->rowCount() == 0) {
-        http_response_code(404);
         echo 'User not found';
         echo $data['forgotAccount'];
         exit;
@@ -26,39 +25,37 @@ try {
     // Fetch the user data
     $user_data = $statement->fetchAll();
 
-    // Generate a 6-digit password reset code
-    $code = rand(100000, 999999); // 6-digit code
+    // // Generate a 6-digit password reset code
+    // $code = rand(100000, 999999); // 6-digit code
 
-    // Store the code in the database (e.g., in a separate table or column)
-    $reset_code_sql = "UPDATE MEMBER SET RESET_CODE =? WHERE MAIL =?";
-    $reset_code_stmt = $pdo->prepare($reset_code_sql);
-    $reset_code_stmt->bindParam(1, $code);
-    $reset_code_stmt->bindParam(2, $account);
-    $reset_code_stmt->execute();
+    // // Store the code in the database (e.g., in a separate table or column)
+    // $reset_code_sql = "UPDATE MEMBER SET RESET_CODE =? WHERE MAIL =?";
+    // $reset_code_stmt = $pdo->prepare($reset_code_sql);
+    // $reset_code_stmt->bindParam(1, $code);
+    // $reset_code_stmt->bindParam(2, $account);
+    // $reset_code_stmt->execute();
 
-    // Send the password reset email
-    $to = $user_data[0]['MAIL'];
-    $subject = 'Password Reset Request';
+    // // Send the password reset email
+    // $to = $user_data[0]['MAIL'];
+    // $subject = 'Password Reset Request';
 
-    $message = '
-    <p>Hello '. $user_data[0]['NAME']. ',</p>
-    <p>You have requested to reset your password. Enter the code below to reset your password:</p>
-    <p>Code: '. $code. '</p>
-    <p>If you did not request this, please ignore this email.</p>
-    ';
+    // $message = '
+    // <p>Hello '. $user_data[0]['NAME']. ',</p>
+    // <p>You have requested to reset your password. Enter the code below to reset your password:</p>
+    // <p>Code: '. $code. '</p>
+    // <p>If you did not request this, please ignore this email.</p>
+    // ';
 
-    $headers = [
-        'MIME-Version: 1.0',
-        'Content-Type: text/html; charset=UTF-8',
-        'From: 梨花殿 <lihuadian101@gmail.com>'
-    ];
+    // $headers = [
+    //     'MIME-Version: 1.0',
+    //     'Content-Type: text/html; charset=UTF-8',
+    //     'From: 梨花殿 <lihuadian101@gmail.com>'
+    // ];
 
-    mail($to, $subject, $message, implode("\r\n", $headers));
+    // mail($to, $subject, $message, implode("\r\n", $headers));
 
-    http_response_code(200);
     echo 'Password reset email sent successfully';
 } catch (PDOException $e) {
-    http_response_code(500);
     echo 'Database error: '. $e->getMessage();
     exit;
 }

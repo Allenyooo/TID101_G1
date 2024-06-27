@@ -187,7 +187,7 @@ export default {
                 console.log("Form is valid, sending request...");
                 axios
                     .post(
-                        "http://localhost/tid101_g1/public/php/register/register.php",
+                        `${import.meta.env.VITE_PHP_PATH}register/register.php`,
                         {
                             email: this.email,
                             password: this.password,
