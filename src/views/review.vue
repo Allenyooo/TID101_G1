@@ -19,9 +19,9 @@ export default {
     },
 
     methods: {
-        getCookie(name) {
+        getCookie(id) {
             let value = "; " + document.cookie;
-            let parts = value.split("; " + name + "=");
+            let parts = value.split("; " + id + "=");
             if (parts.length === 2) return parts.pop().split(";").shift();
             return null;
         },
@@ -29,9 +29,12 @@ export default {
             try {
                 const memberId = this.getCookie("memberId");
                 const response = await fetch(
-                    "http://localhost/tid101_g1/public/php/review/reviews.php?shop=1"
+                    // "http://localhost/tid101_g1/public/php/review/reviews.php?shop=1"
+                    `${import.meta.env.VITE_PHP_PATH}review/reviews.php?shop=1`
+
                 );
                 const reviewData = await response.json();
+                console.log(reviewData);
                 this.items = reviewData.map(item => ({
                     ...item,
                     isLike: false, 
@@ -59,7 +62,9 @@ export default {
             } else {
                 try {
                     const response = await fetch(
-                        "http://localhost/tid101_g1/public/php/review/toggleLike.php",
+                        // "http://localhost/tid101_g1/public/php/review/toggleLike.php",
+                        `${import.meta.env.VITE_PHP_PATH}review/toggleLike.php`,
+
                         {
                             method: "POST",
                             headers: {
@@ -98,7 +103,9 @@ export default {
         async fetchScore() {
             try {
                 const response = await fetch(
-                    "http://localhost/tid101_g1/public/php/review/score.php?shop=1"
+                    // "http://localhost/tid101_g1/public/php/review/score.php?shop=1"
+                    `${import.meta.env.VITE_PHP_PATH}review/score.php?shop=1`
+
                 );
                 const reviewData = await response.json();
                 this.score = reviewData;
@@ -536,6 +543,8 @@ export default {
             .scoreSin{
                 display: flex;
                 justify-content: space-around;
+                width: 80%;
+                margin: 0 auto;
             }
 
             img {
