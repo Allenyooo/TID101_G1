@@ -22,18 +22,16 @@
 
      
     
-        $sql = "SELECT PRODUCT.ID  ,PRICE, PERCENT,round(PRICE * PERCENT) as DP ,STARTDATE,ENDDATE 
-                from  PRODUCT
-                join DISCOUNT on PRODUCT.DISCOUNT_ID = DISCOUNT.ID";
+        $sql = "SELECT ID,TYPE,QUESTION,ANSWER
+                from  FAQ";
 
     $statement = $pdo->prepare($sql);
     $statement->execute();
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
-        $sql2 = "SELECT PRODUCT.ID as 編號,PRICE as 價格, PERCENT as 折扣,round(PRICE * PERCENT) as 折扣後價格 ,STARTDATE as 折扣開始日期,ENDDATE as 折扣結束日期,PIC as 商品圖片
-                 from  PRODUCT
-                 join DISCOUNT on PRODUCT.DISCOUNT_ID = DISCOUNT.ID";
+        $sql2 = "SELECT ID as 編號 ,TYPE as 分類,QUESTION as 問題標題,ANSWER as 回答內容
+                 from  FAQ;";
 
     $statement2 = $pdo->prepare($sql2);
     $statement2->execute();
@@ -41,7 +39,7 @@
 
 
 
-        $sql3 = "SELECT ID , status from PRODUCT";
+        $sql3 = "SELECT ID , status from FAQ";
 
     $statement3 = $pdo->prepare($sql3);
     $statement3->execute();
@@ -49,19 +47,13 @@
 
 
 
-    
-        $sql4 = "SELECT PIC from PRODUCT";
 
-    $statement4 = $pdo->prepare($sql4);
-    $statement4->execute();
-    $data4 = $statement4->fetchAll(PDO::FETCH_ASSOC);
 
 
     $allData = array(
         "data" => $data,
         "data2" => $data2,
-        "data3" => $data3,
-        "data4" => $data4,
+        "data3" => $data3
     );
     
 
@@ -70,7 +62,7 @@
     
     //     echo json_encode($data);
     // }else{
-    //     echo echojson_encode(["message" => "抓取失敗"]);
+    //     echo echojson_encode(["message" => "抓取失败"]);
 
     // }
 

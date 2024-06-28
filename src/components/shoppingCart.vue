@@ -36,7 +36,7 @@
 
     <div class="spBottom">
       <p>總計： NT${{ total }}</p>
-      <router-link to="/CheckOut">前往結帳</router-link>
+      <router-link to="/CheckOut" @click="pmColse">前往結帳</router-link>
     </div>
   </div>
 
@@ -58,6 +58,7 @@ export default {
       total: 0,
       test: [],
       shoppingCartTasks: [],
+      memberId: "",
     };
   },
   methods: {
@@ -67,28 +68,6 @@ export default {
     pmColse2(e) {
       e.target.closest("div.spBottom").classList.toggle("pmOn");
     },
-    // pmcD(i) {
-    //   if (this.productTasks[i].tCount > 1) {
-    //     this.productTasks[i].tCount -= 1;
-
-    //     this.total -=
-    //       this.productTasks[i].tPrice * this.productTasks[i].tDiscount;
-    //   }
-    // },
-    // pmcU(i) {
-    //   this.productTasks[i].tCount += 1;
-    //   this.total +=
-    //     this.productTasks[i].tPrice * this.productTasks[i].tDiscount;
-    // },
-    // pmcC(i) {
-    //   this.total -=
-    //     this.productTasks[i].tPrice *
-    //     this.productTasks[i].tDiscount *
-    //     this.productTasks[i].tCount;
-
-    //   this.productTasks.splice(i, 1);
-    //   localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
-    // },
 
     pmcD(i) {
       if (this.shoppingCartTasks[i].COUNT > 1) {
@@ -119,7 +98,7 @@ export default {
         //     return response.json();
         //   })
         //   .then((data) => {
-        //     this.shoppingCartTasks = data; // 将获取的数据存储到组件的data中的products属性中
+        //     this.shoppingCartTasks = data; //
         //   });
         // .catch((error) => {
         //   console.error("Error fetching data:", error);
@@ -218,6 +197,7 @@ export default {
             // Search: this.placeholder[id].search,
             // Input: this.input,
             changeD: this.shoppingCartTasks[i].ID,
+            memberID: this.memberId,
           }),
         }
       );
@@ -235,6 +215,7 @@ export default {
             // Search: this.placeholder[id].search,
             // Input: this.input,
             changeD: this.shoppingCartTasks[i].ID,
+            memberID: this.memberId,
           }),
         }
       );
@@ -254,9 +235,20 @@ export default {
             // Search: this.placeholder[id].search,
             // Input: this.input,
             changeD: this.shoppingCartTasks[i].ID,
+            memberID: this.memberId,
           }),
         }
       );
+    },
+
+    getMemberId() {
+      let cookie = document.cookie;
+      let getId = cookie.match(/memberId=(\d+)/);
+      let memberId = getId[1];
+      // console.log(match)
+      console.log(memberId);
+      this.memberId = memberId;
+      // return memberId;
     },
   },
 
@@ -279,24 +271,7 @@ export default {
   //----------------- 這邊是抓lolocalStorage
 
   mounted() {
-    // fetch(
-    //   "http://localhost/vite/tid101_g1/public/php/shoppingCart/shoppingCart.php",
-    //   {
-    //     mode: "cors",
-    //   }
-    // )
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error("Network response was not ok");
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     this.shoppingCartTasks = data;
-    //     this.sumtotal();
-    //     this.localstorageDAta();
-    //     this.shoppingCartTasks = this.shoppingCartTasks.concat();
-    //   });
+    this.getMemberId();
   },
   watch: {
     shoppingCartData(newvalue, oldvalue) {
