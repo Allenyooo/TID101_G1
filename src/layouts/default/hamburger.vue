@@ -55,7 +55,7 @@
                     <li class="menu_list_box">
                         <div class="menu_list_user">
                             <router-link v-if="!isMember" to="/login" @click="closeMenu">
-                                <h3>會員登錄</h3>
+                                <h3>會員登入</h3>
                                 <p>회원 등록</p>
                             </router-link>
                             <router-link v-else="isMember" to="/member" @click="closeMenu">
@@ -96,10 +96,12 @@ export default {
             sp: true, //購物車開關
             allTotal: 0,
             shoppingdata: [],
+            memberId: "",
         };
     },
     mounted() {
         this.checkMemberStatus();
+        this.getMemberId();
     },
     methods: {
         toggleMenu() {
@@ -143,12 +145,15 @@ export default {
         },
 
         shoppingcartData() {
-            fetch(
-                `${import.meta.env.VITE_PHP_PATH}shoppingCart/shoppingCart.php`,
-                {
-                    mode: "cors",
-                }
-            )
+            fetch(`${import.meta.env.VITE_PHP_PATH}shoppingCart/shoppingCart.php`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    memberID: this.memberId,
+                }),
+            })
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error("Network response was not ok");
@@ -162,12 +167,28 @@ export default {
                     // this.shoppingCartTasks = this.shoppingCartTasks.concat();
                 });
         },
+
+        getMemberId() {
+            let cookie = document.cookie;
+            let getId = cookie.match(/memberId=(\d+)/);
+            let memberId = getId[1];
+            this.memberId = memberId;
+            // return memberId;
+        },
     },
 
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+@import url(/src/sass/style.scss);
+
+@mixin breakpoint($point) {
+    @media screen and (max-width: $point) {
+        @content;
+    }
+}
+
 nav {
     overflow: hidden;
     position: relative;
@@ -175,7 +196,11 @@ nav {
 }
 
 .menu_list_box {
-    margin: 32px 0 32px 0;
+    margin: 32px 0 0 0;
+
+    @include breakpoint(390px) {
+        margin: 0px;
+    }
 }
 
 #btnMenu {
@@ -217,25 +242,35 @@ nav {
     right: 322px;
     z-index: 105;
     width: 100px;
+
+    @include breakpoint(430px) {
+        top: 167px;
+        right: 165px;
+        scale: 0.8;
+    }
+
+    @include breakpoint(390px) {
+        top: 167px;
+        right: 165px;
+        scale: 0.8;
+    }
 }
 
 #o-menulist {
     position: relative;
     width: 409px;
+
+    @include breakpoint(430px) {
+        left: 141px;
+        top: 10px
+    }
+
+    @include breakpoint(390px) {
+        left: 141px;
+        top: 10px
+    }
 }
 
-/* .deco{
-          position: absolute;
-        top: 267px;
-        right: 330px;
-        z-index: 10;
-        transition: opacity .4s ,transform .4s ;
-
-        &.show{
-        opacity: 0;
-        transform: translateY(-100%);
-        }
-    } */
 .button {
     cursor: pointer;
     border: none;
@@ -277,6 +312,20 @@ nav {
 
 #Close.show {
     display: block;
+}
+
+.c-btnMenu {
+    @include breakpoint(430px) {
+        scale: 0.6;
+        top: 12px;
+        right: 8px;
+    }
+
+    @include breakpoint(390px) {
+        scale: 0.6;
+        top: 12px;
+        right: 8px;
+    }
 }
 
 .c-btnMenu span {
@@ -403,6 +452,14 @@ p {
     color: #7a625b;
     text-align: center;
     margin-top: 2px;
+
+    @include breakpoint(430px) {
+        font-size: 16px;
+    }
+
+    @include breakpoint(390px) {
+        font-size: 16px;
+    }
 }
 
 .menulist {
@@ -415,6 +472,20 @@ p {
     top: 0px;
     right: 348px;
     z-index: 120;
+
+    @include breakpoint(430px) {
+        top: -25px;
+    }
+
+    h3 {
+        @include breakpoint(430px) {
+            font-size: 16px;
+        }
+
+        @include breakpoint(390px) {
+            font-size: 16px;
+        }
+    }
 }
 
 .menu_list .menu_list_recommend {
@@ -422,6 +493,24 @@ p {
     top: 90px;
     right: 308px;
     z-index: 120;
+
+    @include breakpoint(430px) {
+        top: 36px;
+    }
+
+    @include breakpoint(390px) {
+        top: 59px;
+    }
+
+    h3 {
+        @include breakpoint(430px) {
+            font-size: 16px;
+        }
+
+        @include breakpoint(390px) {
+            font-size: 16px;
+        }
+    }
 }
 
 .menu_list .menu_list_ticket {
@@ -429,6 +518,26 @@ p {
     top: 180px;
     right: 245px;
     z-index: 120;
+
+    @include breakpoint(430px) {
+        top: 100px;
+        right: 265px;
+    }
+
+    @include breakpoint(390px) {
+        top: 123px;
+        right: 265px;
+    }
+
+    h3 {
+        @include breakpoint(430px) {
+            font-size: 16px;
+        }
+
+        @include breakpoint(390px) {
+            font-size: 16px;
+        }
+    }
 }
 
 .menu_list .menu_list_user {
@@ -436,6 +545,26 @@ p {
     top: 265px;
     right: 158px;
     z-index: 120;
+
+    @include breakpoint(430px) {
+        top: 162px;
+        right: 215px;
+    }
+
+    @include breakpoint(390px) {
+        top: 186px;
+        right: 215px;
+    }
+
+    h3 {
+        @include breakpoint(430px) {
+            font-size: 16px;
+        }
+
+        @include breakpoint(390px) {
+            font-size: 16px;
+        }
+    }
 }
 
 .menu_list .menu_list_shoppingcart {
@@ -443,6 +572,26 @@ p {
     top: 330px;
     right: 52px;
     z-index: 120;
+
+    @include breakpoint(430px) {
+        top: 220px;
+        right: 149px;
+    }
+
+    @include breakpoint(390px) {
+        top: 236px;
+        right: 149px;
+    }
+
+    h3 {
+        @include breakpoint(430px) {
+            font-size: 16px;
+        }
+
+        @include breakpoint(390px) {
+            font-size: 16px;
+        }
+    }
 }
 
 .o-menu_bg .circle {
@@ -456,6 +605,20 @@ p {
     border-radius: 50%;
     background-color: #fff4eb;
     transition: 0.6s 0.2s cubic-bezier(0.16, 1, 0.3, 1) transform;
+
+    @include breakpoint(430px) {
+        top: -368px;
+        right: -374px;
+        width: 657px;
+        height: 672px;
+    }
+
+    @include breakpoint(390px) {
+        top: -368px;
+        right: -374px;
+        width: 657px;
+        height: 672px;
+    }
 }
 
 .o-menu_bg .circle.show {
@@ -541,5 +704,19 @@ nav a img {
     z-index: 120;
     top: 32px;
     left: 40px;
+
+    @include breakpoint(430px) {
+        width: 59px;
+        height: 70px;
+        top: 7px;
+        left: 19px;
+    }
+
+    @include breakpoint(390px) {
+        width: 59px;
+        height: 70px;
+        top: 7px;
+        left: 19px;
+    }
 }
 </style>

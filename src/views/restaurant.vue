@@ -63,26 +63,35 @@
                         </li>
                     </button>
                     <!--寫留言按鈕-->
-                    <li class="message">
-                        <button @click="pop()">
-                            <div class="icon_bg" @click="popup_open = true">
+                    <li class="message" :class="{ active: popup_open }">
+                        <button @click="pop" :class="[
+                            'button-active',
+                            {
+                                'button-active': showPrompt,
+                                
+                            }
+                        ]">
+                            <div class="icon_bg">
                                 <img class="restaurantstarimg" src="../assets/Image/restaurant/north/message.svg"
                                     alt="message" />
                             </div>
                         </button>
                     </li>
-                </ol>
-            </div>
 
-            <!-- 提示框 -->
-            <div v-if="showPrompt" class="collect-prompt">
-                <p class="collect-prompt_p">請先登入會員</p>
-                <button class="collect-prompt_button" @click="redirectToLogin">
-                    確認
-                </button>
-                <button class="collect-prompt_button" @click="browseAsGuest">
-                    以訪客身分瀏覽
-                </button>
+                    <!-- 提示框 -留言收藏共用-->
+                    <div v-if="showPrompt" class="collect-prompt">
+                        <p class="collect-prompt_p">請先登入會員</p>
+                        <button class="collect-prompt_button" @click="redirectToLogin">確認</button>
+                        <button class="collect-prompt_button" @click="browseAsGuest">以訪客身分瀏覽</button>
+                    </div>
+
+                    <!-- 留言弹窗 -->
+                    <!-- <div v-if="popup_open" class="popup">
+                        <textarea v-model="content" placeholder="写下您的留言"></textarea>
+                        <button @click="submitMessage">提交</button>
+                        <button @click="closePopup">取消</button>
+                    </div> -->
+                </ol>
             </div>
 
             <header class="restaurant_header">
@@ -185,9 +194,10 @@
                                     alt="message" />
                             </div>
                         </button>
+
                         <button @click="popup_open = true"></button>
-                        <div id="pop" :class="{ active: popup_open === true }">
-                            <div class="concent_one">
+                        <div id="pop" :class="{ active: popup_open }">
+                            <div class="concent_one" v-if="popup_open">
                                 <div class="starbars">
                                     <h4 class="starbar_store">整體評價</h4>
                                     <div id="stars" class="left">
@@ -228,6 +238,14 @@
                                 </h5>
                                 <p class="text_words">字元數限制 0/100 字</p>
                             </div>
+
+                            <!--新增-->
+                            <div class="collect-prompt" v-else-if="showPrompt">
+                                <p class="collect-prompt_p">請先登入會員</p>
+                                <button class="collect-prompt_button" @click="redirectToLogin">確認</button>
+                                <button class="collect-prompt_button" @click="browseAsGuest">以訪客身分瀏覽</button>
+                            </div>
+
                             <div class="share">
                                 <h4 class="share_photo">分享照片</h4>
                                 <p class="share_six">(至多6張)</p>
@@ -281,15 +299,16 @@
                                         {{ item.NAME }}
                                     </h4>
                                 </span>
-                                <span :class="['like', { liked: isLike }]" 
-                                @click="toggleLike(item.ID, item.rLIKE)">
-                                    <img :src="item.isLikedByUser ? liked : like" alt=""/>
-                                    <h4 :style="{color:item.isLikedByUser ? '#CB4847' : '#999999'}">{{ item.rLIKE }}</h4>
+                                <span :class="['like', { liked: isLike }]" @click="toggleLike(item.ID, item.rLIKE)">
+                                    <img :src="item.isLikedByUser ? liked : like" alt="" />
+                                    <h4 :style="{ color: item.isLikedByUser ? '#CB4847' : '#999999' }">{{ item.rLIKE }}
+                                    </h4>
                                 </span>
                             </div>
                             <div class="star">
                                 <span class="starbar">
-                                    <img v-for="n in 5" :key="n" :src="n <= item.STAR ? fullStar : nullStar" alt="Starfull" />
+                                    <img v-for="n in 5" :key="n" :src="n <= item.STAR ? fullStar : nullStar"
+                                        alt="Starfull" />
                                 </span>
                                 <span class="date">
                                     <h5>{{ formatDate(item.TIME) }}</h5>
@@ -319,35 +338,33 @@ export default {
     mounted() {
         this.fetchReviews();
         this.fetchScore();
+        this.checkMemberId();
 
         const memberId = this.getMemberIdFromCookie();
 
         if (memberId) {
             this.checktStore(this.storeId, memberId)
         }
-        // this.collectStore();
-        // this.cancelCollectStore();
     },
 
     data() {
         return {
             rating: 0,
-            popup_open: false,
-            rating_text: ["", "1級星", "2級星", "3級星", "4級星", "5級星"],
+            rating_text: ["", "1级星", "2级星", "3级星", "4级星", "5级星"],
             isMember: false,
-
-            isCollected: false, //控制按鈕是否被收藏
-
-            showPrompt: false, //控制提示框顯示與否
-            content: "", //評論內容功能
-            files: [], //上傳照片功能
+            isCollected: false, // 控制按钮是否被收藏
+            showPrompt: false, // 控制提示框显示与否
+            memberId: null,
+            popup_open: false, // 控制留言弹窗显示与否
+            pendingAction: null,
+            content: "", // 评论内容功能
+            files: [], // 上传照片功能
             imageData: [],
             storeId: 1,
-            memberId: "", // 從 cookie 中取得的會員 ID 
             score: [],
-            items: [],       
-            fullStar: new URL("@/assets/Image/restaurant/north/Starfull.png",import.meta.url).href,
-            nullStar: new URL("@/assets/Image/restaurant/north/Starnull.png",import.meta.url).href,
+            items: [],
+            fullStar: new URL("@/assets/Image/restaurant/north/Starfull.png", import.meta.url).href,
+            nullStar: new URL("@/assets/Image/restaurant/north/Starnull.png", import.meta.url).href,
             like: new URL("@/assets/Image/review/like.png", import.meta.url).href,
             liked: new URL("@/assets/Image/review/liked.png", import.meta.url).href,
             isLike: false,
@@ -360,7 +377,7 @@ export default {
             const cookieValue = document.cookie
                 .split("; ")
                 .find((row) => row.startsWith("memberId="));
-            console.log(cookieValue);
+            // console.log(cookieValue);
             return cookieValue ? cookieValue.split("=")[1] : null;
         },
 
@@ -474,11 +491,13 @@ export default {
         //collection.PHP ->收藏:關閉提示窗繼續瀏覽
         browseAsGuest() {
             this.showPrompt = false;
+            // this.showPrompt_two = false;
         },
 
         //collection.PHP ->收藏:跳轉過去同時關閉提示框
         closePrompt() {
             this.showPrompt = false;
+            // this.showPrompt_two = false;
         },
 
         //review.PHP ->給星級、評論、照片新增:送出
@@ -542,12 +561,58 @@ export default {
             this.rating = value;
         },
         pop() {
-            //alert()
+            const memberId = this.getMemberIdFromCookie();
+            if (memberId) {
+                const storeId = 1; // storeId默認值 
+                if (this.isCollected) {
+                    // 取消收藏
+                    this.cancelCollectStore(storeId, memberId);
+                } else {
+                    // 添加收藏
+                    this.collectStore(storeId, memberId);
+                }
+                this.isCollected = !this.isCollected;
+            } else {
+                // 未登錄，顯示提示對話框
+                this.showPrompt = true;
+            }
+        },
+        pop() {
+            // 切换弹窗显示状态
+            this.popup_open = !this.popup_open;
+            if (!this.isUserLoggedIn()) {
+                // 如果未登录，显示非会员提示框
+                this.showPrompt = true;
+            } else {
+
+            }
+        },
+        redirectToLogin() {
+            // 跳转到登录页面的逻辑
+            console.log('跳转到登录页面');
+            // 执行登录跳转的代码，例如使用路由
+            // this.$router.push('/login');
+            this.popup_close(); // 关闭弹窗
+        },
+        browseAsGuest() {
+            // 以访客身份浏览的逻辑
+            console.log('以访客身份浏览');
+            this.popup_close(); // 关闭弹窗
         },
         popup_close() {
+            // 关闭弹窗的方法
             this.popup_open = false;
+            this.showPrompt = false;
         },
-
+        change_rating(index) {
+            // 更改星级评分的方法，根据需要自行处理
+            this.rating = index;
+        },
+        isUserLoggedIn() {
+            // 检查用户是否已登录的逻辑，这里是一个示例
+            // 可以根据实际情况从 Cookie、Session 或 Vuex 等地方获取登录状态
+            return true; // 示例中假设用户已登录
+        },
         fileChange(e, index) {
             let file = e.target.files[0];
             let readFile = new FileReader();
@@ -579,8 +644,8 @@ export default {
                 console.log(reviewData);
                 this.items = reviewData.map(item => ({
                     ...item,
-                    isLike: false, 
-                    isLikedByUser: item.LIKE_MEMBERS.includes(parseInt(memberId)), 
+                    isLike: false,
+                    isLikedByUser: item.LIKE_MEMBERS.includes(parseInt(memberId)),
                 }));
                 ;
                 console.log(reviewData);
@@ -656,8 +721,47 @@ export default {
                 }
             }
         },
-    },
-};
+
+        //彈跳-留言功能，檢查會員id
+        checkMemberId() {
+            // 獲取cookie中的memberId
+            const memberId = this.getMemberIdFromCookie();
+            this.isMember = !!memberId;
+            this.memberId = memberId;
+        },
+        
+        // 检查商店是否已收藏
+        async checkStore(storeId, memberId) {
+            try {
+                const response = await axios.post("path_to_your_api/check_store", { storeId, memberId });
+                this.isCollected = response.data.isCollected;
+            } catch (error) {
+                console.error("Error checking store:", error);
+            }
+        },
+        redirectToLogin() {
+            // 跳到登入頁面邏輯
+            this.$router.push({ path: "/login" });
+        },
+        browseAsGuest() {
+            // 訪客身份
+            this.showPrompt = false;
+        },
+        pop() {
+            if (!this.isMember) {
+                this.showPrompt = true;
+                return;
+            }
+
+            this.popup_open = true;
+        },
+        collect() {
+            // 收藏按鈕
+            alert('');
+        },
+    }
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -672,6 +776,16 @@ export default {
 * {
     text-decoration: none;
     list-style: none;
+}
+
+// 留言按鈕變色
+.message button.button-active {
+    background-color: #ffcc00;
+    width: 46px;
+    height: 46px;
+    border-radius: 50px;
+    margin-right: 12px;
+    border-radius: 50%;
 }
 
 #share-btn {
@@ -809,6 +923,10 @@ button {
             @include breakpoint(1024px) {
                 padding-left: 8px;
             }
+
+            @include breakpoint(390px) {
+                padding-left: 0px;
+            }
         }
 
         .restaurant_starimg {
@@ -925,9 +1043,15 @@ button {
             margin-left: 56px;
             margin-right: 20px;
 
+            @include breakpoint(430px) {
+                margin-left: 33px;
+                margin-right: 0px;
+            }
+
             a {
                 color: #333333;
                 margin-left: 8px;
+                margin-right: 8px;
 
                 &:hover {
                     color: #999999;
@@ -936,10 +1060,10 @@ button {
         }
 
         img {
-            margin-left: 1vw;
+            // margin-left: 1.0vw;
 
             @include breakpoint(1024px) {
-                margin-left: 1vw;
+                margin-left: 1.3vw;
             }
 
             @include breakpoint(430px) {
@@ -958,9 +1082,18 @@ button {
         margin-left: 143px;
         margin-top: -18px;
 
+        @include breakpoint(430px) {
+            margin-left: 114px;
+            margin-top: -19px;
+        }
+
         a {
             color: #333333;
             margin-left: 15px;
+
+            @include breakpoint(430px) {
+                margin-left: 0px;
+            }
 
             &:hover {
                 color: #999999;
@@ -1004,19 +1137,20 @@ button {
             filter: drop-shadow(3px 3px 2px rgba(97, 97, 97, 0.7));
         }
 
-        //收藏後按鈕變色
-        &.collected {
-            background-color: #cb4847;
-        }
-
-        // 提示框彈出時按鈕變色
+        // 收藏後按鈕變色
         &.prompt-active {
             background-color: #cb4847;
         }
 
-        .restaurant_btns .collect_img {
-            width: 44px;
-            height: 44px;
+        .collect_img {
+            width: 20px;
+            height: 20px;
+
+            @include breakpoint(430px) {
+                width: 15px;
+                height: 15px;
+            }
+
         }
 
         .restaurant_btns .collect {
@@ -1025,10 +1159,6 @@ button {
             cursor: pointer;
         }
 
-        @include breakpoint(1024px) {
-            // margin-right: 22px;
-            padding-left: 7px;
-        }
 
         @include breakpoint(820px) {
             width: 40px;
@@ -1047,10 +1177,11 @@ button {
     img {
         width: 13px;
         height: 16px;
-        margin: 14px 6px 12px 12px;
+        margin: 14px 12px 14px 12px;
 
         @include breakpoint(820px) {
             margin-left: 6px;
+            margin: 12px 12px 12px 12px;
             // padding-left: 14px;
         }
 
@@ -1099,8 +1230,12 @@ button {
 
         img {
             width: 23px;
-            height: 18.57px;
+            height: 23px;
             margin: 10px 10px 10px 10px;
+
+            @include breakpoint(820px) {
+                margin: 8px 10px 10px 10px;
+            }
 
             @include breakpoint(430px) {
                 margin: 0;
@@ -1108,6 +1243,10 @@ button {
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
+            }
+
+            @include breakpoint(430px) {
+                width: 17px;
             }
         }
     }
@@ -1122,6 +1261,10 @@ button {
             transform: translateY(-5px);
             filter: drop-shadow(3px 5px 2px rgba(97, 97, 97, 0.7));
         }
+
+        // &.message-active {
+        //     background-color: #ffcc00;
+        // }
 
         @include breakpoint(820px) {
             width: 40px;
@@ -1150,6 +1293,8 @@ button {
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
+                width: 16px;
+                height: 16px;
             }
         }
     }
@@ -1318,7 +1463,7 @@ button {
 
     @include breakpoint(1024px) {
         width: 68vw;
-        padding-bottom: 8vw;
+        padding-bottom: 7vw;
     }
 
     @include breakpoint(820px) {
@@ -1342,6 +1487,11 @@ button {
             margin-bottom: 16px;
             width: 70vw;
             border-bottom: 2px solid #cb4847;
+            // margin-left: 2vw;
+
+            @include breakpoint(1024px) {
+                // margin-left: 2vw;
+            }
 
             @include breakpoint(820px) {
                 font-size: 26px;
@@ -1369,12 +1519,11 @@ button {
         }
 
         @include breakpoint(1280px) {
-            width: 70vw;
-            margin-left: 3vw;
+            width: 66vw;
+            // margin-left: 3vw;
         }
 
         @include breakpoint(1100px) {
-            margin-left: -3vw;
             gap: 0vw;
             width: 80vw;
         }
@@ -1410,7 +1559,7 @@ button {
 
                 @include breakpoint(1280px) {
                     width: 38vw;
-                    margin-left: 2vw;
+                    margin-left: 1vw;
                 }
 
                 @include breakpoint(1100px) {
@@ -1418,7 +1567,7 @@ button {
                 }
 
                 @include breakpoint(1024px) {
-                    width: 662px;
+                    width: 600px;
                 }
 
                 @include breakpoint(820px) {
@@ -1453,7 +1602,7 @@ button {
                         }
 
                         @include breakpoint(1280px) {
-                            width: 10vw;
+                            width: 8vw;
                         }
 
                         @include breakpoint(1100px) {
@@ -1508,7 +1657,7 @@ button {
             .restaurant_media {
                 margin-top: 25.5px;
                 display: flex;
-                margin-left: -80px;
+                margin-left: -46px;
 
                 @include breakpoint(1280px) {
                     margin-left: -30px;
@@ -1531,11 +1680,12 @@ button {
                     }
 
                     img {
-                        margin-right: 12px;
+                        margin-right: 8px;
                         flex-direction: row-reverse;
 
                         @include breakpoint(430px) {
                             width: 28px;
+                            margin-left: 44px;
                         }
 
                         @include breakpoint(390px) {
@@ -1597,7 +1747,7 @@ button {
                     img {
                         margin-right: 12px;
                         display: flex;
-                        margin-left: 76px;
+                        // margin-left: 76px;
                         display: inline;
 
                         @include breakpoint(1314px) {
@@ -1642,8 +1792,8 @@ button {
                     border-bottom: 2px solid #cb4847;
 
                     @include breakpoint(1024px) {
-                        width: 68vw;
-                        margin-left: -55vw;
+                        width: 71vw;
+                        margin-left: -56vw;
                         margin-bottom: -2vw;
                     }
 
@@ -1672,7 +1822,6 @@ button {
         }
 
         .map {
-            padding-left: 60px;
             height: 248px;
 
             @include breakpoint(1440px) {
@@ -1702,7 +1851,9 @@ button {
                 height: 300px;
 
                 @include breakpoint(1280px) {
-                    scale: 0.89;
+                    // scale: 0.89;
+                    width: 420px;
+                    height: 300px;
                 }
 
                 @include breakpoint(1024px) {
@@ -1981,10 +2132,14 @@ button {
 
     .restaurant_review {
         width: 78vw;
-        height: 425px;
+        height: 443px;
         background-color: #fff;
         padding-left: 20px;
-        margin: 0 auto;
+        margin: 20px 20px;
+
+        @include breakpoint(1024px) {
+            height: 460px;
+        }
 
         @include breakpoint(820px) {
             height: 114vh;
@@ -1995,12 +2150,13 @@ button {
             width: 81vw;
             margin-left: 10vw;
             padding-left: 6vw;
-            height: 186vw;
+            height: 207vw;
         }
 
         @include breakpoint(390px) {
             margin-left: 10vw;
             margin-top: 5vw;
+            height: 215vw;
         }
 
         .restaurant_review_content {
@@ -2163,13 +2319,11 @@ button {
             display: flex;
             height: 220px;
             width: 75vw;
-            // justify-content: space-between;
-            // margin-top: 20px;
         }
 
         @include breakpoint(820px) {
             display: block;
-            height: 25vh;
+            height: 28vh;
             width: 48vw;
             margin-left: 7vw;
         }
@@ -2192,13 +2346,14 @@ button {
 
             @include breakpoint(1024px) {
                 width: 24vw;
-                height: 24vh;
+                height: 33vh;
+                padding: 5px 17px 5px 16px;
             }
 
             @include breakpoint(820px) {
                 margin: auto;
                 width: 48vw;
-                height: 26vh;
+                height: 25vh;
                 margin-bottom: 3vw;
             }
 
@@ -2206,15 +2361,16 @@ button {
                 width: 71vw;
                 margin-left: -8vw;
                 margin-bottom: 6vw;
-                height: 42vw;
+                height: 50vw;
             }
 
             @include breakpoint(390px) {
                 width: 68vw;
                 margin-left: -8vw;
+                height: 52vw;
             }
 
-            .namenlike{
+            .namenlike {
                 display: flex;
                 justify-content: space-between;
             }
@@ -2233,7 +2389,6 @@ button {
                         display: block;
                         width: 36px;
                         height: 36px;
-                        // padding-left: 30px;
                         margin-left: 1.7vw;
                         border-radius: 50%;
                         object-fit: cover;
@@ -2243,13 +2398,11 @@ button {
                         }
 
                         @include breakpoint(1024px) {
-                            padding-left: 8px;
-                            padding-top: 8px;
                             margin-left: 0.7vw;
                         }
 
                         @include breakpoint(820px) {
-                            margin-left: 1.7vw;
+                            // margin-left: 1.7vw;
                         }
                     }
 
@@ -2339,7 +2492,7 @@ button {
                 }
 
                 @include breakpoint(820px) {
-                    padding-left: 7vw;
+                    padding-left: 2vw;
                 }
 
                 @include breakpoint(430px) {
@@ -2382,6 +2535,10 @@ button {
                 .date {
                     margin-left: 28px;
 
+                    @include breakpoint(1024px) {
+                        margin-left: 0;
+                    }
+
                     h5 {
                         padding-right: 15px;
                         font-size: 16px;
@@ -2389,6 +2546,11 @@ button {
                         @include breakpoint(1280px) {
                             margin-left: -0.9vw;
                             font-size: 13.7px;
+                        }
+
+                        @include breakpoint(1024px) {
+                            padding-left: 24px;
+                            width: 500px;
                         }
 
                         @include breakpoint(820px) {
@@ -2403,8 +2565,7 @@ button {
                         }
 
                         @include breakpoint(390px) {
-                            padding-left: 2vw;
-                            margin-left: -6.2vw;
+                            margin-left: -4.2vw;
                         }
                     }
                 }
@@ -2412,20 +2573,21 @@ button {
 
             h4 {
                 margin-top: 12px;
-                padding-left: 30px;
+                padding: 4px 16px 5px 16px;
 
                 @include breakpoint(1024px) {
                     // margin-left: 18px;
                     font-size: 18px;
-                    padding-left: 2px;
+                    padding: 4px 16px 4px 4px;
                 }
 
                 @include breakpoint(820px) {
-                    margin-left: 5vw;
+                    margin-left: 1vw;
                 }
 
                 @include breakpoint(390px) {
                     font-size: 16px;
+                    margin-top: 0px;
                 }
             }
         }
@@ -2442,22 +2604,22 @@ button {
     border: none;
 
     @include breakpoint(1024px) {
-        margin: 16px 0 16px 314px;
+        margin: 56px 0 16px 314px;
     }
 
     @include breakpoint(820px) {
         margin-left: 24vw;
-        margin-top: 52vw;
+        margin-top: 58vw;
     }
 
     @include breakpoint(430px) {
         margin-left: 21vw;
-        margin-top: 34vw;
+        margin-top: 43vw;
     }
 
     @include breakpoint(390px) {
         margin-left: 16vw;
-        margin-top: 10vw;
+        margin-top: 17vw;
     }
 
     a {
@@ -2748,21 +2910,24 @@ button {
     display: flex;
     align-items: center;
     cursor: pointer;
+
     img {
         margin-right: 4px;
 
     }
+
     h4 {
         color: #999999;
     }
 }
+
 .liked {
     img {
         margin-right: 4px;
     }
+
     h4 {
         color: $Red;
+    }
 }
-}
-
 </style>

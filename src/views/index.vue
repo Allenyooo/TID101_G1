@@ -62,36 +62,6 @@ export default {
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
 
-//RWD
-// @mixin windows{
-//   @media(max-width:1280px){
-//     @content;
-//   }
-// }
-
-// @mixin xxx{
-//   @media(max-width:1024px){
-//     @content;
-//   }
-// }
-
-// @mixin tablet{
-//   @media(max-width:820px){
-//     @content;
-//   }
-// }
-
-// @mixin mobile{
-//   @media(max-width:430px){
-//     @content;
-//   }
-// }
-// @mixin mobile{
-//   @media(max-width:375px){
-//     @content;
-//   }
-// }
-
 .wrapper {
     background-color: #333;
     width: 100%;
@@ -206,6 +176,7 @@ export default {
         margin-top: -63.5px;
         margin-left: -70vw;
     }
+
     @include breakpoint(810px) {
         height: unset;
     }
@@ -229,13 +200,15 @@ export default {
     }
 
     @include breakpoint(430px) {
-        position: absolute;
-        top: -25%;
-        left: 43%;
-        width: 15.8vw;
-        height: 15.8vw;
-        scale: 2.2;
+        position: fixed;
+        top: auto;
+        left: 7.5vw;
+        bottom: 74vw;
+        width: 85vw;
+        height: 85vw;
     }
+
+
 
     .-top {
         .-frontend {
@@ -243,15 +216,36 @@ export default {
                 top: 3px
             }
         }
+
+        a:hover~img {
+            transform: translateY(-10px);
+            filter: drop-shadow(5px 8px 2px rgba(0, 0, 0, 0.7));
+
+
+            @include breakpoint(1280px) {
+                transform: translateY(-2px);
+            }
+
+            @include breakpoint(430px) {
+                transform: translateY(-1px);
+            }
+        }
+
+
     }
 
     .-bottom {
-        .-backend {
-            @include breakpoint(820px) {
-                top: 94px;
+        a:hover~img {
+            transform: translateY(-10px);
+            filter: drop-shadow(5px 8px 2px rgba(0, 0, 0, 0.7));
+
+
+            @include breakpoint(1280px) {
+                transform: translateY(-2px);
             }
+
             @include breakpoint(430px) {
-                top: 85px;
+                transform: translateY(-1px);
             }
         }
     }
@@ -261,9 +255,10 @@ export default {
         font-size: 24px;
 
         @include breakpoint(430px) {
-            font-size: 16px;
+            font-size: 28px;
             margin-bottom: 1vw;
         }
+
     }
 
     &.rotate {
@@ -278,6 +273,11 @@ export default {
         transition: transform 1s;
         width: 100%;
         height: 100%;
+        // pointer-events: none;
+
+        // a{
+        //     pointer-events: auto;
+        // }
 
         &.move-right {
             transform: translateY(-50px);
@@ -312,6 +312,8 @@ export default {
 
         &.-frontend {
             top: 0;
+
+
         }
 
         &.-backend {
@@ -325,30 +327,25 @@ export default {
         cursor: pointer;
         display: block;
         transition: all .3s ease;
+        pointer-events: none;
 
-        @include breakpoint(840px) {
-            margin-top: 5vw;
-            scale: 2.3;
-        }
+        // &:hover {
+        //     transform: translateY(-10px);
+        //     filter: drop-shadow(5px 8px 2px rgba(0, 0, 0, 0.7));
 
-        &:hover {
-            transform: translateY(-10px);
 
-            @include breakpoint(1280px) {
-                transform: translateY(-2px);
-            }
+        //     @include breakpoint(1280px) {
+        //         transform: translateY(-2px);
+        //     }
 
-            @include breakpoint(430px) {
-                transform: translateY(-1px);
-            }
-
-            &:hover {
-                filter: drop-shadow(5px 8px 2px rgba(0, 0, 0, 0.7));
-            }
-        }
+        //     @include breakpoint(430px) {
+        //         transform: translateY(-1px);
+        //     }
+        // }
     }
 
     // .yiayng__group -top{
+
     // }
     // .yiayng__group -bottom{
 

@@ -26,7 +26,7 @@
                 </div>
                 <h2>{{ detail.NAME }}</h2>
             </div>
-            
+
             <ul class="member_container">
                 <h4 class="member_labeltwo">會員資訊</h4>
 
@@ -413,8 +413,8 @@ export default {
         },
         updateNickname() {
             if (this.newNickname.trim() === '') {
-            alert("請輸入新的暱稱");
-            return;
+                alert("請輸入新的暱稱");
+                return;
             }
             const user = this.details.find(u => u.ID === this.selectedUserId);
             if (user) {
@@ -539,8 +539,9 @@ export default {
     grid-template-columns: 1fr 1fr;
     gap: 20px 40px;
     overflow: hidden;
-    width: 70%;
     margin: auto;
+    border-radius: 15px;
+    width: 68vw;
 
     @include breakpoint(1280px) {
         display: grid;
@@ -549,7 +550,7 @@ export default {
         gap: 24px 24px;
         overflow: hidden;
         margin-left: 6vw;
-        width: 71vw;
+        width: 87%;
     }
 
     @include breakpoint(820px) {
@@ -558,13 +559,13 @@ export default {
     }
 
     @include breakpoint(430px) {
-        height: 186vh;
+        height: 86vh;
         width: 80vw;
         margin-left: 0vw;
     }
 
     @include breakpoint(390px) {
-        height: 226vh;
+        height: 105vh;
         margin-left: 0vw;
     }
 
@@ -680,17 +681,13 @@ export default {
     @include breakpoint(820px) {
         font-size: 20px;
         margin-left: 7vw;
-        height: 33vh;
         width: 60vw;
-    }
-
-    @include breakpoint(700px) {
-        height: 33vh;
     }
 
     @include breakpoint(430px) {
         height: 43vh;
         width: 73vw;
+        margin-left: 0;
     }
 
     @include breakpoint(390px) {
@@ -763,6 +760,11 @@ export default {
             font-size: 28px;
             margin: 6vh auto 3vh;
         }
+
+        @include breakpoint(390px) {
+            font-size: 20px;
+            
+        }
     }
 
     .member_user {
@@ -831,13 +833,14 @@ export default {
                     width: 120px;
                 }
 
-                    & input {
-                        width: 200px;
-                        height: 200px;
-                        border-radius: 100%;
-                        font-size: 11px;
-                        opacity: 0;
-                        cursor: pointer;
+                & input {
+                    width: 200px;
+                    height: 200px;
+                    border-radius: 100%;
+                    font-size: 11px;
+                    opacity: 0;
+                    cursor: pointer;
+
                     & input {
                         width: 200px;
                         height: 200px;
@@ -863,6 +866,10 @@ export default {
                 @include breakpoint(430px) {
                     font-size: 24px;
                     margin-left: 4vw;
+                }
+
+                @include breakpoint(390px) {
+                    font-size: 20px;
                 }
             }
         }
@@ -899,6 +906,7 @@ export default {
 
                 @include breakpoint(390px) {
                     margin-left: 5vw;
+                    font-size: 14px;
                 }
             }
 
@@ -914,6 +922,9 @@ export default {
                     font-size: 16px;
                     margin-bottom: 2vh;
 
+                    @include breakpoint(390px) {
+                        font-size: 14px;
+                    }
                 }
 
                 div {
@@ -922,6 +933,10 @@ export default {
 
                     label {
                         font-size: 16px;
+
+                        @include breakpoint(390px) {
+                            font-size: 14px;
+                        }
                     }
 
                     img {
@@ -959,6 +974,10 @@ export default {
 
                     @include breakpoint(430px) {
                         width: 78vw;
+                    }
+
+                    @include breakpoint(430px) {
+                        font-size: 12px;
                     }
                 }
 
@@ -1165,6 +1184,7 @@ export default {
         border-radius: 20px;
         width: 83vw;
         margin: 0 auto 6vh;
+        padding-bottom: 5vh;
 
 
 
@@ -1175,6 +1195,7 @@ export default {
         @include breakpoint(430px) {
             border: none;
             background-color: #F6F1ED;
+            margin: 2vh 9vh 2vh;
         }
 
 
@@ -1185,15 +1206,15 @@ export default {
             color: $Black;
             margin: 5vh auto 2vh;
 
-
             @include breakpoint(430px) {
                 font-size: 16px;
                 width: 100%;
-                margin: 0vh auto 2vh;
+                margin: 2vh 2vh 2vh;
             }
 
             @include breakpoint(390px) {
                 margin: 0 auto;
+                font-size: 14px;
             }
         }
     }
@@ -1211,17 +1232,18 @@ export default {
         }
 
         @include breakpoint(430px) {
-            margin-top: 123vw;
-            width: 80vw;
+            margin-top: 0vw;
+            width: 82vw;
             background-color: #F6F1ED;
             border-radius: 0px;
         }
 
         @include breakpoint(390px) {
+            width: 80vw;
             margin-top: 141vw;
-            margin: 132vh 8vh 4vh;
+            margin: 0vh 8vh 4vh;
+            height: 33vh;
         }
-
 
         h4 {
             width: 90%;
@@ -1233,6 +1255,10 @@ export default {
             @include breakpoint(430px) {
                 font-size: 16px;
                 margin: 2vh 3vh 2vh;
+            }
+
+            @include breakpoint(390px) {
+                font-size: 14px;
             }
         }
 
@@ -1274,6 +1300,8 @@ export default {
 
                 @include breakpoint(390px) {
                     width: 214px;
+                    height: 23px;
+                    font-size: 12px;
                 }
             }
 
@@ -1288,6 +1316,13 @@ export default {
                     width: 48px;
                     height: 32px;
                     font-size: 14px;
+                    margin-left: 6px;
+                }
+
+                @include breakpoint(390px) {
+                    width: 45px;
+                    height: 23px;
+                    font-size: 12px;
                     margin-left: 6px;
                 }
             }
@@ -1308,6 +1343,10 @@ export default {
                     font-size: 14px;
                 }
 
+                @include breakpoint(390px) {
+                    font-size: 12px;
+                }
+
                 th {
                     h5 {
                         font-weight: 800;
@@ -1315,7 +1354,10 @@ export default {
 
                         @include breakpoint(430px) {
                             font-size: 14px;
-                            // text-align: center;
+                        }
+
+                        @include breakpoint(390px) {
+                            font-size: 12px;
                         }
                     }
                 }
@@ -1353,12 +1395,12 @@ export default {
             background-color: #F6F1ED;
             border-radius: 0px;
             font-size: 16px;
-            height: 47vw;
+            height: 40vw;
         }
 
         @include breakpoint(390px) {
             width: 80vw;
-            height: 50vw;
+            height: 40vw;
         }
 
         h4 {
@@ -1371,6 +1413,10 @@ export default {
             @include breakpoint(430px) {
                 margin: 2vh auto 2vh;
                 font-size: 16px;
+            }
+
+            @include breakpoint(390px) {
+                font-size: 14px;
             }
         }
 
@@ -1428,6 +1474,11 @@ export default {
                             font-size: 14px;
                             text-align: center;
                         }
+
+                        @include breakpoint(390px) {
+                            padding-left: 0;
+                            font-size: 12px;
+                        }
                     }
                 }
 
@@ -1457,6 +1508,7 @@ export default {
 
                     @include breakpoint(390px) {
                         padding-left: 0vw;
+                        font-size: 12px;
                     }
 
                     a {
@@ -1470,6 +1522,10 @@ export default {
 
                         @include breakpoint(430px) {
                             margin-left: 4vw;
+                        }
+
+                        @include breakpoint(390px) {
+                            margin-left: 2vw;
                         }
                     }
                 }
@@ -1494,6 +1550,12 @@ export default {
             font-size: 16px;
             width: 132px;
             height: 42px;
+        }
+
+        @include breakpoint(430px) {
+            font-size: 12px;
+            width: 100px;
+            height: 35px;
         }
     }
 }
