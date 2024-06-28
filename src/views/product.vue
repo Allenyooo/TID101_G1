@@ -283,7 +283,7 @@ export default {
       sp: true,
       cart: [],
       test: [],
-      memberId: 1,
+      memberId: "",
       cartId: 0,
     };
   },
@@ -461,10 +461,21 @@ export default {
     //       console.error("Error fetching data:", error);
     //     });
     // },
+
+    getMemberId() {
+      let cookie = document.cookie;
+      let getId = cookie.match(/memberId=(\d+)/);
+      let memberId = getId[1];
+      // console.log(match)
+      console.log(memberId);
+      this.memberId = memberId;
+      // return memberId;
+    },
   },
 
   mounted() {
     // this.fetchData();
+
     fetch(`${import.meta.env.VITE_PHP_PATH}product/test.php`, {
       mode: "cors",
     })
@@ -480,6 +491,7 @@ export default {
         this.discount = data.data[0].PERCENT;
         this.cart = data.data2;
         this.cartId = data.data2[data.data2.length - 1].ID;
+        this.getMemberId();
       });
     // .catch((error) => {
     //   console.error("Error fetching data:", error);
@@ -544,144 +556,6 @@ export default {
       margin: 0 12px;
     }
   }
-
-  // .left {
-  //   width: 400px;
-  //   height: 100vh;
-  //   background-color: rgba($color: #333333, $alpha: 0.85);
-  // }
-
-  // .spBottom {
-  //   position: fixed;
-  //   right: 0;
-  //   bottom: 0;
-  //   z-index: 20;
-
-  //   transform: translate(100%);
-  //   transition: transform 1s ease-in-out;
-
-  //   a {
-  //     font-size: 24px;
-  //     font-weight: bold;
-  //     height: 60px;
-  //     width: 520px;
-  //     background-color: $LightBrown;
-  //     text-align: center;
-  //     line-height: 60px;
-  //     color: $White;
-  //   }
-
-  //   p {
-  //     font-size: 32px;
-  //     font-weight: bold;
-  //     color: #000000;
-  //     text-align: center;
-  //   }
-  // }
-
-  // .productMove {
-  //   height: 100vw;
-  //   width: 520px;
-  //   background-color: $OffWhite;
-  //   position: fixed;
-  //   z-index: 3;
-  //   top: 0;
-  //   right: 0;
-  //   transform: translate(100%);
-  //   transition: transform 1s ease-in-out;
-  //   border-left: 1px solid $Black;
-
-  //   .spTop {
-  //     margin-top: 35px;
-  //     margin-bottom: 24px;
-  //     padding: 0 36px;
-
-  //     ul {
-  //       li {
-  //         button {
-  //           background-image: url("/src/assets/Image/product/close.svg");
-  //           height: 23px;
-  //           width: 24px;
-  //           background-position: center center;
-  //           border: none;
-  //           margin-left: 19px;
-  //           margin-bottom: 14px;
-  //         }
-
-  //         p {
-  //           font-size: 20px;
-  //           margin-left: 164px;
-  //           margin-bottom: 24px;
-  //         }
-  //       }
-  //       .scBorder {
-  //         border-bottom: 1px solid $Gray;
-  //       }
-  //     }
-  //   }
-
-  //   .pmCount {
-  //     margin-left: 52px;
-
-  //     ul {
-  //       .pmcImg {
-  //         margin-right: 32px;
-  //         margin-bottom: 40px;
-  //       }
-  //       li {
-  //         width: 416px;
-
-  //         ul {
-  //           display: flex;
-  //           li {
-  //             img {
-  //               width: 200px;
-  //               height: 90px;
-  //             }
-
-  //             ul {
-  //               flex-direction: column;
-  //               .pmcName {
-  //                 margin-top: 4px;
-  //               }
-
-  //               .pmcButton {
-  //                 display: flex;
-  //                 margin-top: 24px;
-
-  //                 button {
-  //                   width: 28px;
-  //                   height: 28px;
-  //                   border: none;
-  //                 }
-  //                 .pmcDown {
-  //                   background-image: url("/src/assets/Image/product/drown.svg");
-  //                   background-size: 100%;
-  //                 }
-  //                 .pmcUp {
-  //                   background-image: url("/src/assets/Image/product/up.svg");
-  //                   background-size: 100%;
-  //                 }
-  //                 .pmcClear {
-  //                   width: 20px;
-  //                   height: 25px;
-  //                   background-image: url("/src/assets/Image/product/clear.svg");
-  //                   margin-left: 42px;
-  //                   margin-top: 1.5px;
-  //                 }
-
-  //                 p {
-  //                   font-size: 20px;
-  //                   margin: 0 27px;
-  //                 }
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 
   .pmOn {
     transform: translate(0%);
@@ -773,7 +647,6 @@ export default {
             margin: auto auto;
 
             @include breakpoint(mobile) {
-              // margin: auto 7vw;
             }
 
             img {
@@ -1044,10 +917,10 @@ export default {
               h4 {
                 color: $Gold;
 
-                &:hover {
-                  background-color: #c3a988;
-                  color: white;
-                }
+                // &:hover {
+                //   background-color: #c3a988;
+                //   color: white;
+                // }
               }
             }
 
@@ -1351,7 +1224,9 @@ export default {
     }
   }
   .pCa2 {
-    padding: 50px 50px;
+    padding: 50px;
+    width: 80%;
+    padding-left: 76px;
     display: none;
 
     @include breakpoint(mobile) {

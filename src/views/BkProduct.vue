@@ -15,6 +15,8 @@
           :page="page"
           :bd2="bd2"
           :bd3="bd3"
+          :picTd="picTd"
+          :shopPic="pic"
         ></BD>
       </div>
     </div>
@@ -131,12 +133,12 @@ export default {
       bd3: [],
       title: [
         { 商品編號: "管理員編號" },
-        { 商品圖片: "信箱" },
         { 商品價格: "會員名稱" },
         { 折扣: "狀態" },
         { 折扣後價格: "修改" },
         { 折扣開始日期: "修改" },
         { 折扣結束日期: "修改" },
+        { 商品圖片: "信箱" },
         { 狀態: "修改" },
         { 修改: "修改" },
       ],
@@ -148,6 +150,9 @@ export default {
       sortid: 1,
 
       lastId: 0,
+
+      picTd: 1,
+      pic: [],
     };
   },
 
@@ -218,6 +223,7 @@ export default {
         this.bd = data.data;
         this.bd2 = data.data2;
         this.bd3 = data.data3;
+        this.pic = data.data4;
         this.lastId = data.data[data.data2.length - 1].ID;
         // this.bd2 = data.data2;
         // this.price = data[0].PRICE;
