@@ -8,7 +8,7 @@
                 <h6>고려미</h6>
             </div>
             <span class="restaurant_star">
-                <div class="star">4.8</div>
+                <div class="star">{{ score.AVG }}</div>
                 <img class="restaurant_starimg" src="../assets/Image/restaurant/star.png" alt="star" />
             </span>
             <ul class="list">
@@ -172,9 +172,9 @@
                             <h3>評論區</h3>
                             <span>
                                 <img class="restaurantstarimg" src="../assets/Image/restaurant/star.png" alt="star" />
-                                <h4 class="restaurant_rating">4.8</h4>
+                                <h4 class="restaurant_rating">{{ score.AVG }}</h4>
                                 <h4 class="restaurant_review_num">
-                                    (100+評論)
+                                    ({{ score.num }}則評論)
                                 </h4>
                             </span>
                         </div>
@@ -273,99 +273,30 @@
 
                     <!---評論卡片區，卡片1-->
                     <ul class="customer_review">
-                        <li>
-                            <div>
+                        <li v-for="(item, index) in items.slice(0, 3)" :key="item.ID" :item="item">
+                            <div class="namenlike">
                                 <span>
-                                    <img class="user" src="../assets/Image/restaurant/north/user.png" alt="user" />
+                                    <img class="user" :src="item.AVATAR" alt="user" />
                                     <h4 class="restaurant_username">
-                                        來自火星的阿霈
+                                        {{ item.NAME }}
                                     </h4>
                                 </span>
-                                <span>
-                                    <img class="good" src="../assets/Image/restaurant/north/good.png" alt="good" />
-                                    <h5 class="number">250</h5>
+                                <span :class="['like', { liked: isLike }]" 
+                                @click="toggleLike(item.ID, item.rLIKE)">
+                                    <img :src="item.isLikedByUser ? liked : like" alt=""/>
+                                    <h4 :style="{color:item.isLikedByUser ? '#CB4847' : '#999999'}">{{ item.rLIKE }}</h4>
                                 </span>
                             </div>
                             <div class="star">
                                 <span class="starbar">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
-                                    <img src="../assets/Image/restaurant/north/Starnull.png" alt="Starfull" />
+                                    <img v-for="n in 5" :key="n" :src="n <= item.STAR ? fullStar : nullStar" alt="Starfull" />
                                 </span>
                                 <span class="date">
-                                    <h5>2024/05/12 13:14</h5>
+                                    <h5>{{ formatDate(item.TIME) }}</h5>
                                 </span>
                             </div>
                             <h4>
-                                上次聚餐同事一致好評!<br />
-                                好想再二訪
-                            </h4>
-                        </li>
-                        <!---評論卡片2-->
-                        <li>
-                            <div>
-                                <span>
-                                    <img class="user" src="../assets/Image/restaurant/north/user.png" alt="user" />
-                                    <h4 class="restaurant_username">
-                                        來自火星的阿霈
-                                    </h4>
-                                </span>
-                                <span>
-                                    <img class="good" src="../assets/Image/restaurant/north/good.png" alt="good" />
-                                    <h5 class="number">250</h5>
-                                </span>
-                            </div>
-                            <div class="star">
-                                <span class="starbar">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
-                                    <img src="../assets/Image/restaurant/north/Starnull.png" alt="Starfull" />
-                                </span>
-                                <span class="date">
-                                    <h5>2024/05/12 13:14</h5>
-                                </span>
-                            </div>
-                            <h4>
-                                上次聚餐同事一致好評!<br />
-                                好想再二訪
-                            </h4>
-                        </li>
-                        <!---評論卡片3-->
-                        <li>
-                            <div>
-                                <span>
-                                    <img class="user" src="../assets/Image/restaurant/north/user.png" alt="user" />
-                                    <h4 class="restaurant_username">
-                                        來自火星的阿霈
-                                    </h4>
-                                </span>
-                                <span>
-                                    <img class="good" src="../assets/Image/restaurant/north/good.png" alt="good" />
-                                    <h5 class="number">250</h5>
-                                </span>
-                            </div>
-
-                            <!---彈跳視窗-->
-                            <div class="star">
-                                <span class="starbar">
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
-                                    <img src="../assets/Image/restaurant/north/Starfull.png" alt="Starfull" />
-                                    <img src="../assets/Image/restaurant/north/Starnull.png" alt="Starfull" />
-                                </span>
-                                <span class="date">
-                                    <h5>2024/05/12 13:14</h5>
-                                </span>
-                            </div>
-
-                            <h4>
-                                上次聚餐同事一致好評!<br />
-                                好想再二訪
+                                {{ item.CONTENT.slice(0, 35) + "..." }}
                             </h4>
                         </li>
                     </ul>
@@ -386,6 +317,9 @@ import axios from "axios";
 
 export default {
     mounted() {
+        this.fetchReviews();
+        this.fetchScore();
+
         const memberId = this.getMemberIdFromCookie();
 
         if (memberId) {
@@ -409,7 +343,14 @@ export default {
             files: [], //上傳照片功能
             imageData: [],
             storeId: 1,
-            memberId: "", // 從 cookie 中取得的會員 ID        
+            memberId: "", // 從 cookie 中取得的會員 ID 
+            score: [],
+            items: [],       
+            fullStar: new URL("@/assets/Image/restaurant/north/Starfull.png",import.meta.url).href,
+            nullStar: new URL("@/assets/Image/restaurant/north/Starnull.png",import.meta.url).href,
+            like: new URL("@/assets/Image/review/like.png", import.meta.url).href,
+            liked: new URL("@/assets/Image/review/liked.png", import.meta.url).href,
+            isLike: false,
         };
     },
 
@@ -626,12 +567,101 @@ export default {
                 this.files[index - 1] = file;
             });
         },
+        async fetchReviews() {
+            try {
+                const memberId = this.getMemberIdFromCookie();
+                const response = await fetch(
+                    // "http://localhost/tid101_g1/public/php/review/reviews.php?shop=1"
+                    `${import.meta.env.VITE_PHP_PATH}review/reviews.php?shop=1`
+
+                );
+                const reviewData = await response.json();
+                console.log(reviewData);
+                this.items = reviewData.map(item => ({
+                    ...item,
+                    isLike: false, 
+                    isLikedByUser: item.LIKE_MEMBERS.includes(parseInt(memberId)), 
+                }));
+                ;
+                console.log(reviewData);
+            } catch (error) {
+                console.error("Error fetching shops:", error);
+            }
+        },
+        async fetchScore() {
+            try {
+                const response = await fetch(
+                    // "http://localhost/tid101_g1/public/php/review/score.php?shop=1"
+                    `${import.meta.env.VITE_PHP_PATH}review/score.php?shop=1`
+
+                );
+                const reviewData = await response.json();
+                this.score = reviewData;
+                console.log(reviewData);
+            } catch (error) {
+                console.error("Error fetching shops:", error);
+            }
+        },
+        formatDate(datetime) {
+            const date = new Date(datetime);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, "0"); // 月份從0開始,所以+1
+            const day = String(date.getDate()).padStart(2, "0");
+            const hours = String(date.getHours()).padStart(2, "0");
+            const minutes = String(date.getMinutes()).padStart(2, "0");
+            return `${year}-${month}-${day} ${hours}:${minutes}`;
+        },
+        async toggleLike(itemId, currentLikes) {
+            const memberId = this.getMemberIdFromCookie();
+            if (memberId == null) {
+                alert("請先登入");
+            } else {
+                try {
+                    const response = await fetch(
+                        // "http://localhost/tid101_g1/public/php/review/toggleLike.php",
+                        `${import.meta.env.VITE_PHP_PATH}review/toggleLike.php`,
+
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                itemId,
+                                memberId: parseInt(memberId),
+                            }),
+                        }
+                    );
+                    const data = await response.json();
+                    if (data.success) {
+                        this.items.forEach((item) => {
+                            if (item.ID === itemId) {
+                                if (data.newLikes === 1) {
+                                    item.rLIKE += 1;
+                                    item.isLike = true;
+                                    item.isLikedByUser = true;
+                                } else {
+                                    item.rLIKE -= 1;
+                                    item.isLike = false;
+                                    item.isLikedByUser = false;
+                                }
+                            }
+                            this.isLike = !this.isLike;
+                        });
+                    } else {
+                        console.error("Failed to toggle like");
+                    }
+                } catch (error) {
+                    console.error("Error toggle like:", error);
+                }
+            }
+        },
     },
 };
 </script>
 
 <style lang="scss" scoped>
-@import url(/src/sass/style.scss);
+@import "/src/sass/style.scss";
 
 @mixin breakpoint($point) {
     @media screen and (max-width: $point) {
@@ -2184,6 +2214,11 @@ button {
                 margin-left: -8vw;
             }
 
+            .namenlike{
+                display: flex;
+                justify-content: space-between;
+            }
+
             div {
                 display: flex;
 
@@ -2195,10 +2230,13 @@ button {
                     margin-top: 20px;
 
                     .user {
+                        display: block;
                         width: 36px;
                         height: 36px;
                         // padding-left: 30px;
                         margin-left: 1.7vw;
+                        border-radius: 50%;
+                        object-fit: cover;
 
                         @include breakpoint(1280px) {
                             padding-left: 0px;
@@ -2704,4 +2742,27 @@ button {
         padding-left: 34px;
     }
 }
+
+.like {
+    // outline: 1px red solid;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    img {
+        margin-right: 4px;
+
+    }
+    h4 {
+        color: #999999;
+    }
+}
+.liked {
+    img {
+        margin-right: 4px;
+    }
+    h4 {
+        color: $Red;
+}
+}
+
 </style>

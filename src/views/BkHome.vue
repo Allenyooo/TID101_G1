@@ -8,9 +8,9 @@
         <div class="Bkline"></div>
 
         <div class="BkStatistics">
-          <div class="BS1">累積會員人數: 12,345筆</div>
-          <div class="BS2">目前使用人數: 12,345筆</div>
-          <div class="BS3">今日營收: 12,345元</div>
+          <div class="BS1">累積會員人數: {{webInfo[1]}}筆</div>
+          <!-- <div class="BS2">目前使用人數: 12,345筆</div> -->
+          <div class="BS3">今日營收: {{webInfo[0]}}元</div>
         </div>
 
         <div class="chartTtle">
@@ -20,14 +20,15 @@
         <section class="chartBg">
           <canvas id="Chart"></canvas>
         </section>
-
-        <div class="chartTtle">
+            <!-- 這一段刪掉 chart.js會壞掉 -->
+        <!-- <div class="chartTtle">    
           使用人數
           <button>月</button>
         </div>
         <section class="chartBg">
           <canvas id="Chart2"></canvas>
-        </section>
+        </section> -->
+            <!-- 這一段刪掉 chart.js會壞掉 -->
 
         <div class="chartTtle">
           營收
@@ -53,8 +54,9 @@ export default {
 
   mounted() {
     this.renderChart1();
-    this.renderChart2();
+    // this.renderChart2();
     this.renderChart3();
+    this.getwebInfo();
   },
 
   data() {
@@ -103,8 +105,8 @@ export default {
           src: "/BkFaq",
           border: 2,
         },
-      ],
-
+      ], 
+      webInfo:[],
       stateTd: 1,
       dataTd: 1,
     };
@@ -285,6 +287,20 @@ export default {
       };
       new Chart(ctx, config);
     },
+    async getwebInfo() {
+            try {
+                const response = await fetch(
+                    // "http://localhost/tid101_g1/public/php/review/score.php?shop=1"
+                    `${import.meta.env.VITE_PHP_PATH}Bk/BkHome.php`
+
+                );
+                const webData = await response.json();
+                this.webInfo = webData;
+                console.log(webData);
+            } catch (error) {
+                console.error("Error fetching shops:", error);
+            }
+        },
   },
 };
 </script>
@@ -355,5 +371,9 @@ export default {
       }
     }
   }
+}
+
+.BS1{
+  margin-right: 20px;
 }
 </style>
