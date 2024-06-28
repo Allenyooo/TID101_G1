@@ -65,10 +65,10 @@
                     <!--寫留言按鈕-->
                     <li class="message" :class="{ active: popup_open }">
                         <button @click="pop" :class="[
-                            'button-active',
+                            'message-active',
                             {
-                                'button-active': showPrompt,
-                                
+                                'prompt-active': showPrompt,
+                                popup_open
                             }
                         ]">
                             <div class="icon_bg">
@@ -778,15 +778,15 @@ export default {
     list-style: none;
 }
 
-// 留言按鈕變色
-.message button.button-active {
-    background-color: #ffcc00;
-    width: 46px;
-    height: 46px;
-    border-radius: 50px;
-    margin-right: 12px;
-    border-radius: 50%;
-}
+//留言按鈕變色
+// .message button.button-active {
+//     background-color: #ffcc00;
+//     width: 46px;
+//     height: 46px;
+//     border-radius: 50px;
+//     margin-right: 12px;
+//     border-radius: 50%;
+// }
 
 #share-btn {
     #share-btn {
@@ -1137,7 +1137,12 @@ button {
             filter: drop-shadow(3px 3px 2px rgba(97, 97, 97, 0.7));
         }
 
-        // 收藏後按鈕變色
+        //收藏後按鈕變色
+        &.collected {
+            background-color: #cb4847;
+        }
+
+        // 提示框彈出時按鈕變色
         &.prompt-active {
             background-color: #cb4847;
         }
@@ -1262,9 +1267,9 @@ button {
             filter: drop-shadow(3px 5px 2px rgba(97, 97, 97, 0.7));
         }
 
-        // &.message-active {
-        //     background-color: #ffcc00;
-        // }
+        &.message-active {
+            background-color: #ffcc00;
+        }
 
         @include breakpoint(820px) {
             width: 40px;
