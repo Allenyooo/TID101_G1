@@ -25,8 +25,11 @@
             :key="j.ID"
             :class="{ td: hover == true }"
           >
-            <h5>{{ i }}</h5>
+            {{ i }}
+            <!-- <h5>{{ i }}</h5> -->
           </td>
+
+          <td v-if="picTd == 1"><img :src="shopPic[j.ID - 1].PIC" /></td>
 
           <td v-if="stateTd == 1">
             <BState
@@ -45,7 +48,7 @@
 
           <td v-if="dataTd == 2">
             <!-- <button></button> -->
-            <BC :BCH="BCHref"></BC>
+            <BC :BCH="BCHref" :checkId="j.ID"></BC>
           </td>
         </tr>
 
@@ -113,7 +116,18 @@ import BC from "/src/components/BkCheck.vue";
 export default {
   components: { BR, BState, BC },
 
-  props: ["bd", "title", "dataTd", "stateTd", "BCHref", "page", "bd2", "bd3"],
+  props: [
+    "bd",
+    "title",
+    "dataTd",
+    "stateTd",
+    "BCHref",
+    "page",
+    "bd2",
+    "bd3",
+    "shopPic",
+    "picTd",
+  ],
 
   data() {
     return {
@@ -199,9 +213,20 @@ export default {
           border-left: 1px solid #c4c4c4;
           border-right: 1px solid #c4c4c4;
           vertical-align: middle;
-          overflow: hidden;
+          // overflow: hidden;
+
+          max-width: 80px; /* 设置最大宽度，根据实际情况调整 */
+          white-space: nowrap; /* 不换行 */
+          overflow: hidden; /* 溢出部分隐藏 */
+          text-overflow: ellipsis; /* 显示省略号 */
 
           // text-overflow: ellipsis;
+
+          img {
+            width: 80px;
+            height: 36px;
+            background-size: 100%;
+          }
         }
       }
     }

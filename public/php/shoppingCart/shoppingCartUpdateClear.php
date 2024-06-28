@@ -26,24 +26,21 @@
     
         $shoppingDown = json_decode(file_get_contents("php://input"), true);
 
-        // $Input = $Bksearh['Input'];
-        // $BkInput = '%'.$Input.'%';
-
-        // $Start = $Bksearh['Start'];
-        // $End = $Bksearh['End'];
+  
 
         $productid= $shoppingDown['changeD'];
-        // $memberid = 1;
+        $memberid = $shoppingDown['memberID'];
        
 
 
         $sql = "DELETE from
 	            CART
-	            where ID = ?";
+	            where ID = ? and MEMBER_ID = ?";
 
             $statement = $pdo->prepare($sql);
             // $statement->bindValue(1 , $memberid);
             $statement->bindValue(1 , $productid);
+            $statement->bindValue(2 , $memberid);
        
             $statement->execute();
 

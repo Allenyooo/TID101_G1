@@ -22,9 +22,9 @@
 
      
     
-        $sql = "SELECT STORE.ID , NAME ,REGION ,count(*)
+        $sql = "SELECT  STORE.ID , NAME ,REGION ,count(STORE_ID)
                 from  COLLECT_DETAIL
-                join STORE
+                right join STORE
                 on  STORE_ID= STORE.ID
                 group by STORE.ID";
 

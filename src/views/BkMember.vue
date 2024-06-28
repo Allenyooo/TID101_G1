@@ -219,7 +219,7 @@ export default {
 
     searchButton(id) {
       fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkSearch.php`, {
-        mode: "cors", // 请求模式
+        mode: "cors",
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

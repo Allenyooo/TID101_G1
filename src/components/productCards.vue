@@ -3,9 +3,9 @@
     :effect="'cards'"
     :grabCursor="true"
     :modules="modules"
-    class="mySwiper"
+    class="mySwiper swiper"
   >
-    <swiper-slide>
+    <swiper-slide class="swiper-slide">
       <div class="pcImage i1"></div>
       <div class="pcText">
         <p>便利快捷</p>
@@ -15,7 +15,7 @@
         </h5>
       </div>
     </swiper-slide>
-    <swiper-slide>
+    <swiper-slide class="swiper-slide">
       <div class="pcImage i2"></div>
       <div class="pcText">
         <p>多樣選擇</p>
@@ -24,7 +24,7 @@
         </h5>
       </div>
     </swiper-slide>
-    <swiper-slide>
+    <swiper-slide class="swiper-slide">
       <div class="pcImage i3"></div>
       <div class="pcText">
         <p>優先訂位</p>
@@ -33,7 +33,7 @@
         </h5>
       </div>
     </swiper-slide>
-    <swiper-slide>
+    <swiper-slide class="swiper-slide">
       <div class="pcImage i4"></div>
       <div class="pcText t4">
         <p>有效期一年</p>
@@ -73,9 +73,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .swiper {
-  width: 71.8vw;
+  width: 60vw;
   height: 97.3vw;
 
   .swiper-slide {

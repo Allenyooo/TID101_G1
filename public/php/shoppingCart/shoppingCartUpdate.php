@@ -33,7 +33,7 @@
         // $End = $Bksearh['End'];
 
         $productid= $shoppingDown['changeD'];
-        $memberid = 1;
+        $memberid = $shoppingDown['memberID'];
        
 
 

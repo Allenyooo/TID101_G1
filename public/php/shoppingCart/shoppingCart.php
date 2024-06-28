@@ -23,7 +23,10 @@
     
         // $mail = $_POST['mail'];
 
-        $memberId = 1;
+        $shopping = json_decode(file_get_contents("php://input"), true);
+
+        $memberId =  $shopping['memberID'];
+       
      
     // $sql = "SELECT * FROM member where Account =? and PWD =?";
     $sql = "SELECT  CART.ID,p.PRICE,p.PIC ,CART.COUNT,p.PERCENT

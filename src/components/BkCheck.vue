@@ -1,28 +1,24 @@
 <template>
   <!-- <a href="/src/views/BkMemberDetail.vue" v-if="BCH == 2"><p>查看2</p></a> -->
-  <router-link to="/BkOrderDetail" v-if="BCH == 1"> <p>查看</p></router-link>
-  <router-link to="/BkMemberDetail" v-if="BCH == 2"><p>查看</p></router-link>
+  <router-link to="/BkOrderDetail" v-if="BCH == 1" @click="checkClick(checkId)">
+    <p>查看</p></router-link
+  >
+  <router-link to="/BkMemberDetail" v-if="BCH == 2" @click="checkClick(checkId)"
+    ><p>查看</p></router-link
+  >
+  <!-- <img src="/src/stores/order.js" alt=""> -->
 </template>
 
 <script>
-export default {
-  props: ["BCH"],
+import { useOrderStore } from "/src/stores/order";
 
-  data() {
-    return {
-      i: 6,
-      hover: false,
-    };
-  },
+export default {
+  props: ["BCH", "checkId"],
 
   methods: {
-    // hovertd() {
-    //   this.hover = true;
-    // },
-    tValue(t) {
-      for (let v in t) {
-        return v;
-      }
+    checkClick(value) {
+      const store = useOrderStore();
+      store.setValue(value);
     },
   },
 };

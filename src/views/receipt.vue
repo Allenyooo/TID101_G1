@@ -6,18 +6,51 @@ export default {
     mounted(){
         this.getMemberID();
         this.loginStatus();
-        // this.getOrderDetails();
+        this.getOrderID();
     },
 
     data(){
         return{
             orderDetails: {
-                id: "24EAE33493",
-                date: "2024 / 05 / 15",
-                payment: "LINE Pay",
-                amount: "2600"
+                // id: "24EAE33493",
+                // date: "2024 / 05 / 15",
+                // payment: "LINE Pay",
+                // subtotal: "2700",
+                // discount: "100",
+                // amount: "2600"
             },
+            tickets: [
+                {
+                    id:"1",
+                    price: "100",
+                    qty: "1",
+                },
+                {
+                    id:"2",
+                    price: "300",
+                    qty: "1",
+                },
+                {
+                    id:"3",
+                    price: "500",
+                    qty: "1",
+                },
+                {
+                    id:"4",
+                    price: "800",
+                    qty: "1",
+                },
+                {
+                    id:"5",
+                    price: "1000",
+                    qty: "1",
+                }
+            ],
+            orderDate: "",
+            serialNumber: "17194956168",
+            // imgSrc: "",
             memberId: "",
+            orderID: "",
         }
     },
 
@@ -27,44 +60,106 @@ export default {
         getMemberID(){
             let cookies = document.cookie;
             let match = cookies.match(/memberId=(\d+)/);
-            let memberId = match[1];
-            // console.log(match)
-            console.log(memberId);
-            this.memberId = memberId;
-            return memberId;
+            if(match){
+                let memberId = match[1];
+                // console.log(match)
+                console.log(memberId);
+                this.memberId = memberId;
+                return memberId;
+            }else{
+                let memberId = null
+                this.memberId = memberId;
+                return memberId;
+            }
+
         },
         loginStatus(){
             if(this.memberId == null){
-                alert("發生錯誤 請稍後再嘗試");
+                alert("請先登入");
+                this.$router.push("/login");
             }else{
                 this.getOrderDetails()
             }
         },
+        getOrderID(){
+            let cookies = document.cookie;
+            let match = cookies.match(/orderID=(\d+)/);
+            if(match){
+                let orderID = match[1];
+                // console.log(match)
+                console.log(orderID);
+                this.orderID = orderID;
+                console.log(this.orderID);
+                return this.orderID;
+            }else{
+                alert("找不到orderID");
+            }
+        },
         async getOrderDetails(){
-            fetch(
-                // "http://localhost/tid101_g1/public/php/receipt/orderDetails.php"
-            `${import.meta.env.VITE_PHP_PATH}receipt/orderDetails.php`,{
+            fetch(`${import.meta.env.VITE_PHP_PATH}receipt/orderDetails.php`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    memberId: this.memberId
+                    memberId: this.memberId,
+                    orderID: this.orderID,
                 })
             })
                 .then(resp => resp.json())
-                .then(orderDB => {
-                    this.order = orderDB
+                .then(orderDetailsDB => {
+                    this.orderDetails = orderDetailsDB
                 })
-                .catch(wrong => {
-                    console.log(wrong)
+                .catch(error => {
+                    console.log(error);
                 })
         },
 
+        // async getQrCode(){
+        //     fetch("https://api.pwmqr.com/qrcode/create/",{
+        //         headers: {
+        //             "url": "17194956168"
+        //         }
+        //     })
+        //     .then(resp => {
+        //         this.imgSrc = resp
+        //         console.log(this.imgSrc)
+        //     })
+        //     .catch(error => {
+        //         console.error('Error:', error);
+        //     })
+        // },
+
+        download(){
+            // let url = "https://api.pwmqr.com/qrcode/create/?url=" + this.serialNumber + "&down=1";
+            // console.log(url)
+            location.href = "https://api.pwmqr.com/qrcode/create/?url=" + this.serialNumber + "&down=1";
+        },
         member() {
             this.$router.push("/member");
         },
     },
+
+    computed: {
+        expDate(){
+            let today = new Date();
+            let year = today.getFullYear() + 1;
+            let m = today.getMonth() + 1;
+            let d = today.getDate();
+            // let m = 2;
+            // let d = 29;
+            if( m == 2 && d == 29){
+                var mon = 3
+                var da = 1;
+            }else{
+                var mon = m;
+                var da = d;
+            }
+            let month = mon < 10 ? "0" + mon : mon;
+            let day = da < 10 ? "0" + da : da ;
+            return `${year} / ${month} / ${day}`
+        },
+    }
 };
 </script>
 
@@ -99,12 +194,12 @@ export default {
                                 <th>數量</th>
                                 <th>面額</th>
                             </tr>
-                            <tr>
+                            <tr v-for="(ticket, index) in tickets" :key="tickets.id">
                                 <td>梨饗券</td>
-                                <td>1</td>
-                                <td>$100</td>
+                                <td>{{ ticket.qty }}</td>
+                                <td>${{ ticket.price }}</td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td>梨饗券</td>
                                 <td>1</td>
                                 <td>$300</td>
@@ -123,20 +218,20 @@ export default {
                                 <td>梨饗券</td>
                                 <td>1</td>
                                 <td>$1000</td>
-                            </tr>
+                            </tr> -->
                         </table>
                         <ul class="receipt_amount">
                             <li>
                                 <h5>小計</h5>
-                                <h5>NT$2700</h5>
+                                <h5>NT$ {{ orderDetails.subtotal }}</h5>
                             </li>
                             <li>
                                 <h5>折扣</h5>
-                                <h5>- NT$100</h5>
+                                <h5>- NT$ {{ orderDetails.discount }}</h5>
                             </li>
                             <li>
                                 <h4>總金額</h4>
-                                <h4>NT$2600</h4>
+                                <h4>NT$ {{ orderDetails.amount }}</h4>
                             </li>
                         </ul>
                     </div>
@@ -149,16 +244,16 @@ export default {
                 <ul class="coupon_info">
                     <li>
                         <h5>序號</h5>
-                        <h5>24KK2988EFIJ</h5>
+                        <h5>{{ serialNumber }}</h5>
                     </li>
                     <li>
                         <h5>使用期限</h5>
-                        <h5>2025/12/31</h5>
+                        <h5>{{ expDate }}</h5>
                     </li>
                 </ul>
                 <div class="coupon_button">
                     <button>寄送信箱</button>
-                    <button>點擊下載</button>
+                    <button @click="download">點擊下載</button>
                 </div>
             </div>
         </div>
@@ -196,7 +291,7 @@ export default {
     padding-left: 3vw;
     padding-bottom: 92px;
     @include breakpoint(1280px){
-        padding-left: 5%;
+        padding-left: 0;
         padding-top: 2%;
     }
     @include breakpoint(820px){
@@ -293,7 +388,7 @@ export default {
                 }
             }
             .coupon_info {
-                width: 168px;
+                width: 200px;
                 height: 60px;
                 margin: 12px auto 0;
                 color: $White;
@@ -316,7 +411,7 @@ export default {
                     border-radius: 20px;
                     font-weight: normal;
                     padding: 0;
-                    width: 168px;
+                    width: 188px;
                 }
                 li {
                     display: flex;

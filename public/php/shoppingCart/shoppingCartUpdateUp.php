@@ -26,14 +26,9 @@
     
         $shoppingDown = json_decode(file_get_contents("php://input"), true);
 
-        // $Input = $Bksearh['Input'];
-        // $BkInput = '%'.$Input.'%';
-
-        // $Start = $Bksearh['Start'];
-        // $End = $Bksearh['End'];
 
         $productid= $shoppingDown['changeD'];
-        $memberid = 1;
+        $memberid = $shoppingDown['memberID'];
        
 
 
