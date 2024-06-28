@@ -15,12 +15,13 @@ try {
     $newId = $latestId + 1;
 
     // Prepare the INSERT statement
-    $sql = "INSERT INTO MEMBER (ID, NAME, MAIL, PASSWORD, JOINDATE, LASTLOGIN, STATUS) VALUES (:id, :name, :mail, :pw, NOW(), NOW(), '正常')";
+    $sql = "INSERT INTO MEMBER (ID, NAME, MAIL, PASSWORD, BIRTHDAY, JOINDATE, LASTLOGIN, STATUS, PHOTO) VALUES (:id, :name, :mail, :pw, :birthday, NOW(), NOW(), '正常', :photo)";
     $statement = $pdo->prepare($sql);
     $statement->bindParam(":id", $newId);
     $statement->bindParam(":name", $member["name"]);
     $statement->bindParam(":mail", $member["email"]);
     $statement->bindParam(":pw", $member["password"]);
+    $statement->bindParam(":birthday", $member["birthday"]);
 
     if (!$statement->execute()) {
         $errorInfo = $statement->errorInfo();

@@ -84,16 +84,9 @@
                         <button class="collect-prompt_button" @click="redirectToLogin">確認</button>
                         <button class="collect-prompt_button" @click="browseAsGuest">以訪客身分瀏覽</button>
                     </div>
-
-                    <!-- 留言弹窗 -->
-                    <!-- <div v-if="popup_open" class="popup">
-                        <textarea v-model="content" placeholder="写下您的留言"></textarea>
-                        <button @click="submitMessage">提交</button>
-                        <button @click="closePopup">取消</button>
-                    </div> -->
                 </ol>
             </div>
-
+            
             <header class="restaurant_header">
                 <h2 class="restaurant_slogan">
                     “ 品味正宗韓國美味！<br />來，一起享受美食之旅！”
@@ -239,12 +232,7 @@
                                 <p class="text_words">字元數限制 0/100 字</p>
                             </div>
 
-                            <!--新增-->
-                            <div class="collect-prompt" v-else-if="showPrompt">
-                                <p class="collect-prompt_p">請先登入會員</p>
-                                <button class="collect-prompt_button" @click="redirectToLogin">確認</button>
-                                <button class="collect-prompt_button" @click="browseAsGuest">以訪客身分瀏覽</button>
-                            </div>
+                            
 
                             <div class="share">
                                 <h4 class="share_photo">分享照片</h4>
@@ -483,17 +471,6 @@ export default {
                 });
         },
 
-        //collection.PHP ->收藏:帶user到會員登入頁面
-        redirectToLogin() {
-            this.$router.push({ path: "/login" });
-        },
-
-        //collection.PHP ->收藏:關閉提示窗繼續瀏覽
-        browseAsGuest() {
-            this.showPrompt = false;
-            // this.showPrompt_two = false;
-        },
-
         //collection.PHP ->收藏:跳轉過去同時關閉提示框
         closePrompt() {
             this.showPrompt = false;
@@ -573,45 +550,37 @@ export default {
                 }
                 this.isCollected = !this.isCollected;
             } else {
-                // 未登錄，顯示提示對話框
+                // 未登入，顯示提示對話框
                 this.showPrompt = true;
             }
         },
         pop() {
-            // 切换弹窗显示状态
             this.popup_open = !this.popup_open;
             if (!this.isUserLoggedIn()) {
-                // 如果未登录，显示非会员提示框
+                // 未登入，顯示提示框
                 this.showPrompt = true;
             } else {
 
             }
         },
-        redirectToLogin() {
-            // 跳转到登录页面的逻辑
-            console.log('跳转到登录页面');
-            // 执行登录跳转的代码，例如使用路由
-            // this.$router.push('/login');
-            this.popup_close(); // 关闭弹窗
-        },
+        // redirectToLogin() {
+        //     console.log('會員登錄頁');
+        // },
         browseAsGuest() {
-            // 以访客身份浏览的逻辑
-            console.log('以访客身份浏览');
-            this.popup_close(); // 关闭弹窗
+            console.log('已訪客身分瀏覽');
+            this.popup_close(); 
+            this.showPrompt = false;
         },
         popup_close() {
-            // 关闭弹窗的方法
+            // 弹窗關閉
             this.popup_open = false;
             this.showPrompt = false;
         },
         change_rating(index) {
-            // 更改星级评分的方法，根据需要自行处理
             this.rating = index;
         },
         isUserLoggedIn() {
-            // 检查用户是否已登录的逻辑，这里是一个示例
-            // 可以根据实际情况从 Cookie、Session 或 Vuex 等地方获取登录状态
-            return true; // 示例中假设用户已登录
+            return true; 
         },
         fileChange(e, index) {
             let file = e.target.files[0];
@@ -730,7 +699,7 @@ export default {
             this.memberId = memberId;
         },
         
-        // 检查商店是否已收藏
+        // 檢查商店是否已收藏
         async checkStore(storeId, memberId) {
             try {
                 const response = await axios.post("path_to_your_api/check_store", { storeId, memberId });
@@ -739,14 +708,12 @@ export default {
                 console.error("Error checking store:", error);
             }
         },
+
         redirectToLogin() {
             // 跳到登入頁面邏輯
             this.$router.push({ path: "/login" });
         },
-        browseAsGuest() {
-            // 訪客身份
-            this.showPrompt = false;
-        },
+        
         pop() {
             if (!this.isMember) {
                 this.showPrompt = true;
