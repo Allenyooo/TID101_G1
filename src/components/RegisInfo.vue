@@ -8,23 +8,6 @@
 
     <h2>會員註冊</h2>
 
-    <div class="register_google">
-        <button>
-            <img
-                src="../assets/Image/login/google.svg"
-                alt="google"
-                draggable="false"
-            />
-            <h5>以 Google 帳號登入</h5>
-        </button>
-    </div>
-
-    <div class="register_or">
-        <div class="line"></div>
-        <h4>或</h4>
-        <div class="line"></div>
-    </div>
-
     <form
         @submit.prevent="handleRegistration"
         method="post"
@@ -88,6 +71,16 @@
             />
         </div>
 
+        <div class="register_birthday">
+            <label for="birthday">出生日期</label>
+            <input
+                type="date"
+                id="birthday"
+                v-model="birthday"
+                required
+            />
+        </div>
+
         <div class="register_acceptCondition">
             <input type="checkbox" id="accept" v-model="accept" required />
             <label for="accept">
@@ -126,6 +119,7 @@ export default {
             password: "",
             confirmPassword: "",
             name: "",
+            birthday: "",
             passwordErrorMessage: "",
             accept: false,
             isValidPassword: true,
@@ -193,6 +187,7 @@ export default {
                             password: this.password,
                             confirmPassword: this.confirmPassword,
                             name: this.name,
+                            birthday: this.birthday,
                             accept: this.accept,
                         }
                     )
@@ -223,7 +218,8 @@ export default {
                 this.password !== "" &&
                 this.confirmPassword !== "" &&
                 document.getElementById("accept").checked &&
-                document.getElementById("name").value !== ""
+                document.getElementById("name").value !== "" &&
+                document.getElementById("birthday").value !== ""
             );
         },
     },
@@ -237,7 +233,8 @@ export default {
                 this.password !== "" &&
                 this.confirmPassword !== "" &&
                 document.getElementById("accept").checked &&
-                document.getElementById("name").value !== ""
+                document.getElementById("name").value !== "" &&
+                document.getElementById("birthday").value !== ""
             );
         },
         isPasswordEmpty() {
@@ -287,54 +284,6 @@ h2 {
     z-index: 1;
     @include breakpoint(430px) {
         margin-bottom: 8vw;
-    }
-}
-.register_google {
-    background-color: #fff;
-    border: 1px solid $Black;
-    border-radius: 34px;
-    width: 207px;
-    height: 40px;
-    margin-bottom: 1vw;
-    position: relative;
-    z-index: 1;
-    @include breakpoint(430px) {
-        margin-bottom: 5vw;
-    }
-    &:active {
-        background-color: #eee;
-    }
-    button {
-        cursor: pointer;
-        width: 207px;
-        height: 40px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        background-color: transparent;
-        border: none;
-    }
-}
-
-.register_or {
-    display: flex;
-    align-items: center;
-    div {
-        width: 9vw;
-        height: 0px;
-        border: 0.5px solid $Black;
-        @include breakpoint(1280px) {
-            width: 11vw;
-        }
-        @include breakpoint(820px) {
-            width: 15vw;
-        }
-        @include breakpoint(430px) {
-            width: 30vw;
-        }
-    }
-    h4 {
-        margin: 0 0.5vw;
     }
 }
 
@@ -450,6 +399,36 @@ h2 {
         background-color: transparent;
         border: none;
         border-bottom: 1px solid $Black;
+        @include breakpoint(1280px) {
+            width: 25vw;
+        }
+        @include breakpoint(820px) {
+            width: 33vw;
+        }
+        @include breakpoint(430px) {
+            width: 66vw;
+        }
+    }
+}
+
+.register_birthday {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: 0 auto;
+    label {
+        font-size: 20px;
+        margin-top: 24px;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+    input {
+        width: 20vw;
+        height: 38px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid $Black;
+        color: $Gray;
         @include breakpoint(1280px) {
             width: 25vw;
         }

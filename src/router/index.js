@@ -47,7 +47,7 @@ const routes = [
     },
     children: [
       {
-        path: "",
+        path: "/login",
         component: () => import("../components/LoginInfo.vue"),
       },
       {
@@ -125,7 +125,7 @@ const routes = [
     },
     children: [
       {
-        path: "",
+        path: "/register",
         component: () => import("../components/RegisInfo.vue"),
       },
       {
