@@ -59,7 +59,10 @@
                 usedtimes: 0,
                 payment: [],
                 memberId: "",
-                totalQty: ""
+                totalQty: "",
+                amount: 0,
+                subtotal: 0,
+                orderID: "",
             }
             
         },
@@ -68,15 +71,23 @@
             getMemberID(){
                 let cookies = document.cookie;
                 let match = cookies.match(/memberId=(\d+)/);
-                let memberId = match[1];
-                // console.log(match)
-                console.log(memberId);
-                this.memberId = memberId;
-                return memberId;
+                if(match){
+                    let memberId = match[1];
+                    // console.log(match)
+                    console.log(memberId);
+                    this.memberId = memberId;
+                    return memberId;
+                }else{
+                    let memberId = null
+                    this.memberId = memberId;
+                    return memberId;
+                }
+
             },
             loginStatus(){
                 if(this.memberId == null){
                     alert("請先登入");
+                    this.$router.push("/login");
                 }else{
                     this.purchaseItem()
                 }
@@ -164,17 +175,21 @@
                         payment: this.payment,
                         memberId: this.memberId,
                         tickets: this.tickets,
-                        totalQty: this.totalQty
+                        totalQty: this.totalQty,
+                        amount: this.amount,
+                        subtotal: this.subtotal
                     })
                 })
                     .then(resp => resp.json())
-                    .then(testDB => {
-                        console.log(testDB);
-                        }
-                    )
+                    .then(orderID => {
+                        // console.log(orderID);
+                        this.orderID = orderID;
+                        console.log(this.orderID);
+                        this.setCookie('orderID',this.orderID,7);
+                    })
                     .then(this.$router.push('/receipt'))
                     .catch(error => {
-                        console.error('Error:', error);
+                        console.log('Error:', error);
                     })
             },
             // nextStep(){
@@ -182,11 +197,20 @@
             // },
             backStep(){
                 this.$router.push('/product');
+            },
+            setCookie(name, value, days) {
+                let expires = "";
+                if (days) {
+                    const date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/";
             }
         },
 
         computed: {
-            totalQty(){
+            qtyTotal(){
                 // return this.tickets.reduce((acc, ticket) => acc + ticket.qty, 0);
                 let totalQty = 0;
                 this.tickets.forEach(ticket => {
@@ -215,24 +239,30 @@
                 return `${year} / ${month} / ${day}`
             },
 
-            subtotal(){
-                let subTotal = 0;
+            sub(){
+                let sub = 0;
                 this.tickets.forEach(ticket => {
                     let total = ticket.qty * ticket.salePrice;
-                    subTotal += total;
+                    sub += total;
                     // subTotal += ticket.salePrice;
                 })
-                return subTotal;
+                this.subtotal = sub;
+                // console.log(this.subtotal)
+                return sub;
                 // let subTotal = this.tickets.reduce((acc, ticket) => acc + (ticket.qty * ticket.price),0);
                 // return subTotal;
             },
 
             total(){
-                let total = this.subtotal - this.voucher_discount ;
+                let total = this.sub - this.voucher_discount ;
                 if(total < 0){
-                    return total = 0;
+                    total = 0;
+                    this.amount = total;
+                    return total;
                 }else{
-                    return total = total;
+                    total = total;
+                    this.amount = total;
+                    return total;
                 }
                 // return total
             }
@@ -251,7 +281,7 @@
                     <div class="checkOut_left_zone">
                         <div class="checkOut_purchase_title">
                             <h3>購買明細</h3>
-                            <h5>共 {{ totalQty }} 張</h5>
+                            <h5>共 {{ qtyTotal }} 張</h5>
                             <span>，</span>
                             <h5>使用期限至 {{ expDate }}</h5>
                         </div>
@@ -298,7 +328,7 @@
                                 <ul class="checkOut_amount">
                                     <li class="checkOut_amount_subtotal" v-if="voucher_discount !== null">
                                         <h5>小計</h5>
-                                        <h5>NT${{ subtotal }}</h5>
+                                        <h5>NT${{ sub }}</h5>
                                     </li>
                                     <li class="checkOut_amount_discount" v-if="voucher_discount !== null">
                                         <h5>折扣</h5>

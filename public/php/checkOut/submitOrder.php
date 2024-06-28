@@ -32,18 +32,28 @@
     $orderID = time();
     $status = "正常";
 
-    $sqlIO = "INSERT INTO `ORDER` (ID, MEMBER_ID, ORDERDATE, PAYMENT, `STATUS`, VOUCHER_ID) 
-              VALUES (?, ?, CURDATE(), ?, ?, ?)";
+    if(isset($dataSV[0]['ID'])){
+        $voucherID = $dataSV[0]['ID'];
+    }else{
+        $voucherID = null;
+    }
+
+    echo $voucherID;
+
+    $sqlIO = "INSERT INTO `ORDER` (ID, MEMBER_ID, ORDERDATE, PAYMENT, SUBTOTAL, AMOUNT, `STATUS`, VOUCHER_ID) 
+              VALUES (?, ?, CURDATE(), ? ,?, ?, ?, ?)";
 
     $stateIO = $pdo -> prepare($sqlIO);
     $stateIO -> bindValue(1,$orderID);
     $stateIO -> bindValue(2,$order["memberId"]);
     $stateIO -> bindValue(3,$order["payment"]);
-    $stateIO -> bindValue(4,$status);
-    $stateIO -> bindValue(5,$dataSV[0]['ID']);   // $voucherID = $dataSV[0]['ID'];
+    $stateIO -> bindValue(4,$order["amount"]);
+    $stateIO -> bindValue(5,$order["subtotal"]);
+    $stateIO -> bindValue(6,$status);
+    $stateIO -> bindValue(7,$voucherID);   // $voucherID = $dataSV[0]['ID'];
     $stateIO -> execute();
 
-    $dataIO = $stateIO->fetchAll(PDO::FETCH_ASSOC);
+    // $dataIO = $stateIO->fetchAll(PDO::FETCH_ASSOC);
 
 
         // ORDERDETAIL表 select 找出 ID 序號 
@@ -233,8 +243,23 @@
         echo "交易失敗";
     }
     
+    echo json_encode($orderID);
+    exit(); // 避免重複 echo 重複輸出
 
 
 
+
+
+    // 把 OrderID 存進 Session
+
+    // session_start();
+    // $_SESSION["orderID"] = $orderID;
+    // // print_r($_SESSION);
+    // echo $_SESSION["orderID"];
+    // header("Location: orderDetails.php");
+    // echo "Session variables are set. Order ID: " . $_SESSION["orderID"];
+
+    // setcookie("orderID", $orderID ,time() + 36000);
+    // echo $_COOKIE["orderID"];
 
 ?>
