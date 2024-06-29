@@ -4,10 +4,10 @@ import { RouterLink } from "vue-router";
 export default {
     data() {
         return {
-            fullStar: new URL("@/assets/Image/review/sinsinFull.png",import.meta.url).href,
-            nullStar: new URL("@/assets/Image/review/sinsinNull.png",import.meta.url).href,
-            fullStarSrc: new URL("@/assets/Image/review/fullstar.png",import.meta.url).href,
-            emptyStarSrc: new URL("@/assets/Image/review/nullstar.png",import.meta.url).href,
+            fullStar: new URL("@/assets/Image/review/sinsinFull.png", import.meta.url).href,
+            nullStar: new URL("@/assets/Image/review/sinsinNull.png", import.meta.url).href,
+            fullStarSrc: new URL("@/assets/Image/review/fullstar.png", import.meta.url).href,
+            emptyStarSrc: new URL("@/assets/Image/review/nullstar.png", import.meta.url).href,
             like: new URL("@/assets/Image/review/like.png", import.meta.url).href,
             liked: new URL("@/assets/Image/review/liked.png", import.meta.url).href,
             items: [],
@@ -37,8 +37,8 @@ export default {
                 console.log(reviewData);
                 this.items = reviewData.map(item => ({
                     ...item,
-                    isLike: false, 
-                    isLikedByUser: item.LIKE_MEMBERS.includes(parseInt(memberId)), 
+                    isLike: false,
+                    isLikedByUser: item.LIKE_MEMBERS.includes(parseInt(memberId)),
                 }));
                 ;
                 console.log(reviewData);
@@ -151,22 +151,14 @@ export default {
 <template>
     <div class="review_body">
         <div class="review_sidebar">
-            <img
-                class="storeimg"
-                src="../assets/Image/restaurant/north/logo.svg"
-                alt="logo"
-            />
+            <img class="storeimg" src="../assets/Image/restaurant/north/logo.svg" alt="logo" />
             <div class="column">
                 <h2>高麗味</h2>
                 <h6>고려미</h6>
             </div>
             <span class="review_star">
                 <div class="star">{{ score.AVG }}</div>
-                <img
-                    class="review_starimg"
-                    src="../assets/Image/restaurant/star.png"
-                    alt="star"
-                />
+                <img class="review_starimg" src="../assets/Image/restaurant/star.png" alt="star" />
             </span>
             <ul class="list">
                 <li>- 前言</li>
@@ -225,19 +217,13 @@ export default {
                 <div class="score_middleside">
                     <h1>{{ score.AVG }}</h1>
                     <div class="scoreSin">
-                        <img
-                            v-for="n in 5" :key="n" :src="n <= score.AVG? fullStar : nullStar"
-                            alt="Star"
-                        />
+                        <img v-for="n in 5" :key="n" :src="n <= score.AVG ? fullStar : nullStar" alt="Star" />
                     </div>
                     <h4>{{ score.num }}則評論</h4>
                 </div>
                 <div class="score_rightside">
                     <h4>立即分享你的用餐體驗 !</h4>
-                    <img
-                        src="/src/assets/Image/review/writeReview.png"
-                        alt=""
-                    />
+                    <img src="/src/assets/Image/review/writeReview.png" alt="" />
                 </div>
             </div>
             <hr />
@@ -247,7 +233,7 @@ export default {
                         <select v-model="selected">
                             <option value="rLIKE">依熱門</option>
                             <option value="TIME">依時間</option>
-                            <option value="STAR">依星數</option>                            
+                            <option value="STAR">依星數</option>
                         </select>
                     </div>
                     <div class="inTurn" @click="unsort">
@@ -255,11 +241,7 @@ export default {
                     </div>
                 </div>
                 <ul class="review_cards">
-                    <li
-                        v-for="(item, index) in sortedItems"
-                        :key="item.ID"
-                        :item="item"
-                    >
+                    <li v-for="(item, index) in sortedItems" :key="item.ID" :item="item">
                         <div class="member_info">
                             <div class="avatar">
                                 <img :src="item.AVATAR" alt="" />
@@ -267,22 +249,17 @@ export default {
                             <div class="textinfo">
                                 <div class="name_like">
                                     <h3>{{ item.NAME }}</h3>
-                                    <div
-                                        :class="['like', { liked: isLike }]"
-                                        @click="toggleLike(item.ID, item.rLIKE)"
-                                    >
-                                        <img
-                                            :src="item.isLikedByUser ? liked : like"
-                                            alt=""
-                                        />
-                                        <h4 :style="{color:item.isLikedByUser ? '#CB4847' : '#999999'}">{{ item.rLIKE }}</h4>
+                                    <div :class="['like', { liked: isLike }]" @click="toggleLike(item.ID, item.rLIKE)">
+                                        <img :src="item.isLikedByUser ? liked : like" alt="" />
+                                        <h4 :style="{ color: item.isLikedByUser ? '#CB4847' : '#999999' }">{{ item.rLIKE
+                                            }}
+                                        </h4>
                                     </div>
                                 </div>
                                 <div class="star_time">
                                     <div class="stars">
                                         <img v-for="n in 5" :key="n" :src="n <= item.STAR ? fullStarSrc : emptyStarSrc"
-                                            alt="Star"
-                                        />
+                                            alt="Star" />
                                     </div>
                                     <div class="time">
                                         <h5>{{ formatDate(item.TIME) }}</h5>
@@ -294,11 +271,7 @@ export default {
                             {{ item.CONTENT }}
                         </h5>
                         <div class="photos">
-                            <img
-                                v-for="(photo, index) in item.PHOTOS"
-                                :key="index"
-                                :src="photo"
-                            />
+                            <img v-for="(photo, index) in item.PHOTOS" :key="index" :src="photo" />
                         </div>
                     </li>
                 </ul>
@@ -452,19 +425,27 @@ export default {
         margin-bottom: 40px;
         margin-left: 64px;
     }
+
     .breadcrumb h6 {
         display: inline;
         margin-right: 8px;
     }
+
     .breadcrumb h6 a {
         text-decoration: none;
         color: #333333;
     }
+
     .breadcrumb h6 a:hover {
         color: #666666;
     }
+
     .breadcrumb span {
         margin-right: 8px;
+
+        @include breakpoint(1024px) {
+            margin-top: 3px;
+        }
     }
 
     .review_score {
@@ -482,22 +463,34 @@ export default {
             // outline: 1px solid green;
 
             .star_distribute {
-                & > h3 {
+                &>h3 {
                     margin-bottom: 12px;
+
+                    @include breakpoint(1024px) {
+                        font-size: 24px;
+                    }
                 }
+
                 & li {
                     margin-bottom: 12px;
                     display: flex;
                     align-items: center;
+
                     h3 {
                         margin-right: 16px;
+
+                        @include breakpoint(1024px) {
+                            font-size: 22px;
+                        }
                     }
+
                     .scoreline {
                         width: 100%;
                         height: 20px;
                         background-color: $DarkBrown;
                         border-radius: 10px;
                         position: relative;
+
                         &::after {
                             content: "";
                             height: 100%;
@@ -510,15 +503,19 @@ export default {
                     .s_5::after {
                         width: 66%;
                     }
+
                     .s_4::after {
                         width: 17%;
                     }
+
                     .s_3::after {
                         width: 17%;
                     }
+
                     .s_2::after {
                         width: 0%;
                     }
+
                     .s_1::after {
                         width: 0%;
                     }
@@ -530,6 +527,7 @@ export default {
             width: 25%;
             // outline: 1px solid green;
             padding-top: 40px;
+
             h1 {
                 font-weight: normal;
                 text-align: center;
@@ -540,7 +538,7 @@ export default {
                 -webkit-text-fill-color: transparent;
             }
 
-            .scoreSin{
+            .scoreSin {
                 display: flex;
                 justify-content: space-around;
                 width: 80%;
@@ -555,6 +553,7 @@ export default {
                 margin: 0 auto;
                 margin-bottom: 12px;
             }
+
             h4 {
                 text-align: center;
                 font-weight: bold;
@@ -569,11 +568,21 @@ export default {
             flex-direction: column;
             justify-content: center;
             align-items: center;
+
             h4 {
                 margin-bottom: 20px;
+
+                @include breakpoint(1028px) {
+                    width: 24vw;
+                }
             }
+
             img {
                 cursor: pointer;
+
+                @include breakpoint(1280px) {
+                    width: 16vw;
+                }
             }
         }
     }
@@ -593,6 +602,7 @@ export default {
         .review_btns {
             display: flex;
             margin-bottom: 30px;
+
             .sequence {
                 width: 124px;
                 height: 36px;
@@ -602,12 +612,14 @@ export default {
                 background-color: #fff;
                 color: $DarkBrown;
                 margin-right: 16px;
-                & select{
+
+                & select {
                     width: 100%;
                     height: 100%;
                     padding: 0 5px;
                 }
             }
+
             .inTurn {
                 background-color: #fff;
                 width: 36px;
@@ -633,21 +645,29 @@ export default {
                 padding: 28px;
                 background-color: #fffefe;
                 margin-bottom: 24px;
+
+                h5 {
+                    @include breakpoint(1280px) {
+                        width: 88%;
+                        margin-bottom: 20px;
+                    }
+                }
+
                 .member_info {
                     display: flex;
                     // outline: 1px yellow solid;
                     margin-bottom: 20px;
 
-                    .avatar{
-                        & > img {
-                        width: 80px;
-                        height: 80px;
-                        border-radius: 50%;
-                        object-fit: cover;
-                        margin-right: 16px;
+                    .avatar {
+                        &>img {
+                            width: 80px;
+                            height: 80px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            margin-right: 16px;
+                        }
                     }
-                    }
-                    
+
                     .textinfo {
                         display: flex;
                         flex-direction: column;
@@ -661,28 +681,45 @@ export default {
                             justify-content: space-between;
                             width: 100%;
 
+                            @include breakpoint(1280px) {
+                                width: 98%;
+                            }
+
+                            @include breakpoint(1145px) {
+                                width: 90%;
+                            }
+
+                            @include breakpoint(1028px) {
+                                width: 100%;
+                            }
+
                             h3 {
                                 // outline: 1px red solid;
                                 font-weight: bold;
                                 color: $DarkBrown;
                                 letter-spacing: 2px;
                             }
+
                             .like {
                                 // outline: 1px red solid;
                                 display: flex;
                                 align-items: center;
                                 cursor: pointer;
+
                                 img {
                                     margin-right: 4px;
                                 }
+
                                 h4 {
                                     color: #999999;
                                 }
                             }
+
                             & .liked {
                                 img {
                                     margin-right: 4px;
                                 }
+
                                 h4 {
                                     color: $Red;
                                 }
@@ -691,21 +728,75 @@ export default {
 
                         .star_time {
                             display: flex;
+
+                            @include breakpoint(1024px) {
+                                display: block;
+                            }
+
                             .stars {
                                 display: flex;
                                 margin-right: 28px;
                                 color: #999999;
-                                & > img {
+
+                                @include breakpoint(1280px) {
+                                    margin-right: 0px;
+                                }
+
+                                @include breakpoint(1145px) {
+                                    margin-right: 18px;
+                                }
+
+                                @include breakpoint(1028px) {
+                                    margin-bottom: 10px;
+                                }
+
+                                &>img {
                                     margin-right: 4px;
+
+                                    @include breakpoint(1280px) {
+                                        // width: 30px;
+                                        height: 31px;
+                                        margin-top: 15px;
+                                    }
+
+                                    @include breakpoint(1145px) {
+                                        width: 2vw;
+                                        height: 2vw;
+                                        margin-top: 1vw;
+                                    }
+                                }
+                            }
+
+                            .time {
+                                @include breakpoint(1280px) {
+                                    margin: 0 auto;
+                                }
+
+                                @include breakpoint(1220px) {
+                                    width: 11vw;
+                                }
+
+                                @include breakpoint(1145px) {
+                                    width: 12vw;
+                                    margin-top: 1vw;
+                                }
+
+                                @include breakpoint(1024px) {
+                                    width: 15vw;
+                                    margin: 0;
                                 }
                             }
                         }
                     }
                 }
 
-                & > h5 {
+                &>h5 {
                     width: 80%;
                     margin-bottom: 20px;
+
+                    @include breakpoint(1280px) {
+                        margin-bottom: 20px;
+                    }
                 }
 
                 .photos {
