@@ -999,7 +999,7 @@ export default {
 @import "/src/sass/style.scss";
 /* top-banner */
 .food-top-banner {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-image: url(/src/assets/Image/food/food_banner.jpeg);
     background-size: cover;
@@ -1015,7 +1015,6 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-
         .food-text-box {
             display: flex;
             justify-content: center;
@@ -1300,6 +1299,7 @@ export default {
         line-height: 150%;
         padding-top: 281px;
         padding-left: 36px;
+        cursor: pointer;
         @include breakpoint(1200px) {
             padding: 0;
             display: flex;
