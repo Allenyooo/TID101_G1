@@ -7,8 +7,10 @@
     </div>
     <div class="headRight">
       <p>User:</p>
-      <p class="userName">xxx</p>
-      <button>登出</button>
+      <p class="userName">Allen</p>
+      <button>
+        <router-link to="/BkLogin"><p class="logout">登出</p></router-link>
+      </button>
     </div>
   </div>
 </template>
@@ -26,6 +28,14 @@ export default {
 
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
+a {
+  display: block;
+  text-decoration: none;
+}
+.logout {
+  color: black;
+  font-size: 16px;
+}
 
 .Bkhead {
   height: 80px;
@@ -42,8 +52,13 @@ export default {
     margin-left: auto;
 
     p {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: bold;
+    }
+
+    .logout {
+      color: black;
+      font-size: 16px;
     }
     .userName {
       margin-left: 8px;

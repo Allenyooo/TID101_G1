@@ -1,15 +1,14 @@
 import { defineStore } from "pinia";
 
-export const useOrderStore = defineStore({
-  id: "orderDetail", // 可選，但建議提供唯一的 ID
+export const useOrderDetailStore = defineStore({
+  id: "orderDetail2", // 可選，但建議提供唯一的 ID
   state: () => ({
     id: 0, // 範例狀態
     bd: [],
     bd2: [],
-
     member: [],
     orders: [],
-    orderid: [],
+    vou: [],
   }),
   actions: {
     // setorder(newValue) {
@@ -27,18 +26,18 @@ export const useOrderStore = defineStore({
       this.member = [];
     },
 
-    setorder(orderidData) {
-      this.orderid.push(orderidData);
-    },
-    clearorderid() {
-      this.orderid = [];
-    },
-
     addOrder(orderData) {
       this.orders.push(orderData);
     },
     clearOrders() {
       this.orders = [];
+    },
+
+    setV(vouData) {
+      this.vou.push(vouData);
+    },
+    clearV() {
+      this.vou = [];
     },
 
     // addOrder(orderData) {

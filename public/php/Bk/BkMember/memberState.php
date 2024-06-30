@@ -37,7 +37,7 @@
 
         
         $sql = "UPDATE
-				MANAGER
+				MEMBER
                 set
 				STATUS = ?
 				where ID = ?";
@@ -51,4 +51,4 @@
             $statement->execute();
 
     
-?>
+?>s

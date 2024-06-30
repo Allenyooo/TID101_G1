@@ -1,13 +1,15 @@
 <?php
+
+// include("../conn.php");
     header("Access-Control-Allow-Origin: *");
-    // header("Content-Type: application/json; charset=UTF-8");
+
     header('Content-Type: application/json; charset=UTF-8');
     header("Access-Control-Allow-Headers: Content-Type");
     
 
 // include('/php/conn.php');
        //---------------------------------------------------
-
+  
 
         //MySQL相關資訊
         $db_host = "127.0.0.1";
@@ -33,19 +35,7 @@
 
      
     
-        $sql = "SELECT ID,NAME,MAIL,NICKNAME,PHONE,BIRTHDAY,JOINDATE,LASTLOGIN
-                from  MEMBER
-                where ID = ? ";
-
-
-
-        $statement = $pdo->prepare($sql);
-        $statement->bindValue(1 , $memberDetailID);
-        $statement->execute();
-        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-
-        $sql2 = " SELECT V.ID,V.ORDERDATE, (S.TOTAL - VOUCHER.PRICE) as TOTAL 
+        $sql = "SELECT V.ID,MEMBER.MAIL,MEMBER.NAME,V.ORDERDATE, (S.TOTAL - VOUCHER.PRICE) as TOTAL ,V.PAYMENT
             from (select ID, MEMBER_ID,ORDERDATE,IFNULL(VOUCHER_ID, 5) as VOUCHER_ID ,PAYMENT from `ORDER`  group by ID) as V
                 left join VOUCHER
                 on V.VOUCHER_ID = VOUCHER.ID
@@ -60,8 +50,24 @@
                             group by O.ORDER_ID
                          ) as S
                 on v.ID = S.ORDER_ID
-                where V.MEMBER_ID = ?
-            group by V.ID";
+                where V.ID =?
+            group by V.ID ";
+
+
+
+        $statement = $pdo->prepare($sql);
+        $statement->bindValue(1 , $memberDetailID);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $sql2 = " SELECT P.NAME,ORDERDETAIL.QUANTITY,P.PRICE,P.PERCENT,P.DP
+                  fROM ORDERDETAIL
+                    join (SELECT PRODUCT.ID ,NAME ,PRICE, PERCENT,round(PRICE * PERCENT) as DP 
+                        from  PRODUCT
+                        join DISCOUNT on PRODUCT.DISCOUNT_ID = DISCOUNT.ID) as  P
+	                on ORDERDETAIL.PRODUCT_ID = P.ID
+                where ORDERDETAIL.ORDER_ID =? ";
 
 
             $statement2 = $pdo->prepare($sql2);
@@ -70,21 +76,16 @@
             $data2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
 
 
+            $sql3 = "  SELECT V.ID ,VOUCHER.PRICE from (select ID, MEMBER_ID,ORDERDATE,IFNULL(VOUCHER_ID, 5) as VOUCHER_ID ,PAYMENT from `ORDER`  group by ID) as V
+                left join VOUCHER
+                on V.VOUCHER_ID = VOUCHER.ID
+                where V.ID = ?";
 
 
-            $sql3 = "SELECT MEMBER.ID , `ORDER`.ID from MEMBER
-                        join `ORDER` 
-                        on MEMBER.ID =  `ORDER`.MEMBER_ID
-                    where MEMBER.ID = ?";
-
-
-            $statement3 = $pdo->prepare($sql3);
-            $statement3->bindValue(1 , $memberDetailID);
-            $statement3->execute();
-            $data3 = $statement3->fetchAll(PDO::FETCH_ASSOC);
-
-
-
+      $statement3 = $pdo->prepare($sql3);
+      $statement3->bindValue(1 , $memberDetailID);
+      $statement3->execute();
+      $data3 = $statement3->fetchAll(PDO::FETCH_ASSOC);   
 
 
 

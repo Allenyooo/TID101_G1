@@ -22,7 +22,7 @@
 
         // $ID = 6;
     
-        $Bkstate = json_decode(file_get_contents("php://input"), true);
+        $Bkrevuae = json_decode(file_get_contents("php://input"), true);
 
         // $Input = $Bksearh['Input'];
         // $BkInput = '%'.$Input.'%';
@@ -30,24 +30,29 @@
         // $Start = $Bksearh['Start'];
         // $End = $Bksearh['End'];
 
-        $BkstateID = $Bkstate['STATEID'];
-        $BkstateNew = $Bkstate['NEWSTATE'];
+        $BkrevuaeID = $Bkrevuae['reviseBd']['編號'];
+        $Bkrevuae2 = $Bkrevuae['reviseBd']['店家名稱'];
+        $Bkrevuae3 = $Bkrevuae['reviseBd']['地區'];
    
+
+
        
 
-        
+
         $sql = "UPDATE
-				MANAGER
+                STORE
                 set
-				STATUS = ?
-				where ID = ?";
+                ID = ?,
+                NAME  = ?,
+                REGION = ?
+           
+                where ID = ?";
 
             $statement = $pdo->prepare($sql);
-            $statement->bindValue(1 , $BkstateNew);
-            $statement->bindValue(2 , $BkstateID);
-       
-       
-
+            $statement->bindValue(1 , $BkrevuaeID);
+            $statement->bindValue(2 , $Bkrevuae2);
+            $statement->bindValue(3 , $Bkrevuae3);
+            $statement->bindValue(4 , $BkrevuaeID);
             $statement->execute();
 
     

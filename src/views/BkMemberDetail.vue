@@ -10,26 +10,28 @@
         <div class="BkBreadCrumbs">
           <p class="breadCrumbs">首頁 > 會員資料管理 > 詳細資料</p>
           <button>
-            <router-link to="/BkMember"><h5>返回</h5></router-link>
+            <router-link to="/BkMember" @click="clear"
+              ><h5>返回</h5></router-link
+            >
           </button>
         </div>
 
         <div class="MDText">
           <ul>
-            <li>會員編號:1</li>
-            <li>會員暱稱:xxx</li>
-            <li>加入日期:2012-01-01</li>
+            <li>會員編號:{{ members[0].ID }}</li>
+            <li>會員暱稱:{{ members[0].NICKNAME }}</li>
+            <li>加入日期:{{ members[0].JOINDATE }}</li>
           </ul>
 
           <ul class="MDUl2">
-            <li>會員姓名:xxx</li>
-            <li>手機號碼:0000-123-123</li>
-            <li>最後登入日期:2013-01-01</li>
+            <li>會員姓名:{{ members[0].NAME }}</li>
+            <li>手機號碼:{{ members[0].PHONE }}</li>
+            <li>最後登入日期:{{ members[0].LASTLOGIN }}</li>
           </ul>
 
           <ul>
-            <li>會員帳號:123@gmail.com</li>
-            <li>會員生日:2000-01-01</li>
+            <li>會員帳號:{{ members[0].MAIL }}</li>
+            <li>會員生日:{{ members[0].BIRTHDAY }}</li>
           </ul>
         </div>
 
@@ -40,7 +42,8 @@
                 <th><h4>歷史訂單</h4></th>
                 <th><h4></h4></th>
                 <th><h4></h4></th>
-                <th class="centered"><button>查看訂單明細</button></th>
+                <th><h4></h4></th>
+                <!-- <th class="centered"><button>查看訂單明細</button></th> -->
               </tr>
             </thead>
             <tbody class="tableBody">
@@ -48,16 +51,23 @@
                 <td>訂單編號</td>
                 <td>訂單日期</td>
                 <td>訂單金額</td>
-                <td>訂單狀態</td>
+                <td>訂單詳細資料</td>
               </tr>
 
-              <tr>
-                <td>1</td>
-                <td>2024-01-01 00:00:00</td>
-                <td>1000</td>
-                <td>已付款</td>
+              <tr v-for="i in orders">
+                <td>{{ i.ID }}</td>
+                <td>{{ i.ORDERDATE }}</td>
+                <td>{{ i.TOTAL }}</td>
+                <td>
+                  <router-link
+                    to="/BkOrderDetail"
+                    @click="checkClickOrder(i.ID)"
+                  >
+                    <p>查看</p></router-link
+                  >
+                </td>
               </tr>
-
+              <!-- 
               <tr>
                 <td>2</td>
                 <td>2024-01-01 00:00:00</td>
@@ -70,7 +80,7 @@
                 <td>2024-01-01 00:00:00</td>
                 <td>1000</td>
                 <td>已付款</td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -89,6 +99,9 @@ import BD from "/src/components/BkData.vue";
 import BDate from "/src/components/BkDate.vue";
 import BSort from "/src/components/BkSort.vue";
 // import BR from "/src/components/BkRevise.vue";
+
+import { useOrderStore } from "/src/stores/order";
+import { useOrderDetailStore } from "/src/stores/orderDetail";
 
 export default {
   components: { BH, BM, BS, BD, BDate, BSort },
@@ -148,38 +161,44 @@ export default {
           name: "姓名",
         },
       ],
-      bd: [
-        {
-          id: 1,
-          email: "123@gmail.com",
-          name: "xxx",
-          nickname: "xxx",
-          phone: "0000-111-222",
-          birthday: "2000-01-01",
-          addDate: "2010-01-01",
-          lastDate: "2010-02-02",
-        },
-        {
-          id: 2,
-          email: "123@gmail.com",
-          name: "xxx",
-          nickname: "xxx",
-          phone: "0000-111-222",
-          birthday: "2000-01-01",
-          addDate: "2010-01-01",
-          lastDate: "2010-02-02",
-        },
-        {
-          id: 3,
-          email: "123@gmail.com",
-          name: "xxx",
-          nickname: "xxx",
-          phone: "0000-111-222",
-          birthday: "2000-01-01",
-          addDate: "2010-01-01",
-          lastDate: "2010-02-02",
-        },
-      ],
+      // bd: [
+      //   {
+      //     id: 1,
+      //     email: "123@gmail.com",
+      //     name: "xxx",
+      //     nickname: "xxx",
+      //     phone: "0000-111-222",
+      //     birthday: "2000-01-01",
+      //     addDate: "2010-01-01",
+      //     lastDate: "2010-02-02",
+      //   },
+      //   {
+      //     id: 2,
+      //     email: "123@gmail.com",
+      //     name: "xxx",
+      //     nickname: "xxx",
+      //     phone: "0000-111-222",
+      //     birthday: "2000-01-01",
+      //     addDate: "2010-01-01",
+      //     lastDate: "2010-02-02",
+      //   },
+      //   {
+      //     id: 3,
+      //     email: "123@gmail.com",
+      //     name: "xxx",
+      //     nickname: "xxx",
+      //     phone: "0000-111-222",
+      //     birthday: "2000-01-01",
+      //     addDate: "2010-01-01",
+      //     lastDate: "2010-02-02",
+      //   },
+      // ],
+
+      bd: [],
+      bd2: [],
+      bd3: [],
+      bd4: [],
+      bd5: [],
       title: [
         { 會員編號: "管理員編號" },
         { 帳號: "信箱" },
@@ -196,8 +215,129 @@ export default {
       search: "匯出資料",
       stateTd: 1,
       dataTd: 2,
+
+      members: [],
+      orders: [],
     };
   },
+
+  methods: {
+    clear() {
+      const orderStore = useOrderStore();
+
+      orderStore.clearmember();
+      orderStore.clearOrders();
+    },
+
+    checkClickOrder(value) {
+      fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkOrder/orderDetail.php`, {
+        mode: "cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderDetailid: value,
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          this.bd3 = data.data;
+          this.bd4 = data.data2;
+          this.bd5 = data.data3;
+
+          const store = useOrderDetailStore();
+
+          // store.clearmember();
+          // store.clearOrders();
+
+          // store.setValue({ bd: this.bd.ID, bd2: this.bd2 });
+          this.bd3.forEach((item) => {
+            store.setMember({
+              // 根據實際對象的屬性調整參數
+              ID: item.ID,
+              NAME: item.NAME,
+              MAIL: item.MAIL,
+              ORDERDATE: item.ORDERDATE,
+              TOTAL: item.TOTAL,
+              PAYMENT: item.PAYMENT,
+            });
+          });
+
+          this.bd5.forEach((item) => {
+            store.setV({
+              // 根據實際對象的屬性調整參數
+              ID: item.ID,
+              PRICE: item.PRICE,
+            });
+          });
+
+          // 將 bd2 中的每個對象傳遞給 store.setValue()
+          this.bd4.forEach((item) => {
+            store.addOrder({
+              NAME: item.NAME,
+              QUANTITY: item.QUANTITY,
+              PRICE: item.PRICE,
+              PERCENT: item.PERCENT,
+              DP: item.DP,
+            });
+          });
+        });
+    },
+  },
+
+  // computed: {
+  //   orderId() {
+  //     const orderStore = useOrderStore();
+  //     store.orderStore({
+  //       id: orderStore.member.ID,
+  //     });
+  //   },
+  // },
+
+  created() {
+    const orderStore = useOrderStore();
+
+    this.members = orderStore.member;
+    this.orders = orderStore.orders;
+  },
+
+  // mounted() {
+  //   const orderStore = useOrderStore();
+
+  //   this.$watchEffect(() => {
+  //     this.members = orderStore.member;
+  //     this.orders = orderStore.orders;
+  //   });
+  // },
+
+  // mounted() {
+  //   fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkMember/memberDetail.php`, {
+  //     // mode: "cors",
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       orderDetailid: this.orderId,
+  //     }),
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       this.bd = data.data;
+  //       // this.bd2 = data.data2;
+  //     });
+  // },
 };
 </script>
 
@@ -322,6 +462,15 @@ export default {
               overflow: hidden;
 
               height: 44px;
+              a {
+                font-weight: 0;
+                p {
+                  height: 26px;
+                  font-size: 14px;
+                  margin: 0;
+                  color: $Black;
+                }
+              }
             }
           }
         }

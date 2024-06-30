@@ -23,14 +23,15 @@
    
     
         $sql = "SELECT ID,NAME,PRICE,CODE,STARTDATE,ENDDATE,USEDTIMES
-                from  VOUCHER";
+                from  VOUCHER
+                where ID !=5";
 
     $statement = $pdo->prepare($sql);
     $statement->execute();
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-
-        $sql2 = "SELECT ID as 編號 ,NAME as 名稱,PRICE as 折抵金額 ,CODE as 序號,STARTDATE as 開始日期,ENDDATE as 結束日期,USEDTIMES as 使用次數
+    // ,USEDTIMES as 使用次數
+        $sql2 = "SELECT ID as 編號 ,NAME as 名稱,PRICE as 折抵金額 ,CODE as 序號,STARTDATE as 開始日期,ENDDATE as 結束日期
                 from  VOUCHER";
 
     $statement2 = $pdo->prepare($sql2);
@@ -47,7 +48,7 @@
 
 
 
-        $sql4 = "SELECT ID , status from VOUCHER";
+        $sql4 = "SELECT ID , STATUS from VOUCHER";
 
     $statement4 = $pdo->prepare($sql4);
     $statement4->execute();
