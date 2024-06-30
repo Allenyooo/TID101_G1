@@ -1,7 +1,11 @@
 <script>
 	import { RouterLink } from "vue-router";
+	import restaurantaMessage from "../components/restaurantaMessage.vue";
 
 	export default {
+
+		components:{restaurantaMessage: restaurantaMessage},
+
 		data() {
 			return {
 				fullStar: new URL(
@@ -31,6 +35,9 @@
 				isLike: false,
 				selected: "rLIKE",
 				isReversed: false,
+				popup_open: false,
+				picSrc: '',
+				openPic: false,
 			};
 		},
 
@@ -138,6 +145,20 @@
 			unsort() {
 				this.isReversed = !this.isReversed;
 			},
+			msgShow() {
+				this.popup_open = true;
+			},
+			popup_close() {
+				this.popup_open = false;
+			},
+			picShow() {
+				this.picSrc = photo;
+				this.openPic = true;
+			},
+			clearPic() {
+				this.picSrc = '';
+				this.openPic = false;
+			}
 		},
 
 		mounted() {
@@ -169,6 +190,7 @@
 					return sorted;
 				}
 			},
+			
 		},
 	};
 </script>
@@ -261,13 +283,18 @@
 				</div>
 				<div class="score_rightside">
 					<h4>立即分享你的用餐體驗 !</h4>
-					<img
-						src="/src/assets/Image/review/writeReview.png"
-						alt=""
-					/>
+					<div class="writeBtn" @click="msgShow">
+						<h3>撰寫評論</h3>
+						<img src="/src/assets/Image/review/pen.png" alt="">
+					</div>
 				</div>
 			</div>
 			<hr />
+			<div class="msg">
+				<restaurantaMessage 
+				:popup_open="popup_open"
+				@close-popup="popup_close"></restaurantaMessage>
+			</div>
 			<div class="reviews">
 				<div class="review_btns">
 					<div class="sequence">
@@ -344,10 +371,14 @@
 								v-for="(photo, index) in item.PHOTOS"
 								:key="index"
 								:src="photo"
+								@click="picShow"
 							/>
 						</div>
 					</li>
 				</ul>
+				<div :class="[picFilter, {picOpen : openPic}]" @click="clearPic">
+					<img :src="picSrc" alt="">
+				</div>
 				<!-- <button class="readmore">
                     <h3>READ MORE</h3>
                 </button> -->
@@ -359,20 +390,31 @@
 <style lang="scss" scoped>
 	@import "/src/sass/style.scss";
 
+	@mixin breakpoint($point) {
+		@media screen and (max-width: $point) {
+			@content;
+		}
+	}
+
 	.review_body {
 		background-color: $OffWhite;
 		width: 100%;
 		display: flex;
+		@include breakpoint(615px) {
+			flex-direction: column;
+		}
 	}
 
 	.review_sidebar {
 		background-color: #fff;
 		width: 17vw;
 
-		@include breakpoint(430px) {
+		@include breakpoint(615px) {
 			background-color: #f6f1ed;
-			position: absolute;
-			z-index: 1;
+			width: auto;
+			margin-top: 30%;
+			// position: absolute;
+			// z-index: 1;
 		}
 
 		.storeimg {
@@ -382,7 +424,7 @@
 			margin: 0 auto;
 			display: block;
 
-			@include breakpoint(430px) {
+			@include breakpoint(615px) {
 				display: none;
 			}
 		}
@@ -392,13 +434,14 @@
 			width: fit-content;
 			margin: 0 auto;
 
-			@include breakpoint(430px) {
-				position: absolute;
-				top: 31vw;
-				left: 35vw;
+			@include breakpoint(615px) {
+				// position: absolute;
+				// top: 31vw;
+				// left: 35vw;
 				width: 43vw;
 				display: flex;
 				flex-direction: column;
+				
 			}
 
 			h2 {
@@ -414,10 +457,11 @@
 					font-size: 34px;
 				}
 
-				@include breakpoint(430px) {
+				@include breakpoint(615px) {
 					-webkit-writing-mode: unset;
 					writing-mode: unset;
 					font-weight: 800;
+					margin: 0 auto;
 				}
 			}
 
@@ -427,11 +471,11 @@
 				margin-top: 16px;
 				margin-left: 8px;
 
-				@include breakpoint(430px) {
+				@include breakpoint(615px) {
 					-webkit-writing-mode: unset;
 					writing-mode: unset;
 					font-weight: 800;
-					margin-left: 9vw;
+					margin:0 auto;
 				}
 			}
 		}
@@ -445,10 +489,8 @@
 			margin: 0 auto;
 			margin-top: 26px;
 
-			@include breakpoint(430px) {
-				position: absolute;
-				top: 48vw;
-				left: 39vw;
+			@include breakpoint(615px) {
+				display: none;
 			}
 
 			.star {
@@ -478,7 +520,7 @@
 				width: 76px;
 			}
 
-			@include breakpoint(430px) {
+			@include breakpoint(615px) {
 				display: none;
 			}
 
@@ -496,11 +538,17 @@
 		// outline: 1px solid blue;
 		width: 100%;
 		margin: 20px;
+		@include breakpoint(1024px) {
+			margin: 5px;
+		}
 
 		.breadcrumb {
 			margin-top: 20px;
 			margin-bottom: 40px;
 			margin-left: 64px;
+			@include breakpoint(615px) {
+				display: none;
+			}
 		}
 
 		.breadcrumb h6 {
@@ -519,10 +567,7 @@
 
 		.breadcrumb span {
 			margin-right: 8px;
-
-			@include breakpoint(1024px) {
-				margin-top: 3px;
-			}
+			margin-top: 3px;
 		}
 
 		.review_score {
@@ -534,10 +579,24 @@
 			padding: 0 44px;
 			padding-bottom: 38px;
 			// border-bottom: 2px solid $DarkBrown;
+			@include breakpoint(890px) {
+				flex-direction: column;
+				margin: 0;
+			}
+			
 
 			.score_leftside {
+				
 				width: 25%;
+				margin: 0 auto;
 				// outline: 1px solid green;
+				@include breakpoint(1133px) {
+					width: 220px;
+				}
+				@include breakpoint(890px) {
+					order: 2;
+					margin-bottom: 30px;
+				}
 
 				.star_distribute {
 					& > h3 {
@@ -605,9 +664,18 @@
 			}
 
 			.score_middleside {
+				margin: 0 auto;
 				width: 25%;
 				// outline: 1px solid green;
 				padding-top: 40px;
+
+				@include breakpoint(1028px) {
+					width: 200px;
+				}
+				@include breakpoint(890px) {
+					order: 1;
+					margin-bottom: 30px;
+				}
 
 				h1 {
 					font-weight: normal;
@@ -643,12 +711,16 @@
 			}
 
 			.score_rightside {
+				margin: 0 auto;
 				width: 25%;
 				// outline: 1px solid green;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
+				@include breakpoint(890px) {
+					order: 3;
+				}
 
 				h4 {
 					margin-bottom: 20px;
@@ -657,19 +729,34 @@
 						width: 24vw;
 					}
 
-					@include breakpoint(820px) {
-						width: 26vw;
+					@include breakpoint(890px) {
+						width: 214px;
 						margin-left: 0;
+						margin-bottom: 12px;
 					}
 				}
-
-				img {
+				.writeBtn{
+					width: 221px;
+					height: 60px;
+					background-color: #C8AC96;
+					border-radius: 12px;
 					cursor: pointer;
+					display: flex;
+					justify-content: center;
+					align-items: center;	
 
-					@include breakpoint(1280px) {
-						width: 16vw;
+					h3{
+						color: $OffWhite;
 					}
+
+
+					img {
+					display: block;
+					width: 26px;
+					height: 26px;
 				}
+				}
+				
 			}
 		}
 
@@ -681,13 +768,31 @@
 			border: 3px solid $DarkBrown;
 		}
 
+		.msg{
+			position: fixed;
+			width: 100%;
+			height: 0;
+			top: 0;
+			left: 0;
+			z-index: 10;
+		}
+
 		.reviews {
 			// outline: 1px red solid;
 			padding: 20px;
 
+			@include breakpoint(1024px) {
+				padding: 0;
+			}
+
 			.review_btns {
 				display: flex;
 				margin-bottom: 30px;
+				width: 200px;
+				@include breakpoint(890px) {
+					margin: 0 auto;
+					margin-bottom: 30px;
+				}
 
 				.sequence {
 					width: 124px;
@@ -724,6 +829,9 @@
 				width: 98%;
 				flex-wrap: wrap;
 				margin-bottom: 24px;
+				@include breakpoint(860px) {
+					display: block
+				}
 
 				li {
 					// outline: 1px blue solid;
@@ -731,12 +839,23 @@
 					padding: 28px;
 					background-color: #fffefe;
 					margin-bottom: 24px;
+					filter: drop-shadow(0 0 7px rgba(207, 81, 61, 0.4));
+
+					@include breakpoint(1024px) {
+						padding: 12px;
+					}
+					@include breakpoint(860px) {
+						margin: 0 auto;
+						margin-bottom: 10px;
+						width: 340px;
+					}
+					
 
 					h5 {
-						@include breakpoint(1280px) {
-							width: 88%;
-							margin-bottom: 20px;
-						}
+						// @include breakpoint(1280px) {
+						// 	width: 88%;
+						// 	margin-bottom: 20px;
+						// }
 
 						@include breakpoint(1024px) {
 							margin-top: 0.4vw;
@@ -760,11 +879,6 @@
 								border-radius: 50%;
 								object-fit: cover;
 								margin-right: 16px;
-
-								@include breakpoint(820px) {
-									width: 60px;
-									height: 60px;
-								}
 							}
 						}
 
@@ -833,7 +947,7 @@
 							.star_time {
 								display: flex;
 
-								@include breakpoint(1024px) {
+								@include breakpoint(1200px) {
 									display: block;
 								}
 
@@ -842,67 +956,19 @@
 									margin-right: 28px;
 									color: #999999;
 
-									@include breakpoint(1280px) {
-										margin-right: 0px;
-									}
-
-									@include breakpoint(1145px) {
-										margin-right: 18px;
-									}
-
-									@include breakpoint(1028px) {
-										margin-bottom: 10px;
-									}
-
 									& > img {
 										margin-right: 4px;
-
-										@include breakpoint(1280px) {
-											height: 29px;
-											margin-top: 15px;
-										}
-
-										@include breakpoint(1145px) {
-											width: 2vw;
-											height: 2vw;
-											margin-top: 1vw;
-										}
-
-										@include breakpoint(1024px) {
-											height: 22px;
-										}
-
-										@include breakpoint(820px) {
-											height: 20px;
-										}
+										width: 24px;
+										height: 24px;
+									}
+									@include breakpoint(1200px) {
+										margin-bottom: 4px;
+									}
+									@include breakpoint(890px) {
+										width: 150px;
 									}
 								}
 
-								.time {
-									@include breakpoint(1280px) {
-										margin: 1.5vw 1vw;
-										width: 12vw;
-									}
-
-									@include breakpoint(1220px) {
-										width: 11vw;
-									}
-
-									@include breakpoint(1145px) {
-										width: 12vw;
-										margin-top: 1vw;
-									}
-
-									@include breakpoint(1024px) {
-										width: 14vw;
-										margin-right: 0;
-									}
-
-									@include breakpoint(820px) {
-										width: 18vw;
-										margin-right: 0;
-									}
-								}
 							}
 						}
 					}
@@ -919,7 +985,7 @@
 					.photos {
 						display: flex;
 						flex-wrap: wrap;
-						width: 80%;
+						width: 100%;
 						// margin: 0 auto;
 
 						img {
@@ -929,6 +995,12 @@
 							object-fit: cover;
 							margin-right: 20px;
 							margin-bottom: 20px;
+						    filter: drop-shadow(0 0 7px rgba(207, 81, 61, 0.4));
+
+							@include breakpoint(1050px) {
+								margin-right: 10px;
+								margin-bottom: 10px;
+							}
 						}
 					}
 				}
@@ -949,6 +1021,27 @@
 					list-style: none;
 				}
 			}
+		}
+	}
+
+	.picFilter{
+		display: none;
+	}
+	
+	.reviews .picOpen{
+		width: 100vw;
+        height: 100vh;
+        background-color: #333333;
+        opacity: 0.8;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 15;
+		img{
+			margin: 0 auto;
+			margin-top: 30%;
+			display: block;
+			width: 380px;
 		}
 	}
 </style>
