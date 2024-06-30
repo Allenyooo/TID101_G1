@@ -1,5 +1,15 @@
 <script>
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/effect-cards';
+import { EffectCards } from 'swiper/modules';
+
 export default {
+    components: { 
+        Swiper,
+        SwiperSlide,
+    },
+
     props: {
         isHoverEnabled: {
             type: Boolean,
@@ -23,6 +33,7 @@ export default {
         return {
             hovered: false,
             pics: "",
+            modules: [EffectCards],
         };
     },
 
@@ -155,10 +166,16 @@ export default {
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
 
+@mixin breakpoint($point) {
+    @media screen and (max-width: $point) {
+        @content;
+    }
+}
+
 li {
     display: block;
     transition: 0.1s;
-    // outline: 2px solid blue;
+    // outline: 2px solid red;
     width: 456px;
     // width: 24vw;
     height: 202px;
@@ -168,12 +185,30 @@ li {
     position: relative;
     // margin-bottom: 24px;
     // margin: 0 auto;
+    @include breakpoint(1280px) {
+        width: 400px;
+    }
+    @include breakpoint(1080px) {
+        width: 312px;
+        height: 406px;
+    }
+    @include breakpoint(830px) {
+       margin-right: 20px;
+    }
+
 
     &:not(.no-hover) {
         &:hover {
             transition: 0.1s;
             width: 720px;
             height: 364px;
+            @include breakpoint(1280px) {
+                width: 650px;
+            }
+            @include breakpoint(1080px) {
+                width: 312px;
+                height: 406px;
+            }
         }
 
         &:hover .opened {
@@ -187,6 +222,13 @@ li {
             position: absolute;
             top: 0;
             left: 0;
+            @include breakpoint(1280px) {
+                width: 650px;
+            }
+            @include breakpoint(1080px) {
+                width: 312px;
+                height: 406px;
+            }
         }
 
         &:hover .normal {
@@ -211,6 +253,12 @@ li {
     transition: 0.2s;
     transform-origin: 50% center;
     margin-bottom: 12px;
+    @include breakpoint(1280px) {
+        width: 400px;
+    }
+    @include breakpoint(1080px) {
+        display: none;
+    }
 
     img {
         width: 100%;
@@ -265,20 +313,39 @@ li {
     opacity: 0;
     margin-bottom: 12px;
     display: none;
+    @include breakpoint(1280px) {
+        width: 650px;
+    }
+    @include breakpoint(1080px) {
+        width: 312px;
+        height: 406px;
+        display: block;
+        opacity: 1;
+    }
 
     .card_header {
         width: 100%;
         height: 32px;
         background-color: $Red;
+        @include breakpoint(1080px) {
+           display: none;
+        }
     }
 
     .card_main {
         margin: 20px 28px;
+        @include breakpoint(1080px) {
+            margin: 0 0;
+        }
     }
 }
 
 .maininfo {
     display: flex;
+    @include breakpoint(1080px) {
+        width: 100%;
+        display: block;
+    }
 
     .shopImg {
         display: block;
@@ -287,6 +354,10 @@ li {
         object-fit: cover;
         border-radius: 15px;
         margin-right: 28px;
+        @include breakpoint(1080px) {
+            width: 100%;
+            border-radius: 0;
+        }
     }
 }
 
@@ -295,11 +366,17 @@ li {
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 20px;
+    @include breakpoint(1080px) {
+        padding: 20px;
+    }
 
     .name_collect {
         display: flex;
         justify-content: space-between;
         margin-bottom: 20px;
+        @include breakpoint(1080px) {
+            margin-bottom: 8px;
+        }
     }
 
     .star_price {
@@ -335,6 +412,9 @@ li {
 
         & > h4:nth-child(2) {
             color: #999999;
+            @include breakpoint(1080px) {
+                display: none;
+            }
         }
     }
 
@@ -348,6 +428,11 @@ li {
             height: 16px;
             margin-right: 8px;
         }
+        h4{
+            @include breakpoint(1080px) {
+                font-size: 16px;
+            }
+        }
     }
 
     .shop_address {
@@ -359,6 +444,11 @@ li {
             height: 16px;
             margin-right: 8px;
         }
+        h4{
+            @include breakpoint(1080px) {
+                font-size: 16px;
+            }
+        }
     }
 }
 
@@ -367,9 +457,12 @@ li {
     align-items: center;
     justify-content: space-around;
     background-color: #dbcec6;
-    width: 670px;
+    width: 100%;
     height: 88px;
     border-radius: 15px;
+    @include breakpoint(1080px) {
+        display: none;
+    }
 
     & > div {
         display: flex;

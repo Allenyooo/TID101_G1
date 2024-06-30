@@ -250,8 +250,8 @@ nav {
     }
 
     @include breakpoint(390px) {
-        top: 167px;
-        right: 165px;
+        top: 133px;
+        right: 154px;
         scale: 0.8;
     }
 }
@@ -477,6 +477,11 @@ p {
         top: -25px;
     }
 
+    @include breakpoint(390px) {
+        top: 5px;
+        left: -4vw;
+    }
+
     h3 {
         @include breakpoint(430px) {
             font-size: 16px;
@@ -499,7 +504,7 @@ p {
     }
 
     @include breakpoint(390px) {
-        top: 59px;
+        top: 64px;
     }
 
     h3 {
@@ -614,8 +619,8 @@ p {
     }
 
     @include breakpoint(390px) {
-        top: -368px;
-        right: -374px;
+        top: -386px;
+        right: -394px;
         width: 657px;
         height: 672px;
     }
