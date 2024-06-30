@@ -1175,6 +1175,10 @@
 
 			li {
 				margin-top: 16px;
+
+				@include breakpoint(820px) {
+					width: 80px;
+				}
 			}
 		}
 	}
@@ -1315,7 +1319,7 @@
 				margin-left: 15px;
 
 				@include breakpoint(430px) {
-					margin-left: 0px;
+					margin-left: 10px;
 				}
 
 				&:hover {
@@ -1581,10 +1585,6 @@
 		margin: 0 auto;
 		justify-content: center;
 
-		@include breakpoint(820px) {
-			// width: 90px;
-		}
-
 		@include breakpoint(430px) {
 			flex-direction: column;
 			margin: 3vw 10vw 2vw 6vw;
@@ -1605,27 +1605,30 @@
 			}
 
 			@include breakpoint(1024px) {
-				width: 52vw;
+				// width: 52vw;
 				margin-top: 17%;
+				width: 49vw;
+				font-size: 34px;
 			}
 
 			@include breakpoint(820px) {
 				font-size: 27px;
-				width: 52vw;
+				width: 53vw;
 				margin-left: 0vw;
 				margin-top: 19%;
 			}
 
 			@include breakpoint(430px) {
-				font-size: 30px;
+				font-size: 29px;
 				margin-left: 7vw;
 				width: 81vw;
 				margin-top: 2vw;
 			}
 
 			@include breakpoint(390px) {
-				margin-left: 0vw;
+				margin-left: 16px;
 				width: 89vw;
+				font-size: 28px;
 			}
 		}
 
@@ -1640,7 +1643,7 @@
 
 			@include breakpoint(1024px) {
 				width: 423px;
-				// margin-left: 20px;
+				margin-left: 0px;
 			}
 
 			@include breakpoint(820px) {
@@ -1972,7 +1975,8 @@
 							}
 
 							@include breakpoint(430px) {
-								width: 28px;
+								width: 33px;
+								margin-left: 51px;
 							}
 
 							@include breakpoint(390px) {
@@ -2173,7 +2177,8 @@
 				}
 
 				@include breakpoint(390px) {
-					width: 83vw;
+					width: 85vw;
+					font-size: 16px;
 				}
 			}
 
@@ -2229,7 +2234,7 @@
 				}
 
 				@include breakpoint(390px) {
-					margin-left: 4vw;
+					margin-left: 3vw;
 				}
 			}
 
@@ -2344,6 +2349,7 @@
 
 			@include breakpoint(1024px) {
 				height: 460px;
+				padding-left: 15px;
 			}
 
 			@include breakpoint(820px) {
@@ -2529,7 +2535,7 @@
 			@include breakpoint(820px) {
 				display: block;
 				height: 28vh;
-				width: 48vw;
+				width: 51vw;
 				margin-left: 7vw;
 			}
 
@@ -2625,7 +2631,7 @@
 							@include breakpoint(1024px) {
 								padding-left: 9px;
 								font-size: 18px;
-								width: 140px;
+								width: 120px;
 								padding-top: 12px;
 							}
 						}
@@ -2814,7 +2820,7 @@
 
 		@include breakpoint(820px) {
 			margin-left: 24vw;
-			margin-top: 58vw;
+			margin-top: 52vw;
 		}
 
 		@include breakpoint(430px) {
@@ -2858,23 +2864,18 @@
 			opacity: 1;
 			pointer-events: auto;
 			text-align: center;
-			top: 10%;
-			left: 41%;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
 
-			@include breakpoint(1024px) {
-				top: 332px;
-				left: 403px;
-			}
-
-			@include breakpoint(820px) {
-				top: 213px;
-				left: 280px;
+			@include breakpoint(430px) {
+				width: 386px;
+				height: 560px;
 			}
 
 			@include breakpoint(390px) {
-				top: 253px;
-				left: 18px;
-				width: 93vw;
+				width: 300px;
+				height: 512px;
 			}
 		}
 
@@ -2888,22 +2889,33 @@
 					margin-right: 16px;
 					font-weight: 800;
 					color: #7a625b;
-				}
 
-				#stars {
-					img {
-						width: 24px;
-						margin-left: 5px;
+					@include breakpoint(430px) {
+						font-size: 18px;
 					}
 
-					span {
-						font-size: 16px;
-						color: #7a625b;
-						margin-left: 10px;
+					@include breakpoint(390px) {
+						font-size: 18px;
+					}
+
+					#stars {
+						img {
+							width: 24px;
+							margin-left: 5px;
+
+							@include breakpoint(390px) {
+								// margin-left: 10px;
+							}
+
+							span {
+								font-size: 16px;
+								color: #7a625b;
+								margin-left: 10px;
+							}
+						}
 					}
 				}
 			}
-
 			.line {
 				border: 1px solid red;
 				width: 356px;
@@ -2926,7 +2938,7 @@
 				@include breakpoint(390px) {
 					margin-bottom: -1vw;
 					margin-left: 6vw;
-					width: 76vw;
+					width: 66vw;
 				}
 			}
 
@@ -2935,6 +2947,10 @@
 				margin-top: 8px;
 				color: #7a625b;
 				margin-left: 28px;
+
+				@include breakpoint(430px) {
+					margin-top: 0px;
+				}
 			}
 
 			.experience {
@@ -2943,6 +2959,17 @@
 				color: #7a625b;
 				margin-left: 20px;
 				margin-top: 28px;
+
+				@include breakpoint(430px) {
+					margin-left: 10px;
+					margin-top: 20px;
+					font-size: 18px;
+				}
+
+				@include breakpoint(390px) {
+					margin-top: 11px;
+					font-size: 19px;
+				}
 			}
 
 			.text_1 {
@@ -2957,7 +2984,10 @@
 					padding: 9px 0 0 10px;
 
 					@include breakpoint(390px) {
-						width: 329px;
+						width: 267px;
+						height: 83px;
+						font-size: 11px;
+						padding: 8px 0 0 8px;
 					}
 				}
 
@@ -2983,6 +3013,10 @@
 			font-weight: 800;
 			color: #7a625b;
 			margin-left: 30px;
+
+			@include breakpoint(430px) {
+				font-size: 18px;
+			}
 		}
 
 		&_six {
@@ -3002,6 +3036,11 @@
 		margin-top: 16px;
 		padding-bottom: 40px;
 
+		@include breakpoint(390px) {
+			width: 253px;
+			justify-content: space-around;
+		}
+
 		.box1,
 		.box2,
 		.box3,
@@ -3016,6 +3055,13 @@
 			border-radius: 6px;
 			position: relative;
 			margin-bottom: 12px;
+
+			@include breakpoint(390px) {
+				width: 70px;
+				height: 70px;
+				margin-bottom: 7px;
+				margin-top: 0px;
+			}
 
 			.add {
 				font: bold 15px Tahoma;
@@ -3045,18 +3091,14 @@
 		width: 200px;
 		justify-content: space-between;
 		align-items: center;
-		margin: auto;
-		margin-left: 7vw;
-		margin-top: 2.5vw;
+		margin: 30px auto;
 
-		@include breakpoint(820px) {
-			margin-left: 13vw;
-			margin-top: 1.5vw;
+		@include breakpoint(430px) {
+			margin: 4vw auto;
 		}
 
 		@include breakpoint(390px) {
-			margin-left: 22vw;
-			margin-top: 4.5vw;
+			margin: 0px auto;
 		}
 
 		.cancel {
@@ -3067,6 +3109,7 @@
 			background-color: #c8ac96;
 			color: #fff;
 			border-radius: 9px;
+			
 		}
 
 		.sendout {
@@ -3117,6 +3160,10 @@
 
 		img {
 			margin-right: 4px;
+
+			@include breakpoint(1024px) {
+				margin-top: 10px;
+			}
 		}
 
 		h4 {

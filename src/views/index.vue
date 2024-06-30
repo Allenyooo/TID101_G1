@@ -12,7 +12,12 @@
                 <img class="right" src="/src/assets/Image/index/door_right.png" alt="">
             </div>
 
-            <div class="yiayng" @click="cyclerotate" :class="{ rotate: rotating }">
+
+            <span @click="cyclerotate">
+                <img class="yiayng__img -yia" src="../assets/Image/index/top.svg" alt="">
+            </span>
+
+            <div class="yiayng" :class="{ rotate: rotating }">
 
                 <div class="yiayng__group -top" :class="{ 'move-right': moved, 'highlight': rotating }">
 
@@ -25,7 +30,7 @@
 
                 <div class="yiayng__group -bottom" :class="{ 'move-left': moved, 'highlight': rotating }">
 
-                    <router-link to="/BkHome" class="yiayng__link -backend">
+                    <router-link to="/BkLogin" class="yiayng__link -backend">
                         <h5 class="yiayng__title">後台</h5>
                     </router-link>
 
@@ -186,13 +191,13 @@ export default {
     position: relative;
 }
 
-
 .yiayng {
     position: absolute;
     top: 42%;
     left: 42%;
     width: 15.8vw;
     height: 15.8vw;
+    // z-index: 100;
 
     @include breakpoint(1280px) {
         top: 42%;
@@ -235,6 +240,7 @@ export default {
     }
 
     .-bottom {
+
         a:hover~img {
             transform: translateY(-10px);
             filter: drop-shadow(5px 8px 2px rgba(0, 0, 0, 0.7));
@@ -323,7 +329,7 @@ export default {
 
     &__img {
         width: 100%;
-        height: 100%;
+        // height: 100%;
         cursor: pointer;
         display: block;
         transition: all .3s ease;
@@ -381,4 +387,19 @@ export default {
         transform: rotateY(70deg);
     }
 }
+
+span{
+    width: 16vw;
+    height: 16vw;
+    // outline: 4px solid red;
+    position: absolute;
+    top: 42%;
+    left: 42%;
+    z-index: 100;
+    border-radius: 50%;
+    img{
+        opacity: 0;
+    }
+}
+
 </style>
