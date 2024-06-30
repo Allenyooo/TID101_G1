@@ -409,12 +409,12 @@ export default {
                 "<+=4"
             )
 
-            // .to(".enter_emperor", {
-            //     onComplete: () => {
-            //         window.location.href = import.meta.env.BASE_URL + "home";
-            //         // this.$router.push('/home');
-            //     },
-            // });
+            .to(".enter_emperor", {
+                onComplete: () => {
+                    window.location.href = import.meta.env.BASE_URL + "home";
+                    // this.$router.push('/home');
+                },
+            });
     },
 };
 </script>

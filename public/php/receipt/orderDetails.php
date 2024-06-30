@@ -1,7 +1,9 @@
 <?php
 
-
     include("../conn.php");
+    
+    // ini_set("display_errors",1);
+    // ini_set("session.cookie_domain", "loclahost:5173");
 
     // session_start();
     // print_r($_SESSION);  

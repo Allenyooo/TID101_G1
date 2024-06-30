@@ -6,13 +6,22 @@
         :mousewheel="true"
         :keyboard="true"
         :modules="modules"
+        @slideChange="onSlideChange"
         class="mySwiper"
     >
-        <swiper-slide class="receipt-swiper-slide">
-            <h3>$100 梨饗券</h3>
-            <img src="../assets/Image/receipt/QRcode.png" alt="" />
-        </swiper-slide>
+        <swiper-slide 
+            class="receipt-swiper-slide" 
+            v-for="(receipt, index) in receipts" 
+            :key="receipt.id" 
+            :id="receipt.id" 
+            @click="used(receipt)">
 
+            <h3>{{ receipt.name }}</h3>
+            <img src="../assets/Image/receipt/QRcodeUsed.png" class="QRcodeUsed" v-if="receipt.codeUsed == true">
+            <img :src="receipt.imgSrc" class="receiptImg">
+
+        </swiper-slide>
+        <!-- 
         <swiper-slide class="receipt-swiper-slide">
             <h3>$300 梨饗券</h3>
             <img src="../assets/Image/receipt/QRcode.png" alt="" />
@@ -31,17 +40,7 @@
         <swiper-slide class="receipt-swiper-slide">
             <h3>$1000 梨饗券</h3>
             <img src="../assets/Image/receipt/QRcode.png" alt="" />
-            <!-- <ul class="coupon_info">
-          <li>
-              <h5>序號</h5>
-              <h5>24KK2988EFIJ</h5>
-          </li>
-          <li>
-              <h5>使用期限</h5>
-              <h5>2025/12/31</h5>
-          </li>
-      </ul> -->
-        </swiper-slide>
+        </swiper-slide> -->
     </swiper>
 </template>
 
@@ -65,10 +64,128 @@ export default {
         Swiper,
         SwiperSlide,
     },
+    mounted(){
+        // this.receipts.forEach(receipt => {
+        //     this.getQrCode(receipt)
+        // })
+        this.getOrderID();
+        this.getReceiptNumber();
+        this.getReceiptStatus();
+    },
     data() {
         return {
             modules: [Navigation, Pagination, Mousewheel, Keyboard],
+            receipts:[
+                // {
+                //     id: 17196448591,
+                //     name: "$100 梨饗券",
+                //     // imgSrc: new URL("/assets/Image/receipt/QRcode.png", import.meta.url).href,
+                //     imgSrc: "",
+                //     codeUsed: false
+                // }
+            ],
         };
+    },
+    methods: {
+        getOrderID() {
+            let cookies = document.cookie;
+            let match = cookies.match(/orderID=(\d+)/);
+            if (match) {
+                let orderID = match[1];
+                // console.log(match);
+                // console.log(orderID);
+                this.orderID = orderID;
+                // console.log(this.orderID);
+                return this.orderID;
+            } else {
+                alert("發生錯誤，請稍後再試");
+            }
+        },
+        getQrCode(){
+            this.receipts.forEach(receipt => {
+                receipt.imgSrc = new URL("https://api.pwmqr.com/qrcode/create/?url=" + receipt.id)
+                // console.log(receipt.imgSrc);
+            })
+        },
+        async getReceiptNumber(){
+            let orderID = this.getOrderID();
+            fetch(`${import.meta.env.VITE_PHP_PATH}receipt/receiptNumber.php`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    orderID: orderID
+                })
+            })
+                .then((resp) => resp.json())
+                .then((receiptNumberDB) => {
+                    // console.log(receiptNumberDB);
+                    this.receipts = receiptNumberDB;
+                    // this.receipts[index].codeUsed = false;
+                    // this.receipts.forEach(receipt => {
+                    //     receipt.codeUsed = false
+                    // });
+                    this.getQrCode();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        onSlideChange(swiper) {
+            const activeIndex = swiper.activeIndex;
+            const receiptID = this.receipts[activeIndex].id;
+            this.$emit('sendMsg', receiptID);
+        },
+        // showID(index){
+        //     console.log(this.receipts[index].id);
+        //     const receiptID = this.receipts[index].id;
+        //     this.$emit('sendMsg',receiptID);
+        //     // console.log(receiptID);
+        // },
+        async getReceiptStatus() {
+            let orderID = this.getOrderID();
+            fetch(`${import.meta.env.VITE_PHP_PATH}receipt/receiptStatus.php`,{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        orderID: orderID
+                    }),
+                }
+            )
+                .then((resp) => resp.json())
+                .then((receiptDB) => {
+                    console.log(receiptDB);
+                    // console.log(index);
+                    this.receipts.forEach(receipt => {
+                        // const status = array.includes(receipt.id);
+                        let status = receiptDB.find(item => item.sn === receipt.id);
+                        if (status) {
+                            receipt.codeUsed = true;
+                        } else {
+                            receipt.codeUsed = false;
+                        }
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        async used(receipt) {
+            receipt.codeUsed = true;
+            fetch(`${import.meta.env.VITE_PHP_PATH}receipt/usedReceipt.php`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    receiptID: receipt.id,
+                    status: receipt.codeUsed
+                })
+            })
+        }
     },
 };
 </script>
@@ -86,7 +203,16 @@ export default {
     color: #fff;
 }
 
-.receipt-swiper-slide img {
+.QRcodeUsed{
+    width: 50%;
+    position: absolute;
+    top: 34%;
+    left: 24%;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 35px;
+}
+
+.receipt-swiper-slide .receiptImg {
     background-color: #fff;
     padding: 20px 16px;
     border-radius: 10px;
@@ -97,6 +223,7 @@ export default {
     /* height: 80%; */
     object-fit: cover;
     margin-bottom: 28px;
+    /* position: relative; */
 }
 
 ::v-deep .swiper-button-prev,

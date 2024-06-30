@@ -38,7 +38,7 @@
         $voucherID = null;
     }
 
-    echo $voucherID;
+    // echo $voucherID;
 
     $sqlIO = "INSERT INTO `ORDER` (ID, MEMBER_ID, ORDERDATE, PAYMENT, SUBTOTAL, AMOUNT, `STATUS`, VOUCHER_ID) 
               VALUES (?, ?, CURDATE(), ? ,?, ?, ?, ?)";
@@ -47,8 +47,8 @@
     $stateIO -> bindValue(1,$orderID);
     $stateIO -> bindValue(2,$order["memberId"]);
     $stateIO -> bindValue(3,$order["payment"]);
-    $stateIO -> bindValue(4,$order["amount"]);
-    $stateIO -> bindValue(5,$order["subtotal"]);
+    $stateIO -> bindValue(4,$order["subtotal"]);
+    $stateIO -> bindValue(5,$order["amount"]);
     $stateIO -> bindValue(6,$status);
     $stateIO -> bindValue(7,$voucherID);   // $voucherID = $dataSV[0]['ID'];
     $stateIO -> execute();
@@ -155,55 +155,96 @@
         // echo $receiptNumbers[0];
         // print_r($receiptNumbers);
 
+    // echo $totalQty;
+    // echo $order["tickets"][1]["name"];
+    
+
+
+
+
+
 
     // RECEIPT表 insert 多筆餐券資料
     
-    for($k=0 ; $k < $totalQty ; $k++){
+    // for($k=0 ; $k < $totalQty ; $k++){
 
-        $sqlSP = "SELECT * FROM PRODUCT where `NAME` = ?";
-        $stateSP = $pdo -> prepare($sqlSP);
-        $stateSP -> bindValue(1,$order["tickets"][$k]["name"]);
-        $stateSP -> execute();
+    //     $sqlSP = "SELECT * FROM PRODUCT where `NAME` = ?";
+    //     $stateSP = $pdo -> prepare($sqlSP);
+    //     $stateSP -> bindValue(1,$order["tickets"][$k]["name"]);
+    //     $stateSP -> execute();
         
+    //     $product = $stateSP->fetchAll(PDO::FETCH_ASSOC);
+
+    //     for($a=0 ; $a < $order["tickets"][$k]["qty"] ; $a++){
+
+    //         $sqlIR = "INSERT INTO RECEIPT (ID, MEMBER_ID, ORDER_ID, PRODUCT_ID, `STATUS`, `NUMBER`) 
+    //         VALUES (?, ?, ?, ?, '未使用', 1)";
+
+    //         $stateIR = $pdo -> prepare($sqlIR);
+    //         $stateIR -> bindValue(1,(int)$RID);
+    //         $stateIR -> bindValue(2,$order["memberId"]);
+    //         $stateIR -> bindValue(3,$orderID);
+    //         $stateIR -> bindValue(4,$product[0]["ID"]);
+    //         // $stateIR -> bindValue(5,$receiptNumbers[$k]);
+    //         $stateIR -> execute();
+
+    //         $dataIR = $stateIR->fetchAll(PDO::FETCH_ASSOC);
+
+    //         $RID++;
+    //     }
+        
+    // };
+    
+    // for($b=0 ; $b < $totalQty ; $b++){
+    //     $sqlSRid = "SELECT * FROM RECEIPT where ORDER_ID = ?";
+    //     $stateSRid = $pdo -> prepare($sqlSRid);
+    //     $stateSRid -> bindValue(1,$orderID);
+    //     $stateSRid -> execute();
+        
+    //     $receipt = $stateSRid->fetchAll(PDO::FETCH_ASSOC);
+    
+    
+    //     $sqlUR = "UPDATE RECEIPT SET `NUMBER` = ? WHERE ID = ?";
+    
+    //     $stateUR = $pdo -> prepare($sqlUR);
+    //     $stateUR -> bindValue(1,$receiptNumbers[$b]);
+    //     $stateUR -> bindValue(2,$receipt[$b]["ID"]);
+    //     $stateUR -> execute();
+    
+    //     $dataUR = $stateUR->fetchAll(PDO::FETCH_ASSOC);
+    // }
+
+
+    // RECEIPT表 insert 多筆餐券資料
+    foreach ($order["tickets"] as $ticket) {
+        $sqlSP = "SELECT * FROM PRODUCT WHERE `NAME` = ?";
+        $stateSP = $pdo->prepare($sqlSP);
+        $stateSP->bindValue(1, $ticket["name"]);
+        $stateSP->execute();
         $product = $stateSP->fetchAll(PDO::FETCH_ASSOC);
 
-        for($a=0 ; $a < $order["tickets"][$k]["qty"] ; $a++){
-
+        for ($a = 0; $a < $ticket["qty"]; $a++) {
             $sqlIR = "INSERT INTO RECEIPT (ID, MEMBER_ID, ORDER_ID, PRODUCT_ID, `STATUS`, `NUMBER`) 
-            VALUES (?, ?, ?, ?, '未使用', 1)";
-
-            $stateIR = $pdo -> prepare($sqlIR);
-            $stateIR -> bindValue(1,(int)$RID);
-            $stateIR -> bindValue(2,$order["memberId"]);
-            $stateIR -> bindValue(3,$orderID);
-            $stateIR -> bindValue(4,$product[0]["ID"]);
-            // $stateIR -> bindValue(5,$receiptNumbers[$k]);
-            $stateIR -> execute();
-
-            $dataIR = $stateIR->fetchAll(PDO::FETCH_ASSOC);
-
+                    VALUES (?, ?, ?, ?, '未使用', 1)";
+            $stateIR = $pdo->prepare($sqlIR);
+            $stateIR->bindValue(1, (int)$RID);
+            $stateIR->bindValue(2, $order["memberId"]);
+            $stateIR->bindValue(3, $orderID);
+            $stateIR->bindValue(4, $product[0]["ID"]);
+            $stateIR->execute();
             $RID++;
         }
-        
-    };
-    
-    for($b=0 ; $b < $totalQty ; $b++){
-        $sqlSRid = "SELECT * FROM RECEIPT where ORDER_ID = ?";
-        $stateSRid = $pdo -> prepare($sqlSRid);
-        $stateSRid -> bindValue(1,$orderID);
-        $stateSRid -> execute();
-        
-        $receipt = $stateSRid->fetchAll(PDO::FETCH_ASSOC);
-    
-    
+    }
+
+    // print_r($receiptNumbers);
+
+    foreach ($receiptNumbers as $key => $number) {
         $sqlUR = "UPDATE RECEIPT SET `NUMBER` = ? WHERE ID = ?";
-    
-        $stateUR = $pdo -> prepare($sqlUR);
-        $stateUR -> bindValue(1,$receiptNumbers[$b]);
-        $stateUR -> bindValue(2,$receipt[$b]["ID"]);
-        $stateUR -> execute();
-    
-        $dataUR = $stateUR->fetchAll(PDO::FETCH_ASSOC);
+        $stateUR = $pdo->prepare($sqlUR);
+        $stateUR->bindValue(1, $number);
+        $stateUR->bindValue(2, (int)$RID - $totalQty + $key);
+        $stateUR->execute();
+
     }
 
 
@@ -244,7 +285,7 @@
     }
     
     echo json_encode($orderID);
-    exit(); // 避免重複 echo 重複輸出
+    // exit(); // 避免重複 echo 重複輸出
 
 
 
