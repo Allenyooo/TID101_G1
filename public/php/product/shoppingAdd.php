@@ -25,27 +25,27 @@
 
         $shoppingCart = json_decode(file_get_contents("php://input"), true);
 
-        $shoppingCartID = $shoppingCart['cartID'];
+        // $shoppingCartID = $shoppingCart['cartID'];
         $memberID = $shoppingCart['memberID'];
         $productID = $shoppingCart['productID'];
         $count = $shoppingCart['cartCount'];
      
     
     $sql = "INSERT into
-            CART
+            CART(MEMBER_ID,PRODUCT_ID,COUNT)
             values
-            (?,?,?,?)";
+            (?,?,?)";
 
     
     $statement = $pdo->prepare($sql);
-    $statement->bindValue(1 , $shoppingCartID);
-    $statement->bindValue(2 , $memberID);
-    $statement->bindValue(3 , $productID);
-    $statement->bindValue(4 , $count);
+
+    $statement->bindValue(1 , $memberID);
+    $statement->bindValue(2 , $productID);
+    $statement->bindValue(3 , $count);
 
     $statement->execute();
 
-    echo   $shoppingCartID;
+
 
 
     // foreach($data as $index => $row){
