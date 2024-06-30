@@ -31,22 +31,21 @@
             <button @click="searchButton(sId)"><h5>搜尋</h5></button>
           </div>
           <div class="newButton">
-            <button>
-              <h5>新增折價券</h5>
-            </button>
+            <!-- <h5>新增折價券</h5> -->
+            <BN :revisePage="page" :newId="lastId"></BN>
           </div>
         </div>
 
         <BSort :sortDrop="sortDrop" @sortEvent="sortByID"></BSort>
 
-        <button
+        <!-- <button
           class="discountButton1"
           v-for="i in dButton"
           :class="{ dBOn: buttonState == i.id }"
           @click="(buttonState = i.id), (bdState = i.id)"
         >
           {{ i.text }}
-        </button>
+        </button> -->
 
         <BD
           :bd="bd"
@@ -82,9 +81,10 @@ import BS from "/src/components/BkSearch.vue";
 import BD from "/src/components/BkData.vue";
 import BDate from "/src/components/BkDate.vue";
 import BSort from "/src/components/BkSort.vue";
+import BN from "/src/components/BkNew.vue";
 
 export default {
-  components: { BH, BM, BS, BD, BDate, BSort },
+  components: { BH, BM, BS, BD, BDate, BSort, BN },
 
   data() {
     return {
@@ -321,7 +321,7 @@ export default {
         this.bd2 = data.data2;
         this.bdOff = data.data3;
         this.bd3 = data.data4;
-        this.lastId = data.data[data.data2.length - 1].ID;
+        this.lastId = data.data3[data.data2.length - 1].ID;
         // this.bd2 = data.data2;
         // this.price = data[0].PRICE;
         // this.discount = data[0].PERCENT;

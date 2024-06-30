@@ -39,7 +39,7 @@
 
 
 
-        $sql3 = "SELECT ID , status from FAQ";
+        $sql3 = "SELECT ID , STATUS from FAQ";
 
     $statement3 = $pdo->prepare($sql3);
     $statement3->execute();

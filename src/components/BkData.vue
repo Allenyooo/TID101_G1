@@ -43,6 +43,7 @@
               :revisePage="page"
               :reviseId="j.ID"
               :reviseBd="bd2[j.ID - 1]"
+              :rpic="pic"
             ></BR>
           </td>
 
@@ -127,6 +128,7 @@ export default {
     "bd3",
     "shopPic",
     "picTd",
+    "pic",
   ],
 
   data() {

@@ -111,7 +111,9 @@
             <li class="buttonList">
               <button class="shopping" @click="taskAdd()">加入購物車</button>
               <button href="" @click="taskAdd2()">
-                <router-link to="/CheckOut"><h4>立即結帳</h4></router-link>
+                <router-link to="/CheckOut"
+                  ><h4 class="h4text">立即結帳</h4></router-link
+                >
               </button>
             </li>
           </ul>
@@ -467,7 +469,7 @@ export default {
       let getId = cookie.match(/memberId=(\d+)/);
       let memberId = getId[1];
       // console.log(match)
-      console.log(memberId);
+      // console.log(memberId);
       this.memberId = memberId;
       // return memberId;
     },
@@ -491,7 +493,18 @@ export default {
         this.discount = data.data[0].PERCENT;
         this.cart = data.data2;
         this.cartId = data.data2[data.data2.length - 1].ID;
-        this.getMemberId();
+
+        let cookie = document.cookie;
+        let match = cookie.match(/(?:^|;) *memberId=([^;]*)/);
+
+        if (match) {
+          let memberId = match[1];
+          if (memberId.trim() !== "") {
+            this.getMemberId();
+          }
+        }
+
+        // this.getMemberId();
       });
     // .catch((error) => {
     //   console.error("Error fetching data:", error);
@@ -504,16 +517,20 @@ export default {
 @import "/src/sass/style.scss";
 
 @mixin breakpoint($point) {
-  // 桌機
   @if $point == mobile {
     @media (max-width: 431px) {
       @content;
     }
   }
 
-  // 手機
   @if $point == table {
     @media (max-width: 801px) {
+      @content;
+    }
+  }
+
+  @if $point == other {
+    @media (max-width: 860px) {
       @content;
     }
   }
@@ -922,6 +939,10 @@ export default {
                 //   color: white;
                 // }
               }
+
+              &:hover .h4text {
+                color: white;
+              }
             }
 
             .shopping {
@@ -993,6 +1014,11 @@ export default {
       h4 {
         color: white;
         line-height: 40px;
+
+        @include breakpoint(other) {
+          font-size: 17px;
+          margin: 0 8.2vw;
+        }
 
         @include breakpoint(mobile) {
           font-size: 16px;

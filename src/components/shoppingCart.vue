@@ -246,7 +246,7 @@ export default {
       let getId = cookie.match(/memberId=(\d+)/);
       let memberId = getId[1];
       // console.log(match)
-      console.log(memberId);
+      // console.log(memberId);
       this.memberId = memberId;
       // return memberId;
     },
@@ -271,7 +271,17 @@ export default {
   //----------------- 這邊是抓lolocalStorage
 
   mounted() {
-    this.getMemberId();
+    let cookie = document.cookie;
+    let match = cookie.match(/(?:^|;) *memberId=([^;]*)/);
+
+    if (match) {
+      let memberId = match[1];
+      if (memberId.trim() !== "") {
+        this.getMemberId();
+      }
+    }
+
+    // this.getMemberId();
   },
   watch: {
     shoppingCartData(newvalue, oldvalue) {
@@ -294,7 +304,7 @@ export default {
 @mixin breakpoint($point) {
   // 桌機
   @if $point == mobile {
-    @media (max-width: 391px) {
+    @media (max-width: 431px) {
       @content;
     }
   }
@@ -302,6 +312,12 @@ export default {
   // 手機
   @if $point == table {
     @media (max-width: 801px) {
+      @content;
+    }
+  }
+
+  @if $point == other {
+    @media (max-width: 600px) {
       @content;
     }
   }

@@ -39,7 +39,7 @@
     $data2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
 
 
-        $sql3 = "SELECT ID , status from MANAGER";
+        $sql3 = "SELECT ID , STATUS from MANAGER";
 
     $statement3 = $pdo->prepare($sql3);
     $statement3->execute();

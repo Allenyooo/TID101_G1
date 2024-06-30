@@ -29,9 +29,9 @@
           </div>
           <!-- <div class="searchButton"></div> -->
           <div class="newButton">
-            <button>
+            <!-- <button>
               <h5>匯出資料</h5>
-            </button>
+            </button> -->
           </div>
         </div>
 
@@ -184,6 +184,7 @@ export default {
       bd: [],
       bd2: [],
       bd3: [],
+      orderbd: [],
       title: [
         { 會員編號: "管理員編號" },
 
@@ -281,6 +282,7 @@ export default {
       .then((data) => {
         this.bd = data.data;
         this.bd3 = data.data3;
+        this.orderbd = data.data4;
         this.lastId = data.data[data.data3.length - 1].ID;
         // this.bd2 = data.data2;
         // this.price = data[0].PRICE;

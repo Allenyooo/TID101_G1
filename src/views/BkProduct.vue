@@ -17,6 +17,7 @@
           :bd3="bd3"
           :picTd="picTd"
           :shopPic="pic"
+          :pic="pic"
         ></BD>
       </div>
     </div>

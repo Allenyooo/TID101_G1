@@ -24,6 +24,12 @@
               :class="{ idBg: index == '編號' }"
             />
           </li>
+          <template v-if="rpic">
+            <!-- 如果是 '編號'，显示图片输入框 -->
+            <h4 class="product">商品圖片:</h4>
+
+            <input type="file" @change="handleFileChange(index)" />
+          </template>
         </ul>
         <!-- <div>{{ reviseBd.ID }}</div>
         <div>{{ reviseBd.NAME }}</div>
@@ -31,7 +37,7 @@
         <div>{{ reviseBd.PASSWORD }}</div> -->
         <!-- 底部按鈕 -->
         <div class="buttons">
-          <button class="btn btn-primary" @click="showConfirmationDialog">
+          <button class="btn btn-primary" @click="showConfirmationDialog()">
             儲存
           </button>
           <button class="btn btn-secondary" @click="cancelPopup">刪除</button>
@@ -47,7 +53,7 @@
 import Swal from "sweetalert2";
 
 export default {
-  props: ["reviseId", "revisePage", "reviseBd"],
+  props: ["reviseId", "revisePage", "reviseBd", "rpic"],
 
   data() {
     return {
@@ -72,6 +78,38 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           if (this.revisePage == 1) {
+            Swal.fire({
+              title: "修改成功",
+              icon: "success",
+            });
+            this.saveChanges();
+            this.closePopup();
+          }
+          if (this.revisePage == 3) {
+            Swal.fire({
+              title: "修改成功",
+              icon: "success",
+            });
+            this.saveChanges();
+            this.closePopup();
+          }
+          if (this.revisePage == 5) {
+            Swal.fire({
+              title: "修改成功",
+              icon: "success",
+            });
+            this.saveChanges();
+            this.closePopup();
+          }
+          if (this.revisePage == 6) {
+            Swal.fire({
+              title: "修改成功",
+              icon: "success",
+            });
+            this.saveChanges();
+            this.closePopup();
+          }
+          if (this.revisePage == 7) {
             Swal.fire({
               title: "修改成功",
               icon: "success",
@@ -123,20 +161,69 @@ export default {
     // },
 
     saveChanges() {
-      fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkAccess/accessRevise.php`, {
-        // mode: "cors",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // Search: this.placeholder[id].search,
-          // Input: this.input,
-          reviseBd: this.reviseBd,
-          // Start: this.startDate,
-          // End: this.endDate,
-        }),
-      });
+      console.log(this.revisePage);
+      if (this.revisePage === 1) {
+        fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkAccess/accessRevise.php`, {
+          // mode: "cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            reviseBd: this.reviseBd,
+          }),
+        });
+      } else if (this.revisePage === 3) {
+        fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkShop/shopRevise.php`, {
+          // mode: "cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            reviseBd: this.reviseBd,
+          }),
+        });
+      } else if (this.revisePage === 5) {
+        fetch(
+          `${import.meta.env.VITE_PHP_PATH}Bk/BkProduct/productRevise.php`,
+          {
+            // mode: "cors",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              reviseBd: this.reviseBd,
+            }),
+          }
+        );
+      } else if (this.revisePage === 6) {
+        fetch(
+          `${import.meta.env.VITE_PHP_PATH}Bk/BkDiscount/discountRevise.php`,
+          {
+            // mode: "cors",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              reviseBd: this.reviseBd,
+            }),
+          }
+        );
+      } else if (this.revisePage === 7) {
+        fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkFaq/faqRevise.php`, {
+          // mode: "cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            reviseBd: this.reviseBd,
+          }),
+        });
+      }
     },
 
     saveChangeDelete() {
@@ -225,22 +312,31 @@ export default {
 
   ul {
     li {
-      display: flex;
+      // display: flex;
       justify-content: space-between;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
 
       h4 {
         height: 30px;
         text-align: left;
-        background-color: $DarkBrown;
-        color: $White;
+        // background-color: $DarkBrown;
+        color: $DarkBrown;
         padding: 0 12px;
-        padding-left: 6px;
+        padding-left: 0px;
+        font-weight: bold;
       }
 
       input {
         // margin-left: 16px;
       }
+    }
+    .product {
+      text-align: left;
+      color: #7a625b;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
     }
   }
 }
@@ -277,7 +373,11 @@ export default {
 }
 
 .btn-secondary {
-  background-color: #6c757d;
+  background-color: rgb(132, 132, 132);
+  &:hover {
+    background-color: rgb(221, 51, 51);
+    color: $White;
+  }
 }
 
 .brevise {

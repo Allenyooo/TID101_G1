@@ -32,7 +32,7 @@
     $data = $statement->fetchAll();
 
 
-    $sql2 = "select * from CART;";
+    $sql2 = "select * from CART";
 
     $statement2 = $pdo->prepare($sql2);
     $statement2->execute();

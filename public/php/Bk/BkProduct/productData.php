@@ -30,8 +30,8 @@
     $statement->execute();
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-
-        $sql2 = "SELECT PRODUCT.ID as 編號,PRICE as 價格, PERCENT as 折扣,round(PRICE * PERCENT) as 折扣後價格 ,STARTDATE as 折扣開始日期,ENDDATE as 折扣結束日期,PIC as 商品圖片
+    // PIC as 商品圖片
+        $sql2 = "SELECT PRODUCT.ID as 編號,PRICE as 價格, PERCENT as 折扣,round(PRICE * PERCENT) as 折扣後價格 ,STARTDATE as 折扣開始日期,ENDDATE as 折扣結束日期
                  from  PRODUCT
                  join DISCOUNT on PRODUCT.DISCOUNT_ID = DISCOUNT.ID";
 
@@ -41,7 +41,7 @@
 
 
 
-        $sql3 = "SELECT ID , status from PRODUCT";
+        $sql3 = "SELECT ID , STATUS from PRODUCT";
 
     $statement3 = $pdo->prepare($sql3);
     $statement3->execute();
