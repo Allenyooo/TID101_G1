@@ -1,8 +1,8 @@
 <?php
     include("../conn.php");
-    header("Access-Control-Allow-Origin: *");
-    // header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Headers: Content-Type");
+    // header("Access-Control-Allow-Origin: *");
+    // // header("Content-Type: application/json; charset=UTF-8");
+    // header("Access-Control-Allow-Headers: Content-Type");
     
 
 
@@ -29,23 +29,53 @@
         $memberID = $shoppingCart['memberID'];
         $productID = $shoppingCart['productID'];
         $count = $shoppingCart['cartCount'];
-     
-    
-    $sql = "INSERT into
-            CART
-            values
-            (?,?,?,?)";
 
-    
-    $statement = $pdo->prepare($sql);
-    $statement->bindValue(1 , $shoppingCartID);
-    $statement->bindValue(2 , $memberID);
-    $statement->bindValue(3 , $productID);
-    $statement->bindValue(4 , $count);
 
-    $statement->execute();
+        $sqlS = "SELECT * FROM CART
+                where MEMBER_ID = ? and PRODUCT_ID = ?";
+        
+        $stateS = $pdo -> prepare($sqlS);
+        $stateS -> bindValue(1, $memberID);
+        $stateS -> bindValue(2, $productID);
+        $stateS -> execute();
+        $data = $stateS -> fetchAll(PDO::FETCH_ASSOC);
 
-    echo   $shoppingCartID;
+        print_r($data);
+        echo $data[0]["COUNT"];
+        
+        if(count($data) > 0){
+            $cartCount = settype($data[0]["COUNT"], "int");
+            echo $cartCount;
+            $totalCount = $cartCount + $count;
+            echo $totalCount;
+            echo $count;
+
+
+            $sqlU = "UPDATE CART SET COUNT = ?
+                     WHERE MEMBER_ID = ? AND PRODUCT_ID = ?";
+
+            $stateU = $pdo -> prepare($sqlU);
+            $stateU -> bindValue(1, $totalCount);
+            $stateU -> bindValue(2, $memberID);
+            $stateU -> bindValue(3, $productID);
+            $stateU -> execute();
+
+            echo $shoppingCartID;
+
+        }else{
+            $sql = "INSERT into CART(MEMBER_ID, PRODUCT_ID, COUNT)
+                    values (?,?,?)";
+            
+            $statement = $pdo->prepare($sql);
+            // $statement->bindValue(1 , $shoppingCartID);
+            $statement->bindValue(1 , $memberID);
+            $statement->bindValue(2 , $productID);
+            $statement->bindValue(3 , $count);
+        
+            $statement->execute();
+        
+            echo $shoppingCartID;
+        }
 
 
     // foreach($data as $index => $row){

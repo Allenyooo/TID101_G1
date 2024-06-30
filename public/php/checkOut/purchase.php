@@ -19,7 +19,8 @@
                     on p.ID = c.PRODUCT_ID
                 join DISCOUNT as d
                     on p.DISCOUNT_ID = d.ID
-            WHERE c.MEMBER_ID = ?";
+            WHERE c.MEMBER_ID = ?
+            order by price";
     
     $statement = $pdo->prepare($sql);
     $statement->bindValue(1, $purchase['memberId']);

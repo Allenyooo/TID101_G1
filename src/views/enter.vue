@@ -1,6 +1,7 @@
 <template>
     <div class="enter_body">
-        <section class="enter_cut1">
+        <section :class="['enter_cut1', { 'hide-scroll': isScrolled }]">
+            
             <div class="enter_cut1_open">
                 <div class="cut1_door">
                     <img
@@ -88,6 +89,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default {
     mounted() {
+        window.addEventListener('scroll', this.handleScroll);
+        
         let cut1 = gsap.timeline({
             scrollTrigger: {
                 trigger: ".enter_cut1",
@@ -409,13 +412,26 @@ export default {
                 "<+=4"
             )
 
-            .to(".enter_emperor", {
-                onComplete: () => {
-                    window.location.href = import.meta.env.BASE_URL + "home";
-                    // this.$router.push('/home');
-                },
-            });
+            // .to(".enter_emperor", {
+            //     onComplete: () => {
+            //         window.location.href = import.meta.env.BASE_URL + "home";
+            //         // this.$router.push('/home');
+            //     },
+            // });
     },
+    data(){
+        return{
+            isScrolled: false
+        }
+    },
+    beforeDestroy() {
+        window.removeEventListener('scroll', this.handleScroll);
+    },
+    methods: {
+        handleScroll() {
+            this.isScrolled = window.scrollY > 0;
+        }
+    }
 };
 </script>
 
@@ -442,7 +458,7 @@ export default {
         overflow: hidden;
         position: relative;
         z-index: 49;
-        ::before{
+        & ::before{
             content: "";
             position: absolute;
             top: 50%;
@@ -453,7 +469,7 @@ export default {
             height: 90px;
             border-radius: 90px;
             background-color: rgba($color: $Black, $alpha: 0.6);
-            animation: scrolldown 1.2s 1s linear 2;
+            animation: scrolldown 4.8s linear infinite;
         }
 
         @keyframes scrolldown {
@@ -461,12 +477,36 @@ export default {
                 opacity: 1;
             }
 
-            100%{
+            35%{
                 opacity: 1;
+            }
+
+            45%{
+                opacity: 0;
+            }
+
+            50%{
+                opacity: 0;
+            }
+
+            51%{
+                opacity: 1;
+            }
+
+            85%{
+                opacity: 1;
+            }
+
+            95%{
+                opacity: 0;
+            }
+
+            100%{
+                opacity: 0;
             }
         }
 
-        ::after{
+        & ::after{
             content: "";
             position: absolute;
             top: 50%;
@@ -476,7 +516,7 @@ export default {
             width: 10px;
             height: 10px;
             background-color: #fff;
-            animation: scrollDown 1.2s 1s linear 2;
+            animation: scrollDown 1.2s linear infinite;
             opacity: 0;
         }
 
@@ -486,11 +526,23 @@ export default {
                 opacity: 1;
             }
 
+            50%{
+                top: 50%;
+                opacity: 0;
+            }
+
             100%{
-                top: 54%;
+                top: 46%;
                 opacity: 0;
             }
         }
+
+        &.hide-scroll {
+            & ::before, & ::after {
+                display: none;
+            }
+        }
+
         .enter_cut1_open {
             // width: 95vw;
             // height: 95vh;

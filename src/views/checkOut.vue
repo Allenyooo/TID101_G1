@@ -169,37 +169,40 @@ export default {
             if(this.cardHint == ""){
                 this.dateVerify;
                 if(this.cardHint == ""){
-                    fetch(
-                        // "http://localhost/tid101_g1/public/php/checkOut/submitOrder.php"
-                        `${import.meta.env.VITE_PHP_PATH}checkOut/submitOrder.php`,
-                        {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                promoCode: this.promoCode,
-                                usedtimes: this.usedtimes,
-                                payment: this.payment,
-                                memberId: this.memberId,
-                                tickets: this.tickets,
-                                totalQty: this.totalQty,
-                                amount: this.amount,
-                                subtotal: this.subtotal,
-                            }),
-                        }
-                    )
-                        .then((resp) => resp.json())
-                        .then((orderID) => {
-                            // console.log(orderID);
-                            this.orderID = orderID;
-                            console.log(this.orderID);
-                            this.setCookie("orderID", this.orderID, 7);
-                        })
-                        .then(this.checkOut)
-                        .catch((error) => {
-                            console.log("Error:", error);
-                        });
+                    this.securityVerify;
+                    if(this.cardHint == ""){
+                        fetch(
+                            // "http://localhost/tid101_g1/public/php/checkOut/submitOrder.php"
+                            `${import.meta.env.VITE_PHP_PATH}checkOut/submitOrder.php`,
+                            {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                    promoCode: this.promoCode,
+                                    usedtimes: this.usedtimes,
+                                    payment: this.payment,
+                                    memberId: this.memberId,
+                                    tickets: this.tickets,
+                                    totalQty: this.totalQty,
+                                    amount: this.amount,
+                                    subtotal: this.subtotal,
+                                }),
+                            }
+                        )
+                            .then((resp) => resp.json())
+                            .then((orderID) => {
+                                // console.log(orderID);
+                                this.orderID = orderID;
+                                console.log(this.orderID);
+                                this.setCookie("orderID", this.orderID, 7);
+                            })
+                            .then(this.checkOut)
+                            .catch((error) => {
+                                console.log("Error:", error);
+                            });
+                    }
                 }
             }
         },
@@ -228,7 +231,7 @@ export default {
                 totalQty += ticket.qty;
             });
             this.totalQty = totalQty;
-            return totalQty;
+            return this.totalQty;
         },
 
         expDate() {
@@ -288,43 +291,56 @@ export default {
             let month = today.getMonth() + 1;
             // console.log(month+"/"+year);
 
-            if(expiryYear < year){
-                this.cardHint = "請輸入正確有效期限";
-            }else if(expiryMonth < month && expiryYear == year){
-                this.cardHint = "請輸入正確有效期限";
+            if( 0 < expiryMonth && expiryMonth <= 12 ){
+                if(expiryYear < year){
+                    this.cardHint = "";
+                    this.cardHint = "請輸入正確有效期限";
+                }else if(expiryMonth < month && expiryYear == year){
+                    this.cardHint = "";
+                    this.cardHint = "請輸入正確有效期限";
+                }else{
+                    this.cardHint = "";
+                }
             }else{
                 this.cardHint = "";
+                this.cardHint = "請輸入正確有效期限";
             }
 
         },
         numberVerify(){
             let cardNumber = this.cardNumber;
+            cardNumber = cardNumber.replace(/\D/g, '');
             let numberLength = cardNumber.length;
             if(numberLength < 16 || numberLength > 16){
                 this.cardHint = "請輸入有效卡號";
             }else{
                 let topFifteen = cardNumber.slice(0,15);
-                // console.log(topFifteen);
-                let lastDigit = parseInt(cardNumber.slice(-1));
-                let numbers = topFifteen.split('');
-                // console.log(numbers);
-                let newFifteens = numbers.map(number =>{
-                    let number2 = number * 2;
-                    if(number2 > 9){
-                        let number3 = parseInt(number2.toString().slice(0,1)) + parseInt(number2.toString().slice(-1));
-                        // number3 = parseInt(number3);
-                        return number3;
-                    }else{
-                        return number2;
+                console.log(topFifteen);
+                let lastDigit = parseInt(cardNumber.toString().slice(-1));
+                console.log(lastDigit);
+                let numbers = topFifteen.split('').reverse();
+                console.log(numbers);
+                let newFifteens = numbers.map((number,index) =>{
+                    if((index + 1) % 2 === 1){
+                        let number2 = number * 2;
+                        if(number2 > 9){
+                            let number3 = parseInt(number2.toString().slice(0,1)) + parseInt(number2.toString().slice(-1));
+                            // number3 = parseInt(number3);
+                            return number3;
+                        }else{
+                            return number2;
+                        }
+                    } else {
+                        return parseInt(number);
                     }
                 });
-                // console.log(newFifteen);
+                console.log(newFifteens);
                 let plus = newFifteens.reduce((acc, newFifteen) => acc + newFifteen , 0);
-                // console.log(plus);
+                console.log(plus);
                 let plus9 = plus * 9;
-                // console.log(plus9);
+                console.log(plus9);
                 let lastStep = parseInt(plus9.toString().slice(-1));
-                // console.log(lastStep);
+                console.log(lastStep);
                 if(lastStep !== lastDigit){
                     this.cardHint = "";
                     this.cardHint = "請輸入有效卡號";
@@ -334,7 +350,22 @@ export default {
                     console.log("通過");
                 }
             }
+        },
+        securityVerify(){
+            let securityCode = this.securityCode;
+            securityCode = securityCode.replace(/\D/g, '');
+            console.log(securityCode);
+            let securityLength = securityCode.length;
+            console.log(securityLength);
+
+            if(securityCode == null || securityLength !== 3){
+                this.cardHint = "";
+                this.cardHint = "請輸入有效安全碼";
+            }else{
+                this.cardHint = "";
+            }
         }
+
     },
 };
 </script>
@@ -973,7 +1004,7 @@ export default {
     padding: 12px 0 16px 16px;
     font-family: $fontFamily;
     position: relative;
-    z-index: 5;
+    z-index: 2;
     h4 {
         padding-left: 8px;
         font-weight: bold;
