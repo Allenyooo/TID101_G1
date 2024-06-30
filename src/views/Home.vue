@@ -815,7 +815,6 @@
 			// ScrollTrigger.removeEventListener("scroll", ScrollTrigger.update);
 		},
 		mounted() {
-			console.log("ddd");
 			gsap.registerPlugin(ScrollTrigger);
 
 			let tl = gsap.timeline({
@@ -873,26 +872,26 @@
 				},
 			});
 
-			tls.from(".home_cloud1, .home_cloud2, .home_cloud3", {
-				opacity: 0,
-				x: 200,
+			tls.to(".home_cloud1, .home_cloud2, .home_cloud3", {
+				opacity: 1,
+				x: -200,
 				stagger: 0.02,
 			})
-				.from(
+				.to(
 					".home_flower, .home_lion, .home_path, .home_pot, .home_lamp, .home_drum, .home_statue",
 					{
-						opacity: 0,
-						scale: 0,
+						opacity: 1,
+						scale: 1,
 						stagger: 0.03,
 					},
 					"<+=0.1"
 				)
-				.from(
+				.to(
 					".home_introWord1 h2",
 					{
-						opacity: 0,
+						opacity: 1,
 						stagger: 0.05,
-						y: 50,
+						y: -50,
 					},
 					"<"
 				)
@@ -916,10 +915,10 @@
 					},
 					"<"
 				)
-				.from(
+				.to(
 					".home_introWord2",
 					{
-						opacity: 0,
+						opacity: 1,
 					},
 					"<+0.2"
 				)
@@ -968,7 +967,7 @@
 				.to(
 					".home_cloud3",
 					{
-						x: -100,
+						x: -380,
 					},
 					"<"
 				)
@@ -986,12 +985,11 @@
 					},
 					"<"
 				)
-				.from(
+				.to(
 					".home_introWord2 h4, .home_introWord2 h3",
 					{
-						opacity: 0,
+						opacity: 1,
 						stagger: 0.03,
-						duration: 0.7,
 						delay: 0.2,
 					},
 					"<"
@@ -1459,15 +1457,15 @@
 	.home_intro {
 		position: relative;
 		width: 100vw;
-		// min-height: 100vh;
 		height: 100vh;
 		.home_cloud1 {
 			width: 235px;
 			height: 82px;
 			position: absolute;
 			top: 3vh;
-			right: 12vw;
+			right: calc(12vw - 200px);
 			z-index: 1;
+			opacity: 0;
 			@include breakpoint(820px) {
 				width: 20vw;
 			}
@@ -1477,8 +1475,9 @@
 			height: 93px;
 			position: absolute;
 			top: 24vh;
-			left: 7vw;
+			left: calc(7vw + 200px);
 			z-index: 1;
+			opacity: 0;
 			@include breakpoint(820px) {
 				width: 25vw;
 			}
@@ -1488,8 +1487,9 @@
 			height: 71px;
 			position: absolute;
 			top: 68vh;
-			left: 21vw;
+			left: calc(21vw + 200px);
 			z-index: 1;
+			opacity: 0;
 			@include breakpoint(820px) {
 				width: 20vw;
 			}
@@ -1504,35 +1504,49 @@
 		.home_flower {
 			top: 12vh;
 			left: 17vw;
+			opacity: 0;
+			scale: 0;
 		}
 		.home_lion {
 			top: 7vh;
 			right: 22vw;
+			opacity: 0;
+			scale: 0;
 		}
 		.home_path {
 			top: 42vh;
 			left: 3vw;
+			opacity: 0;
+			scale: 0;
 		}
 		.home_pot {
 			top: 36vh;
 			right: 14vw;
+			opacity: 0;
+			scale: 0;
 		}
 		.home_lamp {
 			top: 55vh;
 			right: 3vw;
+			opacity: 0;
+			scale: 0;
 		}
 		.home_drum {
 			top: 74vh;
 			left: 22vw;
+			opacity: 0;
+			scale: 0;
 		}
 		.home_statue {
 			top: 80vh;
 			right: 26vw;
+			opacity: 0;
+			scale: 0;
 		}
 		.home_introWord1 {
 			display: flex;
 			position: absolute;
-			top: 50%;
+			top: calc(50% + 50px);
 			left: 50%;
 			transform: translate(-50%, -50%);
 			margin: auto;
@@ -1541,6 +1555,7 @@
 				writing-mode: vertical-lr;
 				line-height: 150%;
 				color: $Black;
+				opacity: 0;
 				&:last-child {
 					padding-top: 44px;
 				}
@@ -1562,11 +1577,12 @@
 			margin: auto;
 			transform: translate(-50%, 50%);
 			box-sizing: content-box;
-			// opacity: 0;
+			opacity: 0;
 			h4 {
 				color: $Black;
 				text-align: center;
 				font-size: 1.2vw;
+				opacity: 0;
 				@include breakpoint(1280px) {
 					font-size: 1.5vw;
 				}
@@ -1586,6 +1602,7 @@
 				background: $RevGoldGrad;
 				background-clip: text;
 				-webkit-text-fill-color: transparent;
+				opacity: 0;
 				@include breakpoint(1280px) {
 					font-size: 2.4vw;
 				}
@@ -2007,7 +2024,7 @@
 						transition: opacity 0.3s;
 
 						.home_card_title {
-							width: 30%;
+							width: 40%;
 							background-color: $Gold;
 							margin: 24px auto 16px;
 							border-radius: 10px;
@@ -2020,6 +2037,8 @@
 								color: $OffWhite;
 								line-height: 143%;
 								font-size: 1.7vw;
+								padding: 4px 0;
+								text-wrap: nowrap;
 								@include breakpoint(820px) {
 									font-size: 2.5vw;
 								}
@@ -2029,7 +2048,7 @@
 							}
 						}
 						img {
-							width: 22vw;
+							width: 80%;
 							border-radius: 20px;
 							@include breakpoint(820px) {
 								width: 30vw;

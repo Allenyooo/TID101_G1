@@ -25,7 +25,7 @@
 					<div class="box1">
 						<img
 							ref="preview"
-							:src="imageSrc ? imageSrc : detail.PHOTO"
+							:src="imageSrc? imageSrc : (detail.PHOTO === null? '/tid101/g1/src/assets/Image/member/Person.png' : detail.PHOTO)"
 							alt="profile pic"
 							id="profilePic"
 						/>
@@ -461,31 +461,25 @@
 				<tbody>
 					<tr v-for="order in orders" :key="order.ID">
 						<td>
-							<router-link to="/receipt?">{{
-								order.ID
-							}}</router-link>
+							<router-link
+								@click.native="setOrderIdCookie(order.ID)"
+								:to="`/receipt`"
+								>{{ order.ID }}</router-link
+							>
 						</td>
 						<td>{{ order.ORDERDATE }}</td>
 						<td>{{ getEndDate(order.ORDERDATE) }}</td>
 						<td>僅限使用一次</td>
 					</tr>
 				</tbody>
-				<!-- <tr>
-					<td>
-						<router-link to="/receipt">24EAE33432</router-link>
-					</td>
-					<td>2024/07/02</td>
-					<td>2025/07/02</td>
-					<td>僅限使用一次</td>
-				</tr> -->
 			</table>
 		</section>
 
 		<div class="buttons">
-			<button class="return" @click="logout">登出</button>
 			<router-link to="/Home" class="btn btn-primary return"
 				>返回首頁</router-link
 			>
+			<button class="logout" @click="logout">登出</button>
 		</div>
 	</div>
 </template>
@@ -534,6 +528,10 @@
 			};
 		},
 		methods: {
+			setOrderIdCookie(orderID) {
+				document.cookie = `orderID=${orderID};path=/`;
+			},
+
 			logout() {
 				document.cookie =
 					"memberId=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
@@ -836,7 +834,7 @@
 				}
 			},
 		},
-		mounted() {
+		created() {
 			this.fetchDetails();
 			this.fetchShops();
 			this.fetchOrders();
@@ -1492,10 +1490,6 @@
 			width: 83vw;
 			margin: 0 auto 4vh;
 
-			@include breakpoint(1280px) {
-				// height: 22vh;
-			}
-
 			@include breakpoint(820px) {
 				width: 76vw;
 			}
@@ -1505,11 +1499,6 @@
 				background-color: #f6f1ed;
 				border-radius: 0px;
 				font-size: 16px;
-				height: 47vw;
-			}
-
-			@include breakpoint(390px) {
-				height: 50vw;
 			}
 
 			h4 {
@@ -1573,13 +1562,6 @@
 					td {
 						color: $Black;
 
-						@include breakpoint(820px) {
-						}
-
-						@include breakpoint(796px) {
-							padding-left: 4vw;
-						}
-
 						@include breakpoint(430px) {
 							font-size: 14px;
 							text-align: center;
@@ -1601,6 +1583,26 @@
 			gap: 40px;
 
 			.return {
+				display: block;
+				width: 203px;
+				height: 64px;
+				background-color: $Gold;
+				border-radius: 20px;
+				font-size: 20px;
+				color: $White;
+				border: 4px solid $Gold;
+				text-align: center;
+				line-height: 60px;
+				margin-bottom: 4vh;
+
+				@include breakpoint(430px) {
+					font-size: 16px;
+					width: 132px;
+					height: 42px;
+					line-height: 36px;
+				}
+			}
+			.logout {
 				display: block;
 				width: 203px;
 				height: 64px;

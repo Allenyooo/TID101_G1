@@ -15,7 +15,7 @@ try {
     $newId = $latestId + 1;
 
     // Prepare the INSERT statement
-    $sql = "INSERT INTO MEMBER (ID, NAME, MAIL, PASSWORD, BIRTHDAY, JOINDATE, LASTLOGIN, STATUS, PHOTO) VALUES (:id, :name, :mail, :pw, :birthday, NOW(), NOW(), '正常', :photo)";
+    $sql = "INSERT INTO MEMBER (ID, NAME, MAIL, PASSWORD, BIRTHDAY, JOINDATE, LASTLOGIN, STATUS) VALUES (:id, :name, :mail, :pw, :birthday, NOW(), NOW(), '正常')";
     $statement = $pdo->prepare($sql);
     $statement->bindParam(":id", $newId);
     $statement->bindParam(":name", $member["name"]);
