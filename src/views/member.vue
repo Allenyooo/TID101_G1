@@ -1349,7 +1349,7 @@
 				@include breakpoint(430px) {
 					font-size: 16px;
 					width: 100%;
-					margin: 0vh auto 2vh;
+					// margin: 10px 9px;
 				}
 
 				@include breakpoint(390px) {
