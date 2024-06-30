@@ -30,21 +30,26 @@
 
 
 
-    $sql3 = "SELECT ID , status from MEMBER";
+    $sql3 = "SELECT ID , STATUS from MEMBER";
 
     $statement3 = $pdo->prepare($sql3);
     $statement3->execute();
     $data3 = $statement3->fetchAll(PDO::FETCH_ASSOC);
 
 
+    $sql4 = "SELECT ID , STATUS from MEMBER";
 
+    $statement4 = $pdo->prepare($sql4);
+    $statement4->execute();
+    $data4 = $statement4->fetchAll(PDO::FETCH_ASSOC);
 
 
 
     $allData = array(
         "data" => $data,
        
-        "data3" => $data3
+        "data3" => $data3,
+        "data4" => $data4,
     );
     
 

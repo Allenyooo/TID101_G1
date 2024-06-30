@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="revisePage == 1">
     <div class="reviseButton">
       <button class="btn btn-primary brevise" @click="showPopup = true">
         <h5>新增操作人員帳號</h5>
@@ -50,6 +50,150 @@
     </div>
   </div>
 
+  <div v-if="revisePage == 3">
+    <div class="reviseButton">
+      <button class="btn btn-primary brevise" @click="showPopup = true">
+        <h5>新增店家</h5>
+      </button>
+    </div>
+
+    <!-- 彈出視窗 -->
+    <div v-if="showPopup" class="popup">
+      <div class="popup-content">
+        <!-- 右上角關閉按鈕 -->
+        <button class="close-btn" @click="closePopup">&times;</button>
+        <!-- 彈出視窗內容 -->
+
+        <ul>
+          <li>
+            <h4>編號:</h4>
+            <input type="text" class="idBg" :Value="newId + 1" readonly />
+          </li>
+          <li>
+            <h4>店家名稱:</h4>
+            <input type="text" v-model="name" />
+          </li>
+          <li>
+            <h4>地區:</h4>
+            <input type="text" v-model="region" />
+          </li>
+        </ul>
+        <!-- <div>{{ reviseBd.ID }}</div>
+          <div>{{ reviseBd.NAME }}</div>
+          <div>{{ reviseBd.MAIL }}</div>
+          <div>{{ reviseBd.PASSWORD }}</div> -->
+        <!-- 底部按鈕 -->
+        <div class="buttons">
+          <button class="btn btn-primary" @click="showConfirmationDialog">
+            新增
+          </button>
+          <button class="btn btn-secondary" @click="cancelPopup">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div v-if="revisePage == 6">
+    <div class="reviseButton">
+      <button class="btn btn-primary brevise" @click="showPopup = true">
+        <h5>新增折價券</h5>
+      </button>
+    </div>
+
+    <!-- 彈出視窗 -->
+    <div v-if="showPopup" class="popup">
+      <div class="popup-content">
+        <!-- 右上角關閉按鈕 -->
+        <button class="close-btn" @click="closePopup">&times;</button>
+        <!-- 彈出視窗內容 -->
+
+        <ul>
+          <li>
+            <h4>編號:</h4>
+            <input type="text" class="idBg" :Value="newId + 1" readonly />
+          </li>
+          <li>
+            <h4>名稱:</h4>
+            <input type="text" v-model="name" />
+          </li>
+          <li>
+            <h4>折抵金額:</h4>
+            <input type="text" v-model="price" />
+          </li>
+          <li>
+            <h4>序號:</h4>
+            <input type="text" v-model="code" />
+          </li>
+          <li>
+            <h4>開始日期:</h4>
+            <input type="text" v-model="start" />
+          </li>
+          <li>
+            <h4>結束日期:</h4>
+            <input type="text" v-model="end" />
+          </li>
+        </ul>
+        <!-- <div>{{ reviseBd.ID }}</div>
+          <div>{{ reviseBd.NAME }}</div>
+          <div>{{ reviseBd.MAIL }}</div>
+          <div>{{ reviseBd.PASSWORD }}</div> -->
+        <!-- 底部按鈕 -->
+        <div class="buttons">
+          <button class="btn btn-primary" @click="showConfirmationDialog">
+            新增
+          </button>
+          <button class="btn btn-secondary" @click="cancelPopup">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div v-if="revisePage == 7">
+    <div class="reviseButton">
+      <button class="btn btn-primary brevise" @click="showPopup = true">
+        <h5>新增問答</h5>
+      </button>
+    </div>
+
+    <!-- 彈出視窗 -->
+    <div v-if="showPopup" class="popup">
+      <div class="popup-content">
+        <!-- 右上角關閉按鈕 -->
+        <button class="close-btn" @click="closePopup">&times;</button>
+        <!-- 彈出視窗內容 -->
+
+        <ul>
+          <li>
+            <h4>編號:</h4>
+            <input type="text" class="idBg" :Value="newId + 1" readonly />
+          </li>
+          <li>
+            <h4>分類:</h4>
+            <input type="text" v-model="type" />
+          </li>
+          <li>
+            <h4>問題標題:</h4>
+            <input type="text" v-model="question" />
+          </li>
+          <li>
+            <h4>回答內容:</h4>
+            <input type="text" v-model="answer" />
+          </li>
+        </ul>
+        <!-- <div>{{ reviseBd.ID }}</div>
+          <div>{{ reviseBd.NAME }}</div>
+          <div>{{ reviseBd.MAIL }}</div>
+          <div>{{ reviseBd.PASSWORD }}</div> -->
+        <!-- 底部按鈕 -->
+        <div class="buttons">
+          <button class="btn btn-primary" @click="showConfirmationDialog">
+            新增
+          </button>
+          <button class="btn btn-secondary" @click="cancelPopup">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- ---- -->
 </template>
 
@@ -70,6 +214,14 @@ export default {
       mail: "",
       password: "",
       access: "",
+      region: "",
+      price: "",
+      code: "",
+      start: "",
+      end: "",
+      type: "",
+      question: "",
+      answer: "",
     };
   },
 
@@ -92,6 +244,30 @@ export default {
               icon: "success",
             });
             this.newChange();
+            this.closePopup();
+          }
+          if (this.revisePage == 3) {
+            Swal.fire({
+              title: "修改成功",
+              icon: "success",
+            });
+            this.newChange2();
+            this.closePopup();
+          }
+          if (this.revisePage == 6) {
+            Swal.fire({
+              title: "修改成功",
+              icon: "success",
+            });
+            this.newChange3();
+            this.closePopup();
+          }
+          if (this.revisePage == 7) {
+            Swal.fire({
+              title: "修改成功",
+              icon: "success",
+            });
+            this.newChange4();
             this.closePopup();
           }
         } else {
@@ -159,6 +335,55 @@ export default {
           newMail: this.mail,
           newPassword: this.password,
           newAccess: this.access,
+        }),
+      });
+    },
+
+    newChange2() {
+      fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkShop/shopNew.php`, {
+        // mode: "cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          newId: this.newId + 1,
+          newName: this.name,
+          newRegion: this.region,
+        }),
+      });
+    },
+
+    newChange3() {
+      fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkDiscount/discountNew.php`, {
+        // mode: "cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          newId: this.newId + 1,
+          newName: this.name,
+          newPrice: this.price,
+          newCode: this.code,
+          newStart: this.start,
+          newEnd: this.end,
+        }),
+      });
+    },
+
+    newChange4() {
+      fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkFaq/faqNew.php`, {
+        // mode: "cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          newId: this.newId + 1,
+          newType: this.type,
+          newQuestion: this.question,
+          newAnswer: this.answer,
         }),
       });
     },
@@ -230,17 +455,18 @@ export default {
 
   ul {
     li {
-      display: flex;
+      // display: flex;
       justify-content: space-between;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
 
       h4 {
         height: 30px;
         text-align: left;
-        background-color: $DarkBrown;
-        color: $White;
+        // background-color: $DarkBrown;
+        color: $DarkBrown;
         padding: 0 12px;
-        padding-left: 6px;
+        padding-left: 0px;
+        font-weight: bold;
       }
 
       input {
@@ -263,6 +489,10 @@ export default {
   font-size: 24px;
   cursor: pointer;
   color: #888;
+  margin: 0 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 .buttons {
@@ -274,7 +504,7 @@ export default {
   padding: 1px 6px;
   cursor: pointer;
   border-radius: 0;
-  border: 1.5px solid black;
+
   background-color: $White;
 
   &:hover {
@@ -285,14 +515,43 @@ export default {
 
 .btn-primary {
   background-color: #007bff;
+  margin: 0 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #2852ab;
+    color: $White;
+  }
 }
 
 .btn-secondary {
-  background-color: #6c757d;
+  background-color: rgb(132, 132, 132);
+  margin: 0 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: rgb(221, 51, 51);
+    color: $White;
+  }
 }
 
 .brevise {
   background-color: white;
+  margin: 0 5px;
+  padding: 1px 6px;
+  cursor: pointer;
+  border-radius: 0;
+  border: 1.5px solid black;
+  background-color: $White;
+
+  &:hover {
+    background-color: $Gold;
+    color: $White;
+  }
 }
 
 // ----------------

@@ -22,7 +22,7 @@
 
         // $ID = 6;
     
-        $Bkstate = json_decode(file_get_contents("php://input"), true);
+        $Bknew = json_decode(file_get_contents("php://input"), true);
 
         // $Input = $Bksearh['Input'];
         // $BkInput = '%'.$Input.'%';
@@ -30,23 +30,23 @@
         // $Start = $Bksearh['Start'];
         // $End = $Bksearh['End'];
 
-        $BkstateID = $Bkstate['STATEID'];
-        $BkstateNew = $Bkstate['NEWSTATE'];
-   
+        $BknewID = $Bknew['newId'];
+        $BknewName = $Bknew['newName'];
+        $BknewRegion = $Bknew['newRegion'];
+  
        
 
         
-        $sql = "UPDATE
-				MANAGER
-                set
-				STATUS = ?
-				where ID = ?";
+        $sql = "INSERT into
+                STORE
+                values
+                (?,?,?,'上架',null)";
 
             $statement = $pdo->prepare($sql);
-            $statement->bindValue(1 , $BkstateNew);
-            $statement->bindValue(2 , $BkstateID);
-       
-       
+            $statement->bindValue(1 , $BknewID);
+            $statement->bindValue(2 , $BknewName);
+            $statement->bindValue(3 , $BknewRegion);
+   
 
             $statement->execute();
 

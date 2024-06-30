@@ -76,76 +76,75 @@ export default {
       }
     },
     async makeLoginRequest() {
-        try {
-            const response = await fetch(
-                `${import.meta.env.VITE_PHP_PATH}Bk/BkLogin.php`, 
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        account: this.bkAccount,
-                        password: this.bkPassword,
-                    }),
-                }
-            );
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_PHP_PATH}Bk/BkLogin.php`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              account: this.bkAccount,
+              password: this.bkPassword,
+            }),
+          }
+        );
 
-            console.log("Response status:", response.status);
+        console.log("Response status:", response.status);
 
-            const data = await response.json();
-            console.log("Response data:", data);
-            this.handleLoginResponse(data);
-
-        } catch (error) {
-            console.error("Error logging in:", error);
-            console.error("Error message:", error.message);
-            if (error.response) {
-                console.error("Error response:", error.response);
-            }
-            if (error.request) {
-                console.error("Error request:", error.request);
-            }
-            this.errors.account = "An unknown error occurred";
+        const data = await response.json();
+        console.log("Response data:", data);
+        this.handleLoginResponse(data);
+      } catch (error) {
+        console.error("Error logging in:", error);
+        console.error("Error message:", error.message);
+        if (error.response) {
+          console.error("Error response:", error.response);
         }
+        if (error.request) {
+          console.error("Error request:", error.request);
+        }
+        this.errors.account = "An unknown error occurred";
+      }
     },
 
     handleLoginResponse(data) {
-        if (data.success) {
-            const managerId = data.managerId;
-            this.storeToken(managerId);
-            // this.navigateToMemberRoute();
-            this.$router.push("/BkHome");
-        } else {
-            this.errors.account = "帳號或密碼不正確";
-        }
+      if (data.success) {
+        const managerId = data.managerId;
+        this.storeToken(managerId);
+        // this.navigateToMemberRoute();
+        this.$router.push("/BkHome");
+      } else {
+        this.errors.account = "帳號或密碼不正確";
+      }
     },
     storeToken(managerId) {
-        // this.setCookie("token", token);
-        this.setCookie("managerId", managerId);
-        // sessionStorage.setItem("token", token);
-        sessionStorage.setItem("managerId", managerId);
+      // this.setCookie("token", token);
+      this.setCookie("managerId", managerId);
+      // sessionStorage.setItem("token", token);
+      sessionStorage.setItem("managerId", managerId);
 
-        if (this.remember) {
-            this.setCookie("BkAccount", this.BkAccount, 30);
-            this.setCookie("BkPassword", this.BkAccount, 30);
-            this.remember = true;
-        } else {
-            this.removeCookie("BkAccount");
-            this.removeCookie("BkAccount");
-        }
+      if (this.remember) {
+        this.setCookie("BkAccount", this.BkAccount, 30);
+        this.setCookie("BkPassword", this.BkAccount, 30);
+        this.remember = true;
+      } else {
+        this.removeCookie("BkAccount");
+        this.removeCookie("BkAccount");
+      }
     },
     setCookie(name, value, days = null) {
-        let expires = "";
-        if (days) {
-            const date = new Date();
-            date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-            expires = `; expires=${date.toUTCString()}`;
-        }
-        document.cookie = `${name}=${value}; path=/${expires}`;
+      let expires = "";
+      if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        expires = `; expires=${date.toUTCString()}`;
+      }
+      document.cookie = `${name}=${value}; path=/${expires}`;
     },
     removeCookie(name) {
-        document.cookie = `${name}=; path=/; max-age=0`;
+      document.cookie = `${name}=; path=/; max-age=0`;
     },
   },
 };

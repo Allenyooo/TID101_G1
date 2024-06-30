@@ -31,9 +31,8 @@
             <button @click="searchButton(sId)"><h5>搜尋</h5></button>
           </div>
           <div class="newButton">
-            <button>
-              <h5>新增問答</h5>
-            </button>
+            <!-- <h5>新增問答</h5> -->
+            <BN :revisePage="page" :newId="lastId"></BN>
           </div>
         </div>
 
@@ -61,9 +60,10 @@ import BS from "/src/components/BkSearch.vue";
 import BD from "/src/components/BkData.vue";
 import BDate from "/src/components/BkDate.vue";
 import BSort from "/src/components/BkSort.vue";
+import BN from "/src/components/BkNew.vue";
 
 export default {
-  components: { BH, BM, BS, BD, BDate, BSort },
+  components: { BH, BM, BS, BD, BDate, BSort, BN },
 
   data() {
     return {
