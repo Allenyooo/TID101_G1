@@ -146,7 +146,12 @@
 				this.isReversed = !this.isReversed;
 			},
 			msgShow() {
-				this.popup_open = true;
+				const memberId = this.getCookie("memberId");
+				if (memberId == null) {
+					alert("請先登入");
+				} else {
+					this.popup_open = true;
+				};
 			},
 			popup_close() {
 				this.popup_open = false;
@@ -762,7 +767,7 @@
 
 		hr {
 			height: 1px;
-			width: 100%;
+			width: 99%;
 			color: $DarkBrown;
 			background-color: $DarkBrown;
 			border: 3px solid $DarkBrown;
@@ -874,11 +879,13 @@
 
 						.avatar {
 							& > img {
+								display: block;
 								width: 80px;
 								height: 80px;
 								border-radius: 50%;
 								object-fit: cover;
 								margin-right: 16px;
+								filter: drop-shadow(0 0 7px rgba(207, 81, 61, 0.4));
 							}
 						}
 

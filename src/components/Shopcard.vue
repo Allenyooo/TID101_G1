@@ -1,14 +1,7 @@
 <script>
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-import "swiper/css/effect-cards";
-import { EffectCards } from "swiper/modules";
+
 
 export default {
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
 
   props: {
     isHoverEnabled: {
@@ -33,7 +26,6 @@ export default {
     return {
       hovered: false,
       pics: "",
-      modules: [EffectCards],
     };
   },
 
@@ -195,6 +187,7 @@ li {
       @include breakpoint(1080px) {
         width: 312px;
         height: 406px;
+        
       }
     }
 
@@ -225,9 +218,10 @@ li {
       height: 202px;
       z-index: 0;
       display: none;
-      @include breakpoint(1080px) {
-        width: 312px;
-      }
+      // @include breakpoint(1080px) {
+      //   width: 312px;
+      //   height: 406px;
+      // }
     }
   }
 }
@@ -501,6 +495,7 @@ li {
   }
   @include breakpoint(1080px) {
     width: 312px;
+    height: 406px;
   }
   // @include breakpoint(830px) {
   //   margin-right: 20px;
@@ -513,11 +508,16 @@ li {
   display: block;
   @include breakpoint(1080px) {
     width: 312px;
+    height: 406px;
   }
 }
 
 .member_collection .no-hover:hover .opened {
   opacity: 0;
   //   transform: scale(0.8);
+  @include breakpoint(1080px) {
+    width: 312px;
+    height: 406px;
+  }
 }
 </style>

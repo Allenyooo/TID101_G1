@@ -281,10 +281,12 @@ section {
         }
         @include breakpoint(830px) {
             width: 100%;
+            // height: 420px;
             flex-direction: row;
-            overflow-y: auto;
+            overflow-y: unset;
             overflow-x: auto;
             align-items: baseline;
+            box-sizing: border-box;
         }
 
         &::-webkit-scrollbar {

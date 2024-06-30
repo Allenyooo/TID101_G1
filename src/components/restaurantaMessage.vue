@@ -280,11 +280,14 @@ button {
             .starbar_store {
                 margin-left: 28px;
                 margin-right: 16px;
+                margin-top: 16px;
                 font-weight: 800;
                 color: #7a625b;
             }
 
             #stars {
+                margin-top: 16px;
+
                 img {
                     width: 24px;
                     margin-left: 5px;
@@ -427,15 +430,15 @@ button {
     // margin-left: 7vw;
     margin-top: 2.5vw;
 
-    @include breakpoint(820px) {
-        margin-left: 13vw;
-        margin-top: 1.5vw;
-    }
+    // @include breakpoint(820px) {
+    //     margin-left: 13vw;
+    //     margin-top: 1.5vw;
+    // }
 
-    @include breakpoint(390px) {
-        margin-left: 22vw;
-        margin-top: 4.5vw;
-    }
+    // @include breakpoint(390px) {
+    //     margin-left: 22vw;
+    //     margin-top: 4.5vw;
+    // }
 
     .cancel {
         width: 100px;
@@ -455,6 +458,14 @@ button {
         color: #fff;
         border-radius: 9px;
         margin-left: 24px;
+    }
+
+    .share{
+        width: 100px;
+        font-weight: 800;
+        color: #7a625b;
+        margin-left: 20px;
+        margin-top: 28px;
     }
 }
 </style>
