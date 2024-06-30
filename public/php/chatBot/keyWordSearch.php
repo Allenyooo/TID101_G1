@@ -1,9 +1,5 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST');
-header("Access-Control-Allow-Headers: X-Requested-With");
-header('Content-Type: application/json');
-
+// 包含資料庫連接資訊
 include("../conn.php");
 
 try {

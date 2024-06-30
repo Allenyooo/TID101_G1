@@ -1,13 +1,6 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST');
-header("Access-Control-Allow-Headers: X-Requested-With");
-header('Content-Type: application/json');
-
-$db_host = "127.0.0.1";
-$db_user = "root";
-$db_pass = "password";
-$db_select = "TID101_G1";
+// 包含資料庫連接資訊
+include("../conn.php");
 
 $dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
 $pdo = new PDO($dsn, $db_user, $db_pass);
