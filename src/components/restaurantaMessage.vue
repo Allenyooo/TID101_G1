@@ -1,6 +1,6 @@
 <template>
     <!---評論區-->
-    <button @click="popup_open = true"></button>
+   
     <div id="pop" :class="{ active: popup_open === true }">
         <div class="concent_one">
             <div class="starbars">
@@ -76,7 +76,7 @@
             </div>
         </div>
         <div class="buttons">
-            <button class="cancel" @click="popup_close()">
+            <button class="cancel" @click="popup_close">
                 <h4>取消</h4>
             </button>
             <button class="sendout" @click="submitFile()">
@@ -92,10 +92,18 @@
 import axios from "axios";
 
 export default {
+
+    props: {
+        popup_open: {
+            type: Boolean,
+            default: false,
+        },
+    },
+
     data() {
         return {
             rating: 0,
-            popup_open: false,
+            // popup_open: false,
             rating_text: ["", "1級星", "2級星", "3級星", "4級星", "5級星"],
             isMember: false,
             isCollected: false,
@@ -174,7 +182,7 @@ export default {
             this.rating = value;
         },
         popup_close() {
-            this.popup_open = false;
+            this.$emit('close-popup');
         },
 
         fileChange(e, index) {
@@ -237,12 +245,16 @@ button {
     border: none;
     border-radius: 12px;
     filter: drop-shadow(0 0 7px rgba(207, 81, 61, 0.4));
-    z-index: 10;
-    position: fixed;
-    top: -50px;
-    left: 450px;
+    // z-index: 10;
+    // position: fixed;
+    // top: 20vh;
+    // left: 40vw;
+    width: 412px;
+    height: 625px;
     opacity: 0;
     pointer-events: none;
+    // opacity: 1;
+    // pointer-events: auto;
     transition: opacity 0.4s;
     text-align: center;
 
@@ -255,19 +267,7 @@ button {
         top: 10%;
         left: 41%;
 
-        @include breakpoint(1024px) {
-            top: 332px;
-            left: 403px;
-        }
-
-        @include breakpoint(820px) {
-            top: 213px;
-            left: 280px;
-        }
-
         @include breakpoint(390px) {
-            top: 253px;
-            left: 18px;
             width: 93vw;
         }
     }
@@ -423,8 +423,8 @@ button {
     width: 200px;
     justify-content: space-between;
     align-items: center;
-    margin: auto;
-    margin-left: 7vw;
+    margin: 0 auto;
+    // margin-left: 7vw;
     margin-top: 2.5vw;
 
     @include breakpoint(820px) {
