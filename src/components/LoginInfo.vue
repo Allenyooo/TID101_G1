@@ -8,23 +8,6 @@
 
     <h2>會員登入</h2>
 
-    <div class="login_google">
-        <button>
-            <img
-                src="../assets/Image/login/google.svg"
-                alt="google"
-                draggable="false"
-            />
-            <h5>以 Google 帳號登入</h5>
-        </button>
-    </div>
-
-    <div class="login_or">
-        <div class="line"></div>
-        <h4>或</h4>
-        <div class="line"></div>
-    </div>
-
     <form @submit.prevent="makeLoginRequest" method="post" action="login.php">
         <div class="login_account">
             <label for="account">會員帳號</label>
@@ -60,7 +43,7 @@
         </div>
 
         <div class="login_in">
-            <button :disabled="!isValid" @click="login">
+            <button :disabled="!isValid" @click="makeLoginRequest">
                 <h3>登入</h3>
             </button>
         </div>
@@ -234,54 +217,6 @@ h2 {
     margin: 2vw;
     @include breakpoint(430px) {
         margin-bottom: 8vw;
-    }
-}
-.login_google {
-    background-color: #fff;
-    border: 1px solid $Black;
-    border-radius: 34px;
-    width: 207px;
-    height: 40px;
-    margin-bottom: 1vw;
-    position: relative;
-    z-index: 1;
-    @include breakpoint(430px) {
-        margin-bottom: 5vw;
-    }
-    &:active {
-        background-color: #eee;
-    }
-    button {
-        cursor: pointer;
-        width: 207px;
-        height: 40px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        background-color: transparent;
-        border: none;
-    }
-}
-
-.login_or {
-    display: flex;
-    align-items: center;
-    div {
-        width: 9vw;
-        height: 0px;
-        border: 0.5px solid $Black;
-        @include breakpoint(1280px) {
-            width: 11vw;
-        }
-        @include breakpoint(820px) {
-            width: 15vw;
-        }
-        @include breakpoint(430px) {
-            width: 30vw;
-        }
-    }
-    h4 {
-        margin: 0 0.5vw;
     }
 }
 

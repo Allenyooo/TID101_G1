@@ -31,7 +31,7 @@
     </button>
 
     <!-- FAQ Dialog -->
-    <div v-if="showFAQ" class="faq-dialog">
+    <div v-if="showFAQ" class="faq-dialog" @click.self="closeFAQ">
         <div class="faq-dialog-content">
             <button @click="showFAQ = false">
                 <img src="/src/assets/Image/food/floating_cross.png" alt="" />
@@ -47,18 +47,31 @@
                 </p> -->
             </div>
             <ul>
-                <li v-for="(faq, index) in faqs" :key="index">
-                    <strong @click="toggleAnswer(index)">
-                        Q：{{ faq.question }}
-                    </strong>
+                <li
+                    v-for="(faq, index) in faqs"
+                    :key="index"
+                    @click="toggleAnswer(index)"
+                >
+                    <strong> Q：{{ faq.question }} </strong>
                     <p v-if="faq.showAnswer">A：{{ faq.answer }}</p>
                 </li>
+                <!-- 查無結果 -->
+                <div
+                    v-if="searchResultStatus === 'noResult'"
+                    class="search-result-message"
+                >
+                    沒有找到符合的問題，請點擊左上返回。
+                </div>
+                <ul v-if="searchResultStatus !== 'noResult'">
+                    <!-- 現有的 FAQ 列表內容 -->
+                </ul>
                 <!-- FAQ關鍵字搜尋區塊 -->
                 <div>
                     <input
                         type="text"
                         v-model="searchKeyword"
                         placeholder="輸入關鍵字查詢"
+                        @keyup.enter="searchFAQs"
                     />
                     <button @click="searchFAQs">搜尋</button>
                     <!-- <button @click="resetFAQs">返回</button> -->
@@ -78,6 +91,7 @@ export default {
             showFAQ: false,
             faqs: [],
             searchKeyword: "",
+            searchResultStatus: null, // 可能的值：null（初始狀態）, 'noResult'（沒有結果）, 'hasResult'（有結果）
         };
     },
     mounted() {
@@ -100,33 +114,39 @@ export default {
                 })
                 .catch((error) => console.error("Error fetching FAQs:", error));
         },
+
+        //關鍵字搜尋
         searchFAQs() {
             axios
-                .get(
-                    //"http://localhost/tid101_g1/public/php/chatBot/keyWordSearch.php",
-                    `${import.meta.env.VITE_PHP_PATH}chatBot/selectFAQs.php`,
-
-                    {
-                        params: {
-                            keyword: this.searchKeyword,
-                        },
-                    }
-                )
+                .get(`${import.meta.env.VITE_PHP_PATH}chatBot/selectFAQs.php`, {
+                    params: {
+                        keyword: this.searchKeyword,
+                    },
+                })
                 .then((response) => {
                     this.faqs = response.data.map((faq) => ({
                         question: faq.QUESTION,
                         answer: faq.ANSWER,
                         showAnswer: false,
                     }));
+                    this.searchResultStatus =
+                        this.faqs.length > 0 ? "hasResult" : "noResult";
                 })
-                .catch((error) =>
-                    console.error("Error searching FAQs:", error)
-                );
+                .catch((error) => {
+                    console.error("Error searching FAQs:", error);
+                    this.searchResultStatus = "noResult";
+                });
         },
+        //重置關鍵字
         resetFAQs() {
             this.searchKeyword = "";
+            this.searchResultStatus = null;
             this.fetchFAQs();
         },
+        closeFAQ() {
+            this.showFAQ = false;
+        },
+        //返回最上層
         scrollToTop() {
             window.scrollTo({
                 top: 0,
@@ -163,6 +183,9 @@ export default {
     @include breakpoint(680px) {
         bottom: 110px;
     }
+    @include breakpoint(430px) {
+        bottom: 90px;
+    }
     .main-button {
         margin-top: 5px;
         width: 60px;
@@ -179,6 +202,10 @@ export default {
         @include breakpoint(680px) {
             width: 60px;
             height: 60px;
+        }
+        @include breakpoint(430px) {
+            width: 36px;
+            height: 36px;
         }
         &:hover {
             transform: translateY(-2px);
@@ -205,6 +232,10 @@ export default {
                 width: 60px;
                 height: 60px;
                 padding: 0;
+            }
+            @include breakpoint(430px) {
+                width: 36px;
+                height: 36px;
             }
             transition: background-color 0.3s, transform 0.3s;
             img {
@@ -242,6 +273,10 @@ export default {
         width: 60px;
         height: 60px;
         bottom: 45px;
+    }
+    @include breakpoint(430px) {
+        width: 36px;
+        height: 36px;
     }
 }
 
@@ -293,19 +328,28 @@ export default {
             li {
                 margin-bottom: 10px;
                 background-color: $White;
-                padding: 5px;
+                padding: 8px;
                 border-radius: 12px;
-
+                cursor: pointer;
                 strong {
                     cursor: pointer;
-                    color: #000;
+                    color: $Black;
                 }
 
                 p {
                     cursor: pointer;
-                    color: #000;
+                    color: $Black;
                     margin: 0;
                 }
+            }
+            .search-result-message {
+                background-color: $White;
+                color: $Black;
+                padding: 8px;
+                border-radius: 12px;
+                margin-bottom: 10px;
+                text-align: center;
+                //font-weight: bold;
             }
             div {
                 display: flex;

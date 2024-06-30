@@ -317,8 +317,8 @@
 			</div>
 			<div class="home_introWord2">
 				<h4>
-					韓國地處北緯約33度至43度之間<br>
-					擁有四季分明的氣候<br>這種自然環境造就了韓國<br>獨特的美食文化與歷史<br><br>各個季節的變化<br>使得韓國料理種類繁多、風味各異<br>韓食，成就韓國人與大自然和諧共處的生活方式<br><br>梨花殿的宗旨<br>在於傳遞最正統的韓食文化<br>從主食的挑選，到韓國特色小菜的考究<br>皆源自於道地韓國人的經驗傳遞
+					韓國地處北緯約33度至43度之間<br />
+					擁有四季分明的氣候<br />這種自然環境造就了韓國<br />獨特的美食文化與歷史<br /><br />各個季節的變化<br />使得韓國料理種類繁多、風味各異<br />韓食，成就韓國人與大自然和諧共處的生活方式<br /><br />梨花殿的宗旨<br />在於傳遞最正統的韓食文化<br />從主食的挑選，到韓國特色小菜的考究<br />皆源自於道地韓國人的經驗傳遞
 				</h4>
 				<h3>走進梨花殿，享受如夢似幻的美食饗宴</h3>
 			</div>
@@ -436,9 +436,9 @@
 				<div class="home_table_multiCards">
 					<div class="home_card_info">
 						<h1>傳統韓食</h1>
-						<br>
+						<br />
 						<h2>
-							點擊餐具<br>查看內容
+							點擊餐具<br />查看內容
 							<span class="click"></span>
 						</h2>
 					</div>
@@ -457,7 +457,7 @@
 								draggable="false"
 							/>
 							<h5>
-								韓國的小菜飲食文化獨具特色，被視為餐桌上不可或缺的一部分。小菜種類繁多，包括泡菜、醃製蔬菜、炒菜、煎餅等，提供多樣的風味和營養。<br><br>這些小菜構成了韓國餐桌上的多彩風景，與主食搭配使用。韓國人重視小菜的製作工藝和味道，認為小菜反映了餐廳或家庭的品質和風格，是韓國飲食文化中不可或缺的一部分。
+								韓國的小菜飲食文化獨具特色，被視為餐桌上不可或缺的一部分。小菜種類繁多，包括泡菜、醃製蔬菜、炒菜、煎餅等，提供多樣的風味和營養。<br /><br />這些小菜構成了韓國餐桌上的多彩風景，與主食搭配使用。韓國人重視小菜的製作工藝和味道，認為小菜反映了餐廳或家庭的品質和風格，是韓國飲食文化中不可或缺的一部分。
 							</h5>
 						</div>
 
@@ -475,7 +475,7 @@
 								draggable="false"
 							/>
 							<h5>
-								韓國不鏽鋼碗起源於20世紀，當時的糧食供給仍處於不穩定的情況，政府尋求降低白米需求量的配套措施，此時官員們注意到餐館的不鏽鋼飯碗，便利用這種小碗作為米食限量的工具。隨著物資豐足，大眾仍保留使用不鏽鋼碗的習慣。<br><br>它們特別適合盛放熱湯和飯類，保持溫度的同時防止食物變質。不鏽鋼碗在韓國飲食文化中象徵著現代化與衛生，成為韓國家庭和餐館常見的餐具之一，並體現了韓國人對實用性、衛生、歷史的重視。
+								韓國不鏽鋼碗起源於20世紀，當時的糧食供給仍處於不穩定的情況，政府尋求降低白米需求量的配套措施，此時官員們注意到餐館的不鏽鋼飯碗，便利用這種小碗作為米食限量的工具。隨著物資豐足，大眾仍保留使用不鏽鋼碗的習慣。<br /><br />它們特別適合盛放熱湯和飯類，保持溫度的同時防止食物變質。不鏽鋼碗在韓國飲食文化中象徵著現代化與衛生，成為韓國家庭和餐館常見的餐具之一，並體現了韓國人對實用性、衛生、歷史的重視。
 							</h5>
 						</div>
 
@@ -493,7 +493,7 @@
 								draggable="false"
 							/>
 							<h5>
-								韓國石鍋的歷史可追溯至古代農業社會，最初由農民使用天然石材製作，用於煮飯和湯。石鍋具有優良的保溫性能，能保持食物溫熱，尤其適合韓國冬天寒冷氣候。<br><br>隨著時間推移，石鍋逐漸被廣泛應用於各種韓國料理中，例如：知名的石鍋拌飯（돌솥비빔밥）和各類燉煮菜餚，成為韓國飲食文化的重要部分，象徵著傳統與實用的結合。
+								韓國石鍋的歷史可追溯至古代農業社會，最初由農民使用天然石材製作，用於煮飯和湯。石鍋具有優良的保溫性能，能保持食物溫熱，尤其適合韓國冬天寒冷氣候。<br /><br />隨著時間推移，石鍋逐漸被廣泛應用於各種韓國料理中，例如：知名的石鍋拌飯（돌솥비빔밥）和各類燉煮菜餚，成為韓國飲食文化的重要部分，象徵著傳統與實用的結合。
 							</h5>
 						</div>
 
@@ -529,7 +529,7 @@
 								draggable="false"
 							/>
 							<h5>
-								韓式筷子與其他東亞國家不同，大多呈現狹長且扁平的設計。扁平的設計增加了筷子的摩擦力，使筷子更容易夾住食物，尤其是在進食韓國常見的滑溜食物：如泡菜和各種涼拌菜時。<br><br>除此之外，扁平的筷子不容易在餐桌上滑動，傳統韓食習慣把飯菜放在小桌子上，再移動小桌子到用餐的地方，扁平的筷子可以避免在移動過程滑落。
+								韓式筷子與其他東亞國家不同，大多呈現狹長且扁平的設計。扁平的設計增加了筷子的摩擦力，使筷子更容易夾住食物，尤其是在進食韓國常見的滑溜食物：如泡菜和各種涼拌菜時。<br /><br />除此之外，扁平的筷子不容易在餐桌上滑動，傳統韓食習慣把飯菜放在小桌子上，再移動小桌子到用餐的地方，扁平的筷子可以避免在移動過程滑落。
 							</h5>
 						</div>
 
@@ -623,7 +623,7 @@
 							<span>
 								<h6>#食</h6>
 							</span>
-							<h4>一探韓國飲食的<br>豐富歷史</h4>
+							<h4>一探韓國飲食的<br />豐富歷史</h4>
 						</div>
 					</div>
 
@@ -682,7 +682,7 @@
 							<span>
 								<h6>#餐</h6>
 							</span>
-							<h4>揭開全台最正統<br>的韓式餐廳</h4>
+							<h4>揭開全台最正統<br />的韓式餐廳</h4>
 						</div>
 					</div>
 				</div>
@@ -701,7 +701,7 @@
 							<span>
 								<h6>#券</h6>
 							</span>
-							<h4>梨饗券在手<br>手機直接付款</h4>
+							<h4>梨饗券在手<br />手機直接付款</h4>
 						</div>
 					</div>
 
@@ -738,7 +738,7 @@
 				/>
 				<div class="home_about_title">
 					<h1>梨花殿</h1>
-					<h2 class="korean">이화<br>전에</h2>
+					<h2 class="korean">이화<br />전에</h2>
 					<h2 class="subtitle">韓國料理愛好者的聚集地！</h2>
 				</div>
 
@@ -802,21 +802,24 @@
 			},
 		},
 		beforeUnmount() {
-			if (this.gsap !== null) {
-                console.log(this.gsap);
-                console.log(this.gsap2);
-				this.gsap.kill();
-				this.gsap2.kill();
-			}
-			ScrollTrigger.removeEventListener("scroll", ScrollTrigger.update);
+			// if (this.gsap !== null) {
+			// 	console.log(this.gsap);
+			// 	console.log(this.gsap2);
+			// 	this.gsap.kill();
+			// 	this.gsap2.kill();
+			// }
+			ScrollTrigger.getById("myID").kill();
+			this.gsap = null;
+			this.gsap2 = null;
+
+			// ScrollTrigger.removeEventListener("scroll", ScrollTrigger.update);
 		},
 		mounted() {
+			console.log("ddd");
 			gsap.registerPlugin(ScrollTrigger);
-			// ScrollTrigger.refresh();
 
 			let tl = gsap.timeline({
 				repeat: -1,
-				// clearProps: true,
 			});
 
 			tl.to(".banner-img", {
@@ -864,10 +867,9 @@
 					start: "0% top",
 					end: "150%",
 					scrub: 1,
-					// id: "pin",
+					id: "myID",
 					pin: true,
-					// clearProps: true,
-					markers: true,
+					// markers: true,
 				},
 			});
 
@@ -996,6 +998,7 @@
 				);
 
 			this.gsap2 = tls;
+			// ScrollTrigger.refresh();
 		},
 	};
 </script>
@@ -1456,8 +1459,8 @@
 	.home_intro {
 		position: relative;
 		width: 100vw;
-		min-height: 100vh;
-		// height: 100%;
+		// min-height: 100vh;
+		height: 100vh;
 		.home_cloud1 {
 			width: 235px;
 			height: 82px;
@@ -1607,7 +1610,7 @@
 			left: 50%;
 			transform: translate(-50%, -50%);
 			width: 77vw;
-			height: 48vw;
+			height: 43vw;
 			background-size: contain;
 			background-position: center;
 			background-repeat: no-repeat;
@@ -1626,8 +1629,8 @@
 				height: 160vw;
 			}
 			.home_table {
-				width: 43vw;
-				height: 43vw;
+				width: 40vw;
+				height: 40vw;
 				background-size: 100% 100%;
 				background-repeat: no-repeat;
 				background-image: url(../assets/Image/home/TableIntro/table.png);
@@ -1641,7 +1644,7 @@
 					height: 80vw;
 				}
 				.utensil1 {
-					width: 2vw;
+					width: 1.8vw;
 					position: absolute;
 					top: 5%;
 					left: 35%;
@@ -1659,7 +1662,7 @@
 					}
 				}
 				.fish_cake1 {
-					width: 7.5vw;
+					width: 6.5vw;
 					position: absolute;
 					top: 6%;
 					left: 42%;
@@ -1679,10 +1682,10 @@
 					}
 				}
 				.rice1 {
-					width: 5vw;
+					width: 4.8vw;
 					position: absolute;
 					top: 11%;
-					right: 24%;
+					right: 27%;
 					transition: all 0.5s;
 					&:hover {
 						transform: scale(1.1);
@@ -1697,10 +1700,10 @@
 					}
 				}
 				.bean_noodle {
-					width: 9vw;
+					width: 8vw;
 					position: absolute;
 					top: 18%;
-					left: 12%;
+					left: 14%;
 					transition: all 0.5s;
 					&:hover {
 						transform: scale(1.1);
@@ -1717,10 +1720,10 @@
 					}
 				}
 				.pork {
-					width: 12vw;
+					width: 11vw;
 					position: absolute;
 					top: 24%;
-					left: 36%;
+					left: 37%;
 					transition: all 0.5s;
 					&:hover {
 						transform: scale(1.1);
@@ -1737,7 +1740,7 @@
 					}
 				}
 				.cold_noodle {
-					width: 9.5vw;
+					width: 8.5vw;
 					position: absolute;
 					top: 25%;
 					right: 12%;
@@ -1755,7 +1758,7 @@
 					}
 				}
 				.bibimbap {
-					width: 9vw;
+					width: 8vw;
 					position: absolute;
 					top: 40%;
 					left: 7%;
@@ -1774,7 +1777,7 @@
 					}
 				}
 				.rice_cake_big {
-					width: 16vw;
+					width: 15vw;
 					position: absolute;
 					top: 34%;
 					right: 32%;
@@ -1793,7 +1796,7 @@
 					}
 				}
 				.kimchi_soup {
-					width: 9vw;
+					width: 8vw;
 					position: absolute;
 					top: 47%;
 					right: 8%;
@@ -1812,7 +1815,7 @@
 					}
 				}
 				.squid {
-					width: 8vw;
+					width: 7vw;
 					position: absolute;
 					top: 60%;
 					left: 16%;
@@ -1831,10 +1834,10 @@
 					}
 				}
 				.rice_cake {
-					width: 11vw;
+					width: 10vw;
 					position: absolute;
 					top: 62%;
-					right: 34%;
+					right: 35%;
 					transition: all 0.5s;
 					&:hover {
 						transform: scale(1.1);
@@ -1869,10 +1872,10 @@
 					}
 				}
 				.rice2 {
-					width: 5vw;
+					width: 4.8vw;
 					position: absolute;
-					top: 77%;
-					left: 31%;
+					top: 76%;
+					left: 30%;
 					transition: all 0.5s;
 					&:hover {
 						transform: scale(1.1);
@@ -1887,7 +1890,7 @@
 					}
 				}
 				.fish_cake2 {
-					width: 7.5vw;
+					width: 6.5vw;
 					position: absolute;
 					top: 76%;
 					left: 43%;
@@ -1906,7 +1909,7 @@
 					}
 				}
 				.utensil2 {
-					width: 2vw;
+					width: 1.8vw;
 					position: absolute;
 					bottom: 8%;
 					right: 35%;
@@ -1927,7 +1930,7 @@
 			}
 			.home_table_multiCards {
 				text-align: center;
-				width: 30vw;
+				width: 25vw;
 				@include breakpoint(820px) {
 					width: 50vw;
 				}
@@ -2112,7 +2115,7 @@
 						width: 15vw;
 						height: 7.2vw;
 						position: absolute;
-						top: 72%;
+						top: 72.5%;
 						background: linear-gradient(
 							to top,
 							rgba(51, 51, 51, 0.9),
@@ -2330,9 +2333,11 @@
 					position: relative;
 					width: 15vw;
 					height: 26vw;
+					margin-left: 2.6vw;
 					@include breakpoint(399px) {
 						height: 50vw;
 						right: 9%;
+						margin-left: unset;
 					}
 					.home_map_bannerimg {
 						width: 15vw;
@@ -2352,7 +2357,7 @@
 						width: 15vw;
 						height: 7.2vw;
 						position: absolute;
-						top: 72%;
+						top: 72.5%;
 						background: linear-gradient(
 							to top,
 							rgba(51, 51, 51, 0.9),
@@ -2449,7 +2454,7 @@
 						width: 15vw;
 						height: 7.2vw;
 						position: absolute;
-						top: 72%;
+						top: 72.5%;
 						background: linear-gradient(
 							to top,
 							rgba(51, 51, 51, 0.9),
@@ -2547,7 +2552,7 @@
 						color: $Black;
 						text-decoration: none;
 						display: flex;
-						margin-top: 5.4vw;
+						margin-top: 32px;
 						@include breakpoint(399px) {
 							display: none;
 						}

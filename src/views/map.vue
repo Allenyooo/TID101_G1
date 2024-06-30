@@ -169,6 +169,14 @@ export default {
 <style lang="scss" scoped>
 @import "/src/sass/style.scss";
 
+@mixin breakpoint($point) {
+    @media screen and (max-width: $point) {
+        @content;
+    }
+}
+
+
+
 .map_body {
     background-color: #f7f2db;
     width: 100%;
@@ -177,7 +185,10 @@ export default {
     transition: 0.3s;
     overflow: hidden;
     // .islandOpen{
-    //     position: fixed;
+        //     position: fixed;
+    @include breakpoint(1280px) {
+        
+    }
     //     z-index: 20;
     // }
     .taiwanIsland {
@@ -197,11 +208,38 @@ export default {
             z-index: 0;
             top: 25%;
             left: -113%;
+
+            @include breakpoint(1280px) {
+                left: -80%;
+            }
+            @include breakpoint(1000px) {
+                left: -50%;
+            }
+
+            @include breakpoint(750px) {
+                top: 8%;
+                left: 25%;
+            }
+
             h1 {
                 margin-bottom: 28px;
+
+                @include breakpoint(1280px) {
+                    font-size: 40px;
+                }
+                @include breakpoint(750px) {
+                    font-size: 28px;
+                    margin-bottom: 8px;
+                }
             }
             h3 {
                 line-height: 1.4;
+                @include breakpoint(1280px) {
+                    font-size: 20px;
+                }
+                @include breakpoint(750px) {
+                    font-size: 16px;
+                }
             }
         }
 
@@ -228,9 +266,22 @@ export default {
             position: absolute;
             top: 44px;
             left: 94px;
-            z-index: 10;
+            z-index: 11;
             transition: 0.3s;
+            @include breakpoint(1000px) {
+                display: block;
+                width: 206px;
+                height: 160px;
+                top: 64px;
+            }
+            @include breakpoint(750px) {
+                display: block;
+                width: 161.3px;
+                height: 126px;
+                top: 184px;
+            }
         }
+
         .middleIsland {
             // outline: 1px red solid;
             cursor: pointer;
@@ -238,6 +289,20 @@ export default {
             top: 200px;
             z-index: 11;
             transition: 0.3s;
+            @include breakpoint(1000px) {
+                display: block;
+                width: 202.6px;
+                height: 164px;
+                top: 189px;
+                left: 18px;
+            }
+            @include breakpoint(750px) {
+                display: block;
+                width: 159.35px;
+                height: 129px;
+                top: 283px;
+                left: 34px;
+            }
         }
         .southIsland {
             // outline: 1px red solid;
@@ -247,6 +312,20 @@ export default {
             left: -10px;
             transition: 0.3s;
             z-index: 10;
+            @include breakpoint(1000px) {
+                display: block;
+                width: 151.47px;
+                height: 270px;
+                top: 314px;
+                left: 7px;
+            }
+            @include breakpoint(750px) {
+                display: block;
+                width: 117px;
+                height: 221.88px;
+                top: 381px;
+                left: 26px;
+            }
         }
         .eastIsland {
             // outline: 1px red solid;
@@ -256,6 +335,20 @@ export default {
             left: 104px;
             transition: 0.3s;
             z-index: 10;
+            @include breakpoint(1000px) {
+                display: block;
+                width: 186.6px;
+                height: 421.5px;
+                top: 114.5px;
+                left: 103.5px;
+            }
+            @include breakpoint(750px) {
+                display: block;
+                width: 147px;
+                height: 339px;
+                top: 222.5px;
+                left: 99.5px;
+            }
         }
     }
 }
@@ -292,6 +385,10 @@ export default {
             top: 20%;
             right: -80%;
             animation: cloudNE 13s linear infinite;
+            @include breakpoint(850px) {
+                width: 102px;
+                height: 36.6px;
+            }
             @keyframes cloudNE{
                 0%{
                     left: 3%;
@@ -322,6 +419,11 @@ export default {
             left: -40%;
             animation: cloudNW 13s linear infinite;
             z-index: 12;
+            @include breakpoint(850px) {
+                width: 51px;
+                height: 18.77px;
+            }
+
             @keyframes cloudNW{
                 0%{
                     left: 60%;
@@ -360,6 +462,10 @@ export default {
             right: -100%;
             animation: cloudSE 13s linear infinite;
             z-index: 12;
+            @include breakpoint(850px) {
+                width: 102px;
+                height: 36.7px;
+            }
             @keyframes cloudSE{
                 0%{
                     left: 50%;
@@ -391,6 +497,10 @@ export default {
             left: -80%;
             animation: cloudSW 13s linear infinite;
             z-index: 12;
+            @include breakpoint(850px) {
+                width: 68px;
+                height: 25px;
+            }
             @keyframes cloudSW{
                 0%{
                     left: 1%;
@@ -545,6 +655,9 @@ export default {
             top: 10%;
             left: -80%;
             animation: waveNW 13s linear infinite;
+            @include breakpoint(800px) {
+                display: none;
+            }
             @keyframes waveNW{
                 0%{
                     left: -101%;
@@ -597,6 +710,9 @@ export default {
             bottom: 18%;
             left: -130%;
             animation: waveSW 13s linear infinite;
+            @include breakpoint(1000px) {
+                display: none;
+            }
             @keyframes waveSW{
                 0%{
                     left: -130%;
