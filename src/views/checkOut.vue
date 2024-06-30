@@ -166,38 +166,42 @@ export default {
         },
         async nextStep() {
             this.numberVerify;
-            this.dateVerify;
-            fetch(
-                // "http://localhost/tid101_g1/public/php/checkOut/submitOrder.php"
-                `${import.meta.env.VITE_PHP_PATH}checkOut/submitOrder.php`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        promoCode: this.promoCode,
-                        usedtimes: this.usedtimes,
-                        payment: this.payment,
-                        memberId: this.memberId,
-                        tickets: this.tickets,
-                        totalQty: this.totalQty,
-                        amount: this.amount,
-                        subtotal: this.subtotal,
-                    }),
+            if(this.cardHint == ""){
+                this.dateVerify;
+                if(this.cardHint == ""){
+                    fetch(
+                        // "http://localhost/tid101_g1/public/php/checkOut/submitOrder.php"
+                        `${import.meta.env.VITE_PHP_PATH}checkOut/submitOrder.php`,
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                promoCode: this.promoCode,
+                                usedtimes: this.usedtimes,
+                                payment: this.payment,
+                                memberId: this.memberId,
+                                tickets: this.tickets,
+                                totalQty: this.totalQty,
+                                amount: this.amount,
+                                subtotal: this.subtotal,
+                            }),
+                        }
+                    )
+                        .then((resp) => resp.json())
+                        .then((orderID) => {
+                            // console.log(orderID);
+                            this.orderID = orderID;
+                            console.log(this.orderID);
+                            this.setCookie("orderID", this.orderID, 7);
+                        })
+                        .then(this.checkOut)
+                        .catch((error) => {
+                            console.log("Error:", error);
+                        });
                 }
-            )
-                .then((resp) => resp.json())
-                .then((orderID) => {
-                    // console.log(orderID);
-                    this.orderID = orderID;
-                    console.log(this.orderID);
-                    this.setCookie("orderID", this.orderID, 7);
-                })
-                .then(this.checkOut)
-                .catch((error) => {
-                    console.log("Error:", error);
-                });
+            }
         },
         checkOut() {
             this.$router.push("/receipt");
@@ -301,10 +305,10 @@ export default {
             }else{
                 let topFifteen = cardNumber.slice(0,15);
                 // console.log(topFifteen);
-                let lastDigit = cardNumber.slice(-1);
+                let lastDigit = parseInt(cardNumber.slice(-1));
                 let numbers = topFifteen.split('');
                 // console.log(numbers);
-                let newFifteen = numbers.map(number =>{
+                let newFifteens = numbers.map(number =>{
                     let number2 = number * 2;
                     if(number2 > 9){
                         let number3 = parseInt(number2.toString().slice(0,1)) + parseInt(number2.toString().slice(-1));
@@ -315,6 +319,20 @@ export default {
                     }
                 });
                 // console.log(newFifteen);
+                let plus = newFifteens.reduce((acc, newFifteen) => acc + newFifteen , 0);
+                // console.log(plus);
+                let plus9 = plus * 9;
+                // console.log(plus9);
+                let lastStep = parseInt(plus9.toString().slice(-1));
+                // console.log(lastStep);
+                if(lastStep !== lastDigit){
+                    this.cardHint = "";
+                    this.cardHint = "請輸入有效卡號";
+                    console.log("失敗");
+                }else{
+                    this.cardHint = "";
+                    console.log("通過");
+                }
             }
         }
     },
