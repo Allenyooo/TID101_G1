@@ -1333,6 +1333,10 @@
 			}
 
 			@include breakpoint(430px) {
+				width: 118vw;
+				margin: 0 -3vh 0;
+				padding-bottom: 28px;
+				scale: 0.8;
 				border: none;
 				background-color: #f6f1ed;
 			}
