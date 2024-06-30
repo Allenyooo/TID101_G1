@@ -225,6 +225,9 @@ li {
       height: 202px;
       z-index: 0;
       display: none;
+      @include breakpoint(1080px) {
+        width: 312px;
+      }
     }
   }
 }
@@ -492,12 +495,25 @@ li {
 .member_collection .no-hover:hover {
   width: 460px;
   height: 202px;
+
+  @include breakpoint(1280px) {
+    width: 400px;
+  }
+  @include breakpoint(1080px) {
+    width: 312px;
+  }
+  // @include breakpoint(830px) {
+  //   margin-right: 20px;
+  // }
 }
 
 .member_collection .no-hover:hover .normal {
   opacity: 1;
   transform: scale(1);
   display: block;
+  @include breakpoint(1080px) {
+    width: 312px;
+  }
 }
 
 .member_collection .no-hover:hover .opened {

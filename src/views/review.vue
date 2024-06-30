@@ -997,7 +997,7 @@
 							margin-bottom: 20px;
 						    filter: drop-shadow(0 0 7px rgba(207, 81, 61, 0.4));
 
-							@include breakpoint(1050px) {
+							@include breakpoint(1062px) {
 								margin-right: 10px;
 								margin-bottom: 10px;
 							}
