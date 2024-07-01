@@ -77,32 +77,6 @@ export default {
           this.shoppingCartTasks[i].PRICE * this.shoppingCartTasks[i].PERCENT;
 
         this.changeD(i);
-
-        // -------------------fetch部分-----------------
-        // fetch(
-        //   "http://localhost/vite/tid101_g1/public/php/shoppingCart/shoppingCount.php",
-        //   {
-        //     method: "PUT",
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //       count: this.shoppingCartTasks[i].COUNT,
-        //     }),
-        //   }
-        // )
-        //   .then((response) => {
-        //     if (!response.ok) {
-        //       throw new Error("Network response was not ok");
-        //     }
-        //     return response.json();
-        //   })
-        //   .then((data) => {
-        //     this.shoppingCartTasks = data; //
-        //   });
-        // .catch((error) => {
-        //   console.error("Error fetching data:", error);
-        // });
       }
     },
     pmcU(i) {

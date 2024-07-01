@@ -30,7 +30,6 @@
         $productID = $shoppingCart['productID'];
         $count = $shoppingCart['cartCount'];
 
-
         $sqlS = "SELECT * FROM CART
                 where MEMBER_ID = ? and PRODUCT_ID = ?";
         
@@ -40,15 +39,15 @@
         $stateS -> execute();
         $data = $stateS -> fetchAll(PDO::FETCH_ASSOC);
 
-        print_r($data);
-        echo $data[0]["COUNT"];
+        // print_r($data);
+        // echo $data[0]["COUNT"];
         
         if(count($data) > 0){
             $cartCount = settype($data[0]["COUNT"], "int");
-            echo $cartCount;
+        //     echo $cartCount;
             $totalCount = $cartCount + $count;
-            echo $totalCount;
-            echo $count;
+        //     echo $totalCount;
+        //     echo $count;
 
 
             $sqlU = "UPDATE CART SET COUNT = ?

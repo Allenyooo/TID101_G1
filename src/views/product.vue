@@ -311,30 +311,6 @@ export default {
     },
 
     taskAdd() {
-      //---------------存到localStorage的部分
-      // let storedTasks = localStorage.getItem("productTasks");
-      // this.productTasks = storedTasks ? JSON.parse(storedTasks) : [];
-
-      // let price = this.price;
-      // let picture = this.img;
-      // let count = this.count;
-      // let discount = this.discount;
-
-      // this.total += this.price * this.count * this.discount;
-
-      // this.productTasks.unshift({
-      //   tPrice: price,
-      //   tPicture: picture,
-      //   tCount: count,
-      //   tDiscount: discount,
-
-      //   tTotal: price * count * discount,
-      // });
-
-      // localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
-
-      //----------------------存到資料庫的部分
-
       fetch(`${import.meta.env.VITE_PHP_PATH}product/shoppingAdd.php`, {
         method: "POST",
         headers: {
@@ -345,7 +321,7 @@ export default {
           // Input: this.input,
           // reviseBd: this.reviseBd,
           memberID: this.memberId,
-          cartID: (this.cartId += 1),
+          // cartID: (this.cartId += 1),
           cartCount: this.count,
           productID: this.currentButton,
           // Start: this.startDate,
@@ -362,30 +338,6 @@ export default {
     },
 
     taskAdd2() {
-      //---------------存到localStorage的部分
-      // let storedTasks = localStorage.getItem("productTasks");
-      // this.productTasks = storedTasks ? JSON.parse(storedTasks) : [];
-
-      // let price = this.price;
-      // let picture = this.img;
-      // let count = this.count;
-      // let discount = this.discount;
-
-      // this.total += this.price * this.count * this.discount;
-
-      // this.productTasks.unshift({
-      //   tPrice: price,
-      //   tPicture: picture,
-      //   tCount: count,
-      //   tDiscount: discount,
-
-      //   tTotal: price * count * discount,
-      // });
-
-      // localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
-
-      //----------------------存到資料庫的部分
-
       fetch(`${import.meta.env.VITE_PHP_PATH}product/shoppingAdd.php`, {
         method: "POST",
         headers: {
@@ -396,7 +348,7 @@ export default {
           // Input: this.input,
           // reviseBd: this.reviseBd,
           memberID: this.memberId,
-          cartID: (this.cartId += 1),
+          // cartID: (this.cartId += 1),
           cartCount: this.count,
           productID: this.currentButton,
           // Start: this.startDate,
@@ -492,7 +444,7 @@ export default {
         this.price = data.data[0].PRICE;
         this.discount = data.data[0].PERCENT;
         this.cart = data.data2;
-        this.cartId = data.data2[data.data2.length - 1].ID;
+        // this.cartId = data.data2[data.data2.length - 1].ID;
 
         let cookie = document.cookie;
         let match = cookie.match(/(?:^|;) *memberId=([^;]*)/);
