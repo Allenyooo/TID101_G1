@@ -25,7 +25,7 @@
 					<div class="box1">
 						<img
 							ref="preview"
-							:src="imageSrc? imageSrc : (detail.PHOTO === null? '/tid101/g1/src/assets/Image/member/Person.png' : detail.PHOTO)"
+							:src="imageSrc? imageSrc : (detail.PHOTO === null? profile : detail.PHOTO)"
 							alt="profile pic"
 							id="profilePic"
 						/>
@@ -498,6 +498,7 @@
 			return {
 				aaa: false,
 				imageSrc: "",
+				profile: new URL("@/assets/Image/member/Person.png", import.meta.url).href,
 
 				shownickname: false, //修改暱稱closePhoneErrorModal
 				shownNicknameSuccess: false,
