@@ -552,15 +552,15 @@ export default {
     // height: 95vh;
     height: 120vh;
     padding-top: 1%;
-    @include breakpoint(1280px) {
-        height: 130vh;
-    }
-    @include breakpoint(1180px) {
-        height: 140vh;
-    }
-    @include breakpoint(1024px) {
-        height: 150vh;
-    }
+    // @include breakpoint(1280px) {
+    //     height: 130vh;
+    // }
+    // @include breakpoint(1180px) {
+    //     height: 140vh;
+    // }
+    // @include breakpoint(1024px) {
+    //     height: 150vh;
+    // }
     @include breakpoint(760px) {
         height: unset;
     }
