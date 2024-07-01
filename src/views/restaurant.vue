@@ -2353,7 +2353,7 @@
 			}
 
 			@include breakpoint(820px) {
-				height: 114vh;
+				height: 120vh;
 				width: 71vw;
 			}
 
@@ -2564,7 +2564,7 @@
 				@include breakpoint(820px) {
 					margin: auto;
 					width: 48vw;
-					height: 25vh;
+					height: 27vh;
 					margin-bottom: 3vw;
 				}
 
@@ -2820,7 +2820,7 @@
 
 		@include breakpoint(820px) {
 			margin-left: 24vw;
-			margin-top: 52vw;
+			margin-top: 49vw;
 		}
 
 		@include breakpoint(430px) {
