@@ -79,357 +79,413 @@
             </div>
         </section>
     </div>
+    <swiper
+        :direction="'vertical'"
+        :slidesPerView="1"
+        :spaceBetween="30"
+        :mousewheel="true"
+        :pagination="{
+        clickable: true,
+        }"
+        :modules="modules"
+        class="mySwiper"
+    >
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut1.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut2.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut3.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut4.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut5.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut6.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut7.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut8.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut9.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut10.png" alt=""></swiper-slide>
+        <!-- <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut11.png" alt=""></swiper-slide> -->
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut12.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut13.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide" @touchstart="startTimer" @touchend="startTimer" @mouseenter="startTimer" @mouseout="startTimer"><img src="../assets/Image/enter/cut15.png" alt=""></swiper-slide>
+    </swiper>
 </template>
 
 <script>
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/pagination';
+// import './style.css';
+import { Mousewheel, Pagination } from 'swiper/modules';
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default {
     mounted() {
-        window.addEventListener('scroll', this.handleScroll);
-        
-        let cut1 = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".enter_cut1",
-                start: "top top",
-                end: "65%",
-                pin: true,
-                // markers: true,
-                scrub: 1,
-            },
-        });
+        const gsapAnimations = () => {
+            let cut1 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".enter_cut1",
+                    start: "top top",
+                    end: "65%",
+                    pin: true,
+                    // markers: true,
+                    scrub: 1,
+                },
+            });
 
-        cut1.to(".cut1_door_L", {
-            // x: -45,
-            x: "-99%",
-            duration: 1,
-        })
+            cut1.to(".cut1_door_L", {
+                // x: -45,
+                x: "-99%",
+                duration: 1,
+            })
 
-            .to(
-                ".cut1_door_R",
-                {
-                    // x: 45,
-                    x: "98%",
-                    duration: 1,
-                },0)
+                .to(
+                    ".cut1_door_R",
+                    {
+                        // x: 45,
+                        x: "98%",
+                        duration: 1,
+                    },0)
 
-            .to(
-                ".enter_cut1_open",
-                {
-                    scale: 3,
-                    duration: 1.5,
-                    // transformOrigin: "center 68%",
-                    transformOrigin: "center 72%",
-                },2)
+                .to(
+                    ".enter_cut1_open",
+                    {
+                        scale: 3,
+                        duration: 1.5,
+                        // transformOrigin: "center 68%",
+                        transformOrigin: "center 72%",
+                    },2)
 
-            .to(
-                ".enter_cut1_open",
-                {
-                    scale: 10,
-                    duration: 1.5,
-                    // transformOrigin: "center 68%",   
-                    transformOrigin: "center 72%",
-                },3)
+                .to(
+                    ".enter_cut1_open",
+                    {
+                        scale: 10,
+                        duration: 1.5,
+                        // transformOrigin: "center 68%",   
+                        transformOrigin: "center 72%",
+                    },3)
 
-            .to(
-                ".enter_cut1_open",
-                {
-                    scale: 20,
-                    duration: 1.5,
-                    // transformOrigin: "center 68%",
-                    transformOrigin: "center 72%",
-                },4)
+                .to(
+                    ".enter_cut1_open",
+                    {
+                        scale: 20,
+                        duration: 1.5,
+                        // transformOrigin: "center 68%",
+                        transformOrigin: "center 72%",
+                    },4)
 
-            .to(
-                ".enter_cut1_open",
-                {
-                    autoAlpha: 0,
-                    ease: "none",
-                    duration: 0.000001,
-                },5)
+                .to(
+                    ".enter_cut1_open",
+                    {
+                        autoAlpha: 0,
+                        ease: "none",
+                        duration: 0.000001,
+                    },5)
 
-            .to(
-                ".enter_cut1",
-                {
-                    autoAlpha: 0,
-                    ease: "none",
-                    duration: 0.000001,
-                },5);
+                .to(
+                    ".enter_cut1",
+                    {
+                        autoAlpha: 0,
+                        ease: "none",
+                        duration: 0.000001,
+                    },5);
 
-        let cut2 = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".enter_emperor",
-                start: "top",
-                end: "bottom 60%",
-                pin: true,
-                // markers: true,
-                scrub: 1,
-            },
-        });
+            let cut2 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".enter_emperor",
+                    start: "top",
+                    end: "bottom 60%",
+                    pin: true,
+                    // markers: true,
+                    scrub: 1,
+                },
+            });
 
-        cut2.from(".enter_emperor", {
-            scale: 1.01,
-            y: "-100vh",
-            // ease: "none",
-            // duration: 65,
-            duration: 35,
-            ease: "power2.in",
-        })
-            .to(".enter_emperor", {
-                scale: 35,
-                transformOrigin: "49.6% 12.1%",
+            cut2.from(".enter_emperor", {
+                scale: 1.01,
+                y: "-100vh",
                 // ease: "none",
-                // duration: 35,
-                duration: 15,
+                // duration: 65,
+                duration: 35,
                 ease: "power2.in",
-                // ease: "sine.out",
-                // ease: "power1.in",
             })
+                .to(".enter_emperor", {
+                    scale: 35,
+                    transformOrigin: "49.6% 12.1%",
+                    // ease: "none",
+                    // duration: 35,
+                    duration: 15,
+                    ease: "power2.in",
+                    // ease: "sine.out",
+                    // ease: "power1.in",
+                })
 
-            .to(".hl_1, .hl_2, .hl_3, .hl_4, .hl_5, .hl_6, .hl_7", {
-                opacity: 1,
-                ease: "none",
-                duration: 6,
-            })
-
-            .to(".hl_1", {
-                ease: "none",
-                x: 2.5,
-                y: "0.2px",
-                rotate: "-10",
-            })
-
-            .to(
-                ".hl_2",
-                {
+                .to(".hl_1, .hl_2, .hl_3, .hl_4, .hl_5, .hl_6, .hl_7", {
+                    opacity: 1,
                     ease: "none",
-                    x: 1.5,
-                    y: "0.1px",
-                },
-                "<+=0"
-            )
+                    duration: 6,
+                })
 
-            .to(
-                ".hl_3",
-                {
-                    ease: "none",
-                    x: 0.5,
-                    y: "-0.1px",
-                    scaleX: -0.2,
-                },
-                "<+=0"
-            )
-
-            .to(
-                ".hl_4",
-                {
-                    ease: "none",
-                    x: 0.5,
-                    y: "0.2px",
-                    rotate: "-10",
-                },
-                "<+=0"
-            )
-
-            .to(
-                ".hl_5",
-                {
+                .to(".hl_1", {
                     ease: "none",
                     x: 2.5,
                     y: "0.2px",
                     rotate: "-10",
-                },
-                "<+=0"
-            )
+                })
 
-            .to(
-                ".hl_6",
-                {
+                .to(
+                    ".hl_2",
+                    {
+                        ease: "none",
+                        x: 1.5,
+                        y: "0.1px",
+                    },
+                    "<+=0"
+                )
+
+                .to(
+                    ".hl_3",
+                    {
+                        ease: "none",
+                        x: 0.5,
+                        y: "-0.1px",
+                        scaleX: -0.2,
+                    },
+                    "<+=0"
+                )
+
+                .to(
+                    ".hl_4",
+                    {
+                        ease: "none",
+                        x: 0.5,
+                        y: "0.2px",
+                        rotate: "-10",
+                    },
+                    "<+=0"
+                )
+
+                .to(
+                    ".hl_5",
+                    {
+                        ease: "none",
+                        x: 2.5,
+                        y: "0.2px",
+                        rotate: "-10",
+                    },
+                    "<+=0"
+                )
+
+                .to(
+                    ".hl_6",
+                    {
+                        ease: "none",
+                        x: 1,
+                        y: "0.2px",
+                        rotateZ: "-10",
+                        scaleX: -0.2,
+                    },
+                    "<+=0"
+                )
+
+                .to(
+                    ".hl_7",
+                    {
+                        ease: "none",
+                        x: 2,
+                        y: "0.2px",
+                        rotate: "-10",
+                        scaleX: -0.2,
+                    },
+                    "<+=0"
+                )
+
+                .to(".hl_1 ", {
                     ease: "none",
-                    x: 1,
-                    y: "0.2px",
-                    rotateZ: "-10",
-                    scaleX: -0.2,
-                },
-                "<+=0"
-            )
-
-            .to(
-                ".hl_7",
-                {
-                    ease: "none",
-                    x: 2,
-                    y: "0.2px",
-                    rotate: "-10",
-                    scaleX: -0.2,
-                },
-                "<+=0"
-            )
-
-            .to(".hl_1 ", {
-                ease: "none",
-                x: 4.8,
-                y: "-0.1px",
-                rotate: "-20",
-            })
-
-            .to(
-                ".hl_2",
-                {
-                    ease: "none",
-                    x: 4,
-                    y: "-0.5px",
-                    scale: 0.1,
-                    // rotate: "-0.3"
-                },
-                "<+=0"
-            )
-
-            .to(
-                ".hl_3",
-                {
-                    ease: "none",
-                    x: 1,
-                    y: "-0.1px",
-                    scaleX: -0.5,
-                },
-                "<+=0"
-            )
-
-            .to(
-                ".hl_4",
-                {
-                    ease: "none",
-                    x: 1.5,
-                    y: "-0.2px",
-                    rotate: "-10",
-                    scale: 0.1,
-                },
-                "<+=0"
-            )
-
-            .to(
-                ".hl_5",
-                {
-                    ease: "none",
-                    x: 5.8,
+                    x: 4.8,
                     y: "-0.1px",
                     rotate: "-20",
-                },
-                "<+=0"
-            )
+                })
 
-            .to(
-                ".hl_6",
-                {
+                .to(
+                    ".hl_2",
+                    {
+                        ease: "none",
+                        x: 4,
+                        y: "-0.5px",
+                        scale: 0.1,
+                        // rotate: "-0.3"
+                    },
+                    "<+=0"
+                )
+
+                .to(
+                    ".hl_3",
+                    {
+                        ease: "none",
+                        x: 1,
+                        y: "-0.1px",
+                        scaleX: -0.5,
+                    },
+                    "<+=0"
+                )
+
+                .to(
+                    ".hl_4",
+                    {
+                        ease: "none",
+                        x: 1.5,
+                        y: "-0.2px",
+                        rotate: "-10",
+                        scale: 0.1,
+                    },
+                    "<+=0"
+                )
+
+                .to(
+                    ".hl_5",
+                    {
+                        ease: "none",
+                        x: 5.8,
+                        y: "-0.1px",
+                        rotate: "-20",
+                    },
+                    "<+=0"
+                )
+
+                .to(
+                    ".hl_6",
+                    {
+                        ease: "none",
+                        x: 2.5,
+                        // y: "-0.1px",
+                        // rotateZ: "-90"
+                        scaleX: -1,
+                    },
+                    "<+=0"
+                )
+
+                .to(
+                    ".hl_7",
+                    {
+                        ease: "none",
+                        x: 4,
+                        y: "-0.2px",
+                        rotate: "-10",
+                        scaleX: -1,
+                    },
+                    "<+=0"
+                )
+
+                .to(".hl_1, .hl_2, .hl_3, .hl_4, .hl_5, .hl_6, .hl_7", {
+                    opacity: 0,
                     ease: "none",
-                    x: 2.5,
-                    // y: "-0.1px",
-                    // rotateZ: "-90"
-                    scaleX: -1,
-                },
-                "<+=0"
-            )
+                })
 
-            .to(
-                ".hl_7",
-                {
-                    ease: "none",
-                    x: 4,
-                    y: "-0.2px",
-                    rotate: "-10",
-                    scaleX: -1,
-                },
-                "<+=0"
-            )
+                .to(".enter_emperor", {
+                    scale: 10,
+                    y: "200",
+                    // transformOrigin: "49.6% 12%",
+                    duration: 8,
+                    // ease: "power2.in",
+                    // opacity: 0
+                })
 
-            .to(".hl_1, .hl_2, .hl_3, .hl_4, .hl_5, .hl_6, .hl_7", {
-                opacity: 0,
-                ease: "none",
-            })
+                .to(
+                    ".standup",
+                    {
+                        duration: 1.5,
+                        ease: "power2.in",
+                        opacity: 1,
+                    },
+                    "<+=1"
+                )
 
-            .to(".enter_emperor", {
-                scale: 10,
-                y: "200",
-                // transformOrigin: "49.6% 12%",
-                duration: 8,
-                // ease: "power2.in",
-                // opacity: 0
-            })
+                .to(
+                    ".hand",
+                    {
+                        duration: 10,
+                        ease: "power2.in",
+                        opacity: 1,
+                        y: -62,
+                        x: -10,
+                        scale: 0.8,
+                    },
+                    "<+=1"
+                )
 
-            .to(
-                ".standup",
-                {
-                    duration: 1.5,
-                    ease: "power2.in",
-                    opacity: 1,
-                },
-                "<+=1"
-            )
-
-            .to(
-                ".hand",
-                {
+                .to(".hand", {
                     duration: 10,
                     ease: "power2.in",
                     opacity: 1,
-                    y: -62,
-                    x: -10,
-                    scale: 0.8,
-                },
-                "<+=1"
-            )
+                    y: -70,
+                    x: -20,
+                    scale: 0.6,
+                })
 
-            .to(".hand", {
-                duration: 10,
-                ease: "power2.in",
-                opacity: 1,
-                y: -70,
-                x: -20,
-                scale: 0.6,
-            })
+                .to(
+                    ".standup",
+                    {
+                        duration: 3,
+                        ease: "power2.in",
+                        scale: 1.5,
+                    },
+                    "<+=3"
+                )
 
-            .to(
-                ".standup",
-                {
-                    duration: 3,
-                    ease: "power2.in",
-                    scale: 1.5,
-                },
-                "<+=3"
-            )
+                .to(
+                    ".enter_water",
+                    {
+                        duration: 3,
+                        // ease: "power2.in",
+                        opacity: 1,
+                    },
+                    "<+=4"
+                )
 
-            .to(
-                ".enter_water",
-                {
-                    duration: 3,
-                    // ease: "power2.in",
-                    opacity: 1,
-                },
-                "<+=4"
-            )
-
-            // .to(".enter_emperor", {
-            //     onComplete: () => {
-            //         window.location.href = import.meta.env.BASE_URL + "home";
-            //         // this.$router.push('/home');
-            //     },
-            // });
+                .to(".enter_emperor", {
+                    onComplete: () => {
+                        window.location.href = import.meta.env.BASE_URL + "home";
+                        // this.$router.push('/home');
+                    },
+                },"<+=1");
+        }
+        
+        if (window.innerWidth >= 820) {
+            window.addEventListener('scroll', this.handleScroll);
+            gsapAnimations();
+        }
     },
     data(){
         return{
-            isScrolled: false
+            isScrolled: false,
+            modules: [Mousewheel, Pagination],
+            timer: null,
         }
     },
     beforeDestroy() {
         window.removeEventListener('scroll', this.handleScroll);
     },
+    components: {
+      Swiper,
+      SwiperSlide,
+    },
     methods: {
         handleScroll() {
             this.isScrolled = window.scrollY > 0;
+        },
+        startTimer() {
+            this.timer = setTimeout(this.home, 10);
+        },
+        home() {
+            this.$router.push("/home");
+        }
+
+    },
+    beforeDestroy() {
+        // 清除计时器以防止内存泄漏
+        if (this.timer) {
+            clearTimeout(this.timer);
         }
     }
 };
@@ -442,6 +498,9 @@ export default {
     max-width: 100vw;
     height: 100vh;
     position: relative;
+    @include breakpoint(820px){
+        display: none;
+    }
     
     .enter_cut1 {
         // width: 98vw;
@@ -458,6 +517,7 @@ export default {
         overflow: hidden;
         position: relative;
         z-index: 49;
+
         & ::before{
             content: "";
             position: absolute;
@@ -469,35 +529,27 @@ export default {
             height: 90px;
             border-radius: 90px;
             background-color: rgba($color: $Black, $alpha: 0.6);
-            animation: scrolldown 4.8s linear infinite;
+            animation: scrolldown 4.8s 2s linear infinite;
+            opacity: 0;
+            @include breakpoint(820px){
+                display: none;
+            }
         }
 
         @keyframes scrolldown {
             0%{
-                opacity: 1;
+                opacity: 0;
             }
 
-            35%{
+            10%{
                 opacity: 1;
             }
 
             45%{
-                opacity: 0;
-            }
-
-            50%{
-                opacity: 0;
-            }
-
-            51%{
                 opacity: 1;
             }
 
-            85%{
-                opacity: 1;
-            }
-
-            95%{
+            55%{
                 opacity: 0;
             }
 
@@ -516,8 +568,11 @@ export default {
             width: 10px;
             height: 10px;
             background-color: #fff;
-            animation: scrollDown 1.2s linear infinite;
+            animation: scrollDown 4.8s 2s linear infinite;
             opacity: 0;
+            @include breakpoint(820px){
+                display: none;
+            }
         }
 
         @keyframes scrollDown {
@@ -526,7 +581,22 @@ export default {
                 opacity: 1;
             }
 
-            50%{
+            12%{
+                top: 50%;
+                opacity: 0;
+            }
+
+            20%{
+                top: 46%;
+                opacity: 0;
+            }
+
+            25%{
+                top: 46%;
+                opacity: 1;
+            }
+
+            37%{
                 top: 50%;
                 opacity: 0;
             }
@@ -536,6 +606,7 @@ export default {
                 opacity: 0;
             }
         }
+
 
         &.hide-scroll {
             & ::before, & ::after {
@@ -557,15 +628,34 @@ export default {
             z-index: 50;
             // opacity: 0;
             position: relative;
+            // @include breakpoint(820px){
+            //     background-image: url(../assets/Image/enter/palace_whole.png);
+            // }
             .cut1_door {
                 // padding: 33.24% 0 0 0.42%;
                 // padding: 32.05% 0 0 0.4%;
-                padding: 32.60% 0 0 0.4%;
+                // padding: 32.60% 0 0 0.4%;
+                // padding: 63.2vh 0 0 0.6vh;
+                padding: 62vh 0 0 0.8vh;
                 display: flex;
                 justify-content: center;
+                @include breakpoint(1920px){
+                    padding: 62.1vh 0 0 0.8vh;
+                }
+                @include breakpoint(1440px){
+                    // padding: 63.2vh 0 0 0.6vh;
+                    // padding: 63.5vh 0 0 0.6vh;
+                }
+                @include breakpoint(820px){
+                    // padding: 64.3vh 0 0 0.4vh;
+                    padding: 63vh 0 0 0.6vh;
+                }
                 img {
                     // width: 3.52%;
                     width: 3.5%;
+                    @include breakpoint(820px){
+                        display: none;
+                    }
                 }
             }
         }
@@ -599,6 +689,18 @@ export default {
         left: 48.8%;
         z-index: 45;
         opacity: 0;
+        @include breakpoint(1920px){
+            top: 13.5%;
+            left: 48.5%;
+        }
+        @include breakpoint(1440px){
+            top: 14.5%;
+            left: 48.8%;
+        }
+        @include breakpoint(1440px){
+            top: 15%;
+        }
+
     }
     .enter_table {
         // width: 7.666%;
@@ -622,6 +724,10 @@ export default {
             width: 15%;
             height: 4%;
             margin: 29% auto;
+
+            @include breakpoint(1024px){
+                margin: 28.6% auto;
+            }
 
             img {
                 position: absolute;
@@ -743,4 +849,27 @@ export default {
         opacity: 0;
     }
 }
+
+.mySwiper{
+    display: none;
+    max-width: 100vw;
+    height: 100vh;
+    @include breakpoint(820px){
+        display: block;
+    }
+
+    .swiper-slide{
+        // width: 10%;
+        // height: 100%;
+        img{
+            width: 100%;
+        }
+    }
+}
+
+::v-deep .swiper-vertical > .swiper-pagination-bullets, 
+::v-deep .swiper-pagination-vertical.swiper-pagination-bullets{
+    display: none;
+}
+
 </style>
