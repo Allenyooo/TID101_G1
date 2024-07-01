@@ -106,6 +106,7 @@ export default {
                     `${import.meta.env.VITE_PHP_PATH}chatBot/selectFAQs.php`
                 )
                 .then((response) => {
+                    //console.log(response.data);
                     this.faqs = response.data.map((faq) => ({
                         question: faq.QUESTION,
                         answer: faq.ANSWER,
