@@ -1024,14 +1024,12 @@
 
 	.restaurant_wrapper {
 		overflow: hidden;
-		width: 100vw;
 		background-color: #f6f1ed;
 		display: flex;
 
 		@include breakpoint(430px) {
 			display: block;
 			position: relative;
-			width: 100vw;
 		}
 	}
 
@@ -2147,7 +2145,6 @@
 
 			h4 {
 				color: #333333;
-				font-size: 24px;
 				line-height: 150%;
 
 				@include breakpoint(1425px) {
@@ -2342,25 +2339,26 @@
 
 		.restaurant_review {
 			width: 78vw;
-			height: 443px;
 			background-color: #fff;
 			padding-left: 20px;
 			margin: 20px 20px;
+			padding-bottom: 20px;
+
 
 			@include breakpoint(1024px) {
-				height: 460px;
 				padding-left: 15px;
 			}
 
 			@include breakpoint(820px) {
-				height: 120vh;
+				height: unset;
 				width: 71vw;
+				margin: 20px auto;
 			}
 
 			@include breakpoint(430px) {
 				width: 81vw;
 				margin-left: 10vw;
-				padding-left: 6vw;
+				padding-left: unset;
 				height: 207vw;
 			}
 
@@ -2528,23 +2526,20 @@
 
 			@include breakpoint(1024px) {
 				display: flex;
-				height: 220px;
+				height: 230px;
 				width: 75vw;
 			}
 
 			@include breakpoint(820px) {
 				display: block;
-				height: 28vh;
+				height: 90vh;
 				width: 51vw;
-				margin-left: 7vw;
+				margin: 20px auto 0;
 			}
 
 			@include breakpoint(430px) {
-				height: 60%;
-			}
-
-			@include breakpoint(390px) {
-				height: 72%;
+				width: 100%;
+				height: fit-content;
 			}
 
 			li {
@@ -2557,7 +2552,7 @@
 
 				@include breakpoint(1024px) {
 					width: 24vw;
-					height: 33vh;
+					height: 230px;
 					padding: 5px 17px 5px 16px;
 				}
 
@@ -2570,14 +2565,12 @@
 
 				@include breakpoint(430px) {
 					width: 71vw;
-					margin-left: -8vw;
 					margin-bottom: 6vw;
 					height: 50vw;
 				}
 
 				@include breakpoint(390px) {
 					width: 68vw;
-					margin-left: -8vw;
 					height: 52vw;
 				}
 
@@ -2810,27 +2803,16 @@
 		height: 52px;
 		background-color: #cb4847;
 		border-radius: 15px;
-		margin: 16px auto;
+		margin: 16px auto 0;
 		display: block;
 		border: none;
 
 		@include breakpoint(1024px) {
-			margin: 56px 0 16px 314px;
+			// margin: 16px auto;
 		}
 
 		@include breakpoint(820px) {
-			margin-left: 24vw;
-			margin-top: 49vw;
-		}
-
-		@include breakpoint(430px) {
-			margin-left: 21vw;
-			margin-top: 43vw;
-		}
-
-		@include breakpoint(390px) {
-			margin-left: 16vw;
-			margin-top: 17vw;
+			margin: 0 auto;
 		}
 
 		a {
