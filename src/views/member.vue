@@ -406,7 +406,7 @@
 		</section>
 
 		<!--voucher-->
-		<section class="member_voucher">
+		<!-- <section class="member_voucher">
 			<h4>優惠券</h4>
 			<div class="voucher_code">
 				<input
@@ -435,7 +435,7 @@
 					<td>僅限使用一次</td>
 				</tr>
 			</table>
-		</section>
+		</section> -->
 
 		<!--my ticket-->
 		<section class="member_ticket">
@@ -1356,128 +1356,128 @@
 		}
 
 		//voucher
-		.member_voucher {
-			background-color: $White;
-			border: 1px solid $Gold;
-			border-radius: 20px;
-			width: 83vw;
-			margin: 0 auto 6vh;
+		// .member_voucher {
+		// 	background-color: $White;
+		// 	border: 1px solid $Gold;
+		// 	border-radius: 20px;
+		// 	width: 83vw;
+		// 	margin: 0 auto 6vh;
 
-			@include breakpoint(820px) {
-				width: 75vw;
-			}
+		// 	@include breakpoint(820px) {
+		// 		width: 75vw;
+		// 	}
 
-			@include breakpoint(430px) {
-				width: 90vw;
-				background-color: #f6f1ed;
-				border-radius: 0px;
-			}
+		// 	@include breakpoint(430px) {
+		// 		width: 90vw;
+		// 		background-color: #f6f1ed;
+		// 		border-radius: 0px;
+		// 	}
 
-			h4 {
-				width: 90%;
-				font-weight: 800;
-				font-size: 24px;
-				color: $Black;
-				margin: 5vh auto 2vh;
+		// 	h4 {
+		// 		width: 90%;
+		// 		font-weight: 800;
+		// 		font-size: 24px;
+		// 		color: $Black;
+		// 		margin: 5vh auto 2vh;
 
-				@include breakpoint(430px) {
-					font-size: 16px;
-					margin: 2vh 3vh 2vh;
-				}
-			}
+		// 		@include breakpoint(430px) {
+		// 			font-size: 16px;
+		// 			margin: 2vh 3vh 2vh;
+		// 		}
+		// 	}
 
-			.voucher_code {
-				font-size: 15px;
-				width: 90%;
-				margin: 0 auto 3vh;
+		// 	.voucher_code {
+		// 		font-size: 15px;
+		// 		width: 90%;
+		// 		margin: 0 auto 3vh;
 
-				@include breakpoint(430px) {
-					margin: 0 auto;
-				}
+		// 		@include breakpoint(430px) {
+		// 			margin: 0 auto;
+		// 		}
 
-				.voucher_number {
-					padding-left: 10px;
-					border-radius: 20px;
-					width: 50%;
-					height: 40px;
-					background-color: transparent;
+		// 		.voucher_number {
+		// 			padding-left: 10px;
+		// 			border-radius: 20px;
+		// 			width: 50%;
+		// 			height: 40px;
+		// 			background-color: transparent;
 
-					@include breakpoint(1280px) {
-						width: 64%;
-					}
+		// 			@include breakpoint(1280px) {
+		// 				width: 64%;
+		// 			}
 
-					@include breakpoint(700px) {
-						width: 83%;
-					}
+		// 			@include breakpoint(700px) {
+		// 				width: 83%;
+		// 			}
 
-					@include breakpoint(820px) {
-						width: 83%;
-					}
+		// 			@include breakpoint(820px) {
+		// 				width: 83%;
+		// 			}
 
-					@include breakpoint(430px) {
-						height: 32px;
-						font-size: 14px;
-						margin-bottom: 4vw;
-					}
+		// 			@include breakpoint(430px) {
+		// 				height: 32px;
+		// 				font-size: 14px;
+		// 				margin-bottom: 4vw;
+		// 			}
 
-					@include breakpoint(390px) {
-						width: 60vw;
-					}
-				}
+		// 			@include breakpoint(390px) {
+		// 				width: 60vw;
+		// 			}
+		// 		}
 
-				.voucher_sure {
-					border-radius: 20px;
-					height: 40px;
-					width: 60px;
-					background-color: transparent;
-					margin-left: 20px;
+		// 		.voucher_sure {
+		// 			border-radius: 20px;
+		// 			height: 40px;
+		// 			width: 60px;
+		// 			background-color: transparent;
+		// 			margin-left: 20px;
 
-					@include breakpoint(430px) {
-						width: 48px;
-						height: 32px;
-						font-size: 14px;
-						margin-left: 6px;
-					}
-				}
-			}
+		// 			@include breakpoint(430px) {
+		// 				width: 48px;
+		// 				height: 32px;
+		// 				font-size: 14px;
+		// 				margin-left: 6px;
+		// 			}
+		// 		}
+		// 	}
 
-			.voucher_data {
-				width: 90%;
-				margin: 0 auto 4vh;
+		// 	.voucher_data {
+		// 		width: 90%;
+		// 		margin: 0 auto 4vh;
 
-				@include breakpoint(430px) {
-					// margin: 20px 15px;
-				}
+		// 		@include breakpoint(430px) {
+		// 			// margin: 20px 15px;
+		// 		}
 
-				tr {
-					height: 40px;
+		// 		tr {
+		// 			height: 40px;
 
-					@include breakpoint(430px) {
-						font-size: 14px;
-					}
+		// 			@include breakpoint(430px) {
+		// 				font-size: 14px;
+		// 			}
 
-					th {
-						h5 {
-							font-weight: 800;
-							color: $Black;
+		// 			th {
+		// 				h5 {
+		// 					font-weight: 800;
+		// 					color: $Black;
 
-							@include breakpoint(430px) {
-								font-size: 14px;
-								// text-align: center;
-							}
-						}
-					}
+		// 					@include breakpoint(430px) {
+		// 						font-size: 14px;
+		// 						// text-align: center;
+		// 					}
+		// 				}
+		// 			}
 
-					td {
-						color: $Black;
+		// 			td {
+		// 				color: $Black;
 
-						@include breakpoint(430px) {
-							// text-align: center;
-						}
-					}
-				}
-			}
-		}
+		// 				@include breakpoint(430px) {
+		// 					// text-align: center;
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// }
 
 		//my ticket
 		.member_ticket {
