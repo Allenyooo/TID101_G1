@@ -477,7 +477,7 @@ export default {
                             </div>
                         </div>
                         <form action="" class="checkOut_pay">
-                            <h4>選擇付款方式</h4>
+                            <h4>付款方式</h4>
                             <div class="checkOut_pay_method">
                                 <input type="radio" name="pay" id="checkOut_creditCard" v-model="payment" value="信用卡">
                                 <label for="checkOut_creditCard"><span>信用卡</span></label>

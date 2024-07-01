@@ -483,7 +483,6 @@ export default {
 
     },
     beforeDestroy() {
-        // 清除计时器以防止内存泄漏
         if (this.timer) {
             clearTimeout(this.timer);
         }
