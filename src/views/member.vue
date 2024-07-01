@@ -852,7 +852,7 @@
 			width: 100px;
 		}
 	}
-
+	
 	.card_container {
 		display: grid;
 		grid-template-rows: auto;
@@ -874,11 +874,7 @@
 		}
 
 		@include breakpoint(430px) {
-			margin-left: 0vw;
-		}
-
-		@include breakpoint(390px) {
-			margin-left: 0vw;
+			margin: 0 auto;
 		}
 	}
 
@@ -892,6 +888,7 @@
 
 		@include breakpoint(430px) {
 			background-color: #fff;
+			width: 312px;
 		}
 	}
 
@@ -976,7 +973,7 @@
 
 			@include breakpoint(430px) {
 				display: block;
-				width: fit-content;
+				width: 100%;
 				border: none;
 				background-color: #f6f1ed;
 				margin: 0 auto;
@@ -1331,12 +1328,10 @@
 			}
 
 			@include breakpoint(430px) {
-				width: 118vw;
-				margin: 0 -3vh 0;
+				width: 85vw;
 				padding-bottom: 28px;
-				scale: 0.8;
 				border: none;
-				background-color: #f6f1ed;
+				background-color: $White;
 			}
 
 			h4 {
@@ -1349,10 +1344,12 @@
 				@include breakpoint(430px) {
 					font-size: 16px;
 					width: 100%;
-					// margin: 10px 9px;
+					padding-top: 20px;
+					margin-left: 10px;
 				}
 
 				@include breakpoint(390px) {
+					width: 92%;
 					margin: 0 auto;
 				}
 			}
