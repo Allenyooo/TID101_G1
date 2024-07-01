@@ -98,61 +98,6 @@ export default {
       // localStorage.setItem("productTasks", JSON.stringify(this.productTasks));
     },
 
-    // fetchData() {
-    //   fetch("http://localhost/vite/tid101_g1/public/php/product/test.php")
-    //     .then((response) => {
-    //       if (!response.ok) {
-    //         throw new Error("Network response was not ok");
-    //       }
-    //       return response.json();
-    //     })
-    //     .then((data) => {
-    //       this.test = data; // 将获取的数据存储到组件的data中的products属性中
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error fetching data:", error);
-    //     });
-    // },
-
-    // sumtotal() {
-    //   let alltotal = 0;
-    //   for (let i = 0; i <script this.shoppingCartTasks.length; i++) {
-    //     alltotal +=
-    //       this.shoppingCartTasks[i].PRICE *
-    //       this.shoppingCartTasks[i].COUNT *
-    //       this.shoppingCartTasks[i].PERCENT;
-    //   }
-    //   this.total = alltotal;
-    // },
-
-    // shoppingCount() {
-    //   fetch(
-    //     "http://localhost/vite/tid101_g1/public/php/shoppingCart/shoppingCart.php",
-    //     {
-    //       method: "PUT",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         username: username.value,
-    //         password: password.value,
-    //       }),
-    //     }
-    //   )
-    //     .then((response) => {
-    //       if (!response.ok) {
-    //         throw new Error("Network response was not ok");
-    //       }
-    //       return response.json();
-    //     })
-    //     .then((data) => {
-    //       this.test = data; // 将获取的数据存储到组件的data中的products属性中
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error fetching data:", error);
-    //     });
-    // },
-
     localstorageDAta() {
       // 從 localStorage 中讀取已有的 productTasks，如果不存在則初始化為空陣列
       let storedTasks = localStorage.getItem("productTasks");

@@ -259,7 +259,7 @@ export default {
         `${import.meta.env.VITE_PHP_PATH}Bk/BkDiscount/discountSearch.php`,
         {
           mode: "cors",
-          method: "PUT",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },

@@ -204,7 +204,7 @@ export default {
     searchButton(id) {
       fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkAccess/accessSearch.php`, {
         mode: "cors",
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },

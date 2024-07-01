@@ -24,23 +24,35 @@
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
-        $sql2 = " SELECT V.ID,V.ORDERDATE, (S.TOTAL - VOUCHER.PRICE) as TOTAL 
-            from (select ID, MEMBER_ID,ORDERDATE,IFNULL(VOUCHER_ID, 5) as VOUCHER_ID ,PAYMENT from `ORDER`  group by ID) as V
-                left join VOUCHER
-                on V.VOUCHER_ID = VOUCHER.ID
-                left join MEMBER
-                on V.MEMBER_ID = MEMBER.ID
-                left join (select SUM(ROUND(P.PRICE * O.QUANTITY * D.PERCENT) )as TOTAL,O.ORDER_ID
-                            from PRODUCT as P
-                            join ORDERDETAIL as O
-                            on P.ID = O.PRODUCT_ID
-                            join DISCOUNT as D
-                            on P.DISCOUNT_ID = D.ID
-                            group by O.ORDER_ID
-                         ) as S
-                on v.ID = S.ORDER_ID
-                where V.MEMBER_ID = ?
-            group by V.ID";
+        // $sql2 = "SELECT V.ID,V.ORDERDATE, (S.TOTAL - VOUCHER.PRICE) as TOTAL 
+        //     from (select ID, MEMBER_ID,ORDERDATE,IFNULL(VOUCHER_ID, 5) as VOUCHER_ID ,PAYMENT from `ORDER`  group by ID) as V
+        //         left join VOUCHER
+        //         on V.VOUCHER_ID = VOUCHER.ID
+        //         left join MEMBER
+        //         on V.MEMBER_ID = MEMBER.ID
+        //         left join (select SUM(ROUND(P.PRICE * O.QUANTITY * D.PERCENT) )as TOTAL,O.ORDER_ID
+        //                     from PRODUCT as P
+        //                     join ORDERDETAIL as O
+        //                     on P.ID = O.PRODUCT_ID
+        //                     join DISCOUNT as D
+        //                     on P.DISCOUNT_ID = D.ID
+        //                     group by O.ORDER_ID
+        //                  ) as S
+        //         on V.ID = S.ORDER_ID
+        //         where V.MEMBER_ID = ?
+        //     group by V.ID";
+
+
+        $sql2 = "SELECT O.ID,O.ORDERDATE,O.SUBTOTAL as TOTAL 
+            from `ORDER` as O
+            join `MEMBER` as M
+            on O.MEMBER_ID = M.ID
+            where O.MEMBER_ID = ?";
+
+
+
+
+
 
 
             $statement2 = $pdo->prepare($sql2);

@@ -8,54 +8,6 @@
       <router-link to="/Product"><h5>梨饗券</h5></router-link>
     </div>
 
-    <!-- <button @click="scToggle()">購物車</button> -->
-
-    <!-- <div class="left"></div> -->
-
-    <!-- <shopping :sp="move"></shopping> -->
-
-    <!-- 
-    <div class="productMove" :class="{ pmOn: move == true }">
-      <div class="spTop">
-        <ul>
-          <li>
-            <button @click="pmColse"></button>
-          </li>
-          <li><p>購物車清單</p></li>
-          <li class="scBorder"></li>
-        </ul>
-      </div>
-      <div class="pmCount">
-        <ul>
-          <li v-for="(j, index) in productTasks" :key="index" class="pmcLi">
-            <ul>
-              <li class="pmcImg">
-                <img :src="j.tPicture" />
-              </li>
-              <li>
-                <ul>
-                  <li class="pmcName">
-                    <h4>${{ j.tPrice }}梨饗券</h4>
-                  </li>
-                  <li class="pmcButton">
-                    <button class="pmcDown" @click="pmcD(index)"></button>
-                    <p>{{ j.tCount }}</p>
-                    <button class="pmcUp" @click="pmcU(index)"></button>
-                    <button class="pmcClear" @click="pmcC(index)"></button>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="spBottom" :class="{ pmOn: move == true }">
-      <p>總計： NT${{ total }}</p>
-      <a href="">前往結帳</a>
-    </div> -->
-
     <!-------------- top -------------->
     <div class="productTop" id="app">
       <ul>

@@ -3,29 +3,34 @@
 
      
     
-    // $sql = "SELECT O.ID , M.MAIL , M.NAME , O.ORDERDATE , sum(OD.UNIT_PRICE) - V.PRICE as TOTAL, PAYMENT 
-    //         from `ORDER` as O
-    //             join ORDERDETAIL as OD on O.ID = OD.ORDER_ID
-    //             join MEMBER as M on O.MEMBER_ID = M.ID
-    //             join VOUCHER as V on O.VOUCHER_ID = V.ID
-    //         group by ID";
 
-    $sql = "SELECT V.ID,MEMBER.MAIL,MEMBER.NAME,V.ORDERDATE, (S.TOTAL - VOUCHER.PRICE) as TOTAL ,V.PAYMENT
-            from (select ID, MEMBER_ID,ORDERDATE,IFNULL(VOUCHER_ID, 5) as VOUCHER_ID ,PAYMENT from `ORDER`  group by ID) as V
-                left join VOUCHER
-                on V.VOUCHER_ID = VOUCHER.ID
-                left join MEMBER
-                on V.MEMBER_ID = MEMBER.ID
-                left join (select SUM(ROUND(P.PRICE * O.QUANTITY * D.PERCENT) )as TOTAL,O.ORDER_ID
-                            from PRODUCT as P
-                            join ORDERDETAIL as O
-                            on P.ID = O.PRODUCT_ID
-                            join DISCOUNT as D
-                            on P.DISCOUNT_ID = D.ID
-                            group by O.ORDER_ID
-                         ) as S
-                on v.ID = S.ORDER_ID
-            group by V.ID";
+
+    // $sql = "SELECT V.ID,MEMBER.MAIL,MEMBER.`NAME`,V.ORDERDATE, (S.TOTAL - VOUCHER.PRICE) as TOTAL ,V.PAYMENT
+    //         from (select ID, MEMBER_ID,ORDERDATE,IFNULL(VOUCHER_ID, 5) as VOUCHER_ID ,PAYMENT from `ORDER`  group by ID) as V
+    //             left join VOUCHER
+    //             on V.VOUCHER_ID = VOUCHER.ID
+    //             left join MEMBER
+    //             on V.MEMBER_ID = MEMBER.ID
+    //             left join (select SUM(ROUND(P.PRICE * O.QUANTITY * D.PERCENT) )as TOTAL,O.ORDER_ID
+    //                         from PRODUCT as P
+    //                         join ORDERDETAIL as O
+    //                         on P.ID = O.PRODUCT_ID
+    //                         join DISCOUNT as D
+    //                         on P.DISCOUNT_ID = D.ID
+    //                         group by O.ORDER_ID
+    //                      ) as S
+    //             on V.ID = S.ORDER_ID
+    //         group by V.ID";
+
+    $sql = "SELECT O.ID,M.MAIL,M.NAME,O.ORDERDATE,O.SUBTOTAL,O.PAYMENT
+            from `ORDER` as O
+            join `MEMBER` as M
+            on O.MEMBER_ID = M.ID";
+
+
+
+
+
 
     $statement = $pdo->prepare($sql);
     $statement->execute();
