@@ -2279,19 +2279,13 @@
 			}
 
 			h4 {
-				margin-top: 40px;
-
-				@include breakpoint(1024px) {
-					margin-top: 80px;
-				}
+				margin: auto;
 
 				@include breakpoint(820px) {
-					margin-top: 8vw;
 					font-size: 17px;
 				}
 
 				@include breakpoint(430px) {
-					font-size: 17px;
 					margin: 0 auto;
 				}
 
