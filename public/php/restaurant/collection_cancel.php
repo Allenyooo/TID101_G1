@@ -7,6 +7,8 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 // 设置允许的请求头部
 header("Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Requested-With");
 
+include '../conn.php';
+
 // 允许 AJAX 跨域请求
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
@@ -14,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // collection_check.php - 取消收藏功能
 // 連線SQL
-$db_host = "127.0.0.1";
-$db_user = "root";
-$db_pass = "password";
-$db_select = "TID101_G1";
+// $db_host = "127.0.0.1";
+// $db_user = "root";
+// $db_pass = "password";
+// $db_select = "TID101_G1";
 
 // 建立資料庫連線物件
-$dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
+// $dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
 
 try {
     // 建立PDO物件，並放入指定的相關資料

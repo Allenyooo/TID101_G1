@@ -1174,6 +1174,10 @@
 			li {
 				margin-top: 16px;
 
+				@include breakpoint(1180px) {
+					width: 7vw;
+				}
+
 				@include breakpoint(820px) {
 					width: 80px;
 				}
@@ -1602,8 +1606,12 @@
 				margin-left: 2vw;
 			}
 
+			@include breakpoint(1180px) {
+				width: 40vw;
+			}
+
 			@include breakpoint(1024px) {
-				// width: 52vw;
+				width: 96px;
 				margin-top: 17%;
 				width: 49vw;
 				font-size: 34px;
@@ -1621,6 +1629,10 @@
 				margin-left: 7vw;
 				width: 81vw;
 				margin-top: 2vw;
+			}
+
+			@include breakpoint(412px) {
+				width: 85vw;
 			}
 
 			@include breakpoint(390px) {
@@ -1768,6 +1780,10 @@
 						margin-left: 1vw;
 					}
 
+					@include breakpoint(1180px) {
+						margin-left: 4vw;
+					}
+
 					@include breakpoint(1100px) {
 						width: 50vw;
 					}
@@ -1905,6 +1921,11 @@
 							@include breakpoint(1280px) {
 								// font-size: 18px;
 								width: 17vw;
+							}
+
+							@include breakpoint(1180px) {
+								// font-size: 18px;
+								width: 18vw;
 							}
 
 							@include breakpoint(1024px) {
@@ -2462,12 +2483,19 @@
 					margin-left: 30vw;
 				}
 
+				@include breakpoint(1180px) {
+					margin-left: 21vw;
+				}
+
 				@include breakpoint(1024px) {
 					margin-left: 14vw;
 				}
 
 				@include breakpoint(820px) {
 					margin-left: -7vw;
+				}
+				@include breakpoint(768px) {
+					margin-left: 0;
 				}
 
 				@include breakpoint(430px) {
@@ -2514,7 +2542,7 @@
 		.customer_review {
 			display: flex;
 			width: 75vw;
-			height: 220px;
+			height: 18vw;
 			justify-content: space-between;
 			margin-top: 20px;
 
@@ -2531,6 +2559,10 @@
 				margin: 20px auto 0;
 			}
 
+			@include breakpoint(768px) {
+				height: 74vh;
+			}
+
 			@include breakpoint(430px) {
 				width: 100%;
 				height: fit-content;
@@ -2538,11 +2570,15 @@
 
 			li {
 				width: 24vw;
-				height: 220px;
+				height: 21vw;
 				border-radius: 5px;
 				background-color: #f6f1ed;
 				border-radius: 5px;
 				filter: drop-shadow(0 0 7px rgba(207, 81, 61, 0.4));
+
+				@include breakpoint(1180px) {
+					height: 20vw;
+				}
 
 				@include breakpoint(1024px) {
 					width: 24vw;
@@ -2555,6 +2591,10 @@
 					width: 48vw;
 					height: 27vh;
 					margin-bottom: 3vw;
+				}
+
+				@include breakpoint(768px) {
+					height: 22vh;
 				}
 
 				@include breakpoint(430px) {
@@ -2618,7 +2658,7 @@
 							@include breakpoint(1024px) {
 								padding-left: 9px;
 								font-size: 18px;
-								width: 120px;
+								width: 100px;
 								padding-top: 12px;
 							}
 						}
@@ -2733,6 +2773,10 @@
 					.date {
 						margin-left: 28px;
 
+						@include breakpoint(1180px) {
+							margin-left: 18px;
+						}
+
 						@include breakpoint(1024px) {
 							margin-left: 0;
 						}
@@ -2749,6 +2793,7 @@
 							@include breakpoint(1024px) {
 								padding-left: 24px;
 								width: 500px;
+								margin-left: -2.4vw;
 							}
 
 							@include breakpoint(820px) {
@@ -2801,8 +2846,8 @@
 		display: block;
 		border: none;
 
-		@include breakpoint(1024px) {
-			// margin: 16px auto;
+		@include breakpoint(1180px) {
+			margin-top: 4vw;
 		}
 
 		@include breakpoint(820px) {

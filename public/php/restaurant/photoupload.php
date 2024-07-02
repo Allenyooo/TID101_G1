@@ -1,9 +1,11 @@
 <?php
 // Establish database connection
-$db_host = "127.0.0.1";
-$db_user = "root";
-$db_pass = "passwordpassword";
-$db_select = "TID101_G1";
+// $db_host = "127.0.0.1";
+// $db_user = "root";
+// $db_pass = "passwordpassword";
+// $db_select = "TID101_G1";
+
+include '../conn.php';
 
 $dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
 $pdo = new PDO($dsn, $db_user, $db_pass);

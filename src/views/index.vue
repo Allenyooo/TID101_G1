@@ -163,7 +163,7 @@
 			}
 
 			@include breakpoint(430px) {
-				margin-top: 2vh;
+				//margin-top: -2vh;
 			}
 
 			@include breakpoint(390px) {
@@ -180,7 +180,7 @@
 				margin-top: -3vw;
 
 				@include breakpoint(430px) {
-					margin-top: 2vh;
+					//margin-top: -2vh;
 				}
 
 				@include breakpoint(390px) {
@@ -322,7 +322,7 @@
 				position: absolute;
 				top: 0px;
 				left: 0px;
-				top: 37vw;
+				//top: 37vw;
 				z-index: 0;
 			}
 
