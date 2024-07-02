@@ -99,11 +99,25 @@
         <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut7.png" alt=""></swiper-slide>
         <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut8.png" alt=""></swiper-slide>
         <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut9.png" alt=""></swiper-slide>
-        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut10.png" alt=""></swiper-slide>
+        <!-- <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut10.png" alt=""></swiper-slide> -->
         <!-- <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut11.png" alt=""></swiper-slide> -->
         <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut12.png" alt=""></swiper-slide>
-        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut13.png" alt=""></swiper-slide>
         <swiper-slide class="swiper-slide" @touchstart="startTimer" @touchend="startTimer" @mouseenter="startTimer" @mouseout="startTimer"><img src="../assets/Image/enter/cut15.png" alt=""></swiper-slide>
+
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut1_m.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut2_m.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut3_m.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut4_m.png" alt=""></swiper-slide>
+        <!-- <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut5_m.png" alt=""></swiper-slide> -->
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut6_m.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut7_m.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut8_m.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut9_m.png" alt=""></swiper-slide>
+        <!-- <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut10_m.png" alt=""></swiper-slide> -->
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut11_m.png" alt=""></swiper-slide>
+        <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut12_m.png" alt=""></swiper-slide>
+        <!-- <swiper-slide class="swiper-slide"><img src="../assets/Image/enter/cut13_m.png" alt=""></swiper-slide> -->
+        <swiper-slide class="swiper-slide" @touchstart="startTimer" @touchend="startTimer" @mouseenter="startTimer" @mouseout="startTimer"><img src="../assets/Image/enter/cut13_m.png" alt=""></swiper-slide>
     </swiper>
 </template>
 
@@ -451,7 +465,7 @@ export default {
                 },"<+=1");
         }
         
-        if (window.innerWidth >= 820) {
+        if (window.innerWidth >= 1200) {
             window.addEventListener('scroll', this.handleScroll);
             gsapAnimations();
         }
@@ -497,7 +511,7 @@ export default {
     max-width: 100vw;
     height: 100vh;
     position: relative;
-    @include breakpoint(820px){
+    @include breakpoint(1200px){
         display: none;
     }
     
@@ -530,7 +544,7 @@ export default {
             background-color: rgba($color: $Black, $alpha: 0.6);
             animation: scrolldown 4.8s 2s linear infinite;
             opacity: 0;
-            @include breakpoint(820px){
+            @include breakpoint(1200px){
                 display: none;
             }
         }
@@ -569,7 +583,7 @@ export default {
             background-color: #fff;
             animation: scrollDown 4.8s 2s linear infinite;
             opacity: 0;
-            @include breakpoint(820px){
+            @include breakpoint(1200px){
                 display: none;
             }
         }
@@ -641,18 +655,17 @@ export default {
                 @include breakpoint(1920px){
                     padding: 62.1vh 0 0 0.8vh;
                 }
-                @include breakpoint(1440px){
-                    // padding: 63.2vh 0 0 0.6vh;
-                    // padding: 63.5vh 0 0 0.6vh;
-                }
-                @include breakpoint(820px){
-                    // padding: 64.3vh 0 0 0.4vh;
-                    padding: 63vh 0 0 0.6vh;
-                }
+                // @include breakpoint(1112px){
+                //     padding: 62.5vh 0 0 0.8vh;
+                // }
+                // @include breakpoint(820px){
+                //     // padding: 64.3vh 0 0 0.4vh;
+                //     padding: 63vh 0 0 0.6vh;
+                // }
                 img {
                     // width: 3.52%;
                     width: 3.5%;
-                    @include breakpoint(820px){
+                    @include breakpoint(1200px){
                         display: none;
                     }
                 }
@@ -696,9 +709,9 @@ export default {
             top: 14.5%;
             left: 48.8%;
         }
-        @include breakpoint(1440px){
-            top: 15%;
-        }
+        // @include breakpoint(1440px){
+        //     top: 15%;
+        // }
 
     }
     .enter_table {
@@ -724,9 +737,9 @@ export default {
             height: 4%;
             margin: 29% auto;
 
-            @include breakpoint(1024px){
-                margin: 28.6% auto;
-            }
+            // @include breakpoint(1024px){
+            //     margin: 28.6% auto;
+            // }
 
             img {
                 position: absolute;
@@ -853,15 +866,41 @@ export default {
     display: none;
     max-width: 100vw;
     height: 100vh;
-    @include breakpoint(820px){
+    @include breakpoint(1200px){
         display: block;
     }
 
     .swiper-slide{
         // width: 10%;
         // height: 100%;
-        img{
-            width: 100%;
+        &:nth-child(1), &:nth-child(2) , &:nth-child(3), &:nth-child(4) , &:nth-child(5), &:nth-child(6) , 
+        &:nth-child(7), &:nth-child(8), &:nth-child(9), &:nth-child(10) , &:nth-child(11){
+            @include breakpoint(1200px){
+                display: block;
+                img{
+                    width: 100%;
+                    // height: 100%;
+                }
+            }
+            @include breakpoint(820px){
+                display: none;
+            }
+        }
+        &:nth-child(12), &:nth-child(13) , &:nth-child(14), &:nth-child(15) , &:nth-child(16), &:nth-child(17) , 
+        &:nth-child(18), &:nth-child(19), &:nth-child(20), &:nth-child(21) , &:nth-child(22){
+            @include breakpoint(1200px){
+                display: none;
+            }
+            @include breakpoint(820px){
+                display: block;
+                img{
+                    width: 100%;
+                    object-fit: cover;
+                    object-position: bottom bottom;
+                    // width: 50%;
+                    // height: 100%;
+                }
+            }
         }
     }
 }

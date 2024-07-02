@@ -9,46 +9,46 @@ export default {
     data() {
         return {
             tickets: [
-                {
-                    // id: "checkOut_purchase_item1",
-                    // name: "$100 梨饗券",
-                    // price: 100,
-                    // percent: 0.9,
-                    // salePrice: 90,
-                    // qty: 1,
-                },
-                {
-                    // id: "checkOut_purchase_item2",
-                    // name: "$300 梨饗券",
-                    // price: 300,
-                    // percent: 0.8,
-                    // salePrice: 240,
-                    // qty: 1,
-                },
-                {
-                    // id: "checkOut_purchase_item3",
-                    // name: "$500 梨饗券",
-                    // price: 500,
-                    // percent: 0.7,
-                    // salePrice: 350,
-                    // qty: 1,
-                },
-                {
-                    // id: "checkOut_purchase_item3",
-                    // name: "$800 梨饗券",
-                    // price: 800,
-                    // percent: 0.9,
-                    // salePrice: 720,
-                    // qty: 1,
-                },
-                {
-                    // id: "checkOut_purchase_item3",
-                    // name: "$1000 梨饗券",
-                    // price: 1000,
-                    // percent: 0.9,
-                    // salePrice: 900,
-                    // qty: 1,
-                },
+                // {
+                //     // id: "checkOut_purchase_item1",
+                //     // name: "$100 梨饗券",
+                //     // price: 100,
+                //     // percent: 0.9,
+                //     // salePrice: 90,
+                //     // qty: 1,
+                // },
+                // {
+                //     // id: "checkOut_purchase_item2",
+                //     // name: "$300 梨饗券",
+                //     // price: 300,
+                //     // percent: 0.8,
+                //     // salePrice: 240,
+                //     // qty: 1,
+                // },
+                // {
+                //     // id: "checkOut_purchase_item3",
+                //     // name: "$500 梨饗券",
+                //     // price: 500,
+                //     // percent: 0.7,
+                //     // salePrice: 350,
+                //     // qty: 1,
+                // },
+                // {
+                //     // id: "checkOut_purchase_item3",
+                //     // name: "$800 梨饗券",
+                //     // price: 800,
+                //     // percent: 0.9,
+                //     // salePrice: 720,
+                //     // qty: 1,
+                // },
+                // {
+                //     // id: "checkOut_purchase_item3",
+                //     // name: "$1000 梨饗券",
+                //     // price: 1000,
+                //     // percent: 0.9,
+                //     // salePrice: 900,
+                //     // qty: 1,
+                // },
             ],
             promoCode: "",
             // hint: false,
@@ -166,14 +166,16 @@ export default {
         },
         async nextStep() {
             this.numberVerify;
-            if(this.cardHint == ""){
+            if (this.cardHint == "") {
                 this.dateVerify;
-                if(this.cardHint == ""){
+                if (this.cardHint == "") {
                     this.securityVerify;
-                    if(this.cardHint == ""){
+                    if (this.cardHint == "") {
                         fetch(
                             // "http://localhost/tid101_g1/public/php/checkOut/submitOrder.php"
-                            `${import.meta.env.VITE_PHP_PATH}checkOut/submitOrder.php`,
+                            `${
+                                import.meta.env.VITE_PHP_PATH
+                            }checkOut/submitOrder.php`,
                             {
                                 method: "POST",
                                 headers: {
@@ -228,7 +230,9 @@ export default {
             // return this.tickets.reduce((acc, ticket) => acc + ticket.qty, 0);
             let totalQty = 0;
             this.tickets.forEach((ticket) => {
-                totalQty += ticket.qty;
+                // console.log(typeof ticket.qty);
+                totalQty += parseInt(ticket.qty);
+                // totalQty += ticket.qty;
             });
             this.totalQty = totalQty;
             return this.totalQty;
@@ -280,9 +284,9 @@ export default {
             }
             // return total
         },
-        dateVerify(){
+        dateVerify() {
             let expiry = this.expiryDate;
-            let expiryMonth = expiry.toString().slice(0,2);
+            let expiryMonth = expiry.toString().slice(0, 2);
             let expiryYear = expiry.toString().slice(-2);
             // console.log(expiryMonth+"/"+expiryYear);
             let today = new Date();
@@ -291,43 +295,44 @@ export default {
             let month = today.getMonth() + 1;
             // console.log(month+"/"+year);
 
-            if( 0 < expiryMonth && expiryMonth <= 12 ){
-                if(expiryYear < year){
+            if (0 < expiryMonth && expiryMonth <= 12) {
+                if (expiryYear < year) {
                     this.cardHint = "";
                     this.cardHint = "請輸入正確有效期限";
-                }else if(expiryMonth < month && expiryYear == year){
+                } else if (expiryMonth < month && expiryYear == year) {
                     this.cardHint = "";
                     this.cardHint = "請輸入正確有效期限";
-                }else{
+                } else {
                     this.cardHint = "";
                 }
-            }else{
+            } else {
                 this.cardHint = "";
                 this.cardHint = "請輸入正確有效期限";
             }
-
         },
-        numberVerify(){
+        numberVerify() {
             let cardNumber = this.cardNumber;
-            cardNumber = cardNumber.replace(/\D/g, '');
+            cardNumber = cardNumber.replace(/\D/g, "");
             let numberLength = cardNumber.length;
-            if(numberLength < 16 || numberLength > 16){
+            if (numberLength < 16 || numberLength > 16) {
                 this.cardHint = "請輸入有效卡號";
-            }else{
-                let topFifteen = cardNumber.slice(0,15);
+            } else {
+                let topFifteen = cardNumber.slice(0, 15);
                 console.log(topFifteen);
                 let lastDigit = parseInt(cardNumber.toString().slice(-1));
                 console.log(lastDigit);
-                let numbers = topFifteen.split('').reverse();
+                let numbers = topFifteen.split("").reverse();
                 console.log(numbers);
-                let newFifteens = numbers.map((number,index) =>{
-                    if((index + 1) % 2 === 1){
+                let newFifteens = numbers.map((number, index) => {
+                    if ((index + 1) % 2 === 1) {
                         let number2 = number * 2;
-                        if(number2 > 9){
-                            let number3 = parseInt(number2.toString().slice(0,1)) + parseInt(number2.toString().slice(-1));
+                        if (number2 > 9) {
+                            let number3 =
+                                parseInt(number2.toString().slice(0, 1)) +
+                                parseInt(number2.toString().slice(-1));
                             // number3 = parseInt(number3);
                             return number3;
-                        }else{
+                        } else {
                             return number2;
                         }
                     } else {
@@ -335,37 +340,39 @@ export default {
                     }
                 });
                 console.log(newFifteens);
-                let plus = newFifteens.reduce((acc, newFifteen) => acc + newFifteen , 0);
+                let plus = newFifteens.reduce(
+                    (acc, newFifteen) => acc + newFifteen,
+                    0
+                );
                 console.log(plus);
                 let plus9 = plus * 9;
                 console.log(plus9);
                 let lastStep = parseInt(plus9.toString().slice(-1));
                 console.log(lastStep);
-                if(lastStep !== lastDigit){
+                if (lastStep !== lastDigit) {
                     this.cardHint = "";
                     this.cardHint = "請輸入有效卡號";
                     console.log("失敗");
-                }else{
+                } else {
                     this.cardHint = "";
                     console.log("通過");
                 }
             }
         },
-        securityVerify(){
+        securityVerify() {
             let securityCode = this.securityCode;
-            securityCode = securityCode.replace(/\D/g, '');
+            securityCode = securityCode.replace(/\D/g, "");
             console.log(securityCode);
             let securityLength = securityCode.length;
             console.log(securityLength);
 
-            if(securityCode == null || securityLength !== 3){
+            if (securityCode == null || securityLength !== 3) {
                 this.cardHint = "";
                 this.cardHint = "請輸入有效安全碼";
-            }else{
+            } else {
                 this.cardHint = "";
             }
-        }
-
+        },
     },
 };
 </script>
@@ -448,17 +455,20 @@ export default {
                                         type="text"
                                         placeholder="輸入折扣代碼"
                                         id="checkOut_enterCode"
-                                        v-model="promoCode"/>
+                                        v-model="promoCode"
+                                    />
                                     <div
                                         id="checkOut_submitCode"
-                                        @click="submitCode">
+                                        @click="submitCode"
+                                    >
                                         確認
                                     </div>
                                 </form>
                                 <ul class="checkOut_amount">
                                     <li
                                         class="checkOut_amount_subtotal"
-                                        v-if="voucher_discount !== null">
+                                        v-if="voucher_discount !== null"
+                                    >
                                         <h5>小計</h5>
                                         <h5>NT${{ sub }}</h5>
                                     </li>
@@ -479,21 +489,47 @@ export default {
                         <form action="" class="checkOut_pay">
                             <h4>付款方式</h4>
                             <div class="checkOut_pay_method">
-                                <input type="radio" name="pay" id="checkOut_creditCard" v-model="payment" value="信用卡">
-                                <label for="checkOut_creditCard"><span>信用卡</span></label>
+                                <input
+                                    type="radio"
+                                    name="pay"
+                                    id="checkOut_creditCard"
+                                    v-model="payment"
+                                    value="信用卡"
+                                />
+                                <label for="checkOut_creditCard"
+                                    ><span>信用卡</span></label
+                                >
                                 <p v-if="cardHint">{{ cardHint }}</p>
                             </div>
-                            <div class="creditCard_zone" v-if="payment.length !== 0">
+                            <div
+                                class="creditCard_zone"
+                                v-if="payment.length !== 0"
+                            >
                                 <h5>信用卡卡號</h5>
-                                <input type="text" placeholder="**** **** **** ****" id="cardNumber" v-model="cardNumber">
+                                <input
+                                    type="text"
+                                    placeholder="**** **** **** ****"
+                                    id="cardNumber"
+                                    v-model="cardNumber"
+                                />
                                 <ul>
                                     <li>
                                         <h5>有效期限</h5>
-                                        <input type="text" placeholder="MM / YY" id="expiryDate" v-model="expiryDate">
+                                        <input
+                                            type="text"
+                                            placeholder="MM / YY"
+                                            id="expiryDate"
+                                            v-model="expiryDate"
+                                        />
                                     </li>
                                     <li>
                                         <h5>安全碼</h5>
-                                        <input type="text" placeholder="CVC / CVV" id="securityCode" v-model="securityCode">
+                                        <input
+                                            type="text"
+                                            placeholder="CVC / CVV"
+                                            id="securityCode"
+                                            v-model="securityCode"
+                                        />
                                     </li>
                                 </ul>
                             </div>
@@ -522,7 +558,12 @@ export default {
                         id="checkOut_next"
                         value="下一步"
                         @click="nextStep"
-                        v-if="totalQty !== 0 && cardNumber !== '' && expiryDate !== '' && securityCode !== ''"
+                        v-if="
+                            totalQty !== 0 &&
+                            cardNumber !== '' &&
+                            expiryDate !== '' &&
+                            securityCode !== ''
+                        "
                     />
                     <input
                         type="button"
@@ -1011,7 +1052,7 @@ export default {
         line-height: 150%;
         margin-bottom: 12px;
     }
-    .checkOut_pay_method{
+    .checkOut_pay_method {
         display: flex;
         align-items: center;
         margin-bottom: 12px;
@@ -1028,7 +1069,7 @@ export default {
             padding-left: 8px;
             cursor: pointer;
         }
-        p{
+        p {
             margin-left: 10%;
             color: $Red;
             font-weight: bold;
@@ -1039,7 +1080,7 @@ export default {
         background-color: #f5f5f5;
         padding: 12px 20px;
         margin-right: 20px;
-        h5{
+        h5 {
             margin-bottom: 8px;
             font-size: $fontSize * 0.875;
             &::after {
@@ -1048,7 +1089,7 @@ export default {
                 color: rgb(224, 68, 61);
             }
         }
-        #cardNumber{
+        #cardNumber {
             border: 1px solid $Gold;
             border-radius: 8px;
             padding: 5px 10px;
@@ -1056,14 +1097,14 @@ export default {
             font-family: $fontFamily;
             width: 100%;
         }
-        ul{
+        ul {
             margin-top: 12px;
             display: flex;
-            li{
-                &:first-child{
+            li {
+                &:first-child {
                     margin-right: 16px;
                 }
-                input{
+                input {
                     border: 1px solid $Gold;
                     border-radius: 8px;
                     padding: 5px 10px;
