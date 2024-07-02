@@ -364,6 +364,7 @@ export default {
                 //     text-align: center;
                 // }
                 button {
+                    color: $Black;
                     width: 50px;
                     height: 30px;
                     text-align: center;
