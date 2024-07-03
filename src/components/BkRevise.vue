@@ -227,20 +227,55 @@ export default {
     },
 
     saveChangeDelete() {
-      fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkAccess/accessDelete.php`, {
-        // mode: "cors",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // Search: this.placeholder[id].search,
-          // Input: this.input,
-          deleteId: this.reviseId,
-          // Start: this.startDate,
-          // End: this.endDate,
-        }),
-      });
+      if (this.revisePage === 1) {
+        fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkAccess/accessDelete.php`, {
+          // mode: "cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // Search: this.placeholder[id].search,
+            // Input: this.input,
+            deleteId: this.reviseId,
+            // Start: this.startDate,
+            // End: this.endDate,
+          }),
+        });
+      } else if (this.revisePage === 7) {
+        fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkFaq/faqDelete.php`, {
+          // mode: "cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // Search: this.placeholder[id].search,
+            // Input: this.input,
+            deleteId: this.reviseId,
+            // Start: this.startDate,
+            // End: this.endDate,
+          }),
+        });
+      } else if (this.revisePage === 6) {
+        fetch(
+          `${import.meta.env.VITE_PHP_PATH}Bk/BkDiscount/discountDelete.php`,
+          {
+            // mode: "cors",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              // Search: this.placeholder[id].search,
+              // Input: this.input,
+              deleteId: this.reviseId,
+              // Start: this.startDate,
+              // End: this.endDate,
+            }),
+          }
+        );
+      }
     },
   },
 
