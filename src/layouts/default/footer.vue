@@ -25,31 +25,6 @@
 <script>
 	export default {
   name: "FooterComponent",
-
-  //固定footer高度
-  mounted() {
-    this.fixFooter();
-    window.addEventListener('resize', this.fixFooter);
-  },
-  beforeUnmount() {
-    window.removeEventListener('resize', this.fixFooter);
-  },
-  methods: {
-    fixFooter() {
-      const footer = this.$refs.footer;
-      const windowHeight = window.innerHeight;
-      const bodyHeight = document.body.scrollHeight;
-
-      if (bodyHeight < windowHeight) {
-        footer.style.position = 'fixed';
-        footer.style.bottom = '0';
-        footer.style.left = '0';
-        footer.style.right = '0';
-      } else {
-        footer.style.position = 'static';
-      }
-    }
-  }
 };
 </script>
 

@@ -2539,30 +2539,29 @@
 		.customer_review {
 			display: flex;
 			width: 75vw;
-			//height: 15vw;
 			justify-content: space-between;
 			margin-top: 20px;
 
 			@include breakpoint(1024px) {
 				display: flex;
-				height: 230px;
+				// height: 230px;
 				width: 75vw;
 			}
 
 			@include breakpoint(820px) {
 				display: block;
-				height: 90vh;
+				// height: 90vh;
 				width: 51vw;
 				margin: 20px auto 0;
 			}
 
 			@include breakpoint(768px) {
-				height: 74vh;
+				// height: 74vh;
 			}
 
 			@include breakpoint(430px) {
 				width: 100%;
-				height: fit-content;
+				// height: fit-content;
 			}
 
 			li {
