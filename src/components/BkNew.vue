@@ -14,10 +14,10 @@
         <!-- 彈出視窗內容 -->
 
         <ul>
-          <li>
+          <!-- <li>
             <h4>編號:</h4>
             <input type="text" class="idBg" :Value="(newId += 1)" readonly />
-          </li>
+          </li> -->
           <li>
             <h4>姓名:</h4>
             <input type="text" v-model="name" />
@@ -65,10 +65,10 @@
         <!-- 彈出視窗內容 -->
 
         <ul>
-          <li>
+          <!-- <li>
             <h4>編號:</h4>
             <input type="text" class="idBg" :Value="(newId += 1)" readonly />
-          </li>
+          </li> -->
           <li>
             <h4>店家名稱:</h4>
             <input type="text" v-model="name" />
@@ -108,10 +108,10 @@
         <!-- 彈出視窗內容 -->
 
         <ul>
-          <li>
+          <!-- <li>
             <h4>編號:</h4>
             <input type="text" class="idBg" :Value="(newId += 1)" readonly />
-          </li>
+          </li> -->
           <li>
             <h4>名稱:</h4>
             <input type="text" v-model="name" />
@@ -163,10 +163,10 @@
         <!-- 彈出視窗內容 -->
 
         <ul>
-          <li>
+          <!-- <li>
             <h4>編號:</h4>
             <input type="text" class="idBg" :Value="(newId += 1)" readonly />
-          </li>
+          </li> -->
           <li>
             <h4>分類:</h4>
             <input type="text" v-model="type" />
@@ -222,6 +222,7 @@ export default {
       type: "",
       question: "",
       answer: "",
+      // newIdLocal: this.newId,
     };
   },
 
@@ -340,6 +341,7 @@ export default {
     },
 
     newChange2() {
+      let incrementedId = this.incrementedNewId;
       fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkShop/shopNew.php`, {
         // mode: "cors",
         method: "POST",
@@ -347,7 +349,7 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          newId: (this.newId += 1),
+          newId: incrementedId,
           newName: this.name,
           newRegion: this.region,
         }),
@@ -355,6 +357,7 @@ export default {
     },
 
     newChange3() {
+      let incrementedId = this.incrementedNewId;
       fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkDiscount/discountNew.php`, {
         // mode: "cors",
         method: "POST",
@@ -362,7 +365,7 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          newId: (this.newId += 1),
+          newId: incrementedId,
           newName: this.name,
           newPrice: this.price,
           newCode: this.code,
@@ -392,6 +395,10 @@ export default {
   computed: {
     revisedId() {
       return this.reviseBd.ID;
+    },
+    incrementedNewId() {
+      // 计算并返回props newId的值加1
+      return parseInt(this.newId) + 1;
     },
     // getPropertyByIndex() {
     //   let aa = 0;
