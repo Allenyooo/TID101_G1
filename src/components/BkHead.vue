@@ -20,9 +20,47 @@ export default {
   props: [],
 
   data() {
-    return {};
+    return {
+      managerId: "",
+      bd: [],
+    };
   },
-  methods: {},
+  methods: {
+    getMemberId() {
+      let cookie = document.cookie;
+      let getId = cookie.match(/managerId=(\d+)/);
+      let managerId = getId[1];
+      // console.log(match)
+      // console.log(memberId);
+      this.managerId = managerId;
+      console.log(this.managerId);
+      // return memberId;
+    },
+  },
+
+  mounted() {
+    // this.getMemberId();
+    // fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkHead.php`, {
+    //   mode: "cors",
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     ID: this.managerId,
+    //   }),
+    // })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error("Network response was not ok");
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     console.log(data);
+    //     this.bd = data;
+    //   });
+  },
 };
 </script>
 

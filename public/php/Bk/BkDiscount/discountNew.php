@@ -22,7 +22,15 @@
         $sql = "INSERT into
                 VOUCHER
                 values
-                (?,?,?,?,?,?,0,'啟用');";
+                (?,?,?,?,?,?,0,'啟用')";
+
+
+
+        // $sql = "INSERT into VOUCHER(`NAME`,`CODE`,PRICE,STARTDATE,ENDDATE,USEDTIMES,`STATUS`)
+	    //         values
+        //         ( ? , ? , ? , ? , ? , 0, '啟用')";
+
+
 
             $statement = $pdo->prepare($sql);
             $statement->bindValue(1 , $BknewID);

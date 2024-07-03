@@ -24,6 +24,10 @@
                 values
                 (?,?,?,'上架',null)";
 
+        // $sql = "INSERT into STORE(`NAME`,REGION,`STATUS`,BANNERPIC)
+	    //         values
+        //         (  ? ,  ? , '上架', NULL)";
+
             $statement = $pdo->prepare($sql);
             $statement->bindValue(1 , $BknewID);
             $statement->bindValue(2 , $BknewName);

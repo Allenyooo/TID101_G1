@@ -43,7 +43,7 @@
         //     group by V.ID";
 
 
-        $sql2 = "SELECT O.ID,O.ORDERDATE,O.SUBTOTAL as TOTAL 
+        $sql2 = "SELECT O.ID,O.ORDERDATE,O.AMOUNT as TOTAL 
             from `ORDER` as O
             join `MEMBER` as M
             on O.MEMBER_ID = M.ID
