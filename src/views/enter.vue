@@ -653,15 +653,25 @@ export default {
                 display: flex;
                 justify-content: center;
                 @include breakpoint(1920px){
+                    // padding: 62.8vh 0 0 0.8vh;
                     padding: 62.1vh 0 0 0.8vh;
                 }
-                // @include breakpoint(1112px){
-                //     padding: 62.5vh 0 0 0.8vh;
-                // }
-                // @include breakpoint(820px){
-                //     // padding: 64.3vh 0 0 0.4vh;
-                //     padding: 63vh 0 0 0.6vh;
-                // }
+                @include breakpoint(1687px){
+                    //  padding: 62.5vh 0 0 0.8vh;
+                    padding: 62.1vh 0 0 0.8vh;
+                    // padding: 63.1vh 0 0 0.8vh;
+                }
+                @include breakpoint(1440px){
+                    padding: 62.1vh 0 0 0.8vh;
+                }
+                @include breakpoint(1380px){
+                    padding: 63.5vh 0 0 0.8vh;
+                }
+                @include breakpoint(1280px){
+                    // padding: 63.6vh 0 0 0.6vh;
+                    padding: 62vh 0 0 0.6vh;
+                    // padding: 62.5vh 0 0 0.8vh;
+                }
                 img {
                     // width: 3.52%;
                     width: 3.5%;
@@ -893,12 +903,14 @@ export default {
             }
             @include breakpoint(820px){
                 display: block;
+                // text-align: center;
+                // vertical-align: middle;
+                // position: relative;
                 img{
                     width: 100%;
+                    height: 100%;
                     object-fit: cover;
-                    object-position: bottom bottom;
-                    // width: 50%;
-                    // height: 100%;
+                    object-position: center;
                 }
             }
         }
