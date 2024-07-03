@@ -2365,7 +2365,6 @@
 			}
 
 			@include breakpoint(820px) {
-				height: unset;
 				width: 71vw;
 				margin: 20px auto;
 			}
@@ -2374,13 +2373,11 @@
 				width: 81vw;
 				margin-left: 10vw;
 				padding-left: unset;
-				height: 207vw;
 			}
 
 			@include breakpoint(390px) {
 				margin-left: 10vw;
 				margin-top: 5vw;
-				height: 215vw;
 			}
 
 			.restaurant_review_content {
@@ -2542,7 +2539,7 @@
 		.customer_review {
 			display: flex;
 			width: 75vw;
-			height: 18vw;
+			//height: 15vw;
 			justify-content: space-between;
 			margin-top: 20px;
 
@@ -2570,26 +2567,25 @@
 
 			li {
 				width: 24vw;
-				height: 21vw;
 				border-radius: 5px;
 				background-color: #f6f1ed;
 				border-radius: 5px;
 				filter: drop-shadow(0 0 7px rgba(207, 81, 61, 0.4));
 
 				@include breakpoint(1180px) {
-					height: 20vw;
+					//height: 20vw;
 				}
 
 				@include breakpoint(1024px) {
 					width: 24vw;
-					height: 230px;
-					padding: 5px 17px 5px 16px;
+					// height: 230px;
+					padding: 12px 17px 5px 16px;
 				}
 
 				@include breakpoint(820px) {
 					margin: auto;
 					width: 48vw;
-					height: 27vh;
+					//height: 22vh;
 					margin-bottom: 3vw;
 				}
 
@@ -2605,12 +2601,17 @@
 
 				@include breakpoint(390px) {
 					width: 68vw;
-					height: 52vw;
+					height: 30vh;
 				}
 
 				.namenlike {
 					display: flex;
 					justify-content: space-between;
+					padding-top: 20px;
+
+					@include breakpoint(820px) {
+						// margin-left: 3vw;
+					}
 				}
 
 				div {
@@ -2621,7 +2622,7 @@
 					}
 
 					span {
-						margin-top: 20px;
+						// margin-top: 20px;
 
 						.user {
 							display: block;
@@ -2727,6 +2728,7 @@
 
 					@include breakpoint(1024px) {
 						padding-left: 2px;
+						padding-top: 6px;
 					}
 
 					@include breakpoint(820px) {
@@ -2793,7 +2795,6 @@
 							@include breakpoint(1024px) {
 								padding-left: 24px;
 								width: 500px;
-								margin-left: -2.4vw;
 							}
 
 							@include breakpoint(820px) {
@@ -2847,11 +2848,11 @@
 		border: none;
 
 		@include breakpoint(1180px) {
-			margin-top: 4vw;
+			margin-top: 1vw;
 		}
 
 		@include breakpoint(820px) {
-			margin: 0 auto;
+			margin: 2vh auto;
 		}
 
 		a {
