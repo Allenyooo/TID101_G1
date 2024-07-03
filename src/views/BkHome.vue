@@ -57,11 +57,33 @@ export default {
     // this.renderChart2();
     this.renderChart3();
     this.getwebInfo();
+    this.getMemberId();
+
+    // fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkHead.php`, {
+    //   mode: "cors",
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     ID: this.managerId,
+    //   }),
+    // })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error("Network response was not ok");
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     console.log(data);
+    //     this.bd = data;
+    //   });
   },
 
   data() {
     return {
-      page: 1,
+      page: 0,
       manage: [
         {
           index: 1,
@@ -109,10 +131,22 @@ export default {
       webInfo: [],
       stateTd: 1,
       dataTd: 1,
+
+      head: [],
     };
   },
 
   methods: {
+    getMemberId() {
+      let cookie = document.cookie;
+      let getId = cookie.match(/managerId=(\d+)/);
+      let managerId = getId[1];
+      // console.log(match)
+      // console.log(memberId);
+      this.managerId = managerId;
+      console.log(this.managerId);
+      // return memberId;
+    },
     renderChart1() {
       const ctx = document.getElementById("Chart").getContext("2d");
       const labels = ["6/5", "6/10", "6/15", "6/20", "6/25", "6/30"];
@@ -312,7 +346,6 @@ export default {
 
   .BkM {
     display: flex;
-    height: 150vw;
 
     .BkContent {
       width: 80vw;

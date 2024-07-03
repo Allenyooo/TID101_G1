@@ -32,7 +32,7 @@ include("../../conn.php");
         //         where V.ID =?
         //     group by V.ID ";
 
-        $sql = "SELECT O.ID,O.ORDERDATE,M.NAME,M.MAIL,O.SUBTOTAL as TOTAL,O.PAYMENT
+        $sql = "SELECT O.ID,O.ORDERDATE,M.NAME,M.MAIL,O.AMOUNT as TOTAL,O.PAYMENT
             from `ORDER` as O
             join `MEMBER` as M
             on O.MEMBER_ID = M.ID

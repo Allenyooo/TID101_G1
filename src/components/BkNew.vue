@@ -16,7 +16,7 @@
         <ul>
           <li>
             <h4>編號:</h4>
-            <input type="text" class="idBg" :Value="newId + 1" readonly />
+            <input type="text" class="idBg" :Value="(newId += 1)" readonly />
           </li>
           <li>
             <h4>姓名:</h4>
@@ -67,7 +67,7 @@
         <ul>
           <li>
             <h4>編號:</h4>
-            <input type="text" class="idBg" :Value="newId + 1" readonly />
+            <input type="text" class="idBg" :Value="(newId += 1)" readonly />
           </li>
           <li>
             <h4>店家名稱:</h4>
@@ -110,7 +110,7 @@
         <ul>
           <li>
             <h4>編號:</h4>
-            <input type="text" class="idBg" :Value="newId + 1" readonly />
+            <input type="text" class="idBg" :Value="(newId += 1)" readonly />
           </li>
           <li>
             <h4>名稱:</h4>
@@ -165,7 +165,7 @@
         <ul>
           <li>
             <h4>編號:</h4>
-            <input type="text" class="idBg" :Value="newId + 1" readonly />
+            <input type="text" class="idBg" :Value="(newId += 1)" readonly />
           </li>
           <li>
             <h4>分類:</h4>
@@ -321,7 +321,7 @@ export default {
     //   console.log(this.reviseBd);
     //   this.showConfirmationDialog();
     // },
-
+    // 1
     newChange() {
       fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkAccess/accessNew.php`, {
         // mode: "cors",
@@ -330,7 +330,7 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          newId: this.newId + 1,
+          // newId: this.newId + 1,
           newName: this.name,
           newMail: this.mail,
           newPassword: this.password,
@@ -347,7 +347,7 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          newId: this.newId + 1,
+          newId: (this.newId += 1),
           newName: this.name,
           newRegion: this.region,
         }),
@@ -362,7 +362,7 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          newId: this.newId + 1,
+          newId: (this.newId += 1),
           newName: this.name,
           newPrice: this.price,
           newCode: this.code,
@@ -380,7 +380,7 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          newId: this.newId + 1,
+          // newId: this.newId + 1,
           newType: this.type,
           newQuestion: this.question,
           newAnswer: this.answer,

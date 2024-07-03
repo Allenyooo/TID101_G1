@@ -22,7 +22,7 @@
      
 
 
-            $sql = "SELECT NAME
+            $sql = "SELECT `NAME`
                 from MANAGER
                 where ID = ?";
 
@@ -32,9 +32,6 @@ $statement->execute();
 $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
-           
-            
-
-            echo json_encode($Data);
+echo json_encode($data);
     
 ?>
