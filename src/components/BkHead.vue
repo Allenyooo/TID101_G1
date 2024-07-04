@@ -7,9 +7,9 @@
     </div>
     <div class="headRight">
       <p>User:</p>
-      <p class="userName">Allen</p>
-      <button>
-        <router-link to="/BkLogin"><p class="logout">登出</p></router-link>
+      <p class="userName">{{ headname }}</p>
+      <button @click="logout">
+        <p class="logout">登出</p>
       </button>
     </div>
   </div>
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  props: [],
+  props: ["headname"],
 
   data() {
     return {
@@ -35,6 +35,17 @@ export default {
       this.managerId = managerId;
       console.log(this.managerId);
       // return memberId;
+    },
+
+    logout() {
+      // 刪除cookie中的managerId
+      document.cookie =
+        "managerId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      // 也可以加上 domain 和 secure，例如：
+      // document.cookie = 'managerId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.yourdomain.com; secure=true;';
+
+      // 重定向到登入頁面
+      this.$router.push("/BkLogin"); // 將'/BkLogin'替換為你實際的登入路徑
     },
   },
 

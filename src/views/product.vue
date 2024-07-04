@@ -263,30 +263,35 @@ export default {
     },
 
     taskAdd() {
-      fetch(`${import.meta.env.VITE_PHP_PATH}product/shoppingAdd.php`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // Search: this.placeholder[id].search,
-          // Input: this.input,
-          // reviseBd: this.reviseBd,
-          memberID: this.memberId,
-          // cartID: (this.cartId += 1),
-          cartCount: this.count,
-          productID: this.currentButton,
-          // Start: this.startDate,
-          // End: this.endDate,
-        }),
-      });
+      if (this.memberId == "") {
+        alert("請先登入");
+        this.$router.push("/login");
+      } else {
+        fetch(`${import.meta.env.VITE_PHP_PATH}product/shoppingAdd.php`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // Search: this.placeholder[id].search,
+            // Input: this.input,
+            // reviseBd: this.reviseBd,
+            memberID: this.memberId,
+            // cartID: (this.cartId += 1),
+            cartCount: this.count,
+            productID: this.currentButton,
+            // Start: this.startDate,
+            // End: this.endDate,
+          }),
+        });
 
-      Swal.fire({
-        icon: "success",
-        title: "成功加入購物車！",
-        showConfirmButton: false,
-        timer: 1500, // 自動在1.5秒後關閉
-      });
+        Swal.fire({
+          icon: "success",
+          title: "成功加入購物車！",
+          showConfirmButton: false,
+          timer: 1500, // 自動在1.5秒後關閉
+        });
+      }
     },
 
     taskAdd2() {

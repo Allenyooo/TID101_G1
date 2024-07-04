@@ -1,6 +1,6 @@
 <template>
   <div class="BkBody">
-    <BH></BH>
+    <BH :headname="head"></BH>
     <div class="BkM">
       <BM :manage="manage" :page="page"></BM>
       <div class="BkContent">
@@ -192,6 +192,9 @@ export default {
       dataTd: 1,
 
       lastId: 0,
+
+      head: "",
+      managerId: 0,
     };
   },
 
@@ -231,9 +234,61 @@ export default {
 
       this.input = "";
     },
+
+    checkManagerIdCookie() {
+      // 檢查managerId是否存在於Cookies中的函數
+      const cookies = document.cookie.split(";");
+      const managerIdCookie = cookies.find((cookie) =>
+        cookie.trim().startsWith("managerId=")
+      );
+
+      if (!managerIdCookie) {
+        // 如果managerId cookie不存在，則重定向到登入頁面
+        this.$router.push("/BkLogin"); // 將'/login'替換為你實際的登入路徑
+      } else {
+        this.getMemberId();
+      }
+    },
+
+    getMemberId() {
+      let cookie = document.cookie;
+      let getId = cookie.match(/managerId=(\d+)/);
+      let managerId = getId[1];
+      // console.log(match)
+      // console.log(memberId);
+      this.managerId = managerId;
+      console.log(this.managerId);
+      this.headname();
+      console.log(this.head);
+      // return memberId;
+    },
+
+    headname() {
+      fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkHead.php`, {
+        mode: "cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ID: this.managerId,
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          this.head = data[0].NAME;
+        });
+    },
   },
 
   mounted() {
+    this.checkManagerIdCookie();
     // this.fetchData();
     fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkAccess/accessData.php`, {
       mode: "cors",

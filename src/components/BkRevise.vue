@@ -242,6 +242,21 @@ export default {
             // End: this.endDate,
           }),
         });
+      } else if (this.revisePage === 3) {
+        fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkShop/shopDelete.php`, {
+          // mode: "cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // Search: this.placeholder[id].search,
+            // Input: this.input,
+            deleteId: this.reviseId,
+            // Start: this.startDate,
+            // End: this.endDate,
+          }),
+        });
       } else if (this.revisePage === 7) {
         fetch(`${import.meta.env.VITE_PHP_PATH}Bk/BkFaq/faqDelete.php`, {
           // mode: "cors",

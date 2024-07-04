@@ -22,7 +22,7 @@
     //             on V.ID = S.ORDER_ID
     //         group by V.ID";
 
-    $sql = "SELECT O.ID,M.MAIL,M.NAME,O.ORDERDATE,O.SUBTOTAL,O.PAYMENT
+    $sql = "SELECT O.ID,M.MAIL,M.NAME,O.ORDERDATE,O.AMOUNT,O.PAYMENT
             from `ORDER` as O
             join `MEMBER` as M
             on O.MEMBER_ID = M.ID";

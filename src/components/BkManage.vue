@@ -58,9 +58,16 @@ export default {
     line-height: 65px;
     text-align: center;
 
+    &:hover {
+      background-color: $LightBrown;
+    }
+
     a {
       font-size: 24px;
       color: $DarkBrown;
+      &:hover {
+        color: white;
+      }
     }
 
     .BmaOn {
