@@ -163,10 +163,16 @@
 			clearPic() {
 				this.picSrc = '';
 				this.openPic = false;
+			},
+			loadingAnima() {
+				setTimeout(function() {
+					document.querySelector('.loadingAnima').style.display = 'none';
+				}, 3000);
 			}
 		},
 
 		mounted() {
+			this.loadingAnima();
 			this.fetchReviews();
 			this.fetchScore();
 		},
@@ -301,6 +307,10 @@
 				@close-popup="popup_close"></restaurantaMessage>
 			</div>
 			<div class="reviews">
+				<div class="loadingAnima">
+					<img src="../../tid101_g1.svg" alt="">
+					<h3>LOADING...</h3>
+				</div>
 				<div class="review_btns">
 					<div class="sequence">
 						<select v-model="selected">
@@ -785,9 +795,41 @@
 		.reviews {
 			// outline: 1px red solid;
 			padding: 20px;
+			position: relative;
 
 			@include breakpoint(1024px) {
 				padding: 0;
+			}
+
+			.loadingAnima{
+				display: flex;
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 5;
+				background-color: $OffWhite;
+				justify-content: center;
+				padding-top: 80px;
+				// align-items: center;
+
+				img{
+					display: block;
+					width: 80px;
+					height: 80px;
+					margin-right: 10px;
+					animation: reviewLoading 6s linear infinite;
+
+					@keyframes reviewLoading{
+						0% { transform: rotate(0deg); }
+						100% { transform: rotate(-720deg); }
+					}
+				}
+				h3{
+					height: 80px;
+					line-height: 80px;
+				}
 			}
 
 			.review_btns {

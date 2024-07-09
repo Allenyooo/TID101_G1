@@ -124,59 +124,6 @@ export default {
             console.log(cookieValue);
             return cookieValue ? cookieValue.split("=")[1] : null;
         },
-        submitFile() {
-            const memberId = this.getMemberIdFromCookie();
-            const storeId = 1;
-            const rating = this.rating;
-            const content = this.content;
-
-            if (!memberId) {
-                alert("未能獲取會員ID，請重新登錄");
-                return;
-            }
-            if (rating === 0) {
-                alert("請給予星級評分");
-                return;
-            }
-            if (!content.trim()) {
-                alert("評論內容不能為空");
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append("storeId", storeId);
-            formData.append("memberId", memberId);
-            formData.append("rating", rating);
-            formData.append("content", content);
-
-            this.files.forEach((file, index) => {
-                formData.append(`imageData[]`, file);
-            });
-
-            axios
-                .post(`${import.meta.env.VITE_PHP_PATH}restaurant/review.php`, formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                })
-                .then((response) => {
-                    console.log(response.data);
-                    alert("評論已送出");
-                    this.content = "";
-                    this.rating = 0;
-                    this.files = [];
-                })
-                .catch((error) => {
-                    console.error("Error submitting review:", error);
-                    let errorMessage = "提交失敗，請稍後再試";
-                    if (error.response) {
-                        errorMessage = error.response.data.message || errorMessage;
-                    }
-                    alert(errorMessage);
-                });
-
-            this.popup_close();
-        },
 
         change_rating(value) {
             this.rating = value;
@@ -204,6 +151,117 @@ export default {
                 this.files[index - 1] = file;
             });
         },
+        submitFile() {
+				const memberId = this.getMemberIdFromCookie(); // Get member ID from cookie
+				const storeId = 1; // Default store ID
+				const rating = this.rating;
+				const content = this.content; // Get the review content from the data object
+
+				// 檢查必要的字段是否存在且不為空
+				if (!memberId) {
+					alert("未能獲取會員ID，請重新登錄");
+					return;
+				}
+				if (rating === 0) {
+					alert("請給予星級評分");
+					return;
+				}
+				if (!content.trim()) {
+					alert("評論內容不能為空");
+					return;
+				}
+
+				if (this.files.length === 0) {
+					const reviewData = {
+						storeId,
+						memberId,
+						rating,
+						content,
+						imageData: [], // or null, depending on your requirements
+					};
+
+					axios
+						.post(
+							`${
+								import.meta.env.VITE_PHP_PATH
+							}restaurant/review.php`,
+							reviewData
+						)
+						.then((response) => {
+							console.log(response.data);
+							alert("評論已送出"); // Display the message returned by PHP
+							this.content = "";
+							this.rating = 0;
+							this.files = []; // Clear the file input
+						})
+						.catch((error) => {
+							console.error("Error submitting review:", error);
+							let errorMessage = "提交失敗，請稍後再試";
+							if (error.response) {
+								errorMessage =
+									error.response.data.message || errorMessage;
+							}
+							alert(errorMessage);
+						});
+
+					this.popup_close(); // close the popup after submitting the form
+					return;
+				}
+
+				const filePromises = this.files.map((file) => {
+					return new Promise((resolve, reject) => {
+						const reader = new FileReader();
+						reader.onload = () => {
+							const base64String = reader.result;
+							resolve(base64String);
+						};
+						reader.onerror = () => {
+							reject(reader.error);
+						};
+						reader.readAsDataURL(file);
+					});
+				});
+
+				// Wait for all files to be converted to base64
+				Promise.all(filePromises).then((base64Files) => {
+					const imageData = base64Files.filter(
+						(file) => file !== null && file !== undefined
+					);
+					const reviewData = {
+						storeId,
+						memberId,
+						rating,
+						content,
+						imageData,
+					};
+
+					axios
+						.post(
+							`${
+								import.meta.env.VITE_PHP_PATH
+							}restaurant/review.php`,
+							reviewData
+						)
+						.then((response) => {
+							console.log(response.data);
+							alert("評論已送出"); // Display the message returned by PHP
+							this.content = "";
+							this.rating = 0;
+							this.files = []; // Clear the file input
+						})
+						.catch((error) => {
+							console.error("Error submitting review:", error);
+							let errorMessage = "提交失敗，請稍後再試";
+							if (error.response) {
+								errorMessage =
+									error.response.data.message || errorMessage;
+							}
+							alert(errorMessage);
+						});
+
+					this.popup_close(); // close the popup after submitting the form
+				});
+			},
     },
 };
 </script>
