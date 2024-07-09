@@ -883,6 +883,7 @@ export default {
     .swiper-slide{
         // width: 10%;
         // height: 100%;
+
         &:nth-child(1), &:nth-child(2) , &:nth-child(3), &:nth-child(4) , &:nth-child(5), &:nth-child(6) , 
         &:nth-child(7), &:nth-child(8), &:nth-child(9), &:nth-child(10) , &:nth-child(11){
             @include breakpoint(1200px){
@@ -906,6 +907,121 @@ export default {
                 // text-align: center;
                 // vertical-align: middle;
                 // position: relative;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                }
+            }
+        }
+        
+        &:nth-child(1){
+            @include breakpoint(1200px){
+                display: block;
+                &::before{
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    border: 1px solid $Black;
+                    width: 50px;
+                    height: 90px;
+                    border-radius: 90px;
+                    background-color: rgba($color: $Black, $alpha: 0.6);
+                    animation: scrolldown 4.8s 2s linear infinite;
+                    opacity: 0;
+                }
+
+                &::after{
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    border-radius: 50%;
+                    width: 10px;
+                    height: 10px;
+                    background-color: #fff;
+                    animation: scrollDown 4.8s 2s linear infinite;
+                    opacity: 0;
+                }
+                img{
+                    width: 100%;
+                    // height: 100%;
+                }
+            }
+            @include breakpoint(820px){
+                display: none;
+            }
+        }
+
+        &:nth-child(12){
+            @include breakpoint(1200px){
+                display: none;
+            }
+            @include breakpoint(820px){
+                display: block;
+                &::before{
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    border: 1px solid $Black;
+                    width: 50px;
+                    height: 100px;
+                    border-radius: 10px;
+                    background-color: rgba($color: $Black, $alpha: 0.8);
+                    animation: scrolldown 4.8s 2s linear infinite;
+                    opacity: 0;
+                }
+
+                &::after{
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    border-radius: 50%;
+                    width: 10px;
+                    height: 10px;
+                    background-color: #fff;
+                    animation: scrollUp 4.8s 2s linear infinite;
+                    opacity: 0;
+                    @keyframes scrollUp {
+                        0%{
+                            top: 52%;
+                            opacity: 1;
+                        }
+
+                        12%{
+                            top: 46%;
+                            opacity: 0;
+                        }
+
+                        20%{
+                            top: 52%;
+                            opacity: 0;
+                        }
+
+                        25%{
+                            top: 52%;
+                            opacity: 1;
+                        }
+
+                        37%{
+                            top: 46%;
+                            opacity: 0;
+                        }
+
+                        100%{
+                            top: 52%;
+                            opacity: 0;
+                        }
+                    }
+                }
                 img{
                     width: 100%;
                     height: 100%;
